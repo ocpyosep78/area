@@ -1,0 +1,11 @@
+<script type='text/javascript' src='static/js/skip-link-focus-fix.js'></script>
+<script type='text/javascript' src='static/js/html5.js'></script>
+<script type='text/javascript' src='static/js/superfish.js'></script>
+<script type='text/javascript' src='static/js/jquery.flexslider-min.js'></script>
+<script type='text/javascript' src='static/js/jquery.tools.min.js'></script>
+<script type='text/javascript' src='static/js/jquery.jcarousel.min.js'></script>
+<script type='text/javascript' src='static/js/jquery.cookie.js'></script>
+<script type='text/javascript' src='static/js/jquery.elastislide.js'></script>
+<script type='text/javascript' src='static/js/jquery-ui.custom.min.js'></script>
+<script type='text/javascript' src='static/js/jquery.mobilemenu.min.js'></script>
+<script type='text/javascript' src='static/js/main.js'></script>
