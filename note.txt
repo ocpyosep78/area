@@ -1,0 +1,6 @@
+link :
+- http://localhost/suekarea/trunk/
+- http://localhost/suekarea/trunk/film
+- http://localhost/suekarea/trunk/2013/06/article
+- http://localhost/suekarea/trunk/contact
+- http://localhost/suekarea/trunk/full-page
