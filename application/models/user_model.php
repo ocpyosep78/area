@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Widget_model extends CI_Model {
+class User_model extends CI_Model {
     function __construct() {
         parent::__construct();
 		
@@ -54,8 +54,8 @@ class Widget_model extends CI_Model {
 		$string_limit = GetStringLimit($param);
 		
 		$select_query = "
-			SELECT SQL_CALC_FOUND_ROWS Widget.*
-			FROM ".WIDGET." Widget
+			SELECT SQL_CALC_FOUND_ROWS User.*
+			FROM ".WIDGET." User
 			WHERE 1 $string_filter
 			ORDER BY $string_sorting
 			LIMIT $string_limit
@@ -91,5 +91,26 @@ class Widget_model extends CI_Model {
 		$row = StripArray($row);
 		
 		return $row;
+	}
+	
+	function get_menu() {
+		$menu = array(
+			array(
+				'Title' => 'Informasi',
+				'Child' => array(
+					array( 'Title' => 'Post', 'Link' => base_url('panel/content/post') ),
+					array( 'Title' => 'Jemaat', 'Link' => 'yahoo.com' )
+				)
+			),
+			array(
+				'Title' => 'Informasi 2',
+				'Child' => array(
+					array( 'Title' => 'Gereja 2', 'Link' => 'google.com' ),
+					array( 'Title' => 'Jemaat 2', 'Link' => 'yahoo.com' )
+				)
+			)
+		);
+		
+		return $menu;
 	}
 }

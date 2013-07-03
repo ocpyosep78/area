@@ -10,14 +10,8 @@ class home extends CI_Controller {
 	}
 	
 	function check() {
-		$ArrayMenu = array(
-			0 => array( 'Link' => '/administrator/entry/jemaat', 'Title' => 'Jemaat' ),
-			1 => array( 'Link' => '/administrator/entry/keluarga', 'Title' => 'Keluarga' ),
-			2 => array( 'Link' => '/administrator/entry/gereja', 'Title' => 'Gereja' ),
-			3 => array( 'Link' => '/administrator/entry/user', 'Title' => 'User' ),
-			4 => array( 'Link' => '/administrator/entry/group', 'Title' => 'Group' )
-		);
-		echo json_encode( array( 'success' => true, 'menu' => $ArrayMenu ));
+		$menu = $this->User_model->get_menu();
+		echo json_encode( array( 'success' => true, 'menu' => $menu ));
 		exit;
 		
 		/*
@@ -35,22 +29,12 @@ class home extends CI_Controller {
 	}
 	
 	function login() {
-		$Data['message'] = '';
-		
 		$Admin = array( 'name' => 'sadasd' );
-		
-		$ArrayMenu = array(
-			0 => array( 'Link' => '/administrator/entry/jemaat', 'Title' => 'Jemaat' ),
-			1 => array( 'Link' => '/administrator/entry/keluarga', 'Title' => 'Keluarga' ),
-			2 => array( 'Link' => '/administrator/entry/gereja', 'Title' => 'Gereja' ),
-			3 => array( 'Link' => '/administrator/entry/user', 'Title' => 'User' ),
-			4 => array( 'Link' => '/administrator/entry/group', 'Title' => 'Group' )
-		);
-		
-		
-		echo json_encode( array( 'success' => true, 'menu' => $ArrayMenu, 'UserAdmin' => $Admin ));
+		$menu = $this->User_model->get_menu();
+		echo json_encode( array( 'success' => true, 'menu' => $menu, 'UserAdmin' => $Admin ));
 		exit;
 		
+		$Data['message'] = '';
 		if (isset($_POST['username'])) {
 //			$Admin = $this->M_User->GetByID(array('username' => $_POST['username']));
 			$Admin = array( 'name' => 'sadasd' );

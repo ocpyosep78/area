@@ -23,10 +23,7 @@ pre,code,kbd,samp,tt{font-family:monospace;*font-size:108%;line-height:100%}
 html,body {color:#444;font-size:13px;}
 
 /* LINKS */
-a {color:#0063DC;text-decoration:underline;}
-a:visited { color: #1057AE; text-decoration:none; }
-a:active { background:#0259C4; color:#FFFFFF; text-decoration:none; }
-a:hover {background:#0063DC; color:#000000; text-decoration:none; }
+a { text-decoration: none; }
 a img {border: none;}
 h1 a, h2 a, h3 a { text-decoration:none !important; }
 
@@ -78,8 +75,6 @@ blockquote {color:#666; margin:1em;}
 
 #logo {margin:0;padding:5px;line-height:50px;}
 #logo a { display:block; width:300px; height: 50px; text-indent:-50000px;  }
-#logo a:hover {color:#0063DC;}
-
 
 #loginmsg p {font-size:10px; color:#666;}
 #loginmsg {margin-bottom:10px;}
@@ -148,10 +143,10 @@ blockquote {color:#666; margin:1em;}
 .framedBody { background:#fff; width:100%; height:100%; margin:0; padding:0;}
 #grid-member {width:100%;height:100%;}
 
-.delIcon { background-image:url(../extjs/resources/delete.gif); background-repeat:no-repeat; }
-.acceptIcon { background-image:url(../extjs/resources/accept.png); background-repeat:no-repeat; }
-.goIcon { background-image:url(../extjs/resources/rss_go.png); background-repeat:no-repeat; }
-.interviewIcon { background-image:url(../extjs/resources/user_edit.png); background-repeat:no-repeat; }
-.addIcon { background-image:url(../extjs/resources/add.gif); background-repeat:no-repeat; }
-.editIcon { background-image:url(../extjs/resources/edit.png); background-repeat:no-repeat; }
-.refreshIcon { background-image:url(../extjs/resources/refresh.gif); background-repeat:no-repeat; }
+.delIcon { background-image:url(../delete.gif); background-repeat:no-repeat; }
+.acceptIcon { background-image:url(../accept.png); background-repeat:no-repeat; }
+.goIcon { background-image:url(../rss_go.png); background-repeat:no-repeat; }
+.interviewIcon { background-image:url(../user_edit.png); background-repeat:no-repeat; }
+.addIcon { background-image:url(../add.gif); background-repeat:no-repeat; }
+.editIcon { background-image:url(../edit.png); background-repeat:no-repeat; }
+.refreshIcon { background-image:url(../refresh.gif); background-repeat:no-repeat; }

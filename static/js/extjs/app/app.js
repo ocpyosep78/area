@@ -3,7 +3,7 @@ Ext.Loader.setConfig({
     paths: {
         'Ext.ux': URLS.ext + '/examples/ux',
         'Ext': URLS.ext + '/src',
-        'Stiki': URLS.app
+        'Stiki': URLS.ext + '/app'
     }
 });
 
@@ -16,7 +16,7 @@ Ext.require([
 
 Ext.application({
     name: 'Stiki',
-    appFolder: URLS.app,
+    appFolder: URLS.ext + '/app',
     autoCreateViewport: false,
     
     controllers: [

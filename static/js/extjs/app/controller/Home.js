@@ -1,14 +1,8 @@
 Ext.define('Stiki.controller.Home', {
     extend: 'Ext.app.Controller',
-    
-    views: [
-        'Sidebar',
-        'MainPanel',
-        'Login'
-    ],
-    
     loggedIn: false,
-    
+    views: [ 'Sidebar', 'MainPanel', 'Login' ],
+	
     init: function() {
         this.control({
             'viewport': {
@@ -36,8 +30,8 @@ Ext.define('Stiki.controller.Home', {
         con.on( 'requestcomplete', function(){ Ext.getBody().unmask() } );
         con.on( 'requestexception', function(){ Ext.getBody().unmask() } );
         con.request({
-            url: URLS.stiki + '/administrator/check',
-            method:'POST',
+            method: 'POST',
+            url: URLS.base + 'panel/home/check',
             success:function(response, opts) {
                 var obj = Ext.JSON.decode(response.responseText);
                 me.loggedIn = true;
@@ -68,16 +62,13 @@ Ext.define('Stiki.controller.Home', {
     onLoginButton: function(button, ev) {
         var form = Ext.ComponentQuery.query('loginwindow form')[0],
             me = this;
+		
         form.submit({
             waitTitle: 'Harap tunggu:',
             waitMsg: 'Loading...',
             success: function(form, action) {
-                if (window.console)
-                    console.log(['submit response', action.result]);
-				
-				window.location.reload();
-                me.loggedIn = true;
-                me.setViewportLayout(action.result.menu)
+				me.loggedIn = true;
+				me.setViewportLayout(action.result.menu);
             },
             failure: function(form, action) {
                 Ext.Msg.alert( 'Gagal:', action.result.text );
@@ -93,8 +84,8 @@ Ext.define('Stiki.controller.Home', {
             border:0,
             items: [
                 { xtype:'container', region:'north', height:60, layout:'fit', html:Ext.get('header').dom.innerHTML, baseCls: 'content-header' },
-                { xtype:'mainpanel', region:'center', layout:'fit'},
-                { xtype:'sidebar', region:'west', width:200, menu:menu, title:'Navigasi'},
+                { xtype:'mainpanel', region:'center', layout:'fit', id: 'MainPanel' },
+                { xtype:'sidebar', id: 'SidebarKu', region:'west', width: 200, menu: menu, title:'Navigasi'},
                 { xtype:'container', applyTo:'footer', region:'south', height:30, layout:'fit', html:Ext.get('footer').dom.innerHTML, baseCls: 'content-footer'}
             ]
         });
@@ -113,11 +104,11 @@ Ext.define('Stiki.controller.Home', {
         
         if ( ! created ) {
             created = Ext.create('Stiki.view.ContentTab', {url:link, title:title, closable: true});
+            created.load();
             tabs.add(created);
         }
         
         tabs.setActiveTab( created );
-        created.load();
     }
 
 });

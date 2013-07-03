@@ -15,7 +15,7 @@ Ext.define( 'Stiki.view.LoginWindow', {
     alias: 'widget.loginwindow',
     y: 106,
     width: 300,
-    height: 220,
+    height: 150,
     closable: false,
     draggable: false,
     layout: 'anchor',
@@ -24,13 +24,13 @@ Ext.define( 'Stiki.view.LoginWindow', {
         Ext.apply(this, {
             items: [{ 
                 xtype: 'form',
-                url: URLS.stiki + '/administrator/',
+                url: URLS.base + 'panel/home/login',
                 border: 0,
                 bodyStyle: 'padding: 10px;',
                 defaultType: 'textfield',
                 items: [{
                     xtype:'container',
-                    html: '<div id="loginmsg" style="padding:10px 0;"><h2>Admission Admin</h2><p>Masukkan username/password untuk login</p></div>'
+                    html: '<div id="loginmsg" style="padding: 10px 0 0 0;"><p>Masukkan username/password untuk login</p></div>'
                 },{
                     name: 'username',
                     fieldLabel: 'Username',
@@ -42,10 +42,7 @@ Ext.define( 'Stiki.view.LoginWindow', {
                     required:true
                 }]
             }],
-            buttons: [{
-                name: 'loginButton',
-                text: 'Login'
-            }]
+            buttons: [ { name: 'loginButton', text: 'Login' } ]
         });
         this.callParent(arguments);
     }

@@ -6,5 +6,5 @@ $autoload['helper'] = array( 'date', 'common', 'url' );
 $autoload['config'] = array();
 $autoload['language'] = array();
 $autoload['model'] = array(
-	// 'Seeker_model'
+	'User_model'
 );
