@@ -32,12 +32,16 @@ Ext.define('Stiki.controller.Home', {
         con.request({
             method: 'POST',
             url: URLS.base + 'panel/home/check',
-            success:function(response, opts) {
+            success: function(response, opts) {
                 var obj = Ext.JSON.decode(response.responseText);
-                me.loggedIn = true;
-                me.setViewportLayout(obj.menu)
+				if (obj.success) {
+					me.loggedIn = true;
+					me.setViewportLayout(obj.menu)
+				} else {
+					Ext.ComponentQuery.query('loginwindow')[0].show();
+				}
             },
-            failure:function(response,opts){
+            failure: function(response,opts){
                 Ext.ComponentQuery.query('loginwindow')[0].show();
             }
         });
@@ -71,7 +75,7 @@ Ext.define('Stiki.controller.Home', {
 				me.setViewportLayout(action.result.menu);
             },
             failure: function(form, action) {
-                Ext.Msg.alert( 'Gagal:', action.result.text );
+                Ext.Msg.alert( 'Gagal:', action.result.message );
             }
         });
     },

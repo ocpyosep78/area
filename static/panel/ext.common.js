@@ -9,6 +9,12 @@ var Func = {
 		}
 		return '[' + Temp + ']';
 	},
+	GetName: function(value) {
+		var result = value.trim().replace(new RegExp(/[^0-9a-z]+/gi), '-').toLowerCase();
+		result = result.replace(new RegExp(/^\-/gi), '').toLowerCase();
+		result = result.replace(new RegExp(/\-$/gi), '').toLowerCase();
+		return result;
+	},
 	InArray: function(Value, Array) {
 		var Result = false;
 		for (var i = 0; i < Array.length; i++) {
@@ -182,12 +188,24 @@ var Template = {
 }
 
 var Store = {
-	Agama: function() {
+	Category: function() {
 		var Store = new Ext.create('Ext.data.Store', {
-			fields: ['AgamaID', 'Agama'],
+			fields: ['id', 'name'],
 			autoLoad: true, proxy: {
-				type: 'ajax', extraParams: { Action: 'Agama' },
-				url: Web.HOST + '/administrator/combo',
+				type: 'ajax', extraParams: { action: 'category' },
+				url: URLS.base + 'panel/combo',
+				reader: { type: 'json', root: 'res' },
+				actionMethods: { read: 'POST' }
+			}
+		});
+		return Store;
+	},
+	PostType: function() {
+		var Store = new Ext.create('Ext.data.Store', {
+			fields: ['id', 'name'],
+			autoLoad: true, proxy: {
+				type: 'ajax', extraParams: { action: 'post_type' },
+				url: URLS.base + 'panel/combo',
 				reader: { type: 'json', root: 'res' },
 				actionMethods: { read: 'POST' }
 			}
@@ -198,15 +216,22 @@ var Store = {
 
 var Combo = {
 	Param: {
-		Agama: function(Param) {
+		Category: function(Param) {
 			var p = {
-				xtype: 'combo', store: Store.Agama(), minChars: 1, selectOnFocus: true,
-				valueField: 'AgamaID', displayField: 'Agama',
-				listConfig: { minWidth: 480 }, tpl: Template.Agama,
-				readonly: true, editable: false
+				xtype: 'combo', store: Store.Category(), minChars: 1, selectOnFocus: true,
+				valueField: 'id', displayField: 'name', readonly: true, editable: false
 			}
 			p = Func.SyncComboParam(p, Param);
-
+			
+			return p;
+		},
+		PostType: function(Param) {
+			var p = {
+				xtype: 'combo', store: Store.PostType(), minChars: 1, selectOnFocus: true,
+				valueField: 'id', displayField: 'name', readonly: true, editable: false
+			}
+			p = Func.SyncComboParam(p, Param);
+			
 			return p;
 		},
 		FreeText: function(Param) {
@@ -230,8 +255,12 @@ var Combo = {
 }
 
 Combo.Class = {
-	Agama: function(Param) {
-		var c = new Ext.form.ComboBox(Combo.Param.Agama(Param));
+	Category: function(Param) {
+		var c = new Ext.form.ComboBox(Combo.Param.Category(Param));
+		return c;
+	},
+	PostType: function(Param) {
+		var c = new Ext.form.ComboBox(Combo.Param.PostType(Param));
 		return c;
 	},
 	Time: function(Param) {

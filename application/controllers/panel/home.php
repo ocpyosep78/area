@@ -10,68 +10,45 @@ class home extends CI_Controller {
 	}
 	
 	function check() {
-		$menu = $this->User_model->get_menu();
-		echo json_encode( array( 'success' => true, 'menu' => $menu ));
-		exit;
+		$is_login = $this->User_model->is_login();
 		
-		/*
-		// cek apakah user login atau ga, kalau login, berikan menu dia, dalam format HTML
-		if ( $UserAdmin = $this->session->userdata('UserAdmin') ) {
-			$ArrayMenu = $this->M_User->GetArrayMenu();
-			$ArrayMenu = array_values($ArrayMenu);
-			
-			echo json_encode( array( 'success' => true, 'menu' => $ArrayMenu ));
-			return;
+		$result['success'] = false;
+		if ($is_login) {
+			$result['success'] = true;
+			$result['menu'] = $this->User_model->get_menu();
 		}
-		/* */
-        
-		show_error("Not logged in", 403);
+		
+		echo json_encode($result);
+		exit;
 	}
 	
 	function login() {
-		$Admin = array( 'name' => 'sadasd' );
-		$menu = $this->User_model->get_menu();
-		echo json_encode( array( 'success' => true, 'menu' => $menu, 'UserAdmin' => $Admin ));
-		exit;
+		$user = $this->User_model->get_by_id(array( 'email' => $_POST['email'] ));
 		
-		$Data['message'] = '';
-		if (isset($_POST['username'])) {
-//			$Admin = $this->M_User->GetByID(array('username' => $_POST['username']));
-			$Admin = array( 'name' => 'sadasd' );
+		$result = array( 'success' => false, 'message' => '' );
+		if (count($user) == 0) {
+			$result['message'] = 'Maaf, user anda tidak ditemukan';
+		} else if ($user['is_active'] == 0) {
+			$result['message'] = 'Maaf, user anda tidak aktif';
+		} else if ($user['passwd'] == EncriptPassword($_POST['passwd'])) {
+			$result['success'] = true;
+			$result['menu'] = $this->User_model->get_menu();
+			$this->User_model->set_session($user);
 			
-			if (count($Admin) == 0) {
-				$Data['message'] = 'Maaf, user tidak ditemukan';
-			} else {
-				$password = (isset($_POST['password'])) ? $_POST['password'] : '';
-				if ($Admin['password'] == md5($password)) {
-					$this->session->set_userdata(array('UserAdmin' => $Admin));
-					
-					// Update Last Login
-					$ParamAdmin = $Admin;
-					$ParamAdmin['last_login'] = $this->config->item('current_time');
-					$this->M_User->UpdateLogin($ParamAdmin);
-					/* */
-					
-					// X-Requested-With
-					if ( isset($_SERVER['HTTP_X_REQUESTED_WITH']) && $_SERVER['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest' ) {
-						unset($Admin['AdminPassWord']);
-						$ArrayMenu = $this->M_User->GetArrayMenu();
-						echo json_encode( array( 'success' => true, 'menu' => $ArrayMenu, 'UserAdmin' => $Admin ));
-						return;
-					}
-					
-					$LinkRedirect = $this->M_User->GetAdminRedirectPage($Admin);
-					header("Location: " . $LinkRedirect); exit;
-				}
-			}
-		}
-                
-		if ( isset($_SERVER['HTTP_X_REQUESTED_WITH']) && $_SERVER['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest' ) {
-			echo json_encode(array('success'=>false,'text'=>$Data['message']));
-			return;
+			// update last login
+			$param['id'] = $user['id'];
+			$param['login_last_date'] = $this->config->item('current_datetime');
+			$this->User_model->update($param);
 		}
 		
-		$this->load->view('administrator/home');
+		echo json_encode($result);
+		exit;
+	}
+	
+	function logout() {
+		$this->User_model->del_session();
+		header("Location: ".base_url());
+		exit;
 	}
 	
 	function dashboard() {

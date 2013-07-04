@@ -1,180 +1,224 @@
 Ext.Loader.setConfig({ enabled: true });
 Ext.Loader.setPath('Ext.ux', URLS.ext + '/examples/ux');
-Ext.require([
-    'Ext.grid.*',
-    'Ext.data.*',
-    'Ext.ux.grid.FiltersFeature',
-    'Ext.toolbar.Paging'
-]);
+Ext.require([ 'Ext.grid.*', 'Ext.data.*', 'Ext.ux.grid.FiltersFeature', 'Ext.toolbar.Paging' ]);
 
 Ext.onReady(function() {
 	Ext.QuickTips.init();
 	
-	var ProfesiStore = Ext.create('Ext.data.Store', {
-		model: 'ProfesiModel', autoLoad: true, pageSize: 25, remoteSort: true,
-        sorters: [{ property: 'profesi', direction: 'ASC' }],
-		fields: [ 'K_GEDUNG', 'SINGKAT', 'CONTENT' ],
+	var main_store = Ext.create('Ext.data.Store', {
+		autoLoad: true, pageSize: 25, remoteSort: true,
+        sorters: [{ property: 'create_date', direction: 'DESC' }],
+		fields: [
+			'id', 'user_id', 'category_id', 'category_name', 'post_type_id', 'post_type_name', 'alias', 'name', 'desc', 'create_date',
+			'publish_date', 'view_count'
+		],
 		proxy: {
-			type: 'ajax', extraParams: { RequestName: 'Profesi' },
+			type: 'ajax',
 			url : URLS.base + 'panel/content/post/grid', actionMethods: { read: 'POST' },
 			reader: { type: 'json', root: 'rows', totalProperty: 'count' }
 		}
 	});
 	
-	var ProfesiGrid = new Ext.grid.GridPanel({
-		viewConfig: { forceFit: true }, store: ProfesiStore, height: 335, renderTo: 'grid-member',
+	var main_grid = new Ext.grid.GridPanel({
+		viewConfig: { forceFit: true }, store: main_store, height: 335, renderTo: 'grid-member',
 		features: [{ ftype: 'filters', encode: true, local: false }],
 		columns: [ {
-					header: 'Profesi', dataIndex: 'profesi', sortable: true, filter: true, width: 600, flex: 1
+					header: 'Judul', dataIndex: 'name', sortable: true, filter: true, width: 200, flex: 1
+			}, {	header: 'Kategori', dataIndex: 'category_name', sortable: true, filter: true, width: 200
+			}, {	header: 'Tipe Post', dataIndex: 'post_type_name', sortable: true, filter: true, width: 100
+			}, {	header: 'Publish', dataIndex: 'publish_date', sortable: true, filter: true, width: 150, align: 'center'
+			}, {	header: 'Dilihat', dataIndex: 'view_count', sortable: true, filter: true, width: 100, align: 'right'
 		} ],
 		tbar: [ {
-				text: 'Tambah', iconCls: 'addIcon', tooltip: 'Tambah Profesi', id: 'AddTB', handler: function() { CallWindowProfesi({ ProfesiID: 0 }); }
+				text: 'Tambah', iconCls: 'addIcon', tooltip: 'Tambah', handler: function() { main_win({ id: 0 }); }
 			}, '-', {
-				text: 'Ubah', iconCls: 'editIcon', tooltip: 'Ubah Profesi', id: 'UpdateTB', handler: function() { ProfesiGrid.Update({ }); }
+				text: 'Ubah', iconCls: 'editIcon', tooltip: 'Ubah', handler: function() { main_grid.update({ }); }
 			}, '-', {
-				text: 'Hapus', iconCls: 'delIcon', tooltip: 'Hapus Profesi', id: 'DeleteTB', handler: function() {
-					if (ProfesiGrid.getSelectionModel().getSelection().length == 0) {
+				text: 'Hapus', iconCls: 'delIcon', tooltip: 'Hapus', handler: function() {
+					if (main_grid.getSelectionModel().getSelection().length == 0) {
 						Ext.Msg.alert('Informasi', 'Silahkan memilih data.');
 						return false;
 					}
 					
-					Ext.MessageBox.confirm('Konfirmasi', 'Apa anda yakin akan menghapus data ini ?', ProfesiGrid.Delete);
+					Ext.MessageBox.confirm('Konfirmasi', 'Apa anda yakin akan menghapus data ini ?', main_grid.delete);
 				}
 			}, '->', {
-                id: 'SearchPM', xtype: 'textfield', tooltip: 'Cari Profesi', emptyText: 'Cari', listeners: {
+                id: 'SearchPM', xtype: 'textfield', tooltip: 'Cari', emptyText: 'Cari', listeners: {
                     'specialKey': function(field, el) {
                         if (el.getKey() == Ext.EventObject.ENTER) {
                             var value = Ext.getCmp('SearchPM').getValue();
                             if ( value ) {
-								ProfesiGrid.LoadGrid({ RequestName: 'Profesi', NameLike: value });
+								main_grid.load_grid({ RequestName: 'Profesi', NameLike: value });
                             }
                         }
                     }
                 }
             }, '-', {
 				text: 'Reset', tooltip: 'Reset pencarian', iconCls: 'refreshIcon', handler: function() {
-					ProfesiGrid.LoadGrid({ RequestName: 'Profesi' });
+					main_grid.load_grid({ RequestName: 'Profesi' });
 				}
 		} ],
 		bbar: new Ext.PagingToolbar( {
-			store: ProfesiStore, displayInfo: true,
+			store: main_store, displayInfo: true,
 			displayMsg: 'Displaying topics {0} - {1} of {2}',
 			emptyMsg: 'No topics to display'
 		} ),
 		listeners: {
 			'itemdblclick': function(model, records) {
-				ProfesiGrid.Update({ });
+				main_grid.update({ });
             }
         },
-		LoadGrid: function(Param) {
-			ProfesiStore.proxy.extraParams = Param;
-			ProfesiStore.load();
+		load_grid: function(Param) {
+			main_store.proxy.extraParams = Param;
+			main_store.load();
 		},
-		Update: function(Param) {
-			var Data = ProfesiGrid.getSelectionModel().getSelection();
-			if (Data.length == 0) {
+		update: function(Param) {
+			var row = main_grid.getSelectionModel().getSelection();
+			if (row.length == 0) {
 				Ext.Msg.alert('Informasi', 'Silahkan memilih data.');
 				return false;
 			}
 			
 			Ext.Ajax.request({
-				url: Web.HOST + '/administrator/ajax',
-				params: { Action: 'GetProfesiByID', ProfesiID: Data[0].data.id },
+				url: URLS.base + 'panel/content/post/action',
+				params: { action: 'get_by_id', id: row[0].data.id },
 				success: function(Result) {
 					eval('var Record = ' + Result.responseText)
-					Record.ProfesiID = Record.id;
-					CallWindowProfesi(Record);
+					Record.id = Record.id;
+					main_win(Record);
 				}
 			});
 		},
-		Delete: function(Value) {
+		delete: function(Value) {
 			if (Value == 'no') {
 				return;
 			}
 			
 			Ext.Ajax.request({
-				url: Web.HOST + '/administrator/ajax',
-				params: { Action: 'DeteleProfesiByID', ProfesiID: ProfesiGrid.getSelectionModel().getSelection()[0].data.id },
+				url: URLS.base + 'panel/content/post/action',
+				params: { action: 'delete', id: main_grid.getSelectionModel().getSelection()[0].data.id },
 				success: function(TempResult) {
 					eval('var Result = ' + TempResult.responseText)
 					
-					Ext.Msg.alert('Informasi', Result.Message);
-					if (Result.QueryStatus == '1') {
-						ProfesiStore.load();
+					Ext.Msg.alert('Informasi', Result.message);
+					if (Result.status == '1') {
+						main_store.load();
 					}
 				}
 			});
 		}
 	});
 	
-	function CallWindowProfesi(Profesi) {
-		var WinProfesi = new Ext.Window({
-			layout: 'fit', width: 325, height: 100,
+	function main_win(param) {
+		var win = new Ext.Window({
+			layout: 'fit', width: 710, height: 465,
 			closeAction: 'hide', plain: true, modal: true,
 			buttons: [ {
-						text: 'Save', id: 'DeleteED', handler: function() { WinProfesi.SaveProfesi(); }
+						text: 'Save', handler: function() { win.save(); }
 				}, {	text: 'Close', handler: function() {
-						WinProfesi.hide();
+						win.hide();
 				}
 			}],
 			listeners: {
 				show: function(w) {
-					var Title = (Profesi.ProfesiID == 0) ? 'Entry Profesi - [New]' : 'Entry Profesi - [Edit]';
+					var Title = (param.id == 0) ? 'Entry Post - [New]' : 'Entry Post - [Edit]';
 					w.setTitle(Title);
 					
 					Ext.Ajax.request({
-						url: Web.HOST + '/administrator/request/entry-profesi-popup',
+						url: URLS.base + 'panel/content/post/view',
 						success: function(Result) {
 							w.body.dom.innerHTML = Result.responseText;
 							
-							WinProfesi.ProfesiID = Profesi.ProfesiID;
-							WinProfesi.profesi = new Ext.form.TextField({ renderTo: 'profesiED', width: 225, allowBlank: false, blankText: 'Masukkan Profesi' });
+							win.id = param.id;
+							win.name = new Ext.form.TextField({
+								renderTo: 'nameED', width: 225, allowBlank: false, blankText: 'Masukkan Judul',
+								enableKeyEvents: true, listeners: {
+									keyup: function(me, b, c) {
+										var alias = Func.GetName(me.getValue());
+										win.alias.setValue(alias);
+									}
+								}
+							});
+							win.desc = new Ext.form.HtmlEditor({ renderTo: 'descED', width: 575, height: 300, enableFont: false });
+							win.alias = new Ext.form.TextField({ renderTo: 'aliasED', width: 225, readOnly: true });
+							win.category = Combo.Class.Category({ renderTo: 'categoryED', width: 225, allowBlank: false, blankText: 'Masukkan Kategori' });
+							win.post_type = Combo.Class.PostType({ renderTo: 'post_typeED', width: 225, allowBlank: false, blankText: 'Masukkan Jenis Post' });
+							win.publish_date = new Ext.form.DateField({ renderTo: 'publish_dateED', width: 120, format: DATE_FORMAT, allowBlank: false, blankText: 'Masukkan Tanggal Publish', value: new Date() });
+							win.publish_time = Combo.Class.Time({ renderTo: 'publish_timeED', width: 100, allowBlank: false, blankText: 'Masukkan Jam Publish', value: new Date() });
 							
 							// Populate Record
-							if (Profesi.ProfesiID > 0) {
-								WinProfesi.profesi.setValue(Profesi.profesi);
+							if (param.id > 0) {
+								win.name.setValue(param.name);
+								win.desc.setValue(param.desc);
+								win.alias.setValue(param.alias);
+								win.category.setValue(param.category_id);
+								win.post_type.setValue(param.post_type_id);
+								
+								a = win; b = param;
+								win = a; param = b;
+								win.publish_date.setValue(Renderer.GetDateFromString.Date(param.publish_date));
+								win.publish_time.setValue(Renderer.GetDateFromString.Time(param.publish_date));
 							}
 						}
 					});
 				},
 				hide: function(w) {
 					w.destroy();
-					w = WinProfesi = null;
+					w = win = null;
 				}
 			},
-			SaveProfesi: function() {
-				var Param = new Object();
-				Param.Action = 'EditProfesi';
-				Param.ProfesiID = WinProfesi.ProfesiID;
-				Param.profesi = WinProfesi.profesi.getValue().toUpperCase();
+			save: function() {
+				var ajax = new Object();
+				ajax.action = 'update';
+				ajax.id = win.id;
+				ajax.name = win.name.getValue();
+				ajax.desc = win.desc.getValue();
+				ajax.alias = win.alias.getValue();
+				ajax.category_id = win.category.getValue();
+				ajax.post_type_id = win.post_type.getValue();
 				
 				// Validation
-				var Validation = true;
-				if (! WinProfesi.profesi.validate()) {
-					Validation = false;
+				var is_valid = true;
+				if (! win.name.validate()) {
+					is_valid = false;
 				}
-				
-				if (! Validation) {
+				if (! win.category.validate()) {
+					is_valid = false;
+				}
+				if (! win.post_type.validate()) {
+					is_valid = false;
+				}
+				if (! win.publish_date.validate()) {
+					is_valid = false;
+				}
+				if (! win.publish_time.validate()) {
+					is_valid = false;
+				}
+				if (! is_valid) {
 					return;
 				}
 				
+				var publish_date = Renderer.ShowFormat.Date(win.publish_date.getValue());
+				var publish_time = Renderer.ShowFormat.Time(win.publish_time.getValue());
+				ajax.publish_date = publish_date + ' ' + publish_time;
+				
 				Ext.Ajax.request({
-					params: Param,
-					url: Web.HOST + '/administrator/ajax',
+					params: ajax,
+					url: URLS.base + 'panel/content/post/action',
 					success: function(TempResult) {
 						eval('var Result = ' + TempResult.responseText)
-                        Ext.Msg.alert('Informasi', Result.Message);
+                        Ext.Msg.alert('Informasi', Result.message);
                         
-                        if (Result.QueryStatus == '1') {
-							ProfesiStore.load();
-							WinProfesi.hide();
+                        if (Result.status) {
+							main_store.load();
+							win.hide();
                         }
 					}
 				});
 			}
 		});
-		WinProfesi.show();
+		win.show();
 	}
 	
-	Renderer.InitWindowSize({ Panel: -1, Grid: ProfesiGrid, Toolbar: 70 });
+	Renderer.InitWindowSize({ Panel: -1, Grid: main_grid, Toolbar: 70 });
 });

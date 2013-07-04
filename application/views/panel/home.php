@@ -59,7 +59,7 @@
 	<div id="header" style="display: none;">
 		<h1 id="logo"><a>SUEKAREA</a></h1>
 		<div class="navigation"><ul>
-			<li><a href="<?php echo base_url('administrator/logout'); ?>"><div>Logout</div></a></li>
+			<li><a href="<?php echo base_url('panel/home/logout'); ?>"><div>Logout</div></a></li>
 		</ul></div>
 	</div>
 	<div id="footer" style="display:none;">

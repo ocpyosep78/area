@@ -9,34 +9,37 @@ class post extends SUEKAREA_Controller {
     }
 	
 	function grid() {
-//		$result['rows'] = $this->M_Pendidikan->GetArray($_GET);
-		$result['rows'] = array();
-		$result['count'] = 0;
+		$result['rows'] = $this->Post_model->get_array($_POST);
+		$result['count'] = $this->Post_model->get_count();
 		
-		echo json_encode($result); exit;
-		
-		$_POST['column'] = array( 'nama', 'lokasi', 'waktu', 'publish_date' );
-		
-		$array = $this->Event_model->get_array($_POST);
-		$count = $this->Event_model->get_count();
-		$grid = array( 'sEcho' => $_POST['sEcho'], 'aaData' => $array, 'iTotalRecords' => $count, 'iTotalDisplayRecords' => $count );
-		
-		echo json_encode($grid);
+		echo json_encode($result);
 	}
 	
 	function action() {
 		$action = (isset($_POST['action'])) ? $_POST['action'] : '';
 		unset($_POST['action']);
 		
+		// user
+		$user = $this->User_model->get_session();
+		
 		$result = array();
 		if ($action == 'update') {
-			$result = $this->Event_model->update($_POST);
+			if (empty($_POST['id'])) {
+				$_POST['user_id'] = $user['id'];
+				$_POST['create_date'] = $this->config->item('current_datetime');
+			}
+			
+			$result = $this->Post_model->update($_POST);
 		} else if ($action == 'get_by_id') {
-			$result = $this->Event_model->get_by_id($_POST);
+			$result = $this->Post_model->get_by_id(array( 'id' => $_POST['id'] ));
 		} else if ($action == 'delete') {
-			$result = $this->Event_model->delete($_POST);
+			$result = $this->Post_model->delete($_POST);
 		}
 		
 		echo json_encode($result);
+	}
+	
+	function view() {
+		$this->load->view( 'panel/content/popup/post' );
 	}
 }

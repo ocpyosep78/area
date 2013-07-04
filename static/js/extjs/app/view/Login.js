@@ -32,11 +32,11 @@ Ext.define( 'Stiki.view.LoginWindow', {
                     xtype:'container',
                     html: '<div id="loginmsg" style="padding: 10px 0 0 0;"><p>Masukkan username/password untuk login</p></div>'
                 },{
-                    name: 'username',
-                    fieldLabel: 'Username',
+                    name: 'email',
+                    fieldLabel: 'Email',
                     required:true
                 },{
-                    name: 'password',
+                    name: 'passwd',
                     fieldLabel: 'Password',
                     inputType: 'password',
                     required:true

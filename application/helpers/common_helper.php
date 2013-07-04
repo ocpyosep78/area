@@ -329,8 +329,14 @@
                 $Filter = json_decode($Param['filter']);
                 
                 foreach ($Filter as $Array) {
-                    $Field = (isset($ReplaceField[$Array->field])) ? $ReplaceField[$Array->field] : $Array->field;
-                    
+					if (isset($ReplaceField[$Array->field])) {
+						$Field = $ReplaceField[$Array->field];
+					} else if (isset($Param['field_replace']) && isset($Param['field_replace'][$Array->field])) {
+						$Field = $Param['field_replace'][$Array->field];
+					} else {
+						$Field = $Array->field;
+					}
+					
                     if (isset($Array->field) && isset($Array->type)) {
                         if ($Array->type == 'numeric') {
                             if ($Array->comparison == 'eq') {
@@ -346,7 +352,8 @@
 							} else if ($Array->comparison == 'in') {
 								$StringFilter .= "AND " . $Field." IN (".$Array->value.") ";
                             }
-						} else if ($Array->type == 'date') {
+						}
+						else if ($Array->type == 'date') {
                             if ($Array->comparison == 'eq') {
                                 $StringFilter .= "AND " . $Field." = '".ConvertDateToQuery($Array->value)."' ";
                                 } else if ($Array->comparison == 'lt') {
@@ -354,7 +361,8 @@
                                 } else if ($Array->comparison == 'gt') {
                                 $StringFilter .= "AND " . $Field." >= '".ConvertDateToQuery($Array->value)."' ";
                             }
-						} else if ($Array->type == 'list') {
+						}
+						else if ($Array->type == 'list') {
                             $Array->field = $Field;
                             $StringFilter .= GetStringFromList($Array);
 						} else if ($Array->type == 'custom') {

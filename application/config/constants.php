@@ -14,8 +14,10 @@ define('FOPEN_READ_WRITE_CREATE',				'a+b');
 define('FOPEN_WRITE_CREATE_STRICT',				'xb');
 define('FOPEN_READ_WRITE_CREATE_STRICT',		'x+b');
 
-define('SHA_SECRET',							'raHa5!4');
+define('SHA_SECRET',							'OraNgerti');
 
-
-/* End of file constants.php */
-/* Location: ./application/config/constants.php */
+define('CATEGORY',								'category');
+define('POST',									'post');
+define('POST_TYPE',								'post_type');
+define('USER',									'user');
+define('USER_TYPE',								'user_type');
