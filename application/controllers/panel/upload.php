@@ -6,6 +6,6 @@ class upload extends CI_Controller {
 	}
 	
 	function index() {
-		$this->load->view( 'panel/common/upload_single');
+		$this->load->view( 'panel/common/upload');
 	}
 }

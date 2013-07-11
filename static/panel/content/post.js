@@ -111,7 +111,7 @@ Ext.onReady(function() {
 	
 	function main_win(param) {
 		var win = new Ext.Window({
-			layout: 'fit', width: 710, height: 465,
+			layout: 'fit', width: 710, height: 495,
 			closeAction: 'hide', plain: true, modal: true,
 			buttons: [ {
 						text: 'Save', handler: function() { win.save(); }
@@ -139,23 +139,28 @@ Ext.onReady(function() {
 									}
 								}
 							});
-							win.desc = new Ext.form.HtmlEditor({ renderTo: 'descED', width: 575, height: 300, enableFont: false });
+							win.desc = new Ext.form.HtmlEditor({ renderTo: 'descED', width: 575, height: 150, enableFont: false });
+							win.download = new Ext.form.HtmlEditor({ renderTo: 'downloadED', width: 575, height: 150, enableFont: false });
 							win.alias = new Ext.form.TextField({ renderTo: 'aliasED', width: 225, readOnly: true });
 							win.category = Combo.Class.Category({ renderTo: 'categoryED', width: 225, allowBlank: false, blankText: 'Masukkan Kategori' });
 							win.post_type = Combo.Class.PostType({ renderTo: 'post_typeED', width: 225, allowBlank: false, blankText: 'Masukkan Jenis Post' });
 							win.publish_date = new Ext.form.DateField({ renderTo: 'publish_dateED', width: 120, format: DATE_FORMAT, allowBlank: false, blankText: 'Masukkan Tanggal Publish', value: new Date() });
 							win.publish_time = Combo.Class.Time({ renderTo: 'publish_timeED', width: 100, allowBlank: false, blankText: 'Masukkan Jam Publish', value: new Date() });
+							win.thumbnail = new Ext.form.TextField({ renderTo: 'thumbnailED', width: 140, readOnly: true });
+							win.thumbnail_button = new Ext.Button({ renderTo: 'btn_thumbnailED', text: 'Browse', width: 75, handler: function(btn) {
+								window.iframe_thumbnail.browse();
+							} });
+							post_thumbnail = function(p) { win.thumbnail.setValue(p.file_name); }
 							
 							// Populate Record
 							if (param.id > 0) {
 								win.name.setValue(param.name);
 								win.desc.setValue(param.desc);
 								win.alias.setValue(param.alias);
+								win.thumbnail.setValue(param.thumbnail);
 								win.category.setValue(param.category_id);
 								win.post_type.setValue(param.post_type_id);
 								
-								a = win; b = param;
-								win = a; param = b;
 								win.publish_date.setValue(Renderer.GetDateFromString.Date(param.publish_date));
 								win.publish_time.setValue(Renderer.GetDateFromString.Time(param.publish_date));
 							}
@@ -174,6 +179,7 @@ Ext.onReady(function() {
 				ajax.name = win.name.getValue();
 				ajax.desc = win.desc.getValue();
 				ajax.alias = win.alias.getValue();
+				ajax.thumbnail = win.thumbnail.getValue();
 				ajax.category_id = win.category.getValue();
 				ajax.post_type_id = win.post_type.getValue();
 				

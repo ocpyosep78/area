@@ -7,12 +7,7 @@ Ext.Loader.setConfig({
     }
 });
 
-Ext.require([
-	'Stiki.controller.Home',
-	'Stiki.view.Sidebar',
-	'Stiki.view.MainPanel',
-	'Stiki.view.Login',
-]);
+Ext.require([ 'Stiki.controller.Home', 'Stiki.view.Sidebar', 'Stiki.view.MainPanel', 'Stiki.view.Login', ]);
 
 Ext.application({
     name: 'Stiki',

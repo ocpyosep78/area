@@ -4,7 +4,7 @@ class Post_model extends CI_Model {
     function __construct() {
         parent::__construct();
 		
-        $this->field = array( 'id', 'user_id', 'category_id', 'post_type_id', 'alias', 'name', 'desc', 'create_date', 'publish_date', 'view_count' );
+        $this->field = array( 'id', 'user_id', 'category_id', 'post_type_id', 'alias', 'name', 'desc', 'thumbnail', 'create_date', 'publish_date', 'view_count' );
     }
 
     function update($param) {

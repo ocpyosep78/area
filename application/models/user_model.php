@@ -96,7 +96,7 @@ class User_model extends CI_Model {
 	function get_menu() {
 		$menu = array(
 			array(
-				'Title' => 'Informasi',
+				'Title' => 'Main Content',
 				'Child' => array(
 					array( 'Title' => 'Post', 'Link' => base_url('panel/content/post') )
 				)
@@ -104,6 +104,7 @@ class User_model extends CI_Model {
 			array(
 				'Title' => 'Master',
 				'Child' => array(
+					array( 'Title' => 'Category', 'Link' => base_url('panel/master/category') ),
 					array( 'Title' => 'Config', 'Link' => base_url('panel/master/config') )
 				)
 			)

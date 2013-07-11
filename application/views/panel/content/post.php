@@ -1,39 +1,18 @@
 <?php
-	$page_title = (isset($page_title)) ? $page_title : '';
-    $ext = base_url('static/js/extjs');
+	$array_js[] = base_url('static/panel/content/post.js');
 ?>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xml:lang="en" xmlns="http://www.w3.org/1999/xhtml" lang="en-AU">
-<head>
-	<title><?php echo $page_title; ?></title>
-	
-	<link rel="stylesheet" type="text/css" media="all" href="<?php echo base_url('static/js/extjs/resources/css/ext-all.css'); ?>" />
-	<link rel="stylesheet" type="text/css" media="all" href="<?php echo base_url('static/js/extjs/examples/ux/grid/css/GridFilters.css'); ?>" />
-	<link rel="stylesheet" type="text/css" media="all" href="<?php echo base_url('static/js/extjs/examples/ux/grid/css/RangeMenu.css'); ?>" />
-	<link rel="stylesheet" type="text/css" media="all" href="<?php echo base_url('static/js/extjs/resources/css/admin.css'); ?>" />
-	<script type="text/javascript">
-		URLS = <?php echo json_encode( array( 'base' => base_url(), 'ext' => $ext ) ); ?>;
-	</script>
-	<script type="text/javascript" src="<?php echo base_url('static/js/extjs/ext-all.js'); ?>"></script>
-	<script type="text/javascript" src="<?php echo base_url('static/panel/ext.common.js'); ?>"></script>
-</head>
-<body class="framedBody">
-<script type="text/javascript" src="<?php echo base_url('static/panel/content/post.js'); ?>"></script>
 
-<div id="loading_mask">
-    <div class="loading">
-        <p><img src="<?php echo base_url('static/img/loading.gif')?>"></p>
-        <p>Loading...</p>
-    </div>
-</div>
+<?php $this->load->view( 'panel/common/meta' ); ?>
+<?php $this->load->view( 'panel/common/loader', array( 'array_js' => $array_js ) ); ?>
 
 <div class="wi">
+	<div class="x-hidden">
+		<iframe name="iframe_thumbnail" src="<?php echo base_url('panel/upload?callback_name=post_thumbnail'); ?>"></iframe>
+	</div>
+	
 	<div id="x-cnt">
 		<div id="grid-member"></div>
 	</div>
 </div>
 
-<div class="hidden"><div id="FormUpload"></div></div>
-
-</body>
-</html>
+<?php $this->load->view( 'panel/common/footer' ); ?>
