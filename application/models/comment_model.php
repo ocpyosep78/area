@@ -1,24 +1,24 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Category_model extends CI_Model {
+class Comment_model extends CI_Model {
     function __construct() {
         parent::__construct();
 		
-        $this->field = array( 'id', 'name', 'alias' );
+        $this->field = array( 'id', 'user_id', 'link', 'comment', 'comment_time', 'is_publish' );
     }
 
     function update($param) {
         $result = array();
        
         if (empty($param['id'])) {
-            $insert_query  = GenerateInsertQuery($this->field, $param, CATEGORY);
+            $insert_query  = GenerateInsertQuery($this->field, $param, COMMENT);
             $insert_result = mysql_query($insert_query) or die(mysql_error());
            
             $result['id'] = mysql_insert_id();
             $result['status'] = '1';
             $result['message'] = 'Data berhasil disimpan.';
         } else {
-            $update_query  = GenerateUpdateQuery($this->field, $param, CATEGORY);
+            $update_query  = GenerateUpdateQuery($this->field, $param, COMMENT);
             $update_result = mysql_query($update_query) or die(mysql_error());
            
             $result['id'] = $param['id'];
@@ -33,7 +33,7 @@ class Category_model extends CI_Model {
         $array = array();
        
         if (isset($param['id'])) {
-            $select_query  = "SELECT * FROM ".CATEGORY." WHERE id = '".$param['id']."' LIMIT 1";
+            $select_query  = "SELECT * FROM ".COMMENT." WHERE id = '".$param['id']."' LIMIT 1";
         } 
        
         $select_result = mysql_query($select_query) or die(mysql_error());
@@ -47,14 +47,14 @@ class Category_model extends CI_Model {
     function get_array($param = array()) {
         $array = array();
 		
-		$string_namelike = (!empty($_POST['namelike'])) ? "AND Category.name LIKE '%".$_POST['namelike']."%'" : '';
+		$string_namelike = (!empty($_POST['namelike'])) ? "AND Comment.comment LIKE '%".$_POST['namelike']."%'" : '';
 		$string_filter = GetStringFilter($param, @$param['column']);
-		$string_sorting = GetStringSorting($param, @$param['column'], 'name ASC');
+		$string_sorting = GetStringSorting($param, @$param['column'], 'comment_time ASC');
 		$string_limit = GetStringLimit($param);
 		
 		$select_query = "
-			SELECT SQL_CALC_FOUND_ROWS Category.*
-			FROM ".CATEGORY." Category
+			SELECT SQL_CALC_FOUND_ROWS Comment.*
+			FROM ".COMMENT." Comment
 			WHERE 1 $string_namelike $string_filter
 			ORDER BY $string_sorting
 			LIMIT $string_limit
@@ -77,7 +77,7 @@ class Category_model extends CI_Model {
     }
 	
     function delete($param) {
-		$delete_query  = "DELETE FROM ".CATEGORY." WHERE id = '".$param['id']."' LIMIT 1";
+		$delete_query  = "DELETE FROM ".COMMENT." WHERE id = '".$param['id']."' LIMIT 1";
 		$delete_result = mysql_query($delete_query) or die(mysql_error());
 		
 		$result['status'] = '1';
@@ -87,7 +87,7 @@ class Category_model extends CI_Model {
     }
 	
 	function sync($row, $column = array()) {
-		$row = StripArray($row);
+		$row = StripArray($row, array( 'comment_time' ));
 		
 		return $row;
 	}

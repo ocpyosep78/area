@@ -7,14 +7,11 @@ Ext.onReady(function() {
 	
 	var main_store = Ext.create('Ext.data.Store', {
 		autoLoad: true, pageSize: 25, remoteSort: true,
-        sorters: [{ property: 'create_date', direction: 'DESC' }],
-		fields: [
-			'id', 'user_id', 'category_id', 'category_name', 'post_type_id', 'post_type_name', 'alias', 'name', 'desc', 'create_date',
-			'publish_date', 'view_count'
-		],
+        sorters: [{ property: 'name', direction: 'ASC' }],
+		fields: [ 'id', 'alias', 'name' ],
 		proxy: {
 			type: 'ajax',
-			url : URLS.base + 'panel/content/post/grid', actionMethods: { read: 'POST' },
+			url : URLS.base + 'panel/master/category/grid', actionMethods: { read: 'POST' },
 			reader: { type: 'json', root: 'rows', totalProperty: 'count' }
 		}
 	});
@@ -23,11 +20,8 @@ Ext.onReady(function() {
 		viewConfig: { forceFit: true }, store: main_store, height: 335, renderTo: 'grid-member',
 		features: [{ ftype: 'filters', encode: true, local: false }],
 		columns: [ {
-					header: 'Judul', dataIndex: 'name', sortable: true, filter: true, width: 200, flex: 1
-			}, {	header: 'Kategori', dataIndex: 'category_name', sortable: true, filter: true, width: 200
-			}, {	header: 'Tipe Post', dataIndex: 'post_type_name', sortable: true, filter: true, width: 100
-			}, {	header: 'Publish', dataIndex: 'publish_date', sortable: true, filter: true, width: 150, align: 'center'
-			}, {	header: 'Dilihat', dataIndex: 'view_count', sortable: true, filter: true, width: 100, align: 'right'
+					header: 'Name', dataIndex: 'name', sortable: true, filter: true, width: 200, flex: 1
+			}, {	header: 'Alias', dataIndex: 'alias', sortable: true, filter: true, width: 200
 		} ],
 		tbar: [ {
 				text: 'Tambah', iconCls: 'addIcon', tooltip: 'Tambah', handler: function() { main_win({ id: 0 }); }
@@ -80,12 +74,12 @@ Ext.onReady(function() {
 			}
 			
 			Ext.Ajax.request({
-				url: URLS.base + 'panel/content/post/action',
+				url: URLS.base + 'panel/master/category/action',
 				params: { action: 'get_by_id', id: row[0].data.id },
 				success: function(Result) {
-					eval('var Record = ' + Result.responseText)
-					Record.id = Record.id;
-					main_win(Record);
+					eval('var record = ' + Result.responseText)
+					record.id = record.id;
+					main_win(record);
 				}
 			});
 		},
@@ -95,7 +89,7 @@ Ext.onReady(function() {
 			}
 			
 			Ext.Ajax.request({
-				url: URLS.base + 'panel/content/post/action',
+				url: URLS.base + 'panel/master/category/action',
 				params: { action: 'delete', id: main_grid.getSelectionModel().getSelection()[0].data.id },
 				success: function(TempResult) {
 					eval('var Result = ' + TempResult.responseText)
@@ -111,7 +105,7 @@ Ext.onReady(function() {
 	
 	function main_win(param) {
 		var win = new Ext.Window({
-			layout: 'fit', width: 710, height: 495,
+			layout: 'fit', width: 390, height: 130,
 			closeAction: 'hide', plain: true, modal: true,
 			buttons: [ {
 						text: 'Save', handler: function() { win.save(); }
@@ -121,11 +115,11 @@ Ext.onReady(function() {
 			}],
 			listeners: {
 				show: function(w) {
-					var Title = (param.id == 0) ? 'Entry Post - [New]' : 'Entry Post - [Edit]';
+					var Title = (param.id == 0) ? 'Entry Category - [New]' : 'Entry Category - [Edit]';
 					w.setTitle(Title);
 					
 					Ext.Ajax.request({
-						url: URLS.base + 'panel/content/post/view',
+						url: URLS.base + 'panel/master/category/view',
 						success: function(Result) {
 							w.body.dom.innerHTML = Result.responseText;
 							
@@ -133,36 +127,18 @@ Ext.onReady(function() {
 							win.name = new Ext.form.TextField({
 								renderTo: 'nameED', width: 225, allowBlank: false, blankText: 'Masukkan Judul',
 								enableKeyEvents: true, listeners: {
-									keyup: function(me, b, c) {
+									keyup: function(me) {
 										var alias = Func.GetName(me.getValue());
 										win.alias.setValue(alias);
 									}
 								}
 							});
-							win.desc = new Ext.form.HtmlEditor({ renderTo: 'descED', width: 575, height: 150, enableFont: false });
-							win.download = new Ext.form.HtmlEditor({ renderTo: 'downloadED', width: 575, height: 150, enableFont: false });
 							win.alias = new Ext.form.TextField({ renderTo: 'aliasED', width: 225, readOnly: true });
-							win.category = Combo.Class.Category({ renderTo: 'categoryED', width: 225, allowBlank: false, blankText: 'Masukkan Kategori' });
-							win.post_type = Combo.Class.PostType({ renderTo: 'post_typeED', width: 225, allowBlank: false, blankText: 'Masukkan Jenis Post' });
-							win.publish_date = new Ext.form.DateField({ renderTo: 'publish_dateED', width: 120, format: DATE_FORMAT, allowBlank: false, blankText: 'Masukkan Tanggal Publish', value: new Date() });
-							win.publish_time = Combo.Class.Time({ renderTo: 'publish_timeED', width: 100, allowBlank: false, blankText: 'Masukkan Jam Publish', value: new Date() });
-							win.thumbnail = new Ext.form.TextField({ renderTo: 'thumbnailED', width: 140, readOnly: true });
-							win.thumbnail_button = new Ext.Button({ renderTo: 'btn_thumbnailED', text: 'Browse', width: 75, handler: function(btn) {
-								window.iframe_thumbnail.browse();
-							} });
-							post_thumbnail = function(p) { win.thumbnail.setValue(p.file_name); }
 							
 							// Populate Record
 							if (param.id > 0) {
 								win.name.setValue(param.name);
-								win.desc.setValue(param.desc);
 								win.alias.setValue(param.alias);
-								win.thumbnail.setValue(param.thumbnail);
-								win.category.setValue(param.category_id);
-								win.post_type.setValue(param.post_type_id);
-								
-								win.publish_date.setValue(Renderer.GetDateFromString.Date(param.publish_date));
-								win.publish_time.setValue(Renderer.GetDateFromString.Time(param.publish_date));
 							}
 						}
 					});
@@ -177,38 +153,18 @@ Ext.onReady(function() {
 				ajax.action = 'update';
 				ajax.id = win.id;
 				ajax.name = win.name.getValue();
-				ajax.desc = win.desc.getValue();
 				ajax.alias = win.alias.getValue();
-				ajax.thumbnail = win.thumbnail.getValue();
-				ajax.category_id = win.category.getValue();
-				ajax.post_type_id = win.post_type.getValue();
 				
 				// Validation
 				var is_valid = true;
 				if (! win.name.validate()) {
 					is_valid = false;
 				}
-				if (! win.category.validate()) {
-					is_valid = false;
-				}
-				if (! win.post_type.validate()) {
-					is_valid = false;
-				}
-				if (! win.publish_date.validate()) {
-					is_valid = false;
-				}
-				if (! win.publish_time.validate()) {
-					is_valid = false;
-				}
 				if (! is_valid) {
 					return;
 				}
 				
-				var publish_date = Renderer.ShowFormat.Date(win.publish_date.getValue());
-				var publish_time = Renderer.ShowFormat.Time(win.publish_time.getValue());
-				ajax.publish_date = publish_date + ' ' + publish_time;
-				
-				Func.ajax({ param: ajax, url: URLS.base + 'panel/content/post/action', callback: function(result) {
+				Func.ajax({ param: ajax, url: URLS.base + 'panel/master/category/action', callback: function(result) {
 					Ext.Msg.alert('Informasi', result.message);
 					if (result.status) {
 						main_store.load();

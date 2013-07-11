@@ -50,6 +50,7 @@ class Post_model extends CI_Model {
 		// replace
 		$param['field_replace']['name'] = 'Post.name';
 		
+		$string_namelike = (!empty($_POST['namelike'])) ? "AND Post.name LIKE '%".$_POST['namelike']."%'" : '';
 		$string_filter = GetStringFilter($param, @$param['column']);
 		$string_sorting = GetStringSorting($param, @$param['column'], 'Post.name ASC');
 		$string_limit = GetStringLimit($param);
@@ -60,7 +61,7 @@ class Post_model extends CI_Model {
 			FROM ".POST." Post
 			LEFT JOIN ".CATEGORY." Category ON Category.id = Post.category_id
 			LEFT JOIN ".POST_TYPE." PostType ON PostType.id = Post.post_type_id
-			WHERE 1 $string_filter
+			WHERE 1 $string_namelike $string_filter
 			ORDER BY $string_sorting
 			LIMIT $string_limit
 		";

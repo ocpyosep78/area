@@ -96,9 +96,18 @@ class User_model extends CI_Model {
 	function get_menu() {
 		$menu = array(
 			array(
-				'Title' => 'Main Content',
+				'Title' => 'Content Management',
 				'Child' => array(
-					array( 'Title' => 'Post', 'Link' => base_url('panel/content/post') )
+					array( 'Title' => 'Post', 'Link' => base_url('panel/content/post') ),
+					array( 'Title' => 'Comment', 'Link' => base_url('panel/content/comment') ),
+					array( 'Title' => 'Request', 'Link' => base_url('panel/content/request') )
+				)
+			),
+			array(
+				'Title' => 'User Management',
+				'Child' => array(
+					array( 'Title' => 'User', 'Link' => base_url('panel/user/user') ),
+					array( 'Title' => 'Mail', 'Link' => base_url('panel/user/mail') )
 				)
 			),
 			array(

@@ -74,6 +74,26 @@ var Func = {
 	},
 	Trim: function(value) {
 		return value.replace(/^\s+|\s+$/g,'');
+	},
+	
+	ajax: function(p) {
+		p.json = (p.json == null) ? true : p.json;
+		
+		Ext.Ajax.request({
+			params: p.param,
+			url: p.url,
+			success: function(raw_result) {
+				if (p.json) {
+					eval('var result = ' + raw_result.responseText)
+				} else {
+					var result = raw_result;
+				}
+				
+				if (p.callback != null) {
+					p.callback(result);
+				}
+			}
+		});
 	}
 }
 
