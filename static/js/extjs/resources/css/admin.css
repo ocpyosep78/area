@@ -143,11 +143,11 @@ blockquote {color:#666; margin:1em;}
 .framedBody { background:#fff; width:100%; height:100%; margin:0; padding:0;}
 #grid-member {width:100%;height:100%;}
 
-.linkIcon { background-image:url(../link.png); background-repeat:no-repeat; width: 16px; cursor: pointer; }
-.delIcon { background-image:url(../delete.gif); background-repeat:no-repeat; width: 16px; cursor: pointer; }
-.acceptIcon { background-image:url(../accept.png); background-repeat:no-repeat; width: 16px; cursor: pointer; }
-.goIcon { background-image:url(../rss_go.png); background-repeat:no-repeat; width: 16px; cursor: pointer; }
-.interviewIcon { background-image:url(../user_edit.png); background-repeat:no-repeat; width: 16px; cursor: pointer; }
-.addIcon { background-image:url(../add.gif); background-repeat:no-repeat; width: 16px; cursor: pointer; }
-.editIcon { background-image:url(../edit.png); background-repeat:no-repeat; width: 16px; cursor: pointer; }
-.refreshIcon { background-image:url(../refresh.gif); background-repeat:no-repeat; width: 16px; cursor: pointer; }
+.linkIcon { background-image:url(../link.png); background-repeat:no-repeat; width: 16px; cursor: pointer; margin: 0 3px; }
+.delIcon { background-image:url(../delete.gif); background-repeat:no-repeat; width: 16px; cursor: pointer; margin: 0 3px; }
+.acceptIcon { background-image:url(../accept.png); background-repeat:no-repeat; width: 16px; cursor: pointer; margin: 0 3px; }
+.goIcon { background-image:url(../rss_go.png); background-repeat:no-repeat; width: 16px; cursor: pointer; margin: 0 3px; }
+.interviewIcon { background-image:url(../user_edit.png); background-repeat:no-repeat; width: 16px; cursor: pointer; margin: 0 3px; }
+.addIcon { background-image:url(../add.gif); background-repeat:no-repeat; width: 16px; cursor: pointer; margin: 0 3px; }
+.editIcon { background-image:url(../edit.png); background-repeat:no-repeat; width: 16px; cursor: pointer; margin: 0 3px; }
+.refreshIcon { background-image:url(../refresh.gif); background-repeat:no-repeat; width: 16px; cursor: pointer; margin: 0 3px; }

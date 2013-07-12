@@ -20,5 +20,6 @@ define('CATEGORY',								'category');
 define('COMMENT',								'comment');
 define('POST',									'post');
 define('POST_TYPE',								'post_type');
+define('REQUEST',								'request');
 define('USER',									'user');
 define('USER_TYPE',								'user_type');

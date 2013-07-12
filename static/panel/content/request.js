@@ -7,11 +7,11 @@ Ext.onReady(function() {
 	
 	var main_store = Ext.create('Ext.data.Store', {
 		autoLoad: true, pageSize: 25, remoteSort: true,
-        sorters: [{ property: 'name', direction: 'ASC' }],
-		fields: [ 'id', 'alias', 'name' ],
+        sorters: [{ property: 'request_time', direction: 'DESC' }],
+		fields: [ 'id', 'user_id', 'user_fullname', 'description', 'request_time', 'status' ],
 		proxy: {
 			type: 'ajax',
-			url : URLS.base + 'panel/master/category/grid', actionMethods: { read: 'POST' },
+			url : URLS.base + 'panel/content/request/grid', actionMethods: { read: 'POST' },
 			reader: { type: 'json', root: 'rows', totalProperty: 'count' }
 		}
 	});
@@ -20,12 +20,12 @@ Ext.onReady(function() {
 		viewConfig: { forceFit: true }, store: main_store, height: 335, renderTo: 'grid-member',
 		features: [{ ftype: 'filters', encode: true, local: false }],
 		columns: [ {
-					header: 'Name', dataIndex: 'name', sortable: true, filter: true, width: 200, flex: 1
-			}, {	header: 'Alias', dataIndex: 'alias', sortable: true, filter: true, width: 200
+					header: 'Time', dataIndex: 'request_time', sortable: true, filter: true, width: 125, align: 'center'
+			}, {	header: 'User', dataIndex: 'user_fullname', sortable: true, filter: true, width: 125
+			}, {	header: 'Content', dataIndex: 'description', sortable: true, filter: true, width: 100, flex: 1
+			}, {	header: 'Status', dataIndex: 'status', sortable: true, filter: true, width: 100, align: 'center'
 		} ],
 		tbar: [ {
-				text: 'Tambah', iconCls: 'addIcon', tooltip: 'Tambah', handler: function() { main_win({ id: 0 }); }
-			}, '-', {
 				text: 'Ubah', iconCls: 'editIcon', tooltip: 'Ubah', handler: function() { main_grid.update({ }); }
 			}, '-', {
 				text: 'Hapus', iconCls: 'delIcon', tooltip: 'Hapus', handler: function() {
@@ -74,12 +74,12 @@ Ext.onReady(function() {
 			}
 			
 			Ext.Ajax.request({
-				url: URLS.base + 'panel/master/category/action',
+				url: URLS.base + 'panel/content/request/action',
 				params: { action: 'get_by_id', id: row[0].data.id },
 				success: function(Result) {
-					eval('var record = ' + Result.responseText)
-					record.id = record.id;
-					main_win(record);
+					eval('var Record = ' + Result.responseText)
+					Record.id = Record.id;
+					main_win(Record);
 				}
 			});
 		},
@@ -89,7 +89,7 @@ Ext.onReady(function() {
 			}
 			
 			Ext.Ajax.request({
-				url: URLS.base + 'panel/master/category/action',
+				url: URLS.base + 'panel/content/request/action',
 				params: { action: 'delete', id: main_grid.getSelectionModel().getSelection()[0].data.id },
 				success: function(TempResult) {
 					eval('var Result = ' + TempResult.responseText)
@@ -105,7 +105,7 @@ Ext.onReady(function() {
 	
 	function main_win(param) {
 		var win = new Ext.Window({
-			layout: 'fit', width: 390, height: 130,
+			layout: 'fit', width: 710, height: 255,
 			closeAction: 'hide', plain: true, modal: true,
 			buttons: [ {
 						text: 'Save', handler: function() { win.save(); }
@@ -115,30 +115,22 @@ Ext.onReady(function() {
 			}],
 			listeners: {
 				show: function(w) {
-					var Title = (param.id == 0) ? 'Entry Category - [New]' : 'Entry Category - [Edit]';
+					var Title = (param.id == 0) ? 'Entry Post - [New]' : 'Entry Post - [Edit]';
 					w.setTitle(Title);
 					
 					Ext.Ajax.request({
-						url: URLS.base + 'panel/master/category/view',
+						url: URLS.base + 'panel/content/request/view',
 						success: function(Result) {
 							w.body.dom.innerHTML = Result.responseText;
 							
 							win.id = param.id;
-							win.name = new Ext.form.TextField({
-								renderTo: 'nameED', width: 225, allowBlank: false, blankText: 'Masukkan Judul',
-								enableKeyEvents: true, listeners: {
-									keyup: function(me) {
-										var alias = Func.GetName(me.getValue());
-										win.alias.setValue(alias);
-									}
-								}
-							});
-							win.alias = new Ext.form.TextField({ renderTo: 'aliasED', width: 225, readOnly: true });
+							win.description = new Ext.form.TextArea({ renderTo: 'descriptionED', width: 575, height: 150 });
+							win.status = Combo.Class.CommentStatus({ renderTo: 'request_statusED', width: 225 });
 							
 							// Populate Record
 							if (param.id > 0) {
-								win.name.setValue(param.name);
-								win.alias.setValue(param.alias);
+								win.description.setValue(param.description);
+								win.status.setValue(param.status);
 							}
 						}
 					});
@@ -152,19 +144,10 @@ Ext.onReady(function() {
 				var ajax = new Object();
 				ajax.action = 'update';
 				ajax.id = win.id;
-				ajax.name = win.name.getValue();
-				ajax.alias = win.alias.getValue();
+				ajax.description = win.description.getValue();
+				ajax.status = win.status.getValue();
 				
-				// Validation
-				var is_valid = true;
-				if (! win.name.validate()) {
-					is_valid = false;
-				}
-				if (! is_valid) {
-					return;
-				}
-				
-				Func.ajax({ param: ajax, url: URLS.base + 'panel/master/category/action', callback: function(result) {
+				Func.ajax({ param: ajax, url: URLS.base + 'panel/content/request/action', callback: function(result) {
 					Ext.Msg.alert('Informasi', result.message);
 					if (result.status) {
 						main_store.load();

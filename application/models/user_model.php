@@ -49,14 +49,16 @@ class User_model extends CI_Model {
     function get_array($param = array()) {
         $array = array();
 		
+		$string_namelike = (!empty($_POST['namelike'])) ? "AND User.email LIKE '%".$_POST['namelike']."%'" : '';
 		$string_filter = GetStringFilter($param, @$param['column']);
 		$string_sorting = GetStringSorting($param, @$param['column'], 'name ASC');
 		$string_limit = GetStringLimit($param);
 		
 		$select_query = "
-			SELECT SQL_CALC_FOUND_ROWS User.*
+			SELECT SQL_CALC_FOUND_ROWS User.*, UserType.name user_type_name
 			FROM ".USER." User
-			WHERE 1 $string_filter
+			LEFT JOIN ".USER_TYPE." UserType ON UserType.id = User.user_type_id
+			WHERE 1 $string_namelike $string_filter
 			ORDER BY $string_sorting
 			LIMIT $string_limit
 		";

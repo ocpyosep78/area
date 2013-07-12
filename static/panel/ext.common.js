@@ -220,11 +220,27 @@ var Store = {
 		});
 		return Store;
 	},
+	CommentStatus: function() {
+		var Store = ['Pending', 'Approve'];
+		return Store;
+	},
 	PostType: function() {
 		var Store = new Ext.create('Ext.data.Store', {
 			fields: ['id', 'name'],
 			autoLoad: true, proxy: {
 				type: 'ajax', extraParams: { action: 'post_type' },
+				url: URLS.base + 'panel/combo',
+				reader: { type: 'json', root: 'res' },
+				actionMethods: { read: 'POST' }
+			}
+		});
+		return Store;
+	},
+	UserType: function() {
+		var Store = new Ext.create('Ext.data.Store', {
+			fields: ['id', 'name'],
+			autoLoad: true, proxy: {
+				type: 'ajax', extraParams: { action: 'user_type' },
 				url: URLS.base + 'panel/combo',
 				reader: { type: 'json', root: 'res' },
 				actionMethods: { read: 'POST' }
@@ -240,6 +256,14 @@ var Combo = {
 			var p = {
 				xtype: 'combo', store: Store.Category(), minChars: 1, selectOnFocus: true,
 				valueField: 'id', displayField: 'name', readonly: true, editable: false
+			}
+			p = Func.SyncComboParam(p, Param);
+			
+			return p;
+		},
+		CommentStatus: function(Param) {
+			var p = {
+				xtype: 'combo', store: Store.CommentStatus(), selectOnFocus: true, readonly: true, editable: false
 			}
 			p = Func.SyncComboParam(p, Param);
 			
@@ -270,6 +294,15 @@ var Combo = {
 			p = Func.SyncComboParam(p, Param);
 
 			return p;
+		},
+		UserType: function(Param) {
+			var p = {
+				xtype: 'combo', store: Store.UserType(), minChars: 1, selectOnFocus: true,
+				valueField: 'id', displayField: 'name', readonly: true, editable: false
+			}
+			p = Func.SyncComboParam(p, Param);
+			
+			return p;
 		}
 	}
 }
@@ -279,12 +312,20 @@ Combo.Class = {
 		var c = new Ext.form.ComboBox(Combo.Param.Category(Param));
 		return c;
 	},
+	CommentStatus: function(Param) {
+		var c = new Ext.form.ComboBox(Combo.Param.CommentStatus(Param));
+		return c;
+	},
 	PostType: function(Param) {
 		var c = new Ext.form.ComboBox(Combo.Param.PostType(Param));
 		return c;
 	},
 	Time: function(Param) {
 		var c = new Ext.form.field.Time(Combo.Param.Time(Param));
+		return c;
+	},
+	UserType: function(Param) {
+		var c = new Ext.form.ComboBox(Combo.Param.UserType(Param));
 		return c;
 	}
 }

@@ -20,19 +20,40 @@ Ext.onReady(function() {
 		viewConfig: { forceFit: true }, store: main_store, height: 335, renderTo: 'grid-member',
 		features: [{ ftype: 'filters', encode: true, local: false }],
 		columns: [ {
-					header: 'Time', dataIndex: 'comment_time', sortable: true, filter: true, width: 125
+					header: 'Time', dataIndex: 'comment_time', sortable: true, filter: true, width: 125, align: 'center'
 			}, {	header: 'Email', dataIndex: 'user_email', sortable: true, filter: true, width: 150
 			}, {	header: 'Comment', dataIndex: 'comment', sortable: true, filter: true, width: 150, flex: 1
+			}, {	header: 'Publish', xtype: 'actioncolumn', width: 75, align: 'center',
+					items: [ {
+						getClass: function(v, meta, rec) {
+							if (rec.get('is_publish') == 0) {
+								this.items[0].tooltip = 'Publish';
+								return 'delIcon';
+							} else {
+								this.items[0].tooltip = 'Unpublish';
+								return 'acceptIcon';
+							}
+						},
+						handler: function(grid, rowIndex, colIndex) {
+							var rec = grid.store.getAt(rowIndex);
+							var param = { action: 'update', id: rec.data.id, is_publish: (rec.data.is_publish == 0) ? 1 : 0 }
+							Func.ajax({ param: param, url: URLS.base + 'panel/content/comment/action', callback: function(result) {
+								if (result.status) {
+									grid.store.load();
+								}
+							} });
+						}
+					} ]
 			}, {	header: 'Action', xtype: 'actioncolumn', width: 75, align: 'center',
 					items: [ {
-						iconCls: 'linkIcon', tooltip: 'Link', handler: function(grid, rowIndex, colIndex) {
-							var row = grid.store.getAt(rowIndex).data;
-							window.open(row.link);
-						},
-						iconCls: 'acceptIcon', tooltip: 'Hapus', handler: function(grid, rowIndex, colIndex) {
-							var row = grid.store.getAt(rowIndex).data;
-							window.open(row.link);
-						}
+							iconCls: 'linkIcon', tooltip: 'Link', handler: function(grid, rowIndex, colIndex) {
+								var row = grid.store.getAt(rowIndex).data;
+								window.open(row.link);
+							}
+					}, {	iconCls: 'acceptIcon', tooltip: 'Hapus', handler: function(grid, rowIndex, colIndex) {
+								var row = grid.store.getAt(rowIndex).data;
+								window.open(row.link);
+							}
 					} ],
 		} ],
 		tbar: [ {
@@ -54,14 +75,14 @@ Ext.onReady(function() {
                         if (el.getKey() == Ext.EventObject.ENTER) {
                             var value = Ext.getCmp('SearchPM').getValue();
                             if ( value ) {
-								main_grid.load_grid({ RequestName: 'Profesi', namelike: value });
+								main_grid.load_grid({ namelike: value });
                             }
                         }
                     }
                 }
             }, '-', {
 				text: 'Reset', tooltip: 'Reset pencarian', iconCls: 'refreshIcon', handler: function() {
-					main_grid.load_grid({ RequestName: 'Profesi' });
+					main_grid.load_grid({ });
 				}
 		} ],
 		bbar: new Ext.PagingToolbar( {
