@@ -1,4 +1,5 @@
 <?php
+	$array_data['POST_TYPE_PUBLISH'] = POST_TYPE_PUBLISH;
 	$array_js[] = base_url('static/panel/content/post.js');
 ?>
 
@@ -7,6 +8,7 @@
 
 <div class="wi">
 	<div class="x-hidden">
+		<div class="page-data"><?php echo json_encode($array_data); ?></div>
 		<iframe name="iframe_thumbnail" src="<?php echo base_url('panel/upload?callback_name=post_thumbnail'); ?>"></iframe>
 	</div>
 	

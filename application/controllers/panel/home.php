@@ -35,10 +35,12 @@ class home extends CI_Controller {
 			$result['menu'] = $this->User_model->get_menu();
 			$this->User_model->set_session($user);
 			
+			/*
 			// update last login
 			$param['id'] = $user['id'];
 			$param['login_last_date'] = $this->config->item('current_datetime');
 			$this->User_model->update($param);
+			/*	*/
 		}
 		
 		echo json_encode($result);

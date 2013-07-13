@@ -56,6 +56,8 @@
 								<input type="submit" class="submit" id="searchsubmit" value="Search" />
 							</form>
 						</div>
+						<?php
+						/*
 						<div class="newsletter">
 							<div class="newsletter-title">Subscribe to our newsletter</div>
 							<div class="newsletter-popup">
@@ -72,6 +74,8 @@
 								</div>
 							</div>
 						</div>
+						/*	*/
+						?>
 					</div>
 				</div>
 			</section>
@@ -89,7 +93,7 @@
 								<img src="static/upload/logo.png" alt="logo" />
 							</a>
 						</h1>
-						<h2 class="site-description">Responsive WP Theme</h2>
+						<h2 class="site-description">Share Movie &amp; Anime Download</h2>
 					</div>
 				</div>
 			</section>

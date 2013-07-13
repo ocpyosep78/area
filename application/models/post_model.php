@@ -4,7 +4,10 @@ class Post_model extends CI_Model {
     function __construct() {
         parent::__construct();
 		
-        $this->field = array( 'id', 'user_id', 'category_id', 'post_type_id', 'alias', 'name', 'desc', 'thumbnail', 'create_date', 'publish_date', 'view_count' );
+        $this->field = array(
+			'id', 'user_id', 'category_id', 'post_type_id', 'alias', 'name', 'desc', 'thumbnail', 'create_date', 'publish_date', 'view_count',
+			'is_hot', 'is_popular'
+		);
     }
 
     function update($param) {
@@ -94,6 +97,9 @@ class Post_model extends CI_Model {
 	
 	function sync($row, $column = array()) {
 		$row = StripArray($row, array( 'create_date', 'publish_date' ));
+		
+		$date_temp = preg_replace('/-/i', '/', substr($row['create_date'], 0, 8));
+		$row['post_link'] = base_url($date_temp.$row['alias']);
 		
 		return $row;
 	}

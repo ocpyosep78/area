@@ -5,12 +5,15 @@ Ext.require([ 'Ext.grid.*', 'Ext.data.*', 'Ext.ux.grid.FiltersFeature', 'Ext.too
 Ext.onReady(function() {
 	Ext.QuickTips.init();
 	
+	var raw_data = $('.page-data').text();
+	eval('var page_data = ' + raw_data);
+	
 	var main_store = Ext.create('Ext.data.Store', {
 		autoLoad: true, pageSize: 25, remoteSort: true,
         sorters: [{ property: 'create_date', direction: 'DESC' }],
 		fields: [
 			'id', 'user_id', 'category_id', 'category_name', 'post_type_id', 'post_type_name', 'alias', 'name', 'desc', 'create_date',
-			'publish_date', 'view_count'
+			'publish_date', 'view_count', 'post_link', 'is_hot', 'is_popular'
 		],
 		proxy: {
 			type: 'ajax',
@@ -28,6 +31,55 @@ Ext.onReady(function() {
 			}, {	header: 'Tipe Post', dataIndex: 'post_type_name', sortable: true, filter: true, width: 100
 			}, {	header: 'Publish', dataIndex: 'publish_date', sortable: true, filter: true, width: 150, align: 'center'
 			}, {	header: 'Dilihat', dataIndex: 'view_count', sortable: true, filter: true, width: 100, align: 'right'
+			}, {	header: 'Hot', xtype: 'actioncolumn', width: 75, align: 'center',
+					items: [ {
+						getClass: function(v, meta, rec) {
+							if (rec.get('is_hot') == 0) {
+								this.items[0].tooltip = 'Normal Post';
+								return 'delIcon';
+							} else {
+								this.items[0].tooltip = 'Hot Post';
+								return 'acceptIcon';
+							}
+						},
+						handler: function(grid, rowIndex, colIndex) {
+							var rec = grid.store.getAt(rowIndex);
+							var param = { action: 'update', id: rec.data.id, is_hot: (rec.data.is_hot == 0) ? 1 : 0 }
+							Func.ajax({ param: param, url: URLS.base + 'panel/content/post/action', callback: function(result) {
+								if (result.status) {
+									grid.store.load();
+								}
+							} });
+						}
+					} ]
+			}, {	header: 'Popular', xtype: 'actioncolumn', width: 75, align: 'center',
+					items: [ {
+						getClass: function(v, meta, rec) {
+							if (rec.get('is_popular') == 0) {
+								this.items[0].tooltip = 'Normal Post';
+								return 'delIcon';
+							} else {
+								this.items[0].tooltip = 'Popular Post';
+								return 'acceptIcon';
+							}
+						},
+						handler: function(grid, rowIndex, colIndex) {
+							var rec = grid.store.getAt(rowIndex);
+							var param = { action: 'update', id: rec.data.id, is_popular: (rec.data.is_popular == 0) ? 1 : 0 }
+							Func.ajax({ param: param, url: URLS.base + 'panel/content/post/action', callback: function(result) {
+								if (result.status) {
+									grid.store.load();
+								}
+							} });
+						}
+					} ]
+			}, {	header: 'Action', xtype: 'actioncolumn', width: 75, align: 'center',
+					items: [ {
+							iconCls: 'linkIcon', tooltip: 'Link', handler: function(grid, rowIndex, colIndex) {
+								var row = grid.store.getAt(rowIndex).data;
+								window.open(row.post_link);
+							}
+					} ]
 		} ],
 		tbar: [ {
 				text: 'Tambah', iconCls: 'addIcon', tooltip: 'Tambah', handler: function() { main_win({ id: 0 }); }
@@ -143,7 +195,7 @@ Ext.onReady(function() {
 							win.download = new Ext.form.HtmlEditor({ renderTo: 'downloadED', width: 575, height: 150, enableFont: false });
 							win.alias = new Ext.form.TextField({ renderTo: 'aliasED', width: 225, readOnly: true });
 							win.category = Combo.Class.Category({ renderTo: 'categoryED', width: 225, allowBlank: false, blankText: 'Masukkan Kategori' });
-							win.post_type = Combo.Class.PostType({ renderTo: 'post_typeED', width: 225, allowBlank: false, blankText: 'Masukkan Jenis Post' });
+							win.post_type = Combo.Class.PostType({ renderTo: 'post_typeED', width: 225, allowBlank: false, blankText: 'Masukkan Jenis Post', value: page_data.POST_TYPE_PUBLISH });
 							win.publish_date = new Ext.form.DateField({ renderTo: 'publish_dateED', width: 120, format: DATE_FORMAT, allowBlank: false, blankText: 'Masukkan Tanggal Publish', value: new Date() });
 							win.publish_time = Combo.Class.Time({ renderTo: 'publish_timeED', width: 100, allowBlank: false, blankText: 'Masukkan Jam Publish', value: new Date() });
 							win.thumbnail = new Ext.form.TextField({ renderTo: 'thumbnailED', width: 140, readOnly: true });

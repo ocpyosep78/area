@@ -2452,6 +2452,9 @@ a.gal_link:hover span.link-icon {
 	text-decoration:none;
 	color:#e50700;
 }
+.widget_recent_blogposts .article .desc { font-size:12px; }
+.widget_recent_blogposts .article .desc a { font-weight: bold; color: #E50700; }
+
 .widget_recent_blogposts .article .views {
 	float: left;
 	padding:  0 0 0 15px;

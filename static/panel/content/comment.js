@@ -54,7 +54,7 @@ Ext.onReady(function() {
 								var row = grid.store.getAt(rowIndex).data;
 								window.open(row.link);
 							}
-					} ],
+					} ]
 		} ],
 		tbar: [ {
 				text: 'Tambah', iconCls: 'addIcon', tooltip: 'Tambah', handler: function() { main_win({ id: 0 }); }

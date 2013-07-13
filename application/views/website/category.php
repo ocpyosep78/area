@@ -11,23 +11,15 @@
 			
 			<section id="reviews_body">
 					<article id="post_562" class="post-562 reviews type-reviews status-publish format-standard hentry">
-							
-								<div class="pic">
-									<a href="http://wpspace.net/?reviews=lectus-facilisis-et-consequat-lectus-malesuada" class="w_hover img-link img-wrap"><img width="340" height="244" src="static/upload/5-340x244.png" class="attachment-category_news_small wp-post-image" alt="5">
-									<span class="overlay"></span>
-									<span class="link-icon"></span>
-									</a>
-								</div>
-						<h3><a href="http://wpspace.net/?reviews=lectus-facilisis-et-consequat-lectus-malesuada">Lectus facilisis et consequat lectus malesuada.</a></h3>
-						
-						<div class="post-info">
-							<div class="post_rating"><span class="points5 stars"></span></div>
-							<a href="http://wpspace.net/?reviews=lectus-facilisis-et-consequat-lectus-malesuada" class="post_date">May 28, 2013</a>
-							<a href="http://wpspace.net/?reviews=lectus-facilisis-et-consequat-lectus-malesuada" class="comments_count">1</a>
+						<div class="pic">
+							<a href="http://wpspace.net/?reviews=lectus-facilisis-et-consequat-lectus-malesuada" class="w_hover img-link img-wrap">
+								<img width="340" height="244" src="static/upload/5-340x244.png" class="attachment-category_news_small wp-post-image" alt="5">
+								<span class="overlay"></span>
+								<span class="link-icon"></span>
+							</a>
 						</div>
-						
+						<h3><a href="http://wpspace.net/?reviews=lectus-facilisis-et-consequat-lectus-malesuada">Lectus facilisis et consequat lectus malesuada.</a></h3>
 						<div class="text">Nunc at posuere arcu. Etiam sapien urna, mollis volutpat malesuada id, mattis eget nisl. Nunc ut metus eu leo ornare sagittis non commodo sem. Praesent viverra tempus augue ut gravida. Aliquam...</div>
-						
 					</article>
 				
 					<article id="post_559" class="post-559 reviews type-reviews status-publish format-video hentry">

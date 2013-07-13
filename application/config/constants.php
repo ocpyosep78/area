@@ -15,6 +15,7 @@ define('FOPEN_WRITE_CREATE_STRICT',				'xb');
 define('FOPEN_READ_WRITE_CREATE_STRICT',		'x+b');
 
 define('SHA_SECRET',							'OraNgerti');
+define('POST_TYPE_PUBLISH',						2);
 
 define('CATEGORY',								'category');
 define('COMMENT',								'comment');

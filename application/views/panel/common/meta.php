@@ -14,6 +14,7 @@
 	<script type="text/javascript">
 		URLS = <?php echo json_encode( array( 'base' => base_url(), 'ext' => $ext ) ); ?>;
 	</script>
+	<script type="text/javascript" src="<?php echo base_url('static/js/jquery.js'); ?>"></script>
 	<script type="text/javascript" src="<?php echo base_url('static/js/extjs/ext-all.js'); ?>"></script>
 	<script type="text/javascript" src="<?php echo base_url('static/panel/ext.common.js'); ?>"></script>
 </head>
