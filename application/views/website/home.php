@@ -1,367 +1,332 @@
+<?php
+	// slide
+	$param_slide['is_hot'] = 1;
+	$param_slide['limit'] = 9;
+	$param_slide['not_draft'] = true;
+	$param_slide['publish_date'] = $this->config->item('current_datetime');
+	$param_slide['sort'] = '[{"property":"publish_date","direction":"DESC"}]';
+	$array_slide = $this->Post_model->get_array($param_slide);
+	
+	// film
+	$param_film['is_popular'] = 1;
+	$param_film['limit'] = 5;
+	$param_film['category_id'] = CATEGORY_FILM;
+	$param_film['not_draft'] = true;
+	$param_film['publish_date'] = $this->config->item('current_datetime');
+	$param_film['sort'] = '[{"property":"publish_date","direction":"DESC"}]';
+	$array_film = $this->Post_model->get_array($param_film);
+	
+	// anime
+	$param_anime['is_popular'] = 1;
+	$param_anime['limit'] = 5;
+	$param_anime['category_id'] = CATEGORY_ANIME;
+	$param_anime['not_draft'] = true;
+	$param_anime['publish_date'] = $this->config->item('current_datetime');
+	$param_anime['sort'] = '[{"property":"publish_date","direction":"DESC"}]';
+	$array_anime = $this->Post_model->get_array($param_anime);
+	
+	// tv serial
+	$param_tv['is_popular'] = 1;
+	$param_tv['limit'] = 3;
+	$param_tv['category_id'] = CATEGORY_TV_SERIAL;
+	$param_tv['not_draft'] = true;
+	$param_tv['publish_date'] = $this->config->item('current_datetime');
+	$param_tv['sort'] = '[{"property":"publish_date","direction":"DESC"}]';
+	$array_tv = $this->Post_model->get_array($param_tv);
+	
+	// cartoon
+	$param_cartoon['is_popular'] = 1;
+	$param_cartoon['limit'] = 3;
+	$param_cartoon['category_id'] = CATEGORY_CARTOON;
+	$param_cartoon['not_draft'] = true;
+	$param_cartoon['publish_date'] = $this->config->item('current_datetime');
+	$param_cartoon['sort'] = '[{"property":"publish_date","direction":"DESC"}]';
+	$array_cartoon = $this->Post_model->get_array($param_cartoon);
+?>
+
 <?php $this->load->view( 'website/common/meta' ); ?>
 
 <body class="blog boxed pattern-1 navigation-style-1">
 
 <div id="page" class="hfeed site">
-	<?php $this->load->view( 'website/common/header' ); ?>
-	
-    <div id="main" class="right_sidebar"><div class="inner"><div class="general_content clearboth">
-		<div class="main_content"><div id="primary" class="content-area"><div id="content" class="site-content" role="main">
-			<div class="block_home_slider style2"><div class="slider-wrapper">
-				<div id="home_slider" class="flexslider">
-					<ul class="slides">
-						<li>
-							<div class="slide">
-								<a href="#"><img src="static/upload/1-1066x680.jpg" alt="Dantium, totam rem aperiam, eaque. "></a>
-								<div class="caption">
-									<p class="subj">removable</p>		
-									<p class="title">Dantium, totam rem aperiam, eaque. </p>											
-									<p class="body">Galentore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia...</p>
-								</div>
+<?php $this->load->view( 'website/common/header' ); ?>
+
+<div id="main" class="right_sidebar"><div class="inner"><div class="general_content clearboth">
+	<div class="main_content"><div id="primary" class="content-area"><div id="content" class="site-content" role="main">
+		<div class="block_home_slider style2"><div class="slider-wrapper">
+			<div id="home_slider" class="flexslider">
+				<ul class="slides">
+					<?php for ($i = 0; $i < 6; $i++) { ?>
+					<li>
+						<div class="slide">
+							<a href="<?php echo $array_slide[$i]['post_link']; ?>">
+								<img src="<?php echo $array_slide[$i]['thumbnail_link']; ?>" alt="<?php echo $array_slide[$i]['name']; ?>">
+							</a>
+							<div class="caption">
+								<p class="title"><?php echo $array_slide[$i]['name']; ?></p>
+								<p class="body"><?php echo $array_slide[$i]['desc_limit']; ?></p>
 							</div>
-						</li>
-						<li>
-							<div class="slide">
-								<a href=""><img src="static/upload/2-1066x680.jpg" alt="Architecto beatae vitae dicta sunt explicabo."></a>
-								<div class="caption">
-									<p class="subj"></p>		
-									<p class="title">Architecto beatae vitae dicta sunt explicabo.</p>											
-									<p class="body"> Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos enim ipsam voluptatem quia voluptas sit...</p>
-								</div>
-							</div>
-						</li>
-						<li>
-							<div class="slide">
-								<a href=""><img src="static/upload/3-1066x680.jpg" alt="Voluptatem quia voluptas sit asper."></a>
-								<div class="caption">
-									<p class="subj"></p>		
-									<p class="title">Voluptatem quia voluptas sit asper.</p>											
-									<p class="body"> Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos </p>
-								</div>
-							</div>
-						</li>
-						<li>
-							<div class="slide">
-								<a href=""><img src="static/upload/4-1066x680.jpg" alt="Quia voluptas sit asperquia voluptas."></a>
-								<div class="caption">
-									<p class="subj">asdasdsa</p>		
-									<p class="title">Quia voluptas sit asperquia voluptas.</p>											
-									<p class="body">Suspendisse potenti. Aliquam turpis nisl, elementum nec pharetra eget, gravida vitae enim. Phasellus aliquam placerat commodo. Integer arcu purus, ullamcorper et...</p>
-								</div>
-							</div>
-						</li>
-						<li>
-							<div class="slide">
-								<a href="#"><img src="static/upload/5-1066x680.jpg" alt="Elementum nec pharetra eget, gravida."></a>
-								<div class="caption">
-									<p class="subj"></p>		
-									<p class="title">Elementum nec pharetra eget, gravida.</p>											
-									<p class="body">Aliquam turpis nisl, elementum nec pharetra eget, gravida vitae enim. Phasellus aliquam placerat commodo. Integer arcu purus, ullamcorper et fringill.</p>
-								</div>
-							</div>
-						</li>
-					</ul>
-				</div>
-				
-				<ul id="thumb_controls">
-					<li class="slider-item1"><img src="static/upload/1-128x100.jpg"><span class="left_bot"></span><span class="right_top"></span></li>				
-					<li class="slider-item2"><img src="static/upload/2-128x100.jpg"><span class="left_bot"></span><span class="right_top"></span></li>				
-					<li class="slider-item3"><img src="static/upload/3-128x100.jpg"><span class="left_bot"></span><span class="right_top"></span></li>				
-					<li class="slider-item4"><img src="static/upload/4-128x100.jpg"><span class="left_bot"></span><span class="right_top"></span></li>				
-					<li class="slider-item5"><img src="static/upload/5-128x100.jpg"><span class="left_bot"></span><span class="right_top"></span></li>
+						</div>
+					</li>
+					<?php } ?>
 				</ul>
-			</div></div>
-			
-			<div class="recent_news_home clearboth">
-				<div class="block_home_post">
-					<div class="post-image">
-						<a href="http://wpspace.net/?news=dolorem-ipsum-quia-dolor-sit-amet" class="img-link img-wrap w_hover">
-							<img width="388" height="246" src="static/upload/2-388x246.jpg" class="attachment-recent_news_homepage wp-post-image" alt="Dolorem ipsum quia dolor sit amet dolor laud." />
-							<span class="link-icon"></span>
-							<span class="overlay"></span>
-						</a>
-					</div>
-					<div class="post-content">
-						<div class="title"><a href="http://wpspace.net/?news=dolorem-ipsum-quia-dolor-sit-amet">Dolorem ipsum quia dolor sit amet dolor laud.</a></div>
-					</div>
-				</div>
-				<div class="block_home_post">
-					<div class="post-image">
-						<a href="http://wpspace.net/?news=beatae-vitae-dicta-sunt-explicabo-ipsam" class="img-link img-wrap w_hover">
-							<img width="388" height="246" src="static/upload/4-388x246.jpg" class="attachment-recent_news_homepage wp-post-image" alt="Beatae vitae dicta sunt.explicabo ipsam." />
-							<span class="link-icon"></span>
-							<span class="overlay"></span>
-						</a>
-					</div>
-					<div class="post-content">
-						<div class="title"><a href="http://wpspace.net/?news=beatae-vitae-dicta-sunt-explicabo-ipsam">Beatae vitae dicta sunt.explicabo ipsam.</a></div>
-					</div>
-				</div>
-				<div class="block_home_post">
-					<div class="post-image">
-						<a href="http://wpspace.net/?news=ut-enim-ad-minima-veniam-quis-nostrum" class="img-link img-wrap w_hover">
-							<img width="388" height="246" src="static/upload/41-388x246.jpg" class="attachment-recent_news_homepage wp-post-image" alt="Ut enim ad minima veniam, quis nostrum." />
-							<span class="link-icon"></span>
-							<span class="overlay"></span>
-						</a>
-					</div>
-					<div class="post-content">
-						<div class="title"><a href="http://wpspace.net/?news=ut-enim-ad-minima-veniam-quis-nostrum">Ut enim ad minima veniam, quis nostrum.</a></div>
-					</div>
-				</div>
 			</div>
 			
-			<div class="home_category_news clearboth">
-				<div class="border-top"></div><h2 class="block-title">Business</h2>
-				<div class="items-wrap">
-					<div class="block_home_post first-post">
-						<div class="post-image">
-							<a href="http://wpspace.net/?news=many-desktop-publishing-packages-and-web-page-editors-now-use" class="img-link img-wrap w_hover">
-								<img width="600" height="352" src="static/upload/5-600x352.jpg" class="attachment-category_news_first wp-post-image" alt="Many desktop publishing packages and web page editors now use." />
-								<span class="link-icon"></span>
-								<span class="overlay"></span>
-							</a>
-						</div>
-						<div class="post-content">
-							<div class="title"><a href="http://wpspace.net/?news=many-desktop-publishing-packages-and-web-page-editors-now-use">Many desktop publishing packages and web page...</a></div>
-						</div>
-						<div class="post-body">Suspendisse potenti. Aliquam turpis nisl, elementum nec pharetra eget, gravida vitae enim. Phasellus aliquam placerat commodo. Integer arcu purus, ullamcorper et...</div>
-					</div>
-					<div class="block_home_post bd-bot">
-						<div class="post-image">
-							<a href="http://wpspace.net/?news=perspiciatis-unde-omnis-iste-natus-voluptatem" class="img-link img-wrap w_hover">
-								<img width="170" height="126" src="static/upload/6-170x126.jpg" class="attachment-category_news wp-post-image" alt="Perspiciatis unde omnis iste natus." />
-								<span class="link-icon"></span>
-								<span class="overlay"></span>
-							</a>
-						</div>
-						<div class="post-content">
-							<div class="title"><a href="http://wpspace.net/?news=perspiciatis-unde-omnis-iste-natus-voluptatem">Perspiciatis unde omnis iste natus.</a></div>
-						</div>
-					</div>
-					<div class="block_home_post bd-bot">
-						<div class="post-image">
-							<a href="http://wpspace.net/?news=default-model-text-and-search-forwill" class="img-link img-wrap w_hover">
-								<img width="170" height="126" src="static/upload/7-170x126.jpg" class="attachment-category_news wp-post-image" alt="Default model text, and search for&#8217;will." />
-								<span class="link-icon"></span>
-								<span class="overlay"></span>
-							</a>
-						</div>
-						<div class="post-content">
-							<div class="title"><a href="http://wpspace.net/?news=default-model-text-and-search-forwill">Default model text, and search for&#8217;will.</a></div>
-						</div>
-					</div>
-					<div class="block_home_post">
-						<div class="post-image">
-							<a href="http://wpspace.net/?news=web-page-editors-now-use-as-their-default" class="img-link img-wrap w_hover">
-								<img width="170" height="126" src="static/upload/8-170x126.jpg" class="attachment-category_news wp-post-image" alt="Web page editors now use as their default." />
-								<span class="link-icon"></span>
-								<span class="overlay"></span>
-							</a>
-						</div>
-						<div class="post-content">
-							<div class="title"><a href="http://wpspace.net/?news=web-page-editors-now-use-as-their-default">Web page editors now use as their default.</a></div>
-						</div>
-					</div>
-					<div class="block_home_post">
-						<div class="post-image">
-							<a href="http://wpspace.net/?news=news-sample-post" class="img-link img-wrap w_hover">
-								<img width="170" height="126" src="static/upload/9-170x126.jpg" class="attachment-category_news wp-post-image" alt="Many desktop publishing packages and web page editors now use." />
-								<span class="link-icon"></span>
-								<span class="overlay"></span>
-							</a>
-						</div>
-						<div class="post-content">
-							<div class="title"><a href="http://wpspace.net/?news=news-sample-post">Many desktop publishing packages and web page...</a></div>
-						</div>
-					</div>
-				</div>
-				<div class="view-all"><a href="http://wpspace.net/?news_entries=business">View all Business News</a></div>
-			</div>
-			
-			<div class="home_category_news clearboth">
-				<div class="border-top"></div><h2 class="block-title">Lifestyle</h2>
-				<div class="items-wrap">
-					<div class="block_home_post first-post">
-						<div class="post-image">
-							<a href="http://wpspace.net/?news=many-desktop-publishing-packages-and-web-page-editors-now-use-3" class="img-link img-wrap w_hover">
-								<img width="600" height="352" src="static/upload/16-600x352.jpg" class="attachment-category_news_first wp-post-image" alt="Many desktop publishing packages and web page editors now use." />
-								<span class="link-icon"></span>
-								<span class="overlay"></span>
-							</a>
-						</div>
-						<div class="post-content">
-							<div class="title"><a href="http://wpspace.net/?news=many-desktop-publishing-packages-and-web-page-editors-now-use-3">Many desktop publishing packages and web page...</a></div>
-						</div>
-						<div class="post-info">
-							<div class="post_date">April 18, 2013</div>
-							<a href="http://wpspace.net/?news=many-desktop-publishing-packages-and-web-page-editors-now-use-3" class="comments_count">1</a>
-						</div>
-						<div class="post-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed elementum ante non mi dapibus adipiscing. Sed tempor sapien sit amet ipsum condimentum volutpat. Sed vel...</div>
-					</div>
-					<div class="block_home_post bd-bot">
-						<div class="post-image">
-							<a href="http://wpspace.net/?news=perspiciatis-unde-omnis-iste-natus-voluptatem-2" class="img-link img-wrap w_hover">
-								<img width="170" height="126" src="static/upload/12-170x126.jpg" class="attachment-category_news wp-post-image" alt="Perspiciatis unde omnis iste natus." />
-								<span class="link-icon"></span>
-								<span class="overlay"></span>
-							</a>
-						</div>
-						<div class="post-content">
-							<div class="title"><a href="http://wpspace.net/?news=perspiciatis-unde-omnis-iste-natus-voluptatem-2">Perspiciatis unde omnis iste natus.</a></div>
-						</div>
-						<div class="post-info">
-							<div class="post_date">April 18, 2013</div>
-							<a href="http://wpspace.net/?news=perspiciatis-unde-omnis-iste-natus-voluptatem-2" class="comments_count">1</a>
-						</div>
-					</div>
-					<div class="block_home_post bd-bot">
-						<div class="post-image">
-							<a href="http://wpspace.net/?news=vaccusantium-doloremque-laudantium-totam" class="img-link img-wrap w_hover">
-								<img width="170" height="126" src="static/upload/14-170x126.jpg" class="attachment-category_news wp-post-image" alt="Vaccusantium doloremque lau." />
-								<span class="link-icon"></span>
-								<span class="overlay"></span>
-							</a>
-						</div>
-						<div class="post-content">
-							<div class="title"><a href="http://wpspace.net/?news=vaccusantium-doloremque-laudantium-totam">Vaccusantium doloremque lau.</a></div>
-						</div>
-						<div class="post-info">
-							<div class="post_date">April 18, 2013</div>
-							<a href="http://wpspace.net/?news=vaccusantium-doloremque-laudantium-totam" class="comments_count">1</a>
-						</div>								
-					</div>
-					<div class="block_home_post">
-						<div class="post-image">
-							<a href="http://wpspace.net/?news=totam-rem-aperiam-eaque-ipsa-quae-ab-illo-inventore" class="img-link img-wrap w_hover">
-								<img width="170" height="126" src="static/upload/13-170x126.jpg" class="attachment-category_news wp-post-image" alt="Totam rem aperiam, eaque ipsa quae ab illo inventore." />
-								<span class="link-icon"></span>
-								<span class="overlay"></span>
-							</a>
-						</div>
-						<div class="post-content">
-							<div class="title"><a href="http://wpspace.net/?news=totam-rem-aperiam-eaque-ipsa-quae-ab-illo-inventore">Totam rem aperiam, eaque ipsa quae ab illo...</a></div>
-						</div>
-						<div class="post-info">
-							<div class="post_date">April 18, 2013</div>
-							<a href="http://wpspace.net/?news=totam-rem-aperiam-eaque-ipsa-quae-ab-illo-inventore" class="comments_count">2</a>
-						</div>								
-					</div>
-					<div class="block_home_post">
-						<div class="post-image">
-							<a href="http://wpspace.net/?news=many-desktop-publishing-packages-and-web-page-editors-now-use-2" class="img-link img-wrap w_hover">
-								<img width="170" height="126" src="static/upload/11-170x126.jpg" class="attachment-category_news wp-post-image" alt="Many desktop publishing packages and web page editors now use." />
-								<span class="link-icon"></span>
-								<span class="overlay"></span>
-							</a>
-						</div>
-						<div class="post-content">
-							<div class="title"><a href="http://wpspace.net/?news=many-desktop-publishing-packages-and-web-page-editors-now-use-2">Many desktop publishing packages and web page...</a></div>
-						</div>
-						<div class="post-info">
-							<div class="post_date">April 18, 2013</div>
-							<a href="http://wpspace.net/?news=many-desktop-publishing-packages-and-web-page-editors-now-use-2" class="comments_count">1</a>
-						</div>
-					</div>
-				</div>
-				<div class="view-all"><a href="http://wpspace.net/?news_entries=lifestyle">View all Lifestyle News</a></div>
-			</div>
-			
-			<div class="two_columns_news clearboth">
-				<div class="home_category_news_small clearboth">
-					<div class="border-top"></div><h2 class="block-title">Music</h2>
-					<div class="items-wrap">
-						<div class="block_home_post first-post">
-							<div class="post-image">
-								<a href="http://wpspace.net/?news=many-desktop-publishing-packages-and-web-3" class="img-link img-wrap w_hover">
-									<img width="600" height="352" src="static/upload/15-600x352.jpg" class="attachment-category_news_first wp-post-image" alt="Many desktop publishing packages." />
-									<span class="link-icon"></span>
-									<span class="overlay"></span>
-								</a>
-							</div>
-							<div class="post-content">
-								<div class="title"><a href="http://wpspace.net/?news=many-desktop-publishing-packages-and-web-3">Many desktop publishing packages.</a></div>
-							</div>
-							<div class="post-body">Perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque...</div>
-						</div>
-						<div class="block_home_post">
-							<div class="post-image">
-								<a href="http://wpspace.net/?news=many-desktop-publishing-packages-and-web" class="img-link img-wrap w_hover">
-									<img width="170" height="126" src="static/upload/12-170x126.jpg" class="attachment-category_news wp-post-image" alt="Voluptatem accusantium doloremque laudantium." />
-									<span class="link-icon"></span>
-									<span class="overlay"></span>
-								</a>
-							</div>
-							<div class="post-content">
-								<div class="title"><a href="http://wpspace.net/?news=many-desktop-publishing-packages-and-web">Voluptatem accusantium doloremque laudantium.</a></div>
-							</div>
-						</div>
-						<div class="block_home_post last">
-							<div class="post-image">
-								<a href="http://wpspace.net/?news=totam-rem-aperiam-eaque-ipsa-quae-ab-illo-inventore-3" class="img-link img-wrap w_hover">
-									<img width="170" height="126" src="static/upload/22-170x126.jpg" class="attachment-category_news wp-post-image" alt="Cras tincidunt enim non metus ultricies." />
-									<span class="link-icon"></span>
-									<span class="overlay"></span>
-								</a>
-							</div>
-							<div class="post-content">
-								<div class="title"><a href="http://wpspace.net/?news=totam-rem-aperiam-eaque-ipsa-quae-ab-illo-inventore-3">Cras tincidunt enim non metus ultricies.</a></div>
-							</div>
-						</div>
-					</div>
-					<div class="view-all"><a href="http://wpspace.net/?news_entries=music">View all Music News</a></div>
-				</div>
-				
-				<div class="home_category_news_small clearboth">
-					<div class="border-top"></div><h2 class="block-title">Technology</h2>
-					<div class="items-wrap">
-						<div class="block_home_post first-post">
-							<div class="post-image">
-								<a href="http://wpspace.net/?news=many-desktop-publishing-packages-and-web-2" class="img-link img-wrap w_hover">
-									<img width="600" height="352" src="static/upload/10-600x352.jpg" class="attachment-category_news_first wp-post-image" alt="Desktop publishing packages and web." />
-									<span class="link-icon"></span>
-									<span class="overlay"></span>
-								</a>
-							</div>
-							<div class="post-content">
-								<div class="title"><a href="http://wpspace.net/?news=many-desktop-publishing-packages-and-web-2">Desktop publishing packages and web.</a></div>
-							</div>
-							<div class="post-body">Perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque...</div>
-						</div>
-						<div class="block_home_post">
-							<div class="post-image">
-								<a href="http://wpspace.net/?news=totam-rem-aperiam-eaque-ipsa-quae-ab-illo-inventore-2" class="img-link img-wrap w_hover">
-									<img width="170" height="126" src="static/upload/17-170x126.jpg" class="attachment-category_news wp-post-image" alt="Totam rem aperiam, eaque ipsa quae ab illo inventore." />
-									<span class="link-icon"></span>
-									<span class="overlay"></span>
-								</a>
-							</div>
-							<div class="post-content">
-								<div class="title"><a href="http://wpspace.net/?news=totam-rem-aperiam-eaque-ipsa-quae-ab-illo-inventore-2">Totam rem aperiam, eaque ipsa quae ab illo...</a></div>
-							</div>
-						</div>
-						<div class="block_home_post last">
-							<div class="post-image">
-								<a href="http://wpspace.net/?news=many-desktop-publishing-packages-and-web-page-editors-now-use-4" class="img-link img-wrap w_hover">
-									<img width="170" height="126" src="static/upload/32-170x126.jpg" class="attachment-category_news wp-post-image" alt="Natus error sit voluptatem accusantium doloremque laudantium, totam rem" />
-									<span class="link-icon"></span>
-									<span class="overlay"></span>
-								</a>
-							</div>
-							<div class="post-content">
-								<div class="title"><a href="http://wpspace.net/?news=many-desktop-publishing-packages-and-web-page-editors-now-use-4">Natus error sit voluptatem accusantium...</a></div>
-							</div>
-						</div>
-					</div>
-					<div class="view-all"><a href="http://wpspace.net/?news_entries=technology">View all Technology News</a></div>
-				</div>
-			</div>
-		</div></div></div>
+			<ul id="thumb_controls">
+				<?php for ($i = 0; $i < 6; $i++) { ?>
+				<li class="slider-item1"><img src="<?php echo $array_slide[$i]['thumbnail_small_link']; ?>"><span class="left_bot"></span><span class="right_top"></span></li>
+				<?php } ?>
+			</ul>
+		</div></div>
 		
-		<?php $this->load->view( 'website/common/sidebar' ); ?>
+		<div class="recent_news_home clearboth">
+			<?php for ($i = 6; $i < 9; $i++) { ?>
+			<div class="block_home_post">
+				<div class="post-image">
+					<a href="<?php echo $array_slide[$i]['post_link']; ?>" class="img-link img-wrap w_hover">
+						<img width="388" height="246" src="<?php echo $array_slide[$i]['thumbnail_small_link']; ?>" class="attachment-recent_news_homepage wp-post-image" alt="<?php echo $array_slide[$i]['name']; ?>" />
+						<span class="link-icon"></span>
+						<span class="overlay"></span>
+					</a>
+				</div>
+				<div class="post-content">
+					<div class="title"><a href="<?php echo $array_slide[$i]['post_link']; ?>"><?php echo $array_slide[$i]['name']; ?></a></div>
+				</div>
+			</div>
+			<?php } ?>
+		</div>
+		
+		<div class="home_category_news clearboth">
+			<div class="border-top"></div><h2 class="block-title">Film</h2>
+			<div class="items-wrap">
+				<?php foreach ($array_film as $key => $post) { ?>
+				<?php if ($key == 0) { ?>
+				<div class="block_home_post first-post">
+					<div class="post-image">
+						<a href="<?php echo $post['post_link']; ?>" class="img-link img-wrap w_hover">
+							<img width="600" height="352" src="<?php echo $post['thumbnail_small_link']; ?>" class="attachment-category_news_first wp-post-image" alt="<?php echo $post['name']; ?>" />
+							<span class="link-icon"></span>
+							<span class="overlay"></span>
+						</a>
+					</div>
+					<div class="post-content">
+						<div class="title"><a href="<?php echo $post['post_link']; ?>"><?php echo $post['name']; ?></a></div>
+					</div>
+					<div class="post-body"><?php echo $post['desc_limit']; ?></div>
+					<?php if ($post['post_type_id'] == POST_TYPE_SINGLE_LINK) { ?>
+					<div class="post-desc">by <a href="<?php echo $post['link_source']; ?>">Suekarea</a></div>
+					<?php } else { ?>
+					<div class="post-desc">by <a href="<?php echo $post['post_link']; ?>">Suekarea</a></div>
+					<?php } ?>
+				</div>
+				<?php } else if ($key <= 2) { ?>
+				<div class="block_home_post bd-bot">
+					<div class="post-image">
+						<a href="<?php echo $post['post_link']; ?>" class="img-link img-wrap w_hover">
+							<img width="170" height="126" src="<?php echo $post['thumbnail_small_link']; ?>" class="attachment-category_news wp-post-image" alt="<?php echo $post['name']; ?>" />
+							<span class="link-icon"></span>
+							<span class="overlay"></span>
+						</a>
+					</div>
+					<div class="post-content">
+						<div class="title"><a href="<?php echo $post['post_link']; ?>"><?php echo $post['name']; ?></a></div>
+					</div>
+					<?php if ($post['post_type_id'] == POST_TYPE_SINGLE_LINK) { ?>
+					<div class="post-desc">by <a href="<?php echo $post['link_source']; ?>">Suekarea</a></div>
+					<?php } else { ?>
+					<div class="post-desc">by <a href="<?php echo $post['post_link']; ?>">Suekarea</a></div>
+					<?php } ?>
+				</div>
+				<?php } else { ?>
+				<div class="block_home_post">
+					<div class="post-image">
+						<a href="<?php echo $post['post_link']; ?>" class="img-link img-wrap w_hover">
+							<img width="170" height="126" src="<?php echo $post['thumbnail_small_link']; ?>" class="attachment-category_news wp-post-image" alt="<?php echo $post['name']; ?>" />
+							<span class="link-icon"></span>
+							<span class="overlay"></span>
+						</a>
+					</div>
+					<div class="post-content">
+						<div class="title"><a href="<?php echo $post['post_link']; ?>"><?php echo $post['name']; ?></a></div>
+					</div>
+					<?php if ($post['post_type_id'] == POST_TYPE_SINGLE_LINK) { ?>
+					<div class="post-desc">by <a href="<?php echo $post['link_source']; ?>">Suekarea</a></div>
+					<?php } else { ?>
+					<div class="post-desc">by <a href="<?php echo $post['post_link']; ?>">Suekarea</a></div>
+					<?php } ?>
+				</div>
+				<?php } ?>
+				<?php } ?>
+			</div>
+			<div class="view-all"><a href="<?php echo base_url('film'); ?>">View all Film</a></div>
+		</div>
+		
+		<div class="home_category_news clearboth">
+			<div class="border-top"></div><h2 class="block-title">Anime</h2>
+			<div class="items-wrap">
+				<?php foreach ($array_anime as $key => $post) { ?>
+				<?php if ($key == 0) { ?>
+				<div class="block_home_post first-post">
+					<div class="post-image">
+						<a href="<?php echo $post['post_link']; ?>" class="img-link img-wrap w_hover">
+							<img width="600" height="352" src="<?php echo $post['thumbnail_small_link']; ?>" class="attachment-category_news_first wp-post-image" alt="<?php echo $post['name']; ?>" />
+							<span class="link-icon"></span>
+							<span class="overlay"></span>
+						</a>
+					</div>
+					<div class="post-content">
+						<div class="title"><a href="<?php echo $post['post_link']; ?>"><?php echo $post['name']; ?></a></div>
+					</div>
+					<div class="post-body"><?php echo $post['desc_limit']; ?></div>
+					<?php if ($post['post_type_id'] == POST_TYPE_SINGLE_LINK) { ?>
+					<div class="post-desc">by <a href="<?php echo $post['link_source']; ?>">Suekarea</a></div>
+					<?php } else { ?>
+					<div class="post-desc">by <a href="<?php echo $post['post_link']; ?>">Suekarea</a></div>
+					<?php } ?>
+				</div>
+				<?php } else if ($key <= 2) { ?>
+				<div class="block_home_post bd-bot">
+					<div class="post-image">
+						<a href="<?php echo $post['post_link']; ?>" class="img-link img-wrap w_hover">
+							<img width="170" height="126" src="<?php echo $post['thumbnail_small_link']; ?>" class="attachment-category_news wp-post-image" alt="<?php echo $post['name']; ?>" />
+							<span class="link-icon"></span>
+							<span class="overlay"></span>
+						</a>
+					</div>
+					<div class="post-content">
+						<div class="title"><a href="<?php echo $post['post_link']; ?>"><?php echo $post['name']; ?></a></div>
+					</div>
+					<?php if ($post['post_type_id'] == POST_TYPE_SINGLE_LINK) { ?>
+					<div class="post-desc">by <a href="<?php echo $post['link_source']; ?>">Suekarea</a></div>
+					<?php } else { ?>
+					<div class="post-desc">by <a href="<?php echo $post['post_link']; ?>">Suekarea</a></div>
+					<?php } ?>
+				</div>
+				<?php } else { ?>
+				<div class="block_home_post">
+					<div class="post-image">
+						<a href="<?php echo $post['post_link']; ?>" class="img-link img-wrap w_hover">
+							<img width="170" height="126" src="<?php echo $post['thumbnail_small_link']; ?>" class="attachment-category_news wp-post-image" alt="<?php echo $post['name']; ?>" />
+							<span class="link-icon"></span>
+							<span class="overlay"></span>
+						</a>
+					</div>
+					<div class="post-content">
+						<div class="title"><a href="<?php echo $post['post_link']; ?>"><?php echo $post['name']; ?></a></div>
+					</div>
+					<?php if ($post['post_type_id'] == POST_TYPE_SINGLE_LINK) { ?>
+					<div class="post-desc">by <a href="<?php echo $post['link_source']; ?>">Suekarea</a></div>
+					<?php } else { ?>
+					<div class="post-desc">by <a href="<?php echo $post['post_link']; ?>">Suekarea</a></div>
+					<?php } ?>
+				</div>
+				<?php } ?>
+				<?php } ?>
+			</div>
+			<div class="view-all"><a href="<?php echo base_url('anime'); ?>">View all Anime</a></div>
+		</div>
+		
+		<div class="two_columns_news clearboth">
+			<div class="home_category_news_small clearboth">
+				<div class="border-top"></div><h2 class="block-title">TV Serial</h2>
+				<div class="items-wrap">
+					<?php foreach ($array_tv as $key => $post) { ?>
+					<?php if ($key == 0) { ?>
+					<div class="block_home_post first-post">
+						<div class="post-image">
+							<a href="<?php echo $post['post_link']; ?>" class="img-link img-wrap w_hover">
+								<img width="600" height="352" src="<?php echo $post['thumbnail_small_link']; ?>" class="attachment-category_news_first wp-post-image" alt="<?php echo $post['name']; ?>" />
+								<span class="link-icon"></span>
+								<span class="overlay"></span>
+							</a>
+						</div>
+						<div class="post-content">
+							<div class="title"><a href="<?php echo $post['post_link']; ?>"><?php echo $post['name']; ?></a></div>
+						</div>
+						<div class="post-body"><?php echo get_length_char($post['desc_limit'], 125, ' ...'); ?></div>
+						<?php if ($post['post_type_id'] == POST_TYPE_SINGLE_LINK) { ?>
+						<div class="post-desc">by <a href="<?php echo $post['link_source']; ?>">Suekarea</a></div>
+						<?php } else { ?>
+						<div class="post-desc">by <a href="<?php echo $post['post_link']; ?>">Suekarea</a></div>
+						<?php } ?>
+					</div>
+					<?php } else { ?>
+					<div class="block_home_post">
+						<div class="post-image">
+							<a href="<?php echo $post['post_link']; ?>" class="img-link img-wrap w_hover">
+								<img width="170" height="126" src="<?php echo $post['thumbnail_small_link']; ?>" class="attachment-category_news wp-post-image" alt="<?php echo $post['name']; ?>" />
+								<span class="link-icon"></span>
+								<span class="overlay"></span>
+							</a>
+						</div>
+						<div class="post-content">
+							<div class="title"><a href="<?php echo $post['post_link']; ?>"><?php echo $post['name']; ?></a></div>
+						</div>
+						<?php if ($post['post_type_id'] == POST_TYPE_SINGLE_LINK) { ?>
+						<div class="post-desc">by <a href="<?php echo $post['link_source']; ?>">Suekarea</a></div>
+						<?php } else { ?>
+						<div class="post-desc">by <a href="<?php echo $post['post_link']; ?>">Suekarea</a></div>
+						<?php } ?>
+					</div>
+					<?php } ?>
+					<?php } ?>
+				</div>
+				<div class="view-all"><a href="<?php echo base_url('tv-serial'); ?>">View all TV Serial</a></div>
+			</div>
+			
+			<div class="home_category_news_small clearboth">
+				<div class="border-top"></div><h2 class="block-title">Cartoon</h2>
+				<div class="items-wrap">
+					<?php foreach ($array_cartoon as $key => $post) { ?>
+					<?php if ($key == 0) { ?>
+					<div class="block_home_post first-post">
+						<div class="post-image">
+							<a href="<?php echo $post['post_link']; ?>" class="img-link img-wrap w_hover">
+								<img width="600" height="352" src="<?php echo $post['thumbnail_small_link']; ?>" class="attachment-category_news_first wp-post-image" alt="<?php echo $post['name']; ?>" />
+								<span class="link-icon"></span>
+								<span class="overlay"></span>
+							</a>
+						</div>
+						<div class="post-content">
+							<div class="title"><a href="<?php echo $post['post_link']; ?>"><?php echo $post['name']; ?></a></div>
+						</div>
+						<div class="post-body"><?php echo get_length_char($post['desc_limit'], 125, ' ...'); ?></div>
+						<?php if ($post['post_type_id'] == POST_TYPE_SINGLE_LINK) { ?>
+						<div class="post-desc">by <a href="<?php echo $post['link_source']; ?>">Suekarea</a></div>
+						<?php } else { ?>
+						<div class="post-desc">by <a href="<?php echo $post['post_link']; ?>">Suekarea</a></div>
+						<?php } ?>
+					</div>
+					<?php } else { ?>
+					<div class="block_home_post">
+						<div class="post-image">
+							<a href="<?php echo $post['post_link']; ?>" class="img-link img-wrap w_hover">
+								<img width="170" height="126" src="<?php echo $post['thumbnail_small_link']; ?>" class="attachment-category_news wp-post-image" alt="<?php echo $post['name']; ?>" />
+								<span class="link-icon"></span>
+								<span class="overlay"></span>
+							</a>
+						</div>
+						<div class="post-content">
+							<div class="title"><a href="<?php echo $post['post_link']; ?>"><?php echo $post['name']; ?></a></div>
+						</div>
+						<?php if ($post['post_type_id'] == POST_TYPE_SINGLE_LINK) { ?>
+						<div class="post-desc">by <a href="<?php echo $post['link_source']; ?>">Suekarea</a></div>
+						<?php } else { ?>
+						<div class="post-desc">by <a href="<?php echo $post['post_link']; ?>">Suekarea</a></div>
+						<?php } ?>
+					</div>
+					<?php } ?>
+					<?php } ?>
+				</div>
+				<div class="view-all"><a href="<?php echo base_url('cartoon'); ?>">View all Cartoon</a></div>
+			</div>
+		</div>
 	</div></div></div>
 	
-	<?php $this->load->view( 'website/common/footer' ); ?>
+	<?php $this->load->view( 'website/common/sidebar' ); ?>
+</div></div></div>
+
+<?php $this->load->view( 'website/common/footer' ); ?>
 </div>
 
 <?php $this->load->view( 'website/common/library_js' ); ?>

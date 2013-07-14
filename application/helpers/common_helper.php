@@ -672,8 +672,8 @@
         }
     }
     
-    if (! function_exists('GetLengthChar')) {
-        function GetLengthChar($String, $LengthMax, $Follower = '') {
+    if (! function_exists('get_length_char')) {
+        function get_length_char($String, $LengthMax, $Follower = '') {
 			$String = strip_tags($String);
             if (strlen($String) > $LengthMax) {
                 $String = substr($String, 0, $LengthMax);
@@ -791,15 +791,6 @@
         }
     }
     
-	if (! function_exists('get_page_active')) {
-		function get_page_active() {
-			preg_match('/\/page_(\d+)/i', $_SERVER['REQUEST_URI'], $match);
-			$page_no = (isset($match[1])) ? $match[1] : 1;
-			
-			return $page_no;
-		}
-	}
-	
 	if (! function_exists('sent_mail')) {
 		function sent_mail($param) {
 			$headers  = 'MIME-Version: 1.0' . "\r\n";
@@ -850,54 +841,13 @@
 		}
 	}
 	
-	if (! function_exists('get_usia')) {
-		function get_usia($value) {
-			if (empty($value)) {
-				return 0;
-			}
-			
-			$array = ConvertDateToArray($value);
-			$usia = floor(date("Y") - $array['Year']);
-			
-			return $usia;
-		}
-	}
-	
 	if (! function_exists('get_page')) {
 		function get_page() {
-			preg_match('/page_(\d+)/i', $_SERVER['REQUEST_URI'], $match);
+			preg_match('/page-(\d+)/i', $_SERVER['REQUEST_URI'], $match);
 			$page = (empty($match[1])) ? 1 : $match[1];
 			$page = (!empty($_POST['page_no'])) ? $_POST['page_no'] : $page;
 			
 			return $page;
-		}
-	}
-	
-	if (! function_exists('get_tag_name')) {
-		function get_tag_name($array) {
-			$result = '';
-			foreach ($array as $tag) {
-				$result .= (empty($result)) ? $tag['tag_nama'] : ','.$tag['tag_nama'];
-			}
-			
-			return $result;
-		}
-	}
-	
-	if (! function_exists('get_user')) {
-		function get_user() {
-			$ci =& get_instance();
-			$seeker = $ci->Seeker_model->get_session();
-			$company = $ci->Company_model->get_session();
-			
-			$user = array();
-			if (count($seeker) > 0) {
-				$user = $seeker;
-			} else if (count($company) > 0) {
-				$user = $company;
-			}
-			
-			return $user;
 		}
 	}
 	
@@ -908,6 +858,28 @@
 			$result = preg_replace('/-$/i', '', $result);
 			
 			return $result;
+		}
+	}
+	
+	if (! function_exists('clean_html_style')) {
+		function clean_html_style($value) {
+			$result = preg_replace('/font-family[^;]+;/i', '', $value);
+			$result = preg_replace('/font-size[^;]+;/i', '', $result);
+			$result = preg_replace('/face="[^"]+"/i', ' ', $result);
+			$result = preg_replace('/<font[\s]+>/i', ' ', $result);
+			$result = preg_replace('/<(\/)?font(.)?>/i', ' ', $result);
+			$result = preg_replace('/style=\"\"/i', ' ', $result);
+			$result = preg_replace('/ +/i', ' ', $result);
+			
+			return $result;
+		}
+	}
+	
+	if (! function_exists('get_popular')) {
+		function get_popular() {
+			preg_match('/latest/i', $_SERVER['REQUEST_URI'], $match);
+			$is_popular = (isset($match[0])) ? 0 : 1;
+			return $is_popular;
 		}
 	}
 ?>

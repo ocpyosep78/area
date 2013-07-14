@@ -14,3 +14,19 @@ Music => Anime
 Technology => Cartoon
 
 Newscribe => di comment dulu
+
+
+Link Login
+Link Registration
+Link About us
+Link Contact Us
+
+Link Twitter
+Link Facebook
+Link RSS
+Link Google+
+
+Link Search
+
+Normal Image : 194 * 123
+Slide Image	 : 485 * 370

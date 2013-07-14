@@ -16,7 +16,8 @@ if (count($array_arg) >= 1) {
 }
 
 if ($is_website) {
-	$route['film'] = "website/category";
+	$route['(anime|film|tv-serial|cartoon)'] = "website/category";
+	$route['(anime|film|tv-serial|cartoon)/(:any)'] = "website/category";
 	$route['contact'] = "website/contact";
 	$route['(:num)/(:num)/(:any)'] = "website/detail";
 }

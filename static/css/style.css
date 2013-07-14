@@ -128,6 +128,7 @@ h2.page-title {
 	border-top: 3px solid #a2a9ae;
 	border-bottom: 1px solid #e3e3e3;
 }
+h2.page-title .toggle { float: right; text-decoration: none; color: #E50700; }
 .wp-caption,
 .wp-caption-text,
 .sticky,
@@ -1979,7 +1980,7 @@ a.gal_link:hover span.link-icon {
 	font-size: 13px;
 	font-weight: bold;
 	line-height: 17px;
-	margin-bottom: 12px;
+	margin-bottom: 6px;
 }
 .home_category_news .block_home_post.first-post .post-content,
 .home_reviews .block_home_post.first-post .post-content {
@@ -2049,6 +2050,9 @@ a.gal_link:hover span.link-icon {
 .home_category_news .block_home_post .post-body,
 .home_reviews .block_home_post .post-body {
 	overflow: hidden;
+}
+.home_category_news .block_home_post .post-desc a {
+	color: #E50700; text-decoration: none;
 }
 .home_category_news .block_home_post.bd-bot,
 .home_reviews .block_home_post.bd-bot {
@@ -2121,8 +2125,11 @@ a.gal_link:hover span.link-icon {
 	font-weight: bold;
 	font-size: 13px;
 	line-height: 17px;
-	margin-bottom: 12px;
+	margin-bottom: 6px;
 	overflow: hidden;
+}
+.two_columns_news .home_category_news_small .post-desc a {
+	color: #E50700; text-decoration: none;
 }
 .two_columns_news .home_category_news_small .first-post .post-content {
 	font-size: 14px;

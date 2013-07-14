@@ -195,7 +195,7 @@ Ext.onReady(function() {
 							win.download = new Ext.form.HtmlEditor({ renderTo: 'downloadED', width: 575, height: 150, enableFont: false });
 							win.alias = new Ext.form.TextField({ renderTo: 'aliasED', width: 225, readOnly: true });
 							win.category = Combo.Class.Category({ renderTo: 'categoryED', width: 225, allowBlank: false, blankText: 'Masukkan Kategori' });
-							win.post_type = Combo.Class.PostType({ renderTo: 'post_typeED', width: 225, allowBlank: false, blankText: 'Masukkan Jenis Post', value: page_data.POST_TYPE_PUBLISH });
+							win.post_type = Combo.Class.PostType({ renderTo: 'post_typeED', width: 225, allowBlank: false, blankText: 'Masukkan Jenis Post', value: page_data.POST_TYPE_MULTI_LINK });
 							win.publish_date = new Ext.form.DateField({ renderTo: 'publish_dateED', width: 120, format: DATE_FORMAT, allowBlank: false, blankText: 'Masukkan Tanggal Publish', value: new Date() });
 							win.publish_time = Combo.Class.Time({ renderTo: 'publish_timeED', width: 100, allowBlank: false, blankText: 'Masukkan Jam Publish', value: new Date() });
 							win.thumbnail = new Ext.form.TextField({ renderTo: 'thumbnailED', width: 140, readOnly: true });

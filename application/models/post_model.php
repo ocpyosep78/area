@@ -5,7 +5,7 @@ class Post_model extends CI_Model {
         parent::__construct();
 		
         $this->field = array(
-			'id', 'user_id', 'category_id', 'post_type_id', 'alias', 'name', 'desc', 'thumbnail', 'create_date', 'publish_date', 'view_count',
+			'id', 'user_id', 'category_id', 'post_type_id', 'alias', 'name', 'desc', 'link_source', 'thumbnail', 'create_date', 'publish_date', 'view_count',
 			'is_hot', 'is_popular'
 		);
     }
@@ -28,7 +28,9 @@ class Post_model extends CI_Model {
             $result['status'] = '1';
             $result['message'] = 'Data berhasil diperbaharui.';
         }
-       
+		
+		$this->resize_image($param);
+		
         return $result;
     }
 
@@ -37,6 +39,8 @@ class Post_model extends CI_Model {
        
         if (isset($param['id'])) {
             $select_query  = "SELECT * FROM ".POST." WHERE id = '".$param['id']."' LIMIT 1";
+		} else if (isset($param['year']) && isset($param['month']) && isset($param['alias'])) {
+			$select_query  = "SELECT * FROM ".POST." WHERE YEAR(create_date) = '".$param['year']."' AND MONTH(create_date) = '".$param['month']."' AND alias = '".$param['alias']."' LIMIT 1";
         } 
 		
         $select_result = mysql_query($select_query) or die(mysql_error());
@@ -52,19 +56,30 @@ class Post_model extends CI_Model {
 		
 		// replace
 		$param['field_replace']['name'] = 'Post.name';
+		$param['field_replace']['category_name'] = 'Category.name';
 		
-		$string_namelike = (!empty($_POST['namelike'])) ? "AND Post.name LIKE '%".$_POST['namelike']."%'" : '';
+		$string_is_hot = (isset($param['is_hot'])) ? "AND Post.is_hot = '".$param['is_hot']."'" : '';
+		$string_is_popular = (isset($param['is_popular'])) ? "AND Post.is_popular = '".$param['is_popular']."'" : '';
+		$string_month = (isset($param['month'])) ? "AND MONTH(Post.create_date) = '".$param['month']."'" : '';
+		$string_year = (isset($param['year'])) ? "AND YEAR(Post.create_date) = '".$param['year']."'" : '';
+		$string_namelike = (!empty($param['namelike'])) ? "AND Post.name LIKE '%".$param['namelike']."%'" : '';
+		$string_category = (!empty($param['category_id'])) ? "AND Post.category_id = '".$param['category_id']."'" : '';
+		$string_not_draft = (isset($param['not_draft'])) ? "AND Post.post_type_id != '".POST_TYPE_DRAFT."'" : '';
+		$string_publish_date = (!empty($param['publish_date'])) ? "AND Post.publish_date <= '".$param['publish_date']."'" : '';
 		$string_filter = GetStringFilter($param, @$param['column']);
 		$string_sorting = GetStringSorting($param, @$param['column'], 'Post.name ASC');
 		$string_limit = GetStringLimit($param);
 		
 		$select_query = "
-			SELECT SQL_CALC_FOUND_ROWS Post.*,
+			SELECT SQL_CALC_FOUND_ROWS Post.*, User.fullname user_fullname,
 				Category.name category_name, PostType.name post_type_name
 			FROM ".POST." Post
+			LEFT JOIN ".USER." User ON User.id = Post.user_id
 			LEFT JOIN ".CATEGORY." Category ON Category.id = Post.category_id
 			LEFT JOIN ".POST_TYPE." PostType ON PostType.id = Post.post_type_id
-			WHERE 1 $string_namelike $string_filter
+			WHERE 1
+				$string_is_hot $string_is_popular $string_month $string_year $string_namelike
+				$string_category $string_not_draft $string_publish_date $string_filter
 			ORDER BY $string_sorting
 			LIMIT $string_limit
 		";
@@ -97,10 +112,40 @@ class Post_model extends CI_Model {
 	
 	function sync($row, $column = array()) {
 		$row = StripArray($row, array( 'create_date', 'publish_date' ));
+		$row['desc_limit'] = get_length_char(strip_tags($row['desc']), 250, ' ...');
 		
 		$date_temp = preg_replace('/-/i', '/', substr($row['create_date'], 0, 8));
 		$row['post_link'] = base_url($date_temp.$row['alias']);
+		$row['thumbnail_link'] = base_url('static/upload/'.$row['thumbnail']);
+		$row['thumbnail_small_link'] = preg_replace('/\.(jpg|jpeg|png|gif)/i', '_s.$1', $row['thumbnail_link']);
 		
 		return $row;
+	}
+	
+	function resize_image($param) {
+		if (!empty($param['thumbnail'])) {
+			$image_path = $this->config->item('base_path') . '/static/upload/';
+			$image_source = $image_path . $param['thumbnail'];
+			$image_result = $image_source;
+			$image_small = preg_replace('/\.(jpg|jpeg|png|gif)/i', '_s.$1', $image_result);
+			
+			ImageResize($image_source, $image_small, 194, 123, 1);
+			ImageResize($image_source, $image_result, 600, 374, 1);
+		}
+	}
+	
+	function get_link() {
+		$post = array();
+		
+		preg_match('/(\d{4})\/(\d{2})\/([a-z0-9-]+)/i', $_SERVER['REQUEST_URI'], $match);
+		if (count($match) >= 4) {
+			$year = (!empty($match[1])) ? $match[1] : '';
+			$month = (!empty($match[2])) ? $match[2] : '';
+			$alias = (!empty($match[3])) ? $match[3] : '';
+			
+			$post = $this->get_by_id(array( 'year' => $year, 'month' => $month, 'alias' => $alias ));
+		}
+		
+		return $post;
 	}
 }

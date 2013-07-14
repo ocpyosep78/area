@@ -15,7 +15,13 @@ define('FOPEN_WRITE_CREATE_STRICT',				'xb');
 define('FOPEN_READ_WRITE_CREATE_STRICT',		'x+b');
 
 define('SHA_SECRET',							'OraNgerti');
-define('POST_TYPE_PUBLISH',						2);
+define('CATEGORY_ANIME',						3);
+define('CATEGORY_CARTOON',						4);
+define('CATEGORY_FILM',							1);
+define('CATEGORY_TV_SERIAL',					2);
+define('POST_TYPE_DRAFT',						1);
+define('POST_TYPE_SINGLE_LINK',					2);
+define('POST_TYPE_MULTI_LINK',					3);
 
 define('CATEGORY',								'category');
 define('COMMENT',								'comment');

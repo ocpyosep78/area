@@ -1,3 +1,7 @@
+<?php
+	$post = $this->Post_model->get_link();
+?>
+
 <?php $this->load->view( 'website/common/meta' ); ?>
 
 <body class="blog boxed pattern-1 navigation-style-1">
@@ -13,9 +17,9 @@
                             
                 
                 <article id="post_537" class="post-537 news type-news status-publish format-video hentry format-video gallery-style-1">
-                	                	                    
-  				     				   										<div class="pic post_thumb">
-							<img width="1240" height="620" src="static/upload/2-1240x620.jpg" class="attachment-slider wp-post-image" alt="2">						</div>
+					<div class="pic post_thumb">
+						<img width="1240" height="620" src="<?php echo $post['thumbnail_link']; ?>" class="attachment-slider wp-post-image" alt="2">
+					</div>
 					
                 <div class="post_content">
                     <p>Perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto. Beatae vitae dicta sunt.<br>
