@@ -38,7 +38,13 @@ class Post_model extends CI_Model {
         $array = array();
        
         if (isset($param['id'])) {
-            $select_query  = "SELECT * FROM ".POST." WHERE id = '".$param['id']."' LIMIT 1";
+            $select_query  = "
+				SELECT Post.*, User.fullname user_fullname
+				FROM ".POST." Post
+				LEFT JOIN ".USER." User ON User.id = Post.user_id
+				WHERE Post.id = '".$param['id']."'
+				LIMIT 1
+			";
 		} else if (isset($param['year']) && isset($param['month']) && isset($param['alias'])) {
 			$select_query  = "SELECT * FROM ".POST." WHERE YEAR(create_date) = '".$param['year']."' AND MONTH(create_date) = '".$param['month']."' AND alias = '".$param['alias']."' LIMIT 1";
         } 
@@ -63,6 +69,7 @@ class Post_model extends CI_Model {
 		$string_month = (isset($param['month'])) ? "AND MONTH(Post.create_date) = '".$param['month']."'" : '';
 		$string_year = (isset($param['year'])) ? "AND YEAR(Post.create_date) = '".$param['year']."'" : '';
 		$string_namelike = (!empty($param['namelike'])) ? "AND Post.name LIKE '%".$param['namelike']."%'" : '';
+		$string_max_id = (!empty($param['max_id'])) ? "AND Post.id < '".$param['max_id']."'" : '';
 		$string_category = (!empty($param['category_id'])) ? "AND Post.category_id = '".$param['category_id']."'" : '';
 		$string_not_draft = (isset($param['not_draft'])) ? "AND Post.post_type_id != '".POST_TYPE_DRAFT."'" : '';
 		$string_publish_date = (!empty($param['publish_date'])) ? "AND Post.publish_date <= '".$param['publish_date']."'" : '';
@@ -79,7 +86,7 @@ class Post_model extends CI_Model {
 			LEFT JOIN ".POST_TYPE." PostType ON PostType.id = Post.post_type_id
 			WHERE 1
 				$string_is_hot $string_is_popular $string_month $string_year $string_namelike
-				$string_category $string_not_draft $string_publish_date $string_filter
+				$string_category $string_max_id $string_not_draft $string_publish_date $string_filter
 			ORDER BY $string_sorting
 			LIMIT $string_limit
 		";
