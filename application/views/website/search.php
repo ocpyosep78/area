@@ -1,23 +1,15 @@
 <?php
-	$category_alias = $this->uri->segments[1];
-	$category = $this->Category_model->get_by_id(array( 'alias' => $category_alias ));
-	$is_popular = get_popular();
+	preg_match('/search\/([a-z0-9\-]+)/i', $_SERVER['REQUEST_URI'], $match);
+	$keyword = (isset($match[1])) ? $match[1] : '';
+	$keyword_title = str_replace('-', ' ', $keyword);
 	
 	// page
 	$page_item = 10;
 	$page_active = get_page();
-	
-	// page link
-	$page_base  = $category['link'];
-	$page_base .= ($is_popular) ? '' : '/latest';
-	
-	// toggle
-	$toggle_title = ($is_popular) ? 'Latest Post' : 'Popular Post';
-	$toggle_page = ($is_popular) ? $category['link'].'/latest' : $category['link'];
+	$page_base  = base_url('search/'.$keyword);
 	
 	// post
-	$param_post['is_popular'] = $is_popular;
-	$param_post['category_id'] = $category['id'];
+	$param_post['namelike'] = $keyword_title;
 	$param_post['not_draft'] = true;
 	$param_post['publish_date'] = $this->config->item('current_datetime');
 	$param_post['sort'] = '[{"property":"publish_date","direction":"DESC"}]';
@@ -36,10 +28,7 @@
 	
     <div id="main" class="right_sidebar"><div class="inner"><div class="general_content clearboth">
 		<div class="main_content"><div id="primary" class="content-area"><div id="content" class="site-content" role="main">
-			<h2 class="page-title">
-				<a class="toggle" href="<?php echo $toggle_page; ?>"><?php echo $toggle_title; ?></a>
-				<?php echo $category['name']; ?>
-			</h2>
+			<h2 class="page-title">Search : <?php echo ucwords($keyword_title); ?></h2>
 			
 			<section id="reviews_body">
 				<?php foreach ($array_post as $post) { ?>

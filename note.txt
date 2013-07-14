@@ -5,14 +5,6 @@ link :
 - http://localhost/suekarea/trunk/contact
 - http://localhost/suekarea/trunk/full-page
 
-Slide Image => Gambar yang di masukkan di slide 0 - 4
-dibawahnya ambil gambar dari slide 5 - 7
-
-Business => Film
-Lifestyle => TV Serial
-Music => Anime
-Technology => Cartoon
-
 Newscribe => di comment dulu
 
 
@@ -23,10 +15,7 @@ Link Contact Us
 
 Link Twitter
 Link Facebook
-Link RSS
 Link Google+
-
-Link Search
 
 Normal Image : 194 * 123
 Slide Image	 : 485 * 370

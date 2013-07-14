@@ -8,4 +8,5 @@
 <script type='text/javascript' src='<?php echo base_url('static/js/jquery.elastislide.js'); ?>'></script>
 <script type='text/javascript' src='<?php echo base_url('static/js/jquery-ui.custom.min.js'); ?>'></script>
 <script type='text/javascript' src='<?php echo base_url('static/js/jquery.mobilemenu.min.js'); ?>'></script>
+<script type='text/javascript' src='<?php echo base_url('static/js/common.js'); ?>'></script>
 <script type='text/javascript' src='<?php echo base_url('static/js/main.js'); ?>'></script>

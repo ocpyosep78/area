@@ -163,7 +163,7 @@ Ext.onReady(function() {
 	
 	function main_win(param) {
 		var win = new Ext.Window({
-			layout: 'fit', width: 710, height: 495,
+			layout: 'fit', width: 710, height: 425,
 			closeAction: 'hide', plain: true, modal: true,
 			buttons: [ {
 						text: 'Save', handler: function() { win.save(); }
@@ -192,7 +192,7 @@ Ext.onReady(function() {
 								}
 							});
 							win.desc = new Ext.form.HtmlEditor({ renderTo: 'descED', width: 575, height: 150, enableFont: false });
-							win.download = new Ext.form.HtmlEditor({ renderTo: 'downloadED', width: 575, height: 150, enableFont: false });
+							win.link_source = new Ext.form.TextArea({ renderTo: 'downloadED', width: 575, height: 80, allowBlank: false, blankText: 'Masukkan Link Source' });
 							win.alias = new Ext.form.TextField({ renderTo: 'aliasED', width: 225, readOnly: true });
 							win.category = Combo.Class.Category({ renderTo: 'categoryED', width: 225, allowBlank: false, blankText: 'Masukkan Kategori' });
 							win.post_type = Combo.Class.PostType({ renderTo: 'post_typeED', width: 225, allowBlank: false, blankText: 'Masukkan Jenis Post', value: page_data.POST_TYPE_MULTI_LINK });
@@ -212,6 +212,7 @@ Ext.onReady(function() {
 								win.thumbnail.setValue(param.thumbnail);
 								win.category.setValue(param.category_id);
 								win.post_type.setValue(param.post_type_id);
+								win.link_source.setValue(param.link_source);
 								
 								win.publish_date.setValue(Renderer.GetDateFromString.Date(param.publish_date));
 								win.publish_time.setValue(Renderer.GetDateFromString.Time(param.publish_date));
@@ -232,6 +233,7 @@ Ext.onReady(function() {
 				ajax.desc = win.desc.getValue();
 				ajax.alias = win.alias.getValue();
 				ajax.thumbnail = win.thumbnail.getValue();
+				ajax.link_source = win.link_source.getValue();
 				ajax.category_id = win.category.getValue();
 				ajax.post_type_id = win.post_type.getValue();
 				
@@ -241,6 +243,9 @@ Ext.onReady(function() {
 					is_valid = false;
 				}
 				if (! win.category.validate()) {
+					is_valid = false;
+				}
+				if (! win.link_source.validate()) {
 					is_valid = false;
 				}
 				if (! win.post_type.validate()) {

@@ -18,8 +18,14 @@ if (count($array_arg) >= 1) {
 if ($is_website) {
 	$route['(anime|film|tv-serial|cartoon)'] = "website/category";
 	$route['(anime|film|tv-serial|cartoon)/(:any)'] = "website/category";
-	$route['contact'] = "website/contact";
 	$route['(:num)/(:num)/(:any)'] = "website/detail";
+	$route['contact'] = "website/contact";
+	$route['ajax'] = "website/ajax";
+	$route['ajax/(:any)'] = "website/ajax";
+	$route['rss'] = "website/rss";
+	$route['rss/(:any)'] = "website/rss";
+	$route['search'] = "website/search";
+	$route['search/(:any)'] = "website/search";
 }
 
 if ($is_other_page) {

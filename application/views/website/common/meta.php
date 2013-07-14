@@ -1,3 +1,7 @@
+<?php
+	$web['host'] = base_url();
+?>
+
 <!DOCTYPE html>
 <html lang="en-US">
 <head>
@@ -9,4 +13,5 @@
 	<script type='text/javascript' src='<?php echo base_url('static/js/jquery.js'); ?>'></script>
 	<script type='text/javascript' src='<?php echo base_url('static/js/modernizr.js'); ?>'></script>
 	<script type='text/javascript' src='<?php echo base_url('static/js/utils.js'); ?>'></script>
+	<script> var web = <?php echo json_encode($web); ?></script>
 </head>

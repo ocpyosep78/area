@@ -126,6 +126,15 @@ class Post_model extends CI_Model {
 		$row['thumbnail_link'] = base_url('static/upload/'.$row['thumbnail']);
 		$row['thumbnail_small_link'] = preg_replace('/\.(jpg|jpeg|png|gif)/i', '_s.$1', $row['thumbnail_link']);
 		
+		$row['array_link_source'] = array();
+		if (isset($row['link_source'])) {
+			$array_temp = explode("\n", $row['link_source']);
+			foreach ($array_temp as $link) {
+				$array = explode(' ', $link, 2);
+				$row['array_link_source'][] = array( 'link' => @$array[0], 'base_name' => @$array[1] );
+			}
+		}
+		
 		return $row;
 	}
 	

@@ -59,19 +59,20 @@
 	<section class="section2">
 		<div class="inner">
 			<div class="section-wrap clearboth">
-				<?php
-				/*
 				<div class="block_social_top">
 					<div class="icons-label">Follow us:</div>
 					<ul>
+						<!--
 						<li><a href="#" class="tw">Twitter</a></li>
 						<li><a href="#" class="fb">Facebook</a></li>
-						<li><a href="#" class="rss">RSS</a></li>
+						-->
+						<li><a href="<?php echo base_url('rss'); ?>" class="rss" title="Popular Post">RSS</a></li>
+						<li><a href="<?php echo base_url('rss/latest'); ?>" class="rss" title="Latest Post">RSS</a></li>
+						<!--
 						<li><a href="#" class="gplus">Google+</a></li>
+						-->
 					</ul>
 				</div>
-				/*	*/
-				?>
 				
 				<div class="form_search">
 					<form method="post" id="searchform" class="searchform" action="<?php echo base_url('search'); ?>" role="search">
@@ -145,3 +146,16 @@
 		</nav>
 	</section>
 </div></header>
+<script>
+$(document).ready(function() {
+	$('#searchform').submit(function() {
+		var action = $('#searchform').attr('action');
+		var keyword = Func.GetName($('#keyword').val());
+		if (keyword.length == 0) {
+			return false;
+		}
+		
+		$('#searchform').attr('action', action += '/' + keyword);
+	});
+});
+</script>

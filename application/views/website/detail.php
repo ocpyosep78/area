@@ -20,11 +20,14 @@
 			<h2 class="page-title"><?php echo $post['name']; ?></h2>
 			
 			<div id="post_content" class="post_content" role="main">
-                <article id="post_537" class="post-537 news type-news status-publish format-video hentry format-video gallery-style-1">
+                <article class="news type-news status-publish format-video hentry format-video gallery-style-1">
 					<div class="pic post_thumb">
 						<img width="1240" height="620" src="<?php echo $post['thumbnail_link']; ?>" class="attachment-slider wp-post-image" alt="2">
 					</div>
-					<div class="post_content"><?php echo $post['desc']; ?></div>
+					<div class="post_content" style="padding: 10px 0 15px 0;"><?php echo $post['desc']; ?></div>
+					<div style="text-align: center; padding: 0 0 15px 0;"><input type="button" class="reload-download" value="Download" data-id="<?php echo $post['id']; ?>" /></div>
+					<div class="cnt-download" style="text-align: center; padding: 0 0 15px 0;"></div>
+					
 					<div class="block-social">
 						<div class="soc_label">recommend to friends</div>
 						<ul id="post_social_share" class="post_social_share">
@@ -118,6 +121,17 @@
 	
 	<?php $this->load->view( 'website/common/footer' ); ?>
 </div>
+
+<script>
+	$(document).ready(function() {
+		$('.reload-download').click(function() {
+			$('.cnt-download').html('<img src="' + web.host + 'static/img/loading.gif" />');
+			Func.ajax({ url: web.host + 'ajax/view', param: { 'action': 'view_download', id: $(this).data('id') }, is_json: 0, callback: function(view) {
+				$('.cnt-download').html(view);
+			} });
+		});
+	});
+</script>
 
 <?php $this->load->view( 'website/common/library_js' ); ?>
 
