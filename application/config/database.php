@@ -8,11 +8,11 @@ if ($_SERVER['SERVER_NAME'] == 'localhost') {
 	$db['default']['username'] = 'root';
 	$db['default']['password'] = '';
 	$db['default']['database'] = 'suekarea_bd';
-} else if ($_SERVER['SERVER_NAME'] == 'parapekerja.com' || $_SERVER['SERVER_NAME'] == 'www.parapekerja.com') {
+} else if ($_SERVER['SERVER_NAME'] == 'suekarea.com' || $_SERVER['SERVER_NAME'] == 'www.suekarea.com') {
 	$db['default']['hostname'] = 'localhost';
-	$db['default']['username'] = 'shoperin_job';
-	$db['default']['password'] = '4gzlX6^Ozc9f';
-	$db['default']['database'] = 'shoperin_job';
+	$db['default']['username'] = 'suekare1_315';
+	$db['default']['password'] = 'saahcnt&5-';
+	$db['default']['database'] = 'suekare1_media';
 }
 
 $db['default']['dbdriver'] = 'mysql';
