@@ -13,7 +13,7 @@
 	<div class="footer-wrapper">
 		<div class="col1">
 			<div id="footer_logo">
-				<a href="<?php echo base_url(); ?>"><img src="<?php echo base_url('static/upload/footer-logo.png'); ?>" alt="PrimeTime" title="PrimeTime"></a>
+				<a href="<?php echo base_url(); ?>"><img src="<?php echo base_url('static/img/footer-logo.png'); ?>" alt="PrimeTime" title="PrimeTime"></a>
 			</div>
 			<div class="footer_text">Perspiciatis unde omnis iste natus error sit voluptatem accusantium mque laudantium, totam rem aperiam, eaque ipsa quae ab illo.</div>
 			<?php
@@ -78,8 +78,12 @@
 	<div class="footer-wrapper">
 		<ul id="footer_menu">
 			<li id="" class=""><a href="<?php echo base_url(); ?>">Home</a></li>
+			<?php
+			/*
 			<li id="" class=""><a href="#">Contact Us</a></li>
 			<li id="" class=""><a href="#">Privacy Policy</a></li>
+			/*	*/
+			?>
 		</ul>
 		<div class="copyright">
 			<div class="footer_text">© 2013. All Rights Reserved. Created by suekarea</div>
@@ -92,6 +96,8 @@
 <div id="overlay"></div>
 <a href="#" id="toTop"><span></span></a>
 
+<?php
+/*
 <!-- Login form -->
 <div id="login" class="login-popup"><div class="popup">
 	<a href="#" class="close">&times;</a>
@@ -181,3 +187,5 @@
 		</div>
 	</div>
 </div>
+/*	*/
+?>

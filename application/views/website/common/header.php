@@ -10,9 +10,9 @@
 	}
 	
 	// add menu
-	$array_menu[] = array( 'title' => 'Request', 'color' => array_shift($array_color), 'link' => '#' );
-	$array_menu[] = array( 'title' => 'Contact Us', 'color' => array_shift($array_color), 'link' => '#' );
-	$array_menu[] = array( 'title' => 'About Us', 'color' => array_shift($array_color), 'link' => '#' );
+//	$array_menu[] = array( 'title' => 'Request', 'color' => array_shift($array_color), 'link' => '#' );
+//	$array_menu[] = array( 'title' => 'Contact Us', 'color' => array_shift($array_color), 'link' => '#' );
+//	$array_menu[] = array( 'title' => 'About Us', 'color' => array_shift($array_color), 'link' => '#' );
 ?>
 
 <header id="header" class="site-header" role="banner"><div id="site-header">
@@ -34,9 +34,9 @@
 				<div class="block_top_menu">
 					<ul id="top-left-menu">
 						<li><a href="<?php echo base_url(); ?>">Home</a></li>
-						<li><a href="#">About us</a></li>
 						<?php
 						/*
+						<li><a href="#">About us</a></li>
 						<li>
 							<a href="http://wpspace.net/?page_id=10">Dropdown</a>
 							<ul class="sub-menu">
@@ -46,9 +46,9 @@
 							</ul>
 						</li>
 						<li><a href="http://wpspace.net/?page_id=303">Typography</a></li>
+						<li><a href="#">Contact Us</a></li>
 						/*	*/
 						?>
-						<li><a href="#">Contact Us</a></li>
 					</ul>
 				</div>
 			</div>
@@ -112,7 +112,7 @@
 			<div class="name-and-slogan">
 				<h1 class="site-title">
 					<a href="<?php echo base_url(); ?>" title="Suekarea" rel="home">
-						<img src="<?php echo base_url('static/upload/logo.png'); ?>" alt="logo" />
+						<img src="<?php echo base_url('static/img/logo.png'); ?>" alt="logo" />
 					</a>
 				</h1>
 				<h2 class="site-description">Share Movie &amp; Anime Download</h2>
