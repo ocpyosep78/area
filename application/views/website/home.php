@@ -42,9 +42,15 @@
 	$param_cartoon['publish_date'] = $this->config->item('current_datetime');
 	$param_cartoon['sort'] = '[{"property":"publish_date","direction":"DESC"}]';
 	$array_cartoon = $this->Post_model->get_array($param_cartoon);
+	
+	// meta
+	$desc = 'Download';
+	foreach ($array_slide as $post) {
+		$desc .= ' - '.$post['name'];
+	}
 ?>
 
-<?php $this->load->view( 'website/common/meta' ); ?>
+<?php $this->load->view( 'website/common/meta', array( 'desc' => $desc ) ); ?>
 
 <body class="blog boxed pattern-1 navigation-style-1">
 

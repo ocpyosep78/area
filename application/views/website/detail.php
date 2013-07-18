@@ -8,7 +8,7 @@
 	$array_post = $this->Post_model->get_array($param_post);
 ?>
 
-<?php $this->load->view( 'website/common/meta' ); ?>
+<?php $this->load->view( 'website/common/meta', array( 'title' => 'Suekarea - Share Download - '.$post['name'], 'desc' => $post['desc_limit'] ) ); ?>
 
 <body class="blog boxed pattern-1 navigation-style-1">
 
