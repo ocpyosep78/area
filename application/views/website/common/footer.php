@@ -15,7 +15,7 @@
 			<div id="footer_logo">
 				<a href="<?php echo base_url(); ?>"><img src="<?php echo base_url('static/img/footer-logo.png'); ?>" alt="PrimeTime" title="PrimeTime"></a>
 			</div>
-			<div class="footer_text">Share Movie Download and Share Anime Download</div>
+			<div class="footer_text">Share Movie Download and Share Anime Download<br />No adfly</div>
 			<?php
 			/*
 			<div class="block_social_footer">
@@ -190,13 +190,14 @@
 /*	*/
 ?>
 
+<?php if ($this->config->item('online_widget')) { ?>
 <script>
-	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-	ga('create', 'UA-42495224-1', 'suekarea.com');
-	ga('send', 'pageview');
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-42495224-1', 'suekarea.com');
+ga('send', 'pageview');
 </script>
 
 <script type="text/javascript">
@@ -204,3 +205,4 @@ var sc_project=9102153; var sc_invisible=1; var sc_security="a493f0aa";
 var scJsHost = (("https:" == document.location.protocol) ? "https://secure." : "http://www.");
 document.write("<sc"+"ript type='text/javascript' src='" + scJsHost+ "statcounter.com/counter/counter_xhtml.js'></"+"script>");
 </script>
+<?php } ?>

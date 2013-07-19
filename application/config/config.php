@@ -3,11 +3,13 @@
 $PortAddress = ($_SERVER['SERVER_PORT'] != 80) ? ':8666' : '';
 
 if ($_SERVER['SERVER_NAME'] == 'localhost') {
-	$config['base_url']		= 'http://localhost'.$PortAddress.'/suekarea/trunk';
-	$config['base_path']	= realpath(dirname(__FILE__) . '/../..');
+	$config['base_url']			= 'http://localhost'.$PortAddress.'/suekarea/trunk';
+	$config['base_path']		= realpath(dirname(__FILE__) . '/../..');
+	$config['online_widget']	= false;
 } else if ($_SERVER['SERVER_NAME'] == 'suekarea.com' || $_SERVER['SERVER_NAME'] == 'www.suekarea.com') {
-	$config['base_url']		= 'http://suekarea.com';
-	$config['base_path']	= realpath(dirname(__FILE__) . '/../..');
+	$config['base_url']			= 'http://suekarea.com';
+	$config['base_path']		= realpath(dirname(__FILE__) . '/../..');
+	$config['online_widget']	= true;
 } else {
 	echo 'Please set up config.';
 	exit;
