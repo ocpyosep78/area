@@ -1,22 +1,14 @@
-jQuery(window).load(function(){
+jQuery(document).ready(function() {
 	if (!jQuery.browser.msie) {
-		jQuery('.slides li').each(function(){
-			
+		jQuery('.slides li').each(function() {
 			var imgs = jQuery(this).find('img');
 			if (imgs.length > 0 && imgs.get(0).width === 0) {
 				jQuery(this).html('Sorry, requested content is unavailable');
 			}
 		});
 	}
-
-
-	jQuery('#home-gallery-wrapper').elastislide({
-		margin: 18,
-		minItems: 3,
-		imageW: 194
-	});
-});
-jQuery(document).ready(function(){	
+	jQuery('#home-gallery-wrapper').elastislide({ margin: 18, minItems: 3, imageW: 194 });
+	
 	"use strict";
 	/* to Top */
 	jQuery(window).scroll(function() {
@@ -127,40 +119,65 @@ jQuery(document).ready(function(){
 
 	// ----------------------- Contact form submit ----------------
 	jQuery('.sc_contact_form .enter').click(function(e){
-		
 		userSubmitForm();
 		e.preventDefault();
 		return false;
 	});
 
-	// ---------------------------- Registration / Autorization ------------------------
+	// init login
 	jQuery('.login-popup-link').click(function(e) {
-		jQuery('.login-popup').fadeIn();
-		jQuery('#overlay').fadeIn(100);
-		jQuery('body').addClass('overlayed');
-		jQuery('.login-popup #log').get(0).focus();
+		$('body').addClass('overlayed');
+		$('#overlay').fadeIn(100);
+		
+		if ($('.login-popup .close').length == 0) {
+			Func.ajax({ url: web.host + 'ajax/view', param: { 'action': 'view_login' }, is_json: 0, callback: function(view) {
+				$('.login-popup').html(view);
+				$('.login-popup').fadeIn();
+				$('.login-popup #log').get(0).focus();
+				
+				$('.login-popup .close').click(function(e) {
+					$('body').removeClass('overlayed');
+					$('#overlay').fadeOut(100);
+					$('.login-popup').fadeOut();
+					
+					e.preventDefault();
+					return false;
+				});
+			} });
+		} else {
+			$('.login-popup').fadeIn();
+			$('.login-popup #log').get(0).focus();
+		}
+		
 		e.preventDefault();
 		return false;
 	});
-	jQuery('.login-popup .close').click(function(e) {
-		jQuery('body').removeClass('overlayed');
-		jQuery('#overlay').fadeOut(100);
-		jQuery('.login-popup').fadeOut();
-		e.preventDefault();
-		return false;
-	});
+	
+	// init registration
 	jQuery('.registration-popup-link').click(function(e) {
-		jQuery('.registration-popup').fadeIn();
-		jQuery('#overlay').fadeIn(100);
-		jQuery('body').addClass('overlayed');
-		jQuery('.registration-popup #registration_form_username').get(0).focus();
-		e.preventDefault();
-		return false;
-	});
-	jQuery('.registration-popup .close').click(function(e) {
-		jQuery('body').removeClass('overlayed');
-		jQuery('#overlay').fadeOut(100);
-		jQuery('.registration-popup').fadeOut();
+		$('body').addClass('overlayed');
+		$('#overlay').fadeIn(100);
+		
+		if ($('.registration-popup .close').length == 0) {
+			Func.ajax({ url: web.host + 'ajax/view', param: { 'action': 'view_registration' }, is_json: 0, callback: function(view) {
+				$('.registration-popup').html(view);
+				$('.registration-popup').fadeIn();
+				$('.registration-popup #registration_form_username').get(0).focus();
+				
+				$('.registration-popup .close').click(function(e) {
+					$('body').removeClass('overlayed');
+					$('#overlay').fadeOut(100);
+					$('.registration-popup').fadeOut();
+					
+					e.preventDefault();
+					return false;
+				});
+			} });
+		} else {
+			$('.registration-popup').fadeIn();
+			$('.registration-popup #registration_form_username').get(0).focus();
+		}
+		
 		e.preventDefault();
 		return false;
 	});

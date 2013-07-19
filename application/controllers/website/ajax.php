@@ -21,6 +21,10 @@ class ajax extends CI_Controller {
 		if ($action == 'view_download') {
 			$post = $this->Post_model->get_by_id(array( 'id' => $_POST['id'] ));
 			$this->load->view( 'website/ajax/view_download', array( 'post' => $post ) );
+		} else if ($action == 'view_login') {
+			$this->load->view( 'website/ajax/view_login' );
+		} else if ($action == 'view_registration') {
+			$this->load->view( 'website/ajax/view_registration' );
 		}
     }
 }

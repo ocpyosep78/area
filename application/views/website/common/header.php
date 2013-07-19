@@ -18,17 +18,17 @@
 <header id="header" class="site-header" role="banner"><div id="site-header">
 	<section class="top">
 		<div class="inner clearboth">
-			<?php
-			/*
 			<div class="top-right">
 				<ul id="user-links">
+			<?php
+			/*
 					<li><a href="#">Features</a></li>
+			/*	*/
+			?>
 					<li><a class="cursor login-popup-link">Login</a></li>
 					<li><a class="cursor registration-popup-link">Registration</a></li>
 				</ul>
 			</div>
-			/*	*/
-			?>
 			<div class="top-left"><?php echo date("d F Y"); ?></div>  
 			<div class="top-center">
 				<div class="block_top_menu">
