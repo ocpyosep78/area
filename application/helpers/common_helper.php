@@ -116,7 +116,7 @@
     
     if (! function_exists('Upload')) {
         function Upload($InputName, $PathDir = 'User', $Param = array()) {
-            $Param['max_size'] = (isset($Param['max_size'])) ? $Param['max_size'] : 1000000;
+            $Param['max_size'] = (isset($Param['max_size'])) ? $Param['max_size'] : 4000000;
             $Param['AllowedExtention'] = (isset($Param['AllowedExtention'])) ? $Param['AllowedExtention'] : array('jpg', 'jpeg', 'gif', 'png', 'bmp');
             
             $ArrayResult = array('Result' => '0', 'FileDirName' => '');
