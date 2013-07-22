@@ -16,6 +16,11 @@
 ?>
 
 <div id="secondary" class="widget-area main_sidebar right_sidebar" role="complementary">
+<aside>
+	<script type="text/javascript">google_ad_client = "ca-pub-0445723121454332"; google_ad_slot = "9098313148"; google_ad_width = 300; google_ad_height = 250;</script>
+	<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
+</aside>
+
 <aside id="news-combine-widget-2" class="widget widget_news_combine">
 	<div class="widget_header">
 		<h3 class="widget_title">Main News</h3>
@@ -32,7 +37,7 @@
 			<div class="tab_content" id="1">
 				<?php for ($i = 0; $i < 8; $i++) { ?>
 				<div class="block_home_news_post">
-					<p class="title"><a href="<?php echo $array_recent[$i]['post_link']; ?>"><?php echo $array_recent[$i]['name']; ?></a></p>
+					<p class="title"><a href="<?php echo $array_recent[$i]['post_link']; ?>" title="<?php echo $array_recent[$i]['name']; ?>"><?php echo $array_recent[$i]['name']; ?></a></p>
 				</div>
 				<?php } ?>
 			</div>
@@ -40,7 +45,7 @@
 			<div class="tab_content">
 				<?php for ($i = 0; $i < 8; $i++) { ?>
 				<div class="block_home_news_post">
-					<p class="title"><a href="<?php echo $array_popular[$i]['post_link']; ?>"><?php echo $array_popular[$i]['name']; ?></a></p>
+					<p class="title"><a href="<?php echo $array_popular[$i]['post_link']; ?>" title="<?php echo $array_recent[$i]['name']; ?>"><?php echo $array_popular[$i]['name']; ?></a></p>
 				</div>
 				<?php } ?>
 			</div>
@@ -52,6 +57,11 @@
 			</script>
 		</div>
 	</div>
+</aside>
+
+<aside>
+	<script type="text/javascript">google_ad_client = "ca-pub-0445723121454332"; google_ad_slot = "1575046342"; google_ad_width = 300; google_ad_height = 250;</script>
+	<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
 </aside>
 
 <aside id="recent-blogposts-widget-2" class="widget widget_recent_blogposts">
@@ -66,12 +76,12 @@
 				<div class="article">
 					<div class="pic">
 						<a href="<?php echo $array_recent[$i]['post_link']; ?>" class="w_hover img-link img-wrap">
-							<img width="388" height="246" src="<?php echo $array_recent[$i]['thumbnail_small_link']; ?>" class="attachment-recent_news_homepage wp-post-image" alt="1" />
+							<img width="388" height="246" src="<?php echo $array_recent[$i]['thumbnail_small_link']; ?>" title="<?php echo $array_recent[$i]['name']; ?>" class="attachment-recent_news_homepage wp-post-image" alt="1" />
 							<span class="overlay"></span>
 						</a>
 					</div>
 					<div class="text">
-						<p class="title"><a href="<?php echo $array_recent[$i]['post_link']; ?>"><?php echo $array_recent[$i]['name']; ?></a></p>
+						<p class="title"><a href="<?php echo $array_recent[$i]['post_link']; ?>" title="<?php echo $array_recent[$i]['name']; ?>"><?php echo $array_recent[$i]['name']; ?></a></p>
 						<?php if ($array_recent[$i]['post_type_id'] == POST_TYPE_SINGLE_LINK) { ?>
 						<div class="desc">by <a href="<?php echo $array_recent[$i]['link_source']; ?>">Suekarea</a></div>
 						<?php } else { ?>
@@ -85,13 +95,13 @@
 				<?php for ($i = 10; $i < 12; $i++) { ?>
 				<div class="article">
 					<div class="pic">
-						<a href="<?php echo $array_recent[$i]['post_link']; ?>" class="w_hover img-link img-wrap">
+						<a href="<?php echo $array_recent[$i]['post_link']; ?>" title="<?php echo $array_recent[$i]['name']; ?>" class="w_hover img-link img-wrap">
 							<img width="388" height="246" src="<?php echo $array_recent[$i]['thumbnail_small_link']; ?>" class="attachment-recent_news_homepage wp-post-image" alt="1" />
 							<span class="overlay"></span>
 						</a>
 					</div>
 					<div class="text">
-						<p class="title"><a href="<?php echo $array_recent[$i]['post_link']; ?>"><?php echo $array_recent[$i]['name']; ?></a></p>
+						<p class="title"><a href="<?php echo $array_recent[$i]['post_link']; ?>" title="<?php echo $array_recent[$i]['name']; ?>"><?php echo $array_recent[$i]['name']; ?></a></p>
 						<?php if ($array_recent[$i]['post_type_id'] == POST_TYPE_SINGLE_LINK) { ?>
 						<div class="desc">by <a href="<?php echo $array_recent[$i]['link_source']; ?>">Suekarea</a></div>
 						<?php } else { ?>
@@ -125,4 +135,10 @@
 		});			
 	</script>
 </aside>
+
+<aside>
+	<script type="text/javascript">google_ad_client = "ca-pub-0445723121454332"; google_ad_slot = "6005245942"; google_ad_width = 300; google_ad_height = 250;</script>
+	<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
+</aside>
+
 </div>

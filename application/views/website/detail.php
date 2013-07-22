@@ -62,7 +62,7 @@
 									<span class="overlay"></span>
 								</a>
 							</div>
-							<h3><a href="<?php echo $item['post_link']; ?>"><?php echo $item['name']; ?></a></h3>
+							<h3><a href="<?php echo $item['post_link']; ?>" title="<?php echo $item['name']; ?>"><?php echo $item['name']; ?></a></h3>
 						</article>
 						<?php } else { ?>
 						<article class="item_right" style="margin-top: 14px;">
@@ -72,7 +72,7 @@
 									<span class="overlay"></span>
 								</a>
 							</div>
-							<h3><a href="http<?php echo $item['post_link']; ?>"><?php echo $item['name']; ?></a></h3>
+							<h3><a href="<?php echo $item['post_link']; ?>" title="<?php echo $item['name']; ?>"><?php echo $item['name']; ?></a></h3>
 						</article>
 						<?php } ?>
 						<?php } ?>
