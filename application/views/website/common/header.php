@@ -33,7 +33,7 @@
 			<div class="top-center">
 				<div class="block_top_menu">
 					<ul id="top-left-menu">
-						<li><a href="<?php echo base_url(); ?>">Home</a></li>
+						<li><a href="<?php echo base_url(); ?>" alt="Suekarea" title="Suekarea">Home</a></li>
 						<?php
 						/*
 						<li><a href="#">About us</a></li>
@@ -106,7 +106,9 @@
 		<div class="section-wrap clearboth">
 			<div class="banner-block">
 				<div class="banner">
-					<a href="#"><img src="<?php echo base_url('static/upload/banner.jpg'); ?>" alt="banner" /></a>
+					<!-- <a href="#"><img src="<?php echo base_url('static/upload/banner.jpg'); ?>" alt="banner" /></a> -->
+					<script type="text/javascript">google_ad_client = "ca-pub-0445723121454332"; google_ad_slot = "8797261949"; google_ad_width = 468; google_ad_height = 60;</script>
+					<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"> </script>
 				</div>
 			</div>
 			<div class="name-and-slogan">

@@ -13,7 +13,7 @@
 	<div class="footer-wrapper">
 		<div class="col1">
 			<div id="footer_logo">
-				<a href="<?php echo base_url(); ?>"><img src="<?php echo base_url('static/img/footer-logo.png'); ?>" alt="PrimeTime" title="PrimeTime"></a>
+				<a href="<?php echo base_url(); ?>"><img src="<?php echo base_url('static/img/footer-logo.png'); ?>" alt="Suekarea" title="Suekarea"></a>
 			</div>
 			<div class="footer_text">Share Movie Download and Share Anime Download<br />No adfly</div>
 			<?php
