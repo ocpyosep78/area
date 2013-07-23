@@ -4,9 +4,10 @@
 <script type='text/javascript' src='<?php echo base_url('static/js/jquery.flexslider-min.js'); ?>'></script>
 <script type='text/javascript' src='<?php echo base_url('static/js/jquery.tools.min.js'); ?>'></script>
 <script type='text/javascript' src='<?php echo base_url('static/js/jquery.jcarousel.min.js'); ?>'></script>
-<script type='text/javascript' src='<?php echo base_url('static/js/jquery.cookie.js'); ?>'></script>
+<script type='text/javascript' src='<?php echo base_url('static/js/jquery.cokie.js'); ?>'></script>
 <script type='text/javascript' src='<?php echo base_url('static/js/jquery.elastislide.js'); ?>'></script>
 <script type='text/javascript' src='<?php echo base_url('static/js/jquery-ui.custom.min.js'); ?>'></script>
 <script type='text/javascript' src='<?php echo base_url('static/js/jquery.mobilemenu.min.js'); ?>'></script>
+<script type='text/javascript' src='<?php echo base_url('static/js/jquery.validate.js'); ?>'></script>
 <script type='text/javascript' src='<?php echo base_url('static/js/common.js'); ?>'></script>
 <script type='text/javascript' src='<?php echo base_url('static/js/main.js'); ?>'></script>

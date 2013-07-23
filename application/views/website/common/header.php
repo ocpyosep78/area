@@ -1,6 +1,7 @@
 <?php
 	$array_color = array( 'red', 'blue', 'sky-blue', 'purple', 'green', 'orange', 'gray', 'yellow' );
 	$array_category = $this->Category_model->get_array();
+	$is_login = $this->User_model->is_login();
 	
 	// generate menu
 	$array_menu = array();
@@ -25,8 +26,12 @@
 					<li><a href="#">Features</a></li>
 			/*	*/
 			?>
+					<?php if ($is_login) { ?>
+					<li><a href="<?php echo base_url('logout'); ?>">Logout</a></li>
+					<?php } else { ?>
 					<li><a class="cursor login-popup-link">Login</a></li>
 					<li><a class="cursor registration-popup-link">Registration</a></li>
+					<?php } ?>
 				</ul>
 			</div>
 			<div class="top-left"><?php echo date("d F Y"); ?></div>  
@@ -106,9 +111,12 @@
 		<div class="section-wrap clearboth">
 			<div class="banner-block">
 				<div class="banner">
-					<!-- <a href="#"><img src="<?php echo base_url('static/upload/banner.jpg'); ?>" alt="banner" /></a> -->
+					<?php if ($this->config->item('online_widget')) { ?>
 					<script type="text/javascript">google_ad_client = "ca-pub-0445723121454332"; google_ad_slot = "8797261949"; google_ad_width = 468; google_ad_height = 60;</script>
 					<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"> </script>
+					<?php } else { ?>
+					<a href="#"><img src="<?php echo base_url('static/upload/banner.jpg'); ?>" alt="banner" /></a>
+					<?php } ?>
 				</div>
 			</div>
 			<div class="name-and-slogan">

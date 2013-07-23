@@ -4,7 +4,7 @@
 	<div class="content">
 		<div class="title">Authorization</div>
 		<div class="form">
-			<form method="post" name="login_form">
+			<form method="post" id="form-login">
 				<input type="hidden" name="action" value="login"/>
 				
 				<div class="col1">
@@ -19,7 +19,7 @@
 				<div class="column button"><input type="submit" class="enter" value="Login" /></div>
 				<div class="clearboth"></div>
 				
-				<div class="c_message">The Login field can't be empty</div>
+				<div class="c_message hide">The Login field can't be empty</div>
 			</form>
 		</div>
 	</div>

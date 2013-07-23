@@ -974,6 +974,7 @@ h5 {
 }
 .section2 .newsletter .newsletter-popup {
 	display: none;
+	z-index: 1000;
 	border: 1px solid #e0e0e0;
 	position: absolute;
 	left: 51px;
@@ -6384,5 +6385,7 @@ form .result p.error_item:first {
 }
 
 /* CUSTOM */
+.hide { display: none; }
 .cursor  { cursor: pointer; }
 .c_message { color: #666666; border: 1px solid #D29898; background: linear-gradient(to bottom, #FFFFFF 0%, #D29898 100%); margin: 0px; padding: 10px 20px; }
+.validation .error { padding: 5px 0 0 0; color: #E50700; }

@@ -41,11 +41,7 @@
 									<img src="<?php echo base_url('static/img/twitter-icon-big.png'); ?>" class="twitter_icon" alt="twitter">
 								</a>
 							</li>
-							<li>
-								<a href="https://plusone.google.com/_/+1/confirm?url=<?php echo $post['post_link']; ?>" class="gplus_link">
-									<img src="<?php echo base_url('static/img/gplus-icon-big.png'); ?>" class="gplus_icon" alt="gplus">
-								</a>
-							</li>
+							<li><?php $this->load->view( 'website/common/google_plus' ); ?></li>
 						</ul>
 					</div>
 				</article>

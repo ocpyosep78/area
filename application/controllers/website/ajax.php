@@ -7,6 +7,7 @@ class ajax extends CI_Controller {
     
     function index() {
 		$method = (isset($this->uri->segments[2])) ? $this->uri->segments[2] : '';
+		
 		if (method_exists($this, $method)) {
 			$this->$method();
 		} else {
@@ -27,4 +28,40 @@ class ajax extends CI_Controller {
 			$this->load->view( 'website/ajax/view_registration' );
 		}
     }
+	
+	function user() {
+		$action = (!empty($_POST['action'])) ? $_POST['action'] : '';
+		unset($_POST['action']);
+		
+		$result = array( 'status' => false );
+		if ($action == 'register') {
+			$user = $this->User_model->get_by_id(array( 'email' => $_POST['email'] ));
+			if (count($user) > 0) {
+				$result['message'] = 'Email Anda sudah terdaftar, silahkan login.';
+				echo json_encode($result);
+				exit;
+			}
+			
+			$param = $_POST;
+			$param['passwd'] = EncriptPassword($param['passwd']);
+			$result = $this->User_model->update($param);
+			
+			// set user
+			$result['status'] = true;
+			$user = $this->User_model->get_by_id(array( 'id' => $result['id'] ));
+			$this->User_model->set_session($user);
+		} else if ($action == 'login') {
+			$user = $this->User_model->get_by_id(array( 'email' => $_POST['email'] ));
+			if (count($user) == 0) {
+				$result['message'] = 'Email Anda tidak terdaftar, silahkan register.';
+			} else if ($user['passwd'] != EncriptPassword($_POST['passwd'])) {
+				$result['message'] = 'Password Anda tidak sama, harap isikan password yang benar.';
+			} else {
+				$result['status'] = true;
+				$this->User_model->set_session($user);
+			}
+		}
+		
+		echo json_encode($result);
+	}
 }

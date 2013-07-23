@@ -14,6 +14,7 @@
 	<meta name="description" content="<?php echo $desc; ?>" />
 	<link rel="stylesheet" type="text/css" media="all" id="primetime-style-css" href="<?php echo base_url('static/css/style.css'); ?>" />
 	<link rel="stylesheet" type="text/css" media="all" id="responsive-css" href="<?php echo base_url('static/css/responsive.css'); ?>" />
+	<link rel="icon shortcut" href="<?php echo base_url('static/img/favicon.png'); ?>" type="image/x-icon" />
 	<script type="text/javascript" src="<?php echo base_url('static/js/jquery.js'); ?>"></script>
 	<script type="text/javascript" src="<?php echo base_url('static/js/modernizr.js'); ?>"></script>
 	<script type="text/javascript" src="<?php echo base_url('static/js/utils.js'); ?>"></script>
