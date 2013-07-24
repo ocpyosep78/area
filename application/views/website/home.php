@@ -65,8 +65,8 @@
 					<?php for ($i = 0; $i < 6; $i++) { ?>
 					<li>
 						<div class="slide">
-							<a href="<?php echo $array_slide[$i]['post_link']; ?>">
-								<img src="<?php echo $array_slide[$i]['thumbnail_link']; ?>" alt="<?php echo $array_slide[$i]['name']; ?>">
+							<a href="<?php echo $array_slide[$i]['post_link']; ?>" alt="<?php echo $array_slide[$i]['name']; ?>" title="<?php echo $array_slide[$i]['name']; ?>">
+								<img src="<?php echo $array_slide[$i]['thumbnail_link']; ?>" alt="<?php echo $array_slide[$i]['name']; ?>" title="<?php echo $array_slide[$i]['name']; ?>" />
 							</a>
 							<div class="caption">
 								<p class="title"><?php echo $array_slide[$i]['name']; ?></p>
@@ -80,7 +80,10 @@
 			
 			<ul id="thumb_controls">
 				<?php for ($i = 0; $i < 6; $i++) { ?>
-				<li class="slider-item1"><img src="<?php echo $array_slide[$i]['thumbnail_small_link']; ?>"><span class="left_bot"></span><span class="right_top"></span></li>
+				<li class="slider-item1">
+					<img src="<?php echo $array_slide[$i]['thumbnail_small_link']; ?>" alt="<?php echo $array_slide[$i]['name']; ?>" title="<?php echo $array_slide[$i]['name']; ?>" />
+					<span class="left_bot"></span><span class="right_top"></span>
+				</li>
 				<?php } ?>
 			</ul>
 		</div></div>
@@ -89,14 +92,18 @@
 			<?php for ($i = 6; $i < 9; $i++) { ?>
 			<div class="block_home_post">
 				<div class="post-image">
-					<a href="<?php echo $array_slide[$i]['post_link']; ?>" class="img-link img-wrap w_hover">
-						<img width="388" height="246" src="<?php echo $array_slide[$i]['thumbnail_small_link']; ?>" class="attachment-recent_news_homepage wp-post-image" alt="<?php echo $array_slide[$i]['name']; ?>" />
+					<a href="<?php echo $array_slide[$i]['post_link']; ?>" class="img-link img-wrap w_hover" alt="<?php echo $array_slide[$i]['name']; ?>" title="<?php echo $array_slide[$i]['name']; ?>">
+						<img width="388" height="246" src="<?php echo $array_slide[$i]['thumbnail_small_link']; ?>" class="attachment-recent_news_homepage wp-post-image" alt="<?php echo $array_slide[$i]['name']; ?>" title="<?php echo $array_slide[$i]['name']; ?>" />
 						<span class="link-icon"></span>
 						<span class="overlay"></span>
 					</a>
 				</div>
 				<div class="post-content">
-					<div class="title"><a href="<?php echo $array_slide[$i]['post_link']; ?>"><?php echo $array_slide[$i]['name']; ?></a></div>
+					<div class="title">
+						<a href="<?php echo $array_slide[$i]['post_link']; ?>" alt="<?php echo $array_slide[$i]['name']; ?>" title="<?php echo $array_slide[$i]['name']; ?>">
+							<?php echo $array_slide[$i]['name']; ?>
+						</a>
+					</div>
 				</div>
 			</div>
 			<?php } ?>
@@ -109,56 +116,68 @@
 				<?php if ($key == 0) { ?>
 				<div class="block_home_post first-post">
 					<div class="post-image">
-						<a href="<?php echo $post['post_link']; ?>" class="img-link img-wrap w_hover">
-							<img width="600" height="352" src="<?php echo $post['thumbnail_small_link']; ?>" class="attachment-category_news_first wp-post-image" alt="<?php echo $post['name']; ?>" />
+						<a href="<?php echo $post['post_link']; ?>" class="img-link img-wrap w_hover" alt="<?php echo $post['name']; ?>" title="<?php echo $post['name']; ?>">
+							<img width="600" height="352" src="<?php echo $post['thumbnail_small_link']; ?>" class="attachment-category_news_first wp-post-image" alt="<?php echo $post['name']; ?>" title="<?php echo $post['name']; ?>" />
 							<span class="link-icon"></span>
 							<span class="overlay"></span>
 						</a>
 					</div>
 					<div class="post-content">
-						<div class="title"><a href="<?php echo $post['post_link']; ?>"><?php echo $post['name']; ?></a></div>
+						<div class="title">
+							<a href="<?php echo $post['post_link']; ?>" alt="<?php echo $post['name']; ?>" title="<?php echo $post['name']; ?>">
+								<?php echo $post['name']; ?>
+							</a>
+						</div>
 					</div>
 					<div class="post-body"><?php echo $post['desc_limit']; ?></div>
 					<?php if ($post['post_type_id'] == POST_TYPE_SINGLE_LINK) { ?>
-					<div class="post-desc">by <a href="<?php echo $post['link_source']; ?>">Suekarea</a></div>
+					<div class="post-desc">by <a href="<?php echo $post['link_source']; ?>"><?php echo $post['user_fullname']; ?></a></div>
 					<?php } else { ?>
-					<div class="post-desc">by <a href="<?php echo $post['post_link']; ?>">Suekarea</a></div>
+					<div class="post-desc">by <a href="<?php echo $post['post_link']; ?>"><?php echo $post['user_fullname']; ?></a></div>
 					<?php } ?>
 				</div>
 				<?php } else if ($key <= 2) { ?>
 				<div class="block_home_post bd-bot">
 					<div class="post-image">
-						<a href="<?php echo $post['post_link']; ?>" class="img-link img-wrap w_hover">
+						<a href="<?php echo $post['post_link']; ?>" class="img-link img-wrap w_hover" alt="<?php echo $post['name']; ?>" title="<?php echo $post['name']; ?>">
 							<img width="170" height="126" src="<?php echo $post['thumbnail_small_link']; ?>" class="attachment-category_news wp-post-image" alt="<?php echo $post['name']; ?>" />
 							<span class="link-icon"></span>
 							<span class="overlay"></span>
 						</a>
 					</div>
 					<div class="post-content">
-						<div class="title"><a href="<?php echo $post['post_link']; ?>"><?php echo $post['name']; ?></a></div>
+						<div class="title">
+							<a href="<?php echo $post['post_link']; ?>" alt="<?php echo $post['name']; ?>" title="<?php echo $post['name']; ?>">
+								<?php echo $post['name']; ?>
+							</a>
+						</div>
 					</div>
 					<?php if ($post['post_type_id'] == POST_TYPE_SINGLE_LINK) { ?>
-					<div class="post-desc">by <a href="<?php echo $post['link_source']; ?>">Suekarea</a></div>
+					<div class="post-desc">by <a href="<?php echo $post['link_source']; ?>"><?php echo $post['user_fullname']; ?></a></div>
 					<?php } else { ?>
-					<div class="post-desc">by <a href="<?php echo $post['post_link']; ?>">Suekarea</a></div>
+					<div class="post-desc">by <a href="<?php echo $post['post_link']; ?>"><?php echo $post['user_fullname']; ?></a></div>
 					<?php } ?>
 				</div>
 				<?php } else { ?>
 				<div class="block_home_post">
 					<div class="post-image">
 						<a href="<?php echo $post['post_link']; ?>" class="img-link img-wrap w_hover">
-							<img width="170" height="126" src="<?php echo $post['thumbnail_small_link']; ?>" class="attachment-category_news wp-post-image" alt="<?php echo $post['name']; ?>" />
+							<img width="170" height="126" src="<?php echo $post['thumbnail_small_link']; ?>" class="attachment-category_news wp-post-image" alt="<?php echo $post['name']; ?>" title="<?php echo $post['name']; ?>" />
 							<span class="link-icon"></span>
 							<span class="overlay"></span>
 						</a>
 					</div>
 					<div class="post-content">
-						<div class="title"><a href="<?php echo $post['post_link']; ?>"><?php echo $post['name']; ?></a></div>
+						<div class="title">
+							<a href="<?php echo $post['post_link']; ?>" alt="<?php echo $post['name']; ?>" title="<?php echo $post['name']; ?>">
+								<?php echo $post['name']; ?>
+							</a>
+						</div>
 					</div>
 					<?php if ($post['post_type_id'] == POST_TYPE_SINGLE_LINK) { ?>
-					<div class="post-desc">by <a href="<?php echo $post['link_source']; ?>">Suekarea</a></div>
+					<div class="post-desc">by <a href="<?php echo $post['link_source']; ?>"><?php echo $post['user_fullname']; ?></a></div>
 					<?php } else { ?>
-					<div class="post-desc">by <a href="<?php echo $post['post_link']; ?>">Suekarea</a></div>
+					<div class="post-desc">by <a href="<?php echo $post['post_link']; ?>"><?php echo $post['user_fullname']; ?></a></div>
 					<?php } ?>
 				</div>
 				<?php } ?>
@@ -174,56 +193,68 @@
 				<?php if ($key == 0) { ?>
 				<div class="block_home_post first-post">
 					<div class="post-image">
-						<a href="<?php echo $post['post_link']; ?>" class="img-link img-wrap w_hover">
-							<img width="600" height="352" src="<?php echo $post['thumbnail_small_link']; ?>" class="attachment-category_news_first wp-post-image" alt="<?php echo $post['name']; ?>" />
+						<a href="<?php echo $post['post_link']; ?>" class="img-link img-wrap w_hover" alt="<?php echo $post['name']; ?>" title="<?php echo $post['name']; ?>">
+							<img width="600" height="352" src="<?php echo $post['thumbnail_small_link']; ?>" class="attachment-category_news_first wp-post-image" alt="<?php echo $post['name']; ?>" title="<?php echo $post['name']; ?>" />
 							<span class="link-icon"></span>
 							<span class="overlay"></span>
 						</a>
 					</div>
 					<div class="post-content">
-						<div class="title"><a href="<?php echo $post['post_link']; ?>"><?php echo $post['name']; ?></a></div>
+						<div class="title">
+							<a href="<?php echo $post['post_link']; ?>" alt="<?php echo $post['name']; ?>" title="<?php echo $post['name']; ?>">
+								<?php echo $post['name']; ?>
+							</a>
+						</div>
 					</div>
 					<div class="post-body"><?php echo $post['desc_limit']; ?></div>
 					<?php if ($post['post_type_id'] == POST_TYPE_SINGLE_LINK) { ?>
-					<div class="post-desc">by <a href="<?php echo $post['link_source']; ?>">Suekarea</a></div>
+					<div class="post-desc">by <a href="<?php echo $post['link_source']; ?>"><?php echo $post['user_fullname']; ?></a></div>
 					<?php } else { ?>
-					<div class="post-desc">by <a href="<?php echo $post['post_link']; ?>">Suekarea</a></div>
+					<div class="post-desc">by <a href="<?php echo $post['post_link']; ?>"><?php echo $post['user_fullname']; ?></a></div>
 					<?php } ?>
 				</div>
 				<?php } else if ($key <= 2) { ?>
 				<div class="block_home_post bd-bot">
 					<div class="post-image">
-						<a href="<?php echo $post['post_link']; ?>" class="img-link img-wrap w_hover">
-							<img width="170" height="126" src="<?php echo $post['thumbnail_small_link']; ?>" class="attachment-category_news wp-post-image" alt="<?php echo $post['name']; ?>" />
+						<a href="<?php echo $post['post_link']; ?>" class="img-link img-wrap w_hover" alt="<?php echo $post['name']; ?>" title="<?php echo $post['name']; ?>">
+							<img width="170" height="126" src="<?php echo $post['thumbnail_small_link']; ?>" class="attachment-category_news wp-post-image" alt="<?php echo $post['name']; ?>" title="<?php echo $post['name']; ?>" />
 							<span class="link-icon"></span>
 							<span class="overlay"></span>
 						</a>
 					</div>
 					<div class="post-content">
-						<div class="title"><a href="<?php echo $post['post_link']; ?>"><?php echo $post['name']; ?></a></div>
+						<div class="title">
+							<a href="<?php echo $post['post_link']; ?>" alt="<?php echo $post['name']; ?>" title="<?php echo $post['name']; ?>">
+								<?php echo $post['name']; ?>
+							</a>
+						</div>
 					</div>
 					<?php if ($post['post_type_id'] == POST_TYPE_SINGLE_LINK) { ?>
-					<div class="post-desc">by <a href="<?php echo $post['link_source']; ?>">Suekarea</a></div>
+					<div class="post-desc">by <a href="<?php echo $post['link_source']; ?>"><?php echo $post['user_fullname']; ?></a></div>
 					<?php } else { ?>
-					<div class="post-desc">by <a href="<?php echo $post['post_link']; ?>">Suekarea</a></div>
+					<div class="post-desc">by <a href="<?php echo $post['post_link']; ?>"><?php echo $post['user_fullname']; ?></a></div>
 					<?php } ?>
 				</div>
 				<?php } else { ?>
 				<div class="block_home_post">
 					<div class="post-image">
-						<a href="<?php echo $post['post_link']; ?>" class="img-link img-wrap w_hover">
-							<img width="170" height="126" src="<?php echo $post['thumbnail_small_link']; ?>" class="attachment-category_news wp-post-image" alt="<?php echo $post['name']; ?>" />
+						<a href="<?php echo $post['post_link']; ?>" class="img-link img-wrap w_hover" alt="<?php echo $post['name']; ?>" title="<?php echo $post['name']; ?>">
+							<img width="170" height="126" src="<?php echo $post['thumbnail_small_link']; ?>" class="attachment-category_news wp-post-image" alt="<?php echo $post['name']; ?>" title="<?php echo $post['name']; ?>" />
 							<span class="link-icon"></span>
 							<span class="overlay"></span>
 						</a>
 					</div>
 					<div class="post-content">
-						<div class="title"><a href="<?php echo $post['post_link']; ?>"><?php echo $post['name']; ?></a></div>
+						<div class="title">
+							<a href="<?php echo $post['post_link']; ?>" alt="<?php echo $post['name']; ?>" title="<?php echo $post['name']; ?>">
+								<?php echo $post['name']; ?>
+							</a>
+						</div>
 					</div>
 					<?php if ($post['post_type_id'] == POST_TYPE_SINGLE_LINK) { ?>
-					<div class="post-desc">by <a href="<?php echo $post['link_source']; ?>">Suekarea</a></div>
+					<div class="post-desc">by <a href="<?php echo $post['link_source']; ?>"><?php echo $post['user_fullname']; ?></a></div>
 					<?php } else { ?>
-					<div class="post-desc">by <a href="<?php echo $post['post_link']; ?>">Suekarea</a></div>
+					<div class="post-desc">by <a href="<?php echo $post['post_link']; ?>"><?php echo $post['user_fullname']; ?></a></div>
 					<?php } ?>
 				</div>
 				<?php } ?>
@@ -240,38 +271,46 @@
 					<?php if ($key == 0) { ?>
 					<div class="block_home_post first-post">
 						<div class="post-image">
-							<a href="<?php echo $post['post_link']; ?>" class="img-link img-wrap w_hover">
-								<img width="600" height="352" src="<?php echo $post['thumbnail_small_link']; ?>" class="attachment-category_news_first wp-post-image" alt="<?php echo $post['name']; ?>" />
+							<a href="<?php echo $post['post_link']; ?>" class="img-link img-wrap w_hover" alt="<?php echo $post['name']; ?>" title="<?php echo $post['name']; ?>">
+								<img width="600" height="352" src="<?php echo $post['thumbnail_small_link']; ?>" class="attachment-category_news_first wp-post-image" alt="<?php echo $post['name']; ?>" title="<?php echo $post['name']; ?>" />
 								<span class="link-icon"></span>
 								<span class="overlay"></span>
 							</a>
 						</div>
 						<div class="post-content">
-							<div class="title"><a href="<?php echo $post['post_link']; ?>"><?php echo $post['name']; ?></a></div>
+							<div class="title">
+								<a href="<?php echo $post['post_link']; ?>" alt="<?php echo $post['name']; ?>" title="<?php echo $post['name']; ?>">
+									<?php echo $post['name']; ?>
+								</a>
+							</div>
 						</div>
 						<div class="post-body"><?php echo get_length_char($post['desc_limit'], 125, ' ...'); ?></div>
 						<?php if ($post['post_type_id'] == POST_TYPE_SINGLE_LINK) { ?>
-						<div class="post-desc">by <a href="<?php echo $post['link_source']; ?>">Suekarea</a></div>
+						<div class="post-desc">by <a href="<?php echo $post['link_source']; ?>"><?php echo $post['user_fullname']; ?></a></div>
 						<?php } else { ?>
-						<div class="post-desc">by <a href="<?php echo $post['post_link']; ?>">Suekarea</a></div>
+						<div class="post-desc">by <a href="<?php echo $post['post_link']; ?>"><?php echo $post['user_fullname']; ?></a></div>
 						<?php } ?>
 					</div>
 					<?php } else { ?>
 					<div class="block_home_post">
 						<div class="post-image">
-							<a href="<?php echo $post['post_link']; ?>" class="img-link img-wrap w_hover">
-								<img width="170" height="126" src="<?php echo $post['thumbnail_small_link']; ?>" class="attachment-category_news wp-post-image" alt="<?php echo $post['name']; ?>" />
+							<a href="<?php echo $post['post_link']; ?>" class="img-link img-wrap w_hover" alt="<?php echo $post['name']; ?>" title="<?php echo $post['name']; ?>">
+								<img width="170" height="126" src="<?php echo $post['thumbnail_small_link']; ?>" class="attachment-category_news wp-post-image" alt="<?php echo $post['name']; ?>" title="<?php echo $post['name']; ?>" />
 								<span class="link-icon"></span>
 								<span class="overlay"></span>
 							</a>
 						</div>
 						<div class="post-content">
-							<div class="title"><a href="<?php echo $post['post_link']; ?>"><?php echo $post['name']; ?></a></div>
+							<div class="title">
+								<a href="<?php echo $post['post_link']; ?>" alt="<?php echo $post['name']; ?>" title="<?php echo $post['name']; ?>">
+									<?php echo $post['name']; ?>
+								</a>
+							</div>
 						</div>
 						<?php if ($post['post_type_id'] == POST_TYPE_SINGLE_LINK) { ?>
-						<div class="post-desc">by <a href="<?php echo $post['link_source']; ?>">Suekarea</a></div>
+						<div class="post-desc">by <a href="<?php echo $post['link_source']; ?>"><?php echo $post['user_fullname']; ?></a></div>
 						<?php } else { ?>
-						<div class="post-desc">by <a href="<?php echo $post['post_link']; ?>">Suekarea</a></div>
+						<div class="post-desc">by <a href="<?php echo $post['post_link']; ?>"><?php echo $post['user_fullname']; ?></a></div>
 						<?php } ?>
 					</div>
 					<?php } ?>
@@ -287,38 +326,46 @@
 					<?php if ($key == 0) { ?>
 					<div class="block_home_post first-post">
 						<div class="post-image">
-							<a href="<?php echo $post['post_link']; ?>" class="img-link img-wrap w_hover">
-								<img width="600" height="352" src="<?php echo $post['thumbnail_small_link']; ?>" class="attachment-category_news_first wp-post-image" alt="<?php echo $post['name']; ?>" />
+							<a href="<?php echo $post['post_link']; ?>" class="img-link img-wrap w_hover" alt="<?php echo $post['name']; ?>" title="<?php echo $post['name']; ?>">
+								<img width="600" height="352" src="<?php echo $post['thumbnail_small_link']; ?>" class="attachment-category_news_first wp-post-image" alt="<?php echo $post['name']; ?>" title="<?php echo $post['name']; ?>" />
 								<span class="link-icon"></span>
 								<span class="overlay"></span>
 							</a>
 						</div>
 						<div class="post-content">
-							<div class="title"><a href="<?php echo $post['post_link']; ?>"><?php echo $post['name']; ?></a></div>
+							<div class="title">
+								<a href="<?php echo $post['post_link']; ?>" alt="<?php echo $post['name']; ?>" title="<?php echo $post['name']; ?>">
+									<?php echo $post['name']; ?>
+								</a>
+							</div>
 						</div>
 						<div class="post-body"><?php echo get_length_char($post['desc_limit'], 125, ' ...'); ?></div>
 						<?php if ($post['post_type_id'] == POST_TYPE_SINGLE_LINK) { ?>
-						<div class="post-desc">by <a href="<?php echo $post['link_source']; ?>">Suekarea</a></div>
+						<div class="post-desc">by <a href="<?php echo $post['link_source']; ?>"><?php echo $post['user_fullname']; ?></a></div>
 						<?php } else { ?>
-						<div class="post-desc">by <a href="<?php echo $post['post_link']; ?>">Suekarea</a></div>
+						<div class="post-desc">by <a href="<?php echo $post['post_link']; ?>"><?php echo $post['user_fullname']; ?></a></div>
 						<?php } ?>
 					</div>
 					<?php } else { ?>
 					<div class="block_home_post">
 						<div class="post-image">
-							<a href="<?php echo $post['post_link']; ?>" class="img-link img-wrap w_hover">
+							<a href="<?php echo $post['post_link']; ?>" class="img-link img-wrap w_hover" alt="<?php echo $post['name']; ?>" title="<?php echo $post['name']; ?>">
 								<img width="170" height="126" src="<?php echo $post['thumbnail_small_link']; ?>" class="attachment-category_news wp-post-image" alt="<?php echo $post['name']; ?>" />
 								<span class="link-icon"></span>
 								<span class="overlay"></span>
 							</a>
 						</div>
 						<div class="post-content">
-							<div class="title"><a href="<?php echo $post['post_link']; ?>"><?php echo $post['name']; ?></a></div>
+							<div class="title">
+								<a href="<?php echo $post['post_link']; ?>" alt="<?php echo $post['name']; ?>" title="<?php echo $post['name']; ?>">
+									<?php echo $post['name']; ?>
+								</a>
+							</div>
 						</div>
 						<?php if ($post['post_type_id'] == POST_TYPE_SINGLE_LINK) { ?>
-						<div class="post-desc">by <a href="<?php echo $post['link_source']; ?>">Suekarea</a></div>
+						<div class="post-desc">by <a href="<?php echo $post['link_source']; ?>"><?php echo $post['user_fullname']; ?></a></div>
 						<?php } else { ?>
-						<div class="post-desc">by <a href="<?php echo $post['post_link']; ?>">Suekarea</a></div>
+						<div class="post-desc">by <a href="<?php echo $post['post_link']; ?>"><?php echo $post['user_fullname']; ?></a></div>
 						<?php } ?>
 					</div>
 					<?php } ?>

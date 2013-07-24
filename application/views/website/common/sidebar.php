@@ -87,9 +87,9 @@
 					<div class="text">
 						<p class="title"><a href="<?php echo $array_recent[$i]['post_link']; ?>" title="<?php echo $array_recent[$i]['name']; ?>"><?php echo $array_recent[$i]['name']; ?></a></p>
 						<?php if ($array_recent[$i]['post_type_id'] == POST_TYPE_SINGLE_LINK) { ?>
-						<div class="desc">by <a href="<?php echo $array_recent[$i]['link_source']; ?>">Suekarea</a></div>
+						<div class="desc">by <a href="<?php echo $array_recent[$i]['link_source']; ?>"><?php echo $array_recent[$i]['user_fullname']; ?></a></div>
 						<?php } else { ?>
-						<div class="desc">by <a href="<?php echo $array_recent[$i]['post_link']; ?>">Suekarea</a></div>
+						<div class="desc">by <a href="<?php echo $array_recent[$i]['post_link']; ?>"><?php echo $array_recent[$i]['user_fullname']; ?></a></div>
 						<?php } ?>
 					</div>
 				</div>
@@ -107,9 +107,9 @@
 					<div class="text">
 						<p class="title"><a href="<?php echo $array_recent[$i]['post_link']; ?>" title="<?php echo $array_recent[$i]['name']; ?>"><?php echo $array_recent[$i]['name']; ?></a></p>
 						<?php if ($array_recent[$i]['post_type_id'] == POST_TYPE_SINGLE_LINK) { ?>
-						<div class="desc">by <a href="<?php echo $array_recent[$i]['link_source']; ?>">Suekarea</a></div>
+						<div class="desc">by <a href="<?php echo $array_recent[$i]['link_source']; ?>"><?php echo $array_recent[$i]['user_fullname']; ?></a></div>
 						<?php } else { ?>
-						<div class="desc">by <a href="<?php echo $array_recent[$i]['post_link']; ?>">Suekarea</a></div>
+						<div class="desc">by <a href="<?php echo $array_recent[$i]['post_link']; ?>"><?php echo $array_recent[$i]['user_fullname']; ?></a></div>
 						<?php } ?>
 					</div>
 				</div>

@@ -2,16 +2,23 @@
 	$web['host'] = base_url();
 	$title = (!empty($title)) ? $title : 'Suekarea - Share Movie Download and Share Anime Download';
 	$desc = (!empty($desc)) ? $desc : 'Suekarea - Share Movie Download and Share Anime Download';
+	$tag_meta = (isset($tag_meta) && is_array($tag_meta)) ? $tag_meta : array();
 ?>
 
 <!DOCTYPE html>
 <html lang="en-US">
 <head>
 	<meta charset="UTF-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-	<title><?php echo $title; ?></title>
+	<meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+	<?php foreach ($tag_meta as $meta) { ?>
+	<meta property="<?php echo $meta['property']; ?>" content="<?php echo $meta['content']; ?>">
+	<?php } ?>
 	<meta name="title" content="<?php echo $title; ?>" />
 	<meta name="description" content="<?php echo $desc; ?>" />
+	
+	<title><?php echo $title; ?></title>
+	<link href="https://plus.google.com/116513263461360260446/posts" rel="author"/>
 	<link rel="stylesheet" type="text/css" media="all" id="primetime-style-css" href="<?php echo base_url('static/css/style.css'); ?>" />
 	<link rel="stylesheet" type="text/css" media="all" id="responsive-css" href="<?php echo base_url('static/css/responsive.css'); ?>" />
 	<link rel="icon shortcut" href="<?php echo base_url('static/img/favicon.png'); ?>" type="image/x-icon" />

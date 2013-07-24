@@ -15,19 +15,21 @@
 			<div id="footer_logo">
 				<a href="<?php echo base_url(); ?>"><img src="<?php echo base_url('static/img/footer-logo.png'); ?>" alt="Suekarea" title="Suekarea"></a>
 			</div>
-			<div class="footer_text">Share Movie Download and Share Anime Download<br />No adfly</div>
-			<?php
-			/*
+			<div class="footer_text" style="text-align: justify;">
+				Suekarea.com didirikan pada tahun 2013, di sini kami berbagi film, anime, kartun, dll secara gratis. Jadi anda bisa mendowloadnya secara gratis.<br />
+				Seiring berjalannya waktu, Suekarea.com akan mengalami perubahan. Kami berharap anda menikmati apa yang kami berikan
+			</div>
 			<div class="block_social_footer">
 				<ul>
+					<li><a href="<?php echo base_url('rss'); ?>" class="rss" title="Popular RSS">RSS</a></li>
+					<li><a href="<?php echo base_url('rss/latest'); ?>" class="rss" title="Latest RSS">RSS</a></li>
+					<li><a href="https://www.facebook.com/suekarea" class="fb" title="Suekarea FB">Facebook</a></li>
+					<li><a href="https://plus.google.com/u/0/114002599803233293136?rel=author" class="gplus">Google+</a></li>
+			<?php /*
 					<li><a href="#" class="tw">Twitter</a></li>
-					<li><a href="#" class="fb">Facebook</a></li>
-					<li><a href="#" class="rss">RSS</a></li>
-					<li><a href="#" class="gplus">Google+</a></li>
+			/*	*/ ?>
 				</ul>
 			</div>
-			/*	*/
-			?>
 		</div>
 		<div class="col2">
 			 <div class="block_footer_widgets">
@@ -43,13 +45,13 @@
 							<?php foreach ($array_popular as $post) { ?>
 							<div class="article">
 								<div class="pic">
-									<a href="<?php echo $post['post_link']; ?>" class="w_hover">
-										<img width="112" height="80" src="<?php echo $post['thumbnail_small_link']; ?>" class="attachment-widget_popular_footer wp-post-image" alt="21" />
+									<a href="<?php echo $post['post_link']; ?>" class="w_hover" alt="<?php echo $post['name']; ?>" title="<?php echo $post['name']; ?>">
+										<img width="112" height="80" src="<?php echo $post['thumbnail_small_link']; ?>" class="attachment-widget_popular_footer wp-post-image" alt="<?php echo $post['name']; ?>" title="<?php echo $post['name']; ?>" />
 										<span class="overlay"></span>
 									</a>
 								</div>
 								<div class="text">
-									<p class="title"><a href="<?php echo $post['post_link']; ?>"><?php echo $post['name']; ?></a></p>
+									<p class="title"><a href="<?php echo $post['post_link']; ?>" alt="<?php echo $post['name']; ?>" title="<?php echo $post['name']; ?>"><?php echo $post['name']; ?></a></p>
 									<?php
 									/*
 									<div class="icons">
