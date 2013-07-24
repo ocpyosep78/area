@@ -126,15 +126,21 @@ class User_model extends CI_Model {
 	
 	/*	Region Session */
 	
-	function is_login() {
+	function is_login($admin_level = false) {
 		$user = $this->get_session();
 		$result = (count($user) > 0) ? true : false;
+		
+		if ($result && $admin_level) {
+			if ($user['user_type_id'] != USER_TYPE_ADMINISTRATOR) {
+				$result = false;
+			}
+		}
 		
 		return $result;
 	}
 	
-	function required_login() {
-		$is_login = $this->is_login();
+	function required_login($admin_level = false) {
+		$is_login = $this->is_login($admin_level);
 		if (!$is_login) {
 			header("Location: ".base_url('panel'));
 			exit;

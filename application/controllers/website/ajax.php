@@ -43,6 +43,9 @@ class ajax extends CI_Controller {
 			}
 			
 			$param = $_POST;
+			$param['is_active'] = 1;
+			$param['user_type_id'] = USER_TYPE_MEMBER;
+			$param['register_date'] = $this->config->item('current_datetime');
 			$param['passwd'] = EncriptPassword($param['passwd']);
 			$result = $this->User_model->update($param);
 			
@@ -50,10 +53,13 @@ class ajax extends CI_Controller {
 			$result['status'] = true;
 			$user = $this->User_model->get_by_id(array( 'id' => $result['id'] ));
 			$this->User_model->set_session($user);
-		} else if ($action == 'login') {
+		}
+		else if ($action == 'login') {
 			$user = $this->User_model->get_by_id(array( 'email' => $_POST['email'] ));
 			if (count($user) == 0) {
 				$result['message'] = 'Email Anda tidak terdaftar, silahkan register.';
+			} else if (empty($user['is_active'])) {
+				$result['message'] = 'Maaf, user Anda tidak aktif, mohon menghubungi Admin untuk pengaktifan kembali.';
 			} else if ($user['passwd'] != EncriptPassword($_POST['passwd'])) {
 				$result['message'] = 'Password Anda tidak sama, harap isikan password yang benar.';
 			} else {

@@ -5815,6 +5815,7 @@ div#site_settings .menu_style {
 .registration-popup .col1,
 .registration-popup .col2 {
 	float: left;
+	height: 70px;
 }
 .registration-popup .field {
 	margin-bottom:10px;

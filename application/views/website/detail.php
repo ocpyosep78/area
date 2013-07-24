@@ -6,9 +6,18 @@
 	$param_post['category_id'] = $post['category_id'];
 	$param_post['sort'] = '[{"property":"publish_date","direction":"DESC"}]';
 	$array_post = $this->Post_model->get_array($param_post);
+	
+	// param meta
+	$param_meta['title'] = 'Suekarea - Share Download - '.$post['category_name'].' - '.$post['name'];
+	$param_meta['desc'] = $post['desc_limit'];
+	$param_meta['tag_meta'][] = array( 'property' => 'og:url', 'content' => $post['post_link'] );
+	$param_meta['tag_meta'][] = array( 'property' => 'og:type', 'content' => $post['category_name'] );
+	$param_meta['tag_meta'][] = array( 'property' => 'og:title', 'content' => $post['name'] );
+	$param_meta['tag_meta'][] = array( 'property' => 'og:description', 'content' => get_length_char($post['desc_limit'], 200, ' ...') );
+	$param_meta['tag_meta'][] = array( 'property' => 'og:image', 'content' => $post['thumbnail_link'] );
 ?>
 
-<?php $this->load->view( 'website/common/meta', array( 'title' => 'Suekarea - Share Download - '.$post['name'], 'desc' => $post['desc_limit'] ) ); ?>
+<?php $this->load->view( 'website/common/meta', $param_meta ); ?>
 
 <body class="blog boxed pattern-1 navigation-style-1">
 
@@ -17,12 +26,12 @@
 	
     <div id="main" class="right_sidebar"><div class="inner"><div class="general_content clearboth">
 		<div class="main_content"><div id="primary" class="content-area"><div id="content" class="site-content" role="main">
-			<h2 class="page-title"><?php echo $post['name']; ?></h2>
+			<h2 class="page-title"><a href="<?php echo $post['post_link']; ?>" alt="<?php echo $post['name']; ?>" title="<?php echo $post['name']; ?>"><?php echo $post['name']; ?></a></h2>
 			
 			<div id="post_content" class="post_content" role="main">
                 <article class="news type-news status-publish format-video hentry format-video gallery-style-1">
 					<div class="pic post_thumb">
-						<img width="1240" height="620" src="<?php echo $post['thumbnail_link']; ?>" class="attachment-slider wp-post-image" alt="2">
+						<img width="1240" height="620" src="<?php echo $post['thumbnail_link']; ?>" alt="<?php echo $post['name']; ?>" title="<?php echo $post['name']; ?>" class="attachment-slider wp-post-image" />
 					</div>
 					<div class="post_content" style="padding: 10px 0 15px 0;"><?php echo $post['desc']; ?></div>
 					<div style="text-align: center; padding: 0 0 15px 0;"><input type="button" class="reload-download" value="Download" data-id="<?php echo $post['id']; ?>" /></div>
@@ -58,7 +67,7 @@
 									<span class="overlay"></span>
 								</a>
 							</div>
-							<h3><a href="<?php echo $item['post_link']; ?>" title="<?php echo $item['name']; ?>"><?php echo $item['name']; ?></a></h3>
+							<h3 style="margin: 0px;"><a href="<?php echo $item['post_link']; ?>" title="<?php echo $item['name']; ?>"><?php echo get_length_char(strip_tags($item['name']), 60, ' ...'); ?></a></h3>
 						</article>
 						<?php } else { ?>
 						<article class="item_right" style="margin-top: 14px;">
@@ -68,7 +77,7 @@
 									<span class="overlay"></span>
 								</a>
 							</div>
-							<h3><a href="<?php echo $item['post_link']; ?>" title="<?php echo $item['name']; ?>"><?php echo $item['name']; ?></a></h3>
+							<h3 style="margin: 0px;"><a href="<?php echo $item['post_link']; ?>" title="<?php echo $item['name']; ?>"><?php echo get_length_char(strip_tags($item['name']), 60, ' ...'); ?></a></h3>
 						</article>
 						<?php } ?>
 						<?php } ?>

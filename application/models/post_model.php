@@ -39,8 +39,9 @@ class Post_model extends CI_Model {
        
         if (isset($param['id'])) {
             $select_query  = "
-				SELECT Post.*, User.fullname user_fullname
+				SELECT Post.*, User.fullname user_fullname, Category.name category_name
 				FROM ".POST." Post
+				LEFT JOIN ".CATEGORY." Category ON Category.id = Post.category_id
 				LEFT JOIN ".USER." User ON User.id = Post.user_id
 				WHERE Post.id = '".$param['id']."'
 				LIMIT 1

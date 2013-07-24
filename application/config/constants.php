@@ -22,6 +22,8 @@ define('CATEGORY_TV_SERIAL',					2);
 define('POST_TYPE_DRAFT',						1);
 define('POST_TYPE_SINGLE_LINK',					2);
 define('POST_TYPE_MULTI_LINK',					3);
+define('USER_TYPE_ADMINISTRATOR',				1);
+define('USER_TYPE_MEMBER',						2);
 
 define('CATEGORY',								'category');
 define('COMMENT',								'comment');
