@@ -86,46 +86,7 @@
 					</div>
 				</div>
 				
-				<iframe id="the_iframe" scrolling="no" frameborder="0" style="width: 100%" src="http://localhost:8666/suekarea/trunk/comment/comment?link=http://www.suekarea.com/"></iframe>
-				// buat widget
-				// set interval setiap 5 detik
-				// document.getElementById('the_iframe').style.height = document.getElementById('the_iframe').contentWindow.document.body.scrollHeight + 'px';
-				<!--
-				<div id="comments" class="post_comments">
-					<h3 class="comments_title">Comments</h3>
-					<ol class="comment-list">
-						<li class="comment">
-							<div class="photo"><img src="<?php echo base_url('static/upload/b5a37fc.jpg'); ?>" height="106" width="106"></div>
-							<div class="extra_wrap">
-								<h5><a>admin</a></h5>
-								<div class="comment_info">
-									<div class="comment_date">June 2, 2013 at 6:38 am</div>
-								</div>
-								<div class="comment_content"><p>Test comment</p></div>
-							</div>
-						</li>
-					</ol>
-					<div id="respond">
-						<h3 id="reply-title">Leave comment</h3>
-						<form action="http://wpspace.net/wp-comments-post.php" method="post" id="commentform">
-							<p class="comment-form-author">
-								<input name="author" type="text" value="" size="30" />
-								<label class="required">Name</label>
-							</p>
-							<p class="comment-form-email">
-								<input name="email" type="text" value="" size="30" />
-								<label class="required">Email</label>
-							</p>
-							<p class="comment-form-comment">
-								<textarea id="comment" name="comment" cols="45" rows="8"></textarea>
-							</p>
-							<p class="form-submit">
-								<input name="submit" type="submit" value="Post comment" />
-							</p>
-						</form>
-					</div>
-				</div>
-				-->
+				<script type="text/javascript" src="<?php echo base_url('static/js/comment.js'); ?>"></script>
 			</div>
 		</div></div></div>
 		

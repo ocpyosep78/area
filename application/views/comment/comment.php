@@ -1,6 +1,7 @@
 <?php
 	$web['host'] = base_url();
 	$link = fix_link($_GET['link']);
+	$user = $this->User_model->get_cookies();
 	
 	$param_comment['link'] = $link;
 	$param_comment['is_publish'] = 1;
@@ -49,6 +50,7 @@
 				<input type="hidden" name="action" value="update" />
 				<input type="hidden" name="link" value="<?php echo $link; ?>" />
 				
+				<?php if (! $user['is_login']) { ?>
 				<p class="comment-form-author">
 					<input name="name" type="text" value="" size="30" />
 					<label class="required">Name</label>
@@ -57,6 +59,8 @@
 					<input name="email" type="text" value="" size="30" />
 					<label class="required">Email</label>
 				</p>
+				<?php } ?>
+				
 				<p class="comment-form-comment">
 					<textarea name="comment" cols="45" rows="8"></textarea>
 				</p>

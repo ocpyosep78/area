@@ -11,6 +11,9 @@ class User_model extends CI_Model {
         $result = array();
        
         if (empty($param['id'])) {
+			// default value
+			$param['register_date'] = (isset($param['register_date'])) ? $param['register_date'] : $this->config->item('current_datetime');
+			
             $insert_query  = GenerateInsertQuery($this->field, $param, USER);
             $insert_result = mysql_query($insert_query) or die(mysql_error());
            
@@ -31,6 +34,7 @@ class User_model extends CI_Model {
 
     function get_by_id($param) {
         $array = array();
+		$param['auto_insert'] = (isset($param['auto_insert'])) ? $param['auto_insert'] : false;
        
         if (isset($param['id'])) {
             $select_query  = "SELECT * FROM ".USER." WHERE id = '".$param['id']."' LIMIT 1";
@@ -42,7 +46,12 @@ class User_model extends CI_Model {
         if (false !== $row = mysql_fetch_assoc($select_result)) {
             $array = $this->sync($row);
         }
-       
+		
+		if (count($array) == 0 && $param['auto_insert']) {
+			$result = $this->update($param);
+			$array = $this->get_by_id($result);
+		}
+		
         return $array;
     }
 	
@@ -148,7 +157,12 @@ class User_model extends CI_Model {
 	}
 	
 	function set_session($user) {
+		// set session
 		$_SESSION['user_login'] = $user;
+		
+		// set cookie
+		$cookie_value =  mcrypt_encode(json_encode($user));
+		setcookie("user_login", $cookie_value, time() + (60 * 60 * 5), '/');
 	}
 	
 	function get_session() {
@@ -160,10 +174,25 @@ class User_model extends CI_Model {
 		return $user;
 	}
 	
+	function get_cookies() {
+		$user = array( 'is_login' => false );
+		if (isset($_COOKIE["user_login"])) {
+			$user = json_decode(mcrypt_decode($_COOKIE["user_login"]));
+			$user = object_to_array($user);
+			$user['is_login'] = true;
+		}
+		
+		return $user;
+	}
+	
 	function del_session() {
+		// delete session
 		if (isset($_SESSION['user_login'])) {
 			unset($_SESSION['user_login']);
 		}
+		
+		// delete cookie
+		setcookie("user_login", '', time() + 0, '/');
 	}
 	
 	/*	End Region Session */
