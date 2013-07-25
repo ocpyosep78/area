@@ -22,17 +22,4 @@ Slide Image	 : 485 * 370
 
 Comment On Detail
 
-
-<<<<<<< .mine
 Grab Content dari website lain
-
-
-
-https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=2&cad=rja&ved=0CDUQFjAB&url=http%3A%2F%2Fsuekarea.com%2F&ei=13TqUebED4GRrQefjYGwDg&usg=AFQjCNFrz-t6iW-QYuOaWS840i5evZa4yA&sig2=Kx8qOUJ3k7bqtRdqb8U50Q&bvm=bv.49478099,d.bmk
-
-return rwt(this,'','','','2','AFQjCNFrz-t6iW-QYuOaWS840i5evZa4yA','Kx8qOUJ3k7bqtRdqb8U50Q','0CDUQFjAB','','',event)
-
-Grab Content dari website lain
-
-
-suekarea@gmail.com

@@ -27,6 +27,8 @@ if ($is_website) {
 	$route['search'] = "website/search";
 	$route['search/(:any)'] = "website/search";
 	$route['logout'] = "website/logout";
+	
+	$route['comment'] = "comment/comment";
 }
 
 if ($is_other_page) {

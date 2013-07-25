@@ -4618,7 +4618,7 @@ article.reviews .slider_container .flex-direction-nav a.flex-prev:hover {
 }
 .comment-list li.comment .photo img {vertical-align: top;}
 .comment-list li.comment h5 {
-	margin-bottom: 10px;
+	margin-bottom: 4px;
 }
 .comment-list li.comment h5 a {text-decoration: none;}
 .comment-list li.comment .comment_info {
@@ -4626,7 +4626,7 @@ article.reviews .slider_container .flex-direction-nav a.flex-prev:hover {
 	font-size: 11px;
 	line-height: 14px;
 	color: #797a7d;
-	margin-bottom: 9px;
+	margin-bottom: 4px;
 }
 .comment-list li.comment .comment_info .comment_date {
 	float: left;

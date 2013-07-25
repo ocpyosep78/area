@@ -50,7 +50,9 @@
 									<img src="<?php echo base_url('static/img/twitter-icon-big.png'); ?>" class="twitter_icon" alt="twitter">
 								</a>
 							</li>
+							<?php if ($this->config->item('online_widget')) { ?>
 							<li><?php $this->load->view( 'website/common/google_plus' ); ?></li>
+							<?php } ?>
 						</ul>
 					</div>
 				</article>
@@ -84,12 +86,10 @@
 					</div>
 				</div>
 				
-				<?php
-				/*
 				<div id="comments" class="post_comments">
 					<h3 class="comments_title">Comments</h3>
 					<ol class="comment-list">
-						<li class="comment byuser comment-author-admin bypostauthor even thread-even depth-1">
+						<li class="comment">
 							<div class="photo"><img src="<?php echo base_url('static/upload/b5a37fc.jpg'); ?>" height="106" width="106"></div>
 							<div class="extra_wrap">
 								<h5><a>admin</a></h5>
@@ -101,23 +101,25 @@
 						</li>
 					</ol>
 					<div id="respond">
-						<h3 id="reply-title">Leave comment <small><a rel="nofollow" id="cancel-comment-reply-link" href="http://localhost/?news=dolorem-ipsum-quia-dolor-sit-amet#respond" style="display:none;">Cancel reply</a></small></h3>
+						<h3 id="reply-title">Leave comment</h3>
 						<form action="http://wpspace.net/wp-comments-post.php" method="post" id="commentform">
-							<p class="comment-form-author"><input id="author" name="author" type="text" value="" size="30" aria-required="true"><label for="author" class="required">Name</label></p>
-							<p class="comment-form-email"><input id="email" name="email" type="text" value="" size="30" aria-required="true"><label for="email" class="required">Email</label></p>
-							<p class="comment-form-url"><input id="url" name="url" type="text" value="" size="30"><label for="url">Website</label></p>
-							<p class="comment-form-comment"><textarea id="comment" name="comment" cols="45" rows="8" aria-required="true"></textarea></p>
+							<p class="comment-form-author">
+								<input name="author" type="text" value="" size="30" />
+								<label class="required">Name</label>
+							</p>
+							<p class="comment-form-email">
+								<input name="email" type="text" value="" size="30" />
+								<label class="required">Email</label>
+							</p>
+							<p class="comment-form-comment">
+								<textarea id="comment" name="comment" cols="45" rows="8"></textarea>
+							</p>
 							<p class="form-submit">
-								<input name="submit" type="submit" id="submit" value="Post comment">
-								<input type="hidden" name="comment_post_ID" value="537" id="comment_post_ID">
-								<input type="hidden" name="comment_parent" id="comment_parent" value="0">
+								<input name="submit" type="submit" value="Post comment" />
 							</p>
 						</form>
 					</div>
-					<div class="nav_comments"></div>
 				</div>
-				/*	*/
-				?>
 			</div>
 		</div></div></div>
 		
