@@ -47,7 +47,7 @@ class Request_model extends CI_Model {
     function get_array($param = array()) {
         $array = array();
 		
-		$string_namelike = (!empty($_POST['namelike'])) ? "AND Request.description LIKE '%".$_POST['namelike']."%'" : '';
+		$string_namelike = (!empty($param['namelike'])) ? "AND Request.description LIKE '%".$param['namelike']."%'" : '';
 		$string_filter = GetStringFilter($param, @$param['column']);
 		$string_sorting = GetStringSorting($param, @$param['column'], 'comment_time ASC');
 		$string_limit = GetStringLimit($param);

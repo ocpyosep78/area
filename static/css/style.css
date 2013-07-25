@@ -4698,6 +4698,10 @@ article.reviews .slider_container .flex-direction-nav a.flex-prev:hover {
 	display: inline-block;
 	margin-left: 12px;
 }
+#commentform .error {
+	color: #E50700;
+	font-size: 10px;
+}
 #commentform p textarea {
 	height: 122px;
 	width: 100%;

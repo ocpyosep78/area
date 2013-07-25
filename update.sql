@@ -1,0 +1,2 @@
+ALTER TABLE `comment` ADD `name` VARCHAR( 50 ) NOT NULL ,
+ADD `email` VARCHAR( 50 ) NOT NULL

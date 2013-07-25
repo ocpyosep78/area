@@ -4,7 +4,7 @@ class Comment_model extends CI_Model {
     function __construct() {
         parent::__construct();
 		
-        $this->field = array( 'id', 'user_id', 'link', 'comment', 'comment_time', 'is_publish' );
+        $this->field = array( 'id', 'user_id', 'link', 'comment', 'comment_time', 'is_publish', 'name', 'email' );
     }
 
     function update($param) {
@@ -47,15 +47,18 @@ class Comment_model extends CI_Model {
     function get_array($param = array()) {
         $array = array();
 		
-		$string_namelike = (!empty($_POST['namelike'])) ? "AND Comment.comment LIKE '%".$_POST['namelike']."%'" : '';
+		$string_link = (isset($param['link'])) ? "AND Comment.link = '".$param['link']."'" : '';
+		$string_publish = (isset($param['is_publish'])) ? "AND Comment.is_publish = '".$param['is_publish']."'" : '';
+		$string_namelike = (!empty($param['namelike'])) ? "AND Comment.comment LIKE '%".$param['namelike']."%'" : '';
 		$string_filter = GetStringFilter($param, @$param['column']);
 		$string_sorting = GetStringSorting($param, @$param['column'], 'comment_time ASC');
 		$string_limit = GetStringLimit($param);
 		
 		$select_query = "
-			SELECT SQL_CALC_FOUND_ROWS Comment.*
+			SELECT SQL_CALC_FOUND_ROWS Comment.*, User.email user_email, User.fullname user_fullname
 			FROM ".COMMENT." Comment
-			WHERE 1 $string_namelike $string_filter
+			LEFT JOIN ".USER." User ON User.id = Comment.user_id
+			WHERE 1 $string_link $string_publish $string_namelike $string_filter
 			ORDER BY $string_sorting
 			LIMIT $string_limit
 		";
@@ -88,6 +91,9 @@ class Comment_model extends CI_Model {
 	
 	function sync($row, $column = array()) {
 		$row = StripArray($row, array( 'comment_time' ));
+		
+		$row['user_email'] = (empty($row['user_email'])) ? $row['email'] : $row['user_email'];
+		$row['user_fullname'] = (empty($row['user_fullname'])) ? $row['name'] : $row['user_fullname'];
 		
 		return $row;
 	}

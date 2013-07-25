@@ -4,7 +4,7 @@
 	<div class="content">
 		<div class="title">Authorization</div>
 		<div class="form">
-			<form method="post" id="form-login">
+			<form method="post" id="form-login" class="validation">
 				<input type="hidden" name="action" value="login"/>
 				
 				<div class="col1">

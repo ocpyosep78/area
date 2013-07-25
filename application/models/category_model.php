@@ -49,7 +49,7 @@ class Category_model extends CI_Model {
     function get_array($param = array()) {
         $array = array();
 		
-		$string_namelike = (!empty($_POST['namelike'])) ? "AND Category.name LIKE '%".$_POST['namelike']."%'" : '';
+		$string_namelike = (!empty($param['namelike'])) ? "AND Category.name LIKE '%".$param['namelike']."%'" : '';
 		$string_filter = GetStringFilter($param, @$param['column']);
 		$string_sorting = GetStringSorting($param, @$param['column'], 'name ASC');
 		$string_limit = GetStringLimit($param);

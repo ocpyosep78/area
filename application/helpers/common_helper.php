@@ -882,4 +882,13 @@
 			return $is_popular;
 		}
 	}
+	
+	if (! function_exists('fix_link')) {
+		function fix_link($value) {
+			$value = urldecode(trim($value));
+			$value = str_replace('www.', '', $value);
+			
+			return $value;
+		}
+	}
 ?>

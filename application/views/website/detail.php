@@ -86,6 +86,11 @@
 					</div>
 				</div>
 				
+				<iframe id="the_iframe" scrolling="no" frameborder="0" style="width: 100%" src="http://localhost:8666/suekarea/trunk/comment/comment?link=http://www.suekarea.com/"></iframe>
+				// buat widget
+				// set interval setiap 5 detik
+				// document.getElementById('the_iframe').style.height = document.getElementById('the_iframe').contentWindow.document.body.scrollHeight + 'px';
+				<!--
 				<div id="comments" class="post_comments">
 					<h3 class="comments_title">Comments</h3>
 					<ol class="comment-list">
@@ -120,6 +125,7 @@
 						</form>
 					</div>
 				</div>
+				-->
 			</div>
 		</div></div></div>
 		
