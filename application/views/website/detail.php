@@ -5,6 +5,7 @@
 	$param_post['max_id'] = $post['id'];
 	$param_post['category_id'] = $post['category_id'];
 	$param_post['sort'] = '[{"property":"publish_date","direction":"DESC"}]';
+	$param_post['limit'] = 10;
 	$array_post = $this->Post_model->get_array($param_post);
 	
 	// param meta
