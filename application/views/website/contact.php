@@ -68,7 +68,7 @@ $(document).ready(function() {
 		Func.ajax({ url: web.host + 'contact/action', param: param, callback: function(result) {
 			if (result.status) {
 				$("#commentform")[0].reset();
-				$('.cnt-message').text(result.message);
+				$('.cnt-message').text('Pesan anda berhasil dikirim');
 			}
 		} });
 		
