@@ -1,4 +1,6 @@
 <?php
+define('MCRYPT_SECRET',							'SUEKAREA_MCRYPT');
+
 if ( ! function_exists('mcrypt_encode')) {
     function mcrypt_encode($String) {
 		$encryption = new Encryption();

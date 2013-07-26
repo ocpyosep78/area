@@ -3,7 +3,7 @@ ADD `email` VARCHAR( 50 ) NOT NULL
 
 
 2013-07-26 :
-CREATE TABLE `suekarea_bd`.`contact` (
+CREATE TABLE `contact` (
 `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
 `name` VARCHAR( 50 ) NOT NULL ,
 `email` VARCHAR( 50 ) NOT NULL ,
