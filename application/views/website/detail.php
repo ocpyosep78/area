@@ -21,6 +21,14 @@
 
 <body class="blog boxed pattern-1 navigation-style-1">
 
+<style>
+.link-download {
+	text-decoration: none; background: linear-gradient(#FFFFFF 0%, #F5F5F5 100%) repeat scroll 0 0 transparent; border: 1px solid #CDD0D1;
+    border-radius: 2px 2px 2px 2px; box-shadow: 1px 1px rgba(0, 0, 0, 0.05); color: #6D6D6D !important; font-size: 12px;
+    font-weight: bold; height: 27px; line-height: 26px; padding: 5px 12px;
+}
+</style>
+
 <div id="page" class="hfeed site">
 	<?php $this->load->view( 'website/common/header' ); ?>
 	
@@ -34,8 +42,15 @@
 						<img width="1240" height="620" src="<?php echo $post['thumbnail_link']; ?>" alt="<?php echo $post['name']; ?>" title="<?php echo $post['name']; ?>" class="attachment-slider wp-post-image" />
 					</div>
 					<div class="post_content" style="padding: 10px 0 15px 0;"><?php echo $post['desc']; ?></div>
+					
+					<?php if ($post['post_type_id'] == POST_TYPE_SINGLE_LINK) { ?>
+					<div style="text-align: center; padding: 0 0 15px 0;">
+						<a href="<?php echo $post['link_source']; ?>" class="link-download" target="_blank">Download</a>
+					</div>
+					<?php } else { ?>
 					<div style="text-align: center; padding: 0 0 15px 0;"><input type="button" class="reload-download" value="Download" data-id="<?php echo $post['id']; ?>" /></div>
 					<div class="cnt-download" style="text-align: center; padding: 0 0 15px 0;"></div>
+					<?php } ?>
 					
 					<div class="block-social">
 						<div class="soc_label">recommend to friends</div>
