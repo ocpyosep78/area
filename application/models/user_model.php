@@ -111,7 +111,8 @@ class User_model extends CI_Model {
 				'Child' => array(
 					array( 'Title' => 'Post', 'Link' => base_url('panel/content/post') ),
 					array( 'Title' => 'Comment', 'Link' => base_url('panel/content/comment') ),
-					array( 'Title' => 'Request', 'Link' => base_url('panel/content/request') )
+					array( 'Title' => 'Request', 'Link' => base_url('panel/content/request') ),
+					array( 'Title' => 'Contact', 'Link' => base_url('panel/content/contact') )
 				)
 			),
 			array(
@@ -124,6 +125,7 @@ class User_model extends CI_Model {
 			array(
 				'Title' => 'Master',
 				'Child' => array(
+					array( 'Title' => 'Page Static', 'Link' => base_url('panel/master/page_static') ),
 					array( 'Title' => 'Category', 'Link' => base_url('panel/master/category') ),
 					array( 'Title' => 'Config', 'Link' => base_url('panel/master/config') )
 				)

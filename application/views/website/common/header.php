@@ -12,8 +12,8 @@
 	
 	// add menu
 //	$array_menu[] = array( 'title' => 'Request', 'color' => array_shift($array_color), 'link' => '#' );
-//	$array_menu[] = array( 'title' => 'Contact Us', 'color' => array_shift($array_color), 'link' => '#' );
-//	$array_menu[] = array( 'title' => 'About Us', 'color' => array_shift($array_color), 'link' => '#' );
+	$array_menu[] = array( 'title' => 'About Us', 'color' => array_shift($array_color), 'link' => base_url('about-us') );
+	$array_menu[] = array( 'title' => 'Contact Us', 'color' => array_shift($array_color), 'link' => base_url('contact') );
 ?>
 
 <header id="header" class="site-header" role="banner"><div id="site-header">
@@ -39,9 +39,9 @@
 				<div class="block_top_menu">
 					<ul id="top-left-menu">
 						<li><a href="<?php echo base_url(); ?>" alt="Suekarea" title="Suekarea">Home</a></li>
+						<li><a href="<?php echo base_url('about-us'); ?>">About us</a></li>
 						<?php
 						/*
-						<li><a href="#">About us</a></li>
 						<li>
 							<a href="http://wpspace.net/?page_id=10">Dropdown</a>
 							<ul class="sub-menu">
@@ -51,9 +51,9 @@
 							</ul>
 						</li>
 						<li><a href="http://wpspace.net/?page_id=303">Typography</a></li>
-						<li><a href="#">Contact Us</a></li>
 						/*	*/
 						?>
+						<li><a href="<?php echo base_url('contact'); ?>">Contact us</a></li>
 					</ul>
 				</div>
 			</div>

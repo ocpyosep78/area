@@ -15,7 +15,6 @@ define('FOPEN_WRITE_CREATE_STRICT',				'xb');
 define('FOPEN_READ_WRITE_CREATE_STRICT',		'x+b');
 
 define('SHA_SECRET',							'OraNgerti');
-define('MCRYPT_SECRET',							'MCRYPT_PASSWORD');
 define('CATEGORY_ANIME',						3);
 define('CATEGORY_CARTOON',						4);
 define('CATEGORY_FILM',							1);
@@ -28,6 +27,8 @@ define('USER_TYPE_MEMBER',						2);
 
 define('CATEGORY',								'category');
 define('COMMENT',								'comment');
+define('CONTACT',								'contact');
+define('PAGE_STATIC',							'page_static');
 define('POST',									'post');
 define('POST_TYPE',								'post_type');
 define('REQUEST',								'request');

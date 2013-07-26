@@ -4722,6 +4722,9 @@ article.reviews .slider_container .flex-direction-nav a.flex-prev:hover {
 	color: #4c4c4c;
 	font-weight: bold; 
 }
+#commentform .comment {
+	border: 1px solid #C90B0B; color: #FFFFFF !important; background: linear-gradient(to bottom, #F31717 0%, #EB1717 100%) repeat scroll 0 0 transparent;
+}
 
 article.type-reviews .reviews_rating {
 	padding-top: 4px;

@@ -8,18 +8,17 @@ link :
 Newscribe => di comment dulu
 
 
-Link Login
-Link Registration
 Link About us
 Link Contact Us
 
 Link Twitter
-Link Facebook
-Link Google+
+Note :
+- Normal Image : 194 * 123
+- Slide Image	 : 485 * 370
 
-Normal Image : 194 * 123
-Slide Image	 : 485 * 370
-
-Comment On Detail
 
 Grab Content dari website lain
+
+Hapus Comment di admin yang button di grid tidak jalan
+
+Increment View on POST
