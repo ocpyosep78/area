@@ -1,5 +1,11 @@
 <?php
 	$post = $this->Post_model->get_link();
+	if (count($post) == 0) {
+		show_404();
+		exit;
+	}
+	
+	// post detail
 	$post = $this->Post_model->get_by_id(array( 'id' => $post['id'] ));
 	
 	$param_post['max_id'] = $post['id'];
