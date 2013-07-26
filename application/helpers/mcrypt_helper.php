@@ -15,7 +15,7 @@ if ( ! function_exists('mcrypt_decode')) {
 
 if (! class_exists('encryption')) {
 	class Encryption {
-		var $skey 	= SHA_SECRET;
+		var $skey 	= MCRYPT_SECRET;
 	 
 		public function safe_b64encode($string) {
 			$data = base64_encode($string);
