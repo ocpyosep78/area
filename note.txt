@@ -16,9 +16,4 @@ Note :
 - Normal Image : 194 * 123
 - Slide Image	 : 485 * 370
 
-
 Grab Content dari website lain
-
-Fatal : alias post tidak boleh berubah ketika di edit
-
-
