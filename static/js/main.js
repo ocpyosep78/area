@@ -155,7 +155,7 @@ jQuery(document).ready(function() {
 					var param = Site.Form.GetValue('form-login');
 					Func.ajax({ url: web.host + 'ajax/user', param: param, callback: function(result) {
 						if (result.status) {
-							window.location = web.host;
+							window.location.reload();
 						} else {
 							$('#form-login .c_message').text(result.message);
 							$('#form-login .c_message').slideDown();
@@ -219,7 +219,7 @@ jQuery(document).ready(function() {
 					var param = Site.Form.GetValue('form-register');
 					Func.ajax({ url: web.host + 'ajax/user', param: param, callback: function(result) {
 						if (result.status) {
-							window.location = web.host;
+							window.location.reload();
 						} else {
 							$('#form-register .c_message').text(result.message);
 							$('#form-register .c_message').slideDown();

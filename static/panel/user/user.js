@@ -128,7 +128,7 @@ Ext.onReady(function() {
 	
 	function main_win(param) {
 		var win = new Ext.Window({
-			layout: 'fit', width: 390, height: 185,
+			layout: 'fit', width: 390, height: 220,
 			closeAction: 'hide', plain: true, modal: true,
 			buttons: [ {
 						text: 'Save', handler: function() { win.save(); }
@@ -150,6 +150,7 @@ Ext.onReady(function() {
 							win.email = new Ext.form.TextField({ renderTo: 'emailED', width: 225, allowBlank: false, blankText: 'Masukkan Email' });
 							win.fullname = new Ext.form.TextField({ renderTo: 'fullnameED', width: 225, allowBlank: false, blankText: 'Masukkan Nama Lengkap' });
 							win.address = new Ext.form.TextField({ renderTo: 'addressED', width: 225 });
+							win.passwd = new Ext.form.TextField({ renderTo: 'passwdED', width: 225 });
 							win.user_type = Combo.Class.UserType({ renderTo: 'user_typeED', width: 225, allowBlank: false, blankText: 'Masukkan Jenis User' });
 							
 							// Populate Record
@@ -174,6 +175,7 @@ Ext.onReady(function() {
 				ajax.email = win.email.getValue();
 				ajax.fullname = win.fullname.getValue();
 				ajax.address = win.address.getValue();
+				ajax.passwd = win.passwd.getValue();
 				ajax.user_type_id = win.user_type.getValue();
 				
 				// Validation

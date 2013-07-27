@@ -168,4 +168,12 @@ class Post_model extends CI_Model {
 		
 		return $post;
 	}
+	
+	function increment_view($param) {
+		if (isset($param['view_count'])) {
+			$param['view_count']++;
+		}
+		
+		$this->update($param);
+	}
 }

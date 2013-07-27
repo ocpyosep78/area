@@ -38,6 +38,9 @@ class post extends SUEKAREA_Controller {
 				$_POST['user_id'] = $user['id'];
 				$_POST['create_date'] = $this->config->item('current_datetime');
 			}
+			if (isset($_POST['alias']) && !empty($_POST['id'])) {
+				unset($_POST['alias']);
+			}
 			if (isset($_POST['desc'])) {
 				$_POST['desc'] = clean_html_style($_POST['desc']);
 			}

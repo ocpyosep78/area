@@ -3,6 +3,8 @@
 	if (count($post) == 0) {
 		show_404();
 		exit;
+	} else {
+		$this->Post_model->increment_view(array( 'id' => $post['id'], 'view_count' => $post['view_count'] ));
 	}
 	
 	// post detail

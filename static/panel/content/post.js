@@ -186,8 +186,10 @@ Ext.onReady(function() {
 								renderTo: 'nameED', width: 225, allowBlank: false, blankText: 'Masukkan Judul',
 								enableKeyEvents: true, listeners: {
 									keyup: function(me, b, c) {
-										var alias = Func.GetName(me.getValue());
-										win.alias.setValue(alias);
+										if (param.id == 0) {
+											var alias = Func.GetName(me.getValue());
+											win.alias.setValue(alias);
+										}
 									}
 								}
 							});
