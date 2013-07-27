@@ -6,5 +6,5 @@
 	
 	setInterval(function() {
 		document.getElementById('comment_iframe').style.height = document.getElementById('comment_iframe').contentWindow.document.body.scrollHeight + 'px';
-	}, 2000);
+	}, 1000);
 })()

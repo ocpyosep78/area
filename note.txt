@@ -19,6 +19,34 @@ Note :
 
 Grab Content dari website lain
 
-Hapus Comment di admin yang button di grid tidak jalan
-
 Increment View on POST
+
+Waktu login kembali ke halaman login itu, jangan di redirect ke home
+
+Link Post nya masih belum benar (is_link => buat saja sendiri)
+
+Fatal : ditable post : ganti link_source => download
+
+
+CREATE TABLE IF NOT EXISTS `scrape_master` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `category_id` int(11) NOT NULL,
+  `post_type_id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `link` varchar(255) NOT NULL,
+  `is_active` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+CREATE TABLE IF NOT EXISTS `scrape_content` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `category_id` int(11) NOT NULL,
+  `post_type_id` int(11) NOT NULL,
+  `scrape_master_id` int(11) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `desc` longtext NOT NULL,
+  `link_source` longtext NOT NULL,
+  `thumbnail` varchar(50) NOT NULL,
+  `scrape_time` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;

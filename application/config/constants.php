@@ -32,5 +32,7 @@ define('PAGE_STATIC',							'page_static');
 define('POST',									'post');
 define('POST_TYPE',								'post_type');
 define('REQUEST',								'request');
+define('SCRAPE_CONTENT',						'scrape_content');
+define('SCRAPE_MASTER',							'scrape_master');
 define('USER',									'user');
 define('USER_TYPE',								'user_type');

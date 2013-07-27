@@ -5,7 +5,7 @@ class Post_model extends CI_Model {
         parent::__construct();
 		
         $this->field = array(
-			'id', 'user_id', 'category_id', 'post_type_id', 'alias', 'name', 'desc', 'link_source', 'thumbnail', 'create_date', 'publish_date', 'view_count',
+			'id', 'user_id', 'category_id', 'post_type_id', 'alias', 'name', 'desc', 'download', 'thumbnail', 'create_date', 'publish_date', 'view_count',
 			'is_hot', 'is_popular'
 		);
     }
@@ -124,15 +124,18 @@ class Post_model extends CI_Model {
 		
 		$date_temp = preg_replace('/-/i', '/', substr($row['create_date'], 0, 8));
 		$row['post_link'] = base_url($date_temp.$row['alias']);
-		$row['thumbnail_link'] = base_url('static/upload/'.$row['thumbnail']);
-		$row['thumbnail_small_link'] = preg_replace('/\.(jpg|jpeg|png|gif)/i', '_s.$1', $row['thumbnail_link']);
 		
-		$row['array_link_source'] = array();
-		if (isset($row['link_source'])) {
-			$array_temp = explode("\n", $row['link_source']);
+		if (!empty($row['thumbnail'])) {
+			$row['thumbnail_link'] = base_url('static/upload/'.$row['thumbnail']);
+			$row['thumbnail_small_link'] = preg_replace('/\.(jpg|jpeg|png|gif)/i', '_s.$1', $row['thumbnail_link']);
+		}
+		
+		$row['array_download'] = array();
+		if (isset($row['download'])) {
+			$array_temp = explode("\n", $row['download']);
 			foreach ($array_temp as $link) {
 				$array = explode(' ', $link, 2);
-				$row['array_link_source'][] = array( 'link' => @$array[0], 'base_name' => @$array[1] );
+				$row['array_download'][] = array( 'link' => @$array[0], 'base_name' => @$array[1] );
 			}
 		}
 		

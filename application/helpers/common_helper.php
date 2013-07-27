@@ -856,6 +856,7 @@
 			$result = preg_replace('/[^0-9a-z]+/i', '-', $value);
 			$result = preg_replace('/^-/i', '', $result);
 			$result = preg_replace('/-$/i', '', $result);
+			$result = strtolower($result);
 			
 			return $result;
 		}
@@ -905,4 +906,63 @@
 			return $data;
 		}
 	}
-?>
+	
+	if (! function_exists('is_valid_link')) {
+		function is_valid_link($value) {
+			preg_match('/http:\/\/[\w]+/i', $value, $match);
+			$result = (count($match) > 0) ? true : false;
+			
+			return $result;
+		}
+	}
+	
+	if (! class_exists('curl')) {
+		class curl {
+			var $callback = false;
+			
+			function setCallback($func_name) {
+				$this->callback = $func_name;
+			}
+
+			function doRequest($method, $url, $vars, $referer_address) {
+				$ch = curl_init();
+				curl_setopt($ch, CURLOPT_URL, $url);
+				curl_setopt($ch, CURLOPT_HEADER, 0);
+				curl_setopt($ch, CURLOPT_USERAGENT, $_SERVER['HTTP_USER_AGENT']);
+				curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+				curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+				curl_setopt($ch, CURLOPT_REFERER, $referer_address);
+				curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+				
+				if ($method == 'POST') {
+					curl_setopt($ch, CURLOPT_POST, 1);
+					curl_setopt($ch, CURLOPT_POSTFIELDS, $vars);
+				}
+				
+				$data = curl_exec($ch);
+				curl_close($ch);
+				if ($data) {
+					if ($this->callback) {
+						$callback = $this->callback;
+						$this->callback = false;
+						return call_user_func($callback, $data);
+					} else {
+						return $data;
+					}
+				} else {
+					if (is_resource($ch))
+						return curl_error($ch);
+					else
+						return false;
+				}
+			}
+			
+			function get($url, $referer_address = '') {
+				return $this->doRequest('GET', $url, 'NULL', $referer_address);
+			}
+			
+			function post($url, $vars, $referer_address = '') {
+				return $this->doRequest('POST', $url, $vars, $referer_address);
+			}
+		}
+	}

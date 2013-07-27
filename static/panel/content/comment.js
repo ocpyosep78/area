@@ -27,10 +27,10 @@ Ext.onReady(function() {
 					items: [ {
 						getClass: function(v, meta, rec) {
 							if (rec.get('is_publish') == 0) {
-								this.items[0].tooltip = 'Publish';
+								this.items[0].tooltip = 'Unpublish';
 								return 'delIcon';
 							} else {
-								this.items[0].tooltip = 'Unpublish';
+								this.items[0].tooltip = 'Publish';
 								return 'acceptIcon';
 							}
 						},
@@ -47,10 +47,6 @@ Ext.onReady(function() {
 			}, {	header: 'Action', xtype: 'actioncolumn', width: 75, align: 'center',
 					items: [ {
 							iconCls: 'linkIcon', tooltip: 'Link', handler: function(grid, rowIndex, colIndex) {
-								var row = grid.store.getAt(rowIndex).data;
-								window.open(row.link);
-							}
-					}, {	iconCls: 'acceptIcon', tooltip: 'Hapus', handler: function(grid, rowIndex, colIndex) {
 								var row = grid.store.getAt(rowIndex).data;
 								window.open(row.link);
 							}

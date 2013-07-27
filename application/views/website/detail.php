@@ -21,7 +21,9 @@
 	$param_meta['tag_meta'][] = array( 'property' => 'og:type', 'content' => $post['category_name'] );
 	$param_meta['tag_meta'][] = array( 'property' => 'og:title', 'content' => $post['name'] );
 	$param_meta['tag_meta'][] = array( 'property' => 'og:description', 'content' => get_length_char($post['desc_limit'], 200, ' ...') );
-	$param_meta['tag_meta'][] = array( 'property' => 'og:image', 'content' => $post['thumbnail_link'] );
+	if (!empty($post['thumbnail_link'])) {
+		$param_meta['tag_meta'][] = array( 'property' => 'og:image', 'content' => $post['thumbnail_link'] );
+	}
 ?>
 
 <?php $this->load->view( 'website/common/meta', $param_meta ); ?>
@@ -45,9 +47,12 @@
 			
 			<div id="post_content" class="post_content" role="main">
                 <article class="news type-news status-publish format-video hentry format-video gallery-style-1">
+					<?php if (!empty($post['thumbnail_link'])) { ?>
 					<div class="pic post_thumb">
 						<img width="1240" height="620" src="<?php echo $post['thumbnail_link']; ?>" alt="<?php echo $post['name']; ?>" title="<?php echo $post['name']; ?>" class="attachment-slider wp-post-image" />
 					</div>
+					<?php } ?>
+					
 					<div class="post_content" style="padding: 10px 0 15px 0;"><?php echo $post['desc']; ?></div>
 					
 					<?php if ($post['post_type_id'] == POST_TYPE_SINGLE_LINK) { ?>

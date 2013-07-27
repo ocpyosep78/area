@@ -1,24 +1,24 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Page_Static_model extends CI_Model {
+class Scrape_Master_model extends CI_Model {
     function __construct() {
         parent::__construct();
 		
-        $this->field = array( 'id', 'alias', 'name', 'desc' );
+        $this->field = array( 'id', 'category_id', 'post_type_id', 'name', 'link', 'library', 'is_active' );
     }
 
     function update($param) {
         $result = array();
        
         if (empty($param['id'])) {
-            $insert_query  = GenerateInsertQuery($this->field, $param, PAGE_STATIC);
+            $insert_query  = GenerateInsertQuery($this->field, $param, SCRAPE_MASTER);
             $insert_result = mysql_query($insert_query) or die(mysql_error());
            
             $result['id'] = mysql_insert_id();
             $result['status'] = '1';
             $result['message'] = 'Data berhasil disimpan.';
         } else {
-            $update_query  = GenerateUpdateQuery($this->field, $param, PAGE_STATIC);
+            $update_query  = GenerateUpdateQuery($this->field, $param, SCRAPE_MASTER);
             $update_result = mysql_query($update_query) or die(mysql_error());
            
             $result['id'] = $param['id'];
@@ -33,9 +33,7 @@ class Page_Static_model extends CI_Model {
         $array = array();
        
         if (isset($param['id'])) {
-            $select_query  = "SELECT * FROM ".PAGE_STATIC." WHERE id = '".$param['id']."' LIMIT 1";
-        } else if (isset($param['alias'])) {
-            $select_query  = "SELECT * FROM ".PAGE_STATIC." WHERE alias = '".$param['alias']."' LIMIT 1";
+            $select_query  = "SELECT * FROM ".SCRAPE_MASTER." WHERE id = '".$param['id']."' LIMIT 1";
         } 
 		
         $select_result = mysql_query($select_query) or die(mysql_error());
@@ -49,14 +47,18 @@ class Page_Static_model extends CI_Model {
     function get_array($param = array()) {
         $array = array();
 		
+		$string_active = (isset($_POST['is_active'])) ? "AND ScrapeMaster.is_active = '".$param['is_active']."'" : "";
 		$string_filter = GetStringFilter($param, @$param['column']);
-		$string_sorting = GetStringSorting($param, @$param['column'], 'title ASC');
+		$string_sorting = GetStringSorting($param, @$param['column'], 'name ASC');
 		$string_limit = GetStringLimit($param);
 		
 		$select_query = "
-			SELECT SQL_CALC_FOUND_ROWS PageStatic.*
-			FROM ".PAGE_STATIC." PageStatic
-			WHERE 1 $string_filter
+			SELECT SQL_CALC_FOUND_ROWS ScrapeMaster.*,
+				Category.name category_name, PostType.name post_type_name
+			FROM ".SCRAPE_MASTER." ScrapeMaster
+			LEFT JOIN ".CATEGORY." Category ON Category.id = ScrapeMaster.category_id
+			LEFT JOIN ".POST_TYPE." PostType ON PostType.id = ScrapeMaster.post_type_id
+			WHERE 1 $string_active $string_filter
 			ORDER BY $string_sorting
 			LIMIT $string_limit
 		";
@@ -78,7 +80,7 @@ class Page_Static_model extends CI_Model {
     }
 	
     function delete($param) {
-		$delete_query  = "DELETE FROM ".PAGE_STATIC." WHERE id = '".$param['id']."' LIMIT 1";
+		$delete_query  = "DELETE FROM ".SCRAPE_MASTER." WHERE id = '".$param['id']."' LIMIT 1";
 		$delete_result = mysql_query($delete_query) or die(mysql_error());
 		
 		$result['status'] = '1';
@@ -89,7 +91,6 @@ class Page_Static_model extends CI_Model {
 	
 	function sync($row) {
 		$row = StripArray($row);
-		$row['page_link'] = base_url($row['alias']);
 		
 		return $row;
 	}

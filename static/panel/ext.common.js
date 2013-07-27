@@ -236,6 +236,18 @@ var Store = {
 		});
 		return Store;
 	},
+	ScrapeMaster: function() {
+		var Store = new Ext.create('Ext.data.Store', {
+			fields: ['id', 'name'],
+			autoLoad: false, proxy: {
+				type: 'ajax', extraParams: { action: 'scrape_master', is_active: 1 },
+				url: URLS.base + 'panel/combo',
+				reader: { type: 'json', root: 'res' },
+				actionMethods: { read: 'POST' }
+			}
+		});
+		return Store;
+	},
 	UserType: function() {
 		var Store = new Ext.create('Ext.data.Store', {
 			fields: ['id', 'name'],
@@ -272,6 +284,15 @@ var Combo = {
 		PostType: function(Param) {
 			var p = {
 				xtype: 'combo', store: Store.PostType(), minChars: 1, selectOnFocus: true,
+				valueField: 'id', displayField: 'name', readonly: true, editable: false
+			}
+			p = Func.SyncComboParam(p, Param);
+			
+			return p;
+		},
+		ScrapeMaster: function(Param) {
+			var p = {
+				xtype: 'combo', store: Store.ScrapeMaster(), minChars: 1, selectOnFocus: true,
 				valueField: 'id', displayField: 'name', readonly: true, editable: false
 			}
 			p = Func.SyncComboParam(p, Param);
@@ -318,6 +339,10 @@ Combo.Class = {
 	},
 	PostType: function(Param) {
 		var c = new Ext.form.ComboBox(Combo.Param.PostType(Param));
+		return c;
+	},
+	ScrapeMaster: function(Param) {
+		var c = new Ext.form.ComboBox(Combo.Param.ScrapeMaster(Param));
 		return c;
 	},
 	Time: function(Param) {
