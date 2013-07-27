@@ -12,6 +12,16 @@ class post extends SUEKAREA_Controller {
 		$result['rows'] = $this->Post_model->get_array($_POST);
 		$result['count'] = $this->Post_model->get_count();
 		
+		foreach ($result['rows'] as $key => $array) {
+			unset($result['rows'][$key]['alias']);
+			unset($result['rows'][$key]['desc']);
+			unset($result['rows'][$key]['download']);
+			unset($result['rows'][$key]['desc_limit']);
+			unset($result['rows'][$key]['array_download']);
+			unset($result['rows'][$key]['thumbnail_link']);
+			unset($result['rows'][$key]['thumbnail_small_link']);
+		}
+		
 		echo json_encode($result);
 	}
 	

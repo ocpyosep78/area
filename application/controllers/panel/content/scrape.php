@@ -12,6 +12,13 @@ class scrape extends SUEKAREA_Controller {
 		$result['rows'] = $this->Scrape_Content_model->get_array($_POST);
 		$result['count'] = $this->Scrape_Content_model->get_count();
 		
+		foreach ($result['rows'] as $key => $array) {
+			unset($result['rows'][$key]['desc']);
+			unset($result['rows'][$key]['download']);
+			unset($result['rows'][$key]['link_source']);
+			unset($result['rows'][$key]['image_source']);
+		}
+		
 		echo json_encode($result);
 	}
 	

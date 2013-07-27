@@ -51,6 +51,7 @@ class Scrape_Content_model extends CI_Model {
     function get_array($param = array()) {
         $array = array();
 		
+		$string_namelike = (!empty($param['namelike'])) ? "AND ScrapeContent.name LIKE '%".$param['namelike']."%'" : '';
 		$string_filter = GetStringFilter($param, @$param['column']);
 		$string_sorting = GetStringSorting($param, @$param['column'], 'scrape_time DESC');
 		$string_limit = GetStringLimit($param);
@@ -63,7 +64,7 @@ class Scrape_Content_model extends CI_Model {
 			LEFT JOIN ".POST." Post ON Post.id = ScrapeContent.post_id
 			LEFT JOIN ".CATEGORY." Category ON Category.id = ScrapeContent.category_id
 			LEFT JOIN ".POST_TYPE." PostType ON PostType.id = ScrapeContent.post_type_id
-			WHERE 1 $string_filter
+			WHERE 1 $string_namelike $string_filter
 			ORDER BY $string_sorting
 			LIMIT $string_limit
 		";
