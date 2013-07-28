@@ -18,7 +18,7 @@
 	<meta name="description" content="<?php echo $desc; ?>" />
 	
 	<title><?php echo $title; ?></title>
-	<link href="https://plus.google.com/116513263461360260446/posts" rel="author"/>
+	<link href="https://plus.google.com/114002599803233293136/posts" rel="author"/>
 	<link rel="stylesheet" type="text/css" media="all" id="primetime-style-css" href="<?php echo base_url('static/css/style.css'); ?>" />
 	<link rel="stylesheet" type="text/css" media="all" id="responsive-css" href="<?php echo base_url('static/css/responsive.css'); ?>" />
 	<link rel="icon shortcut" href="<?php echo base_url('static/img/favicon.png'); ?>" type="image/x-icon" />
