@@ -29,13 +29,18 @@ class scrape extends SUEKAREA_Controller {
 		$result = array();
 		if ($action == 'update') {
 			$result = $this->Scrape_Content_model->update($_POST);
-		} else if ($action == 'get_by_id') {
+		}
+		else if ($action == 'get_by_id') {
 			$result = $this->Scrape_Content_model->get_by_id(array( 'id' => $_POST['id'] ));
-		} else if ($action == 'delete') {
+		}
+		else if ($action == 'delete') {
 			$result = $this->Scrape_Content_model->delete($_POST);
-		} else if ($action == 'do_scrape') {
-			$result['status'] = true;
+		}
+		else if ($action == 'do_scrape') {
 			$scrape_master = $this->Scrape_Master_model->get_by_id(array( 'id' => $_POST['id'] ));
+			$this->load->library($scrape_master['library']);
+			
+			$result['status'] = true;
 			$array_post = $this->$scrape_master['library']->get_array($scrape_master);
 			foreach ($array_post as $post) {
 				$check = $this->Scrape_Content_model->get_by_id(array( 'link_source' => $post['link_source'] ));
@@ -43,7 +48,8 @@ class scrape extends SUEKAREA_Controller {
 					$result = $this->Scrape_Content_model->update($post);
 				}
 			}
-		} else if ($action == 'publish') {
+		}
+		else if ($action == 'publish') {
 			$result['status'] = true;
 			$scrape = $this->Scrape_Content_model->get_by_id(array( 'id' => $_POST['id'] ));
 			if ($scrape['post_id'] == 0) {
