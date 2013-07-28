@@ -80,6 +80,7 @@
 								</a>
 							</li>
 							<?php if ($this->config->item('online_widget')) { ?>
+							<li><?php $this->load->view( 'website/common/fb_like', array( 'href' => $post['post_link'] ) ); ?></li>
 							<li><?php $this->load->view( 'website/common/google_plus' ); ?></li>
 							<?php } ?>
 						</ul>
