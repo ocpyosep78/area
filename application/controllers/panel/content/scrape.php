@@ -40,14 +40,17 @@ class scrape extends SUEKAREA_Controller {
 			$scrape_master = $this->Scrape_Master_model->get_by_id(array( 'id' => $_POST['id'] ));
 			$this->load->library($scrape_master['library']);
 			
+			$insert_post = 0;
 			$result['status'] = true;
 			$array_post = $this->$scrape_master['library']->get_array($scrape_master);
 			foreach ($array_post as $post) {
 				$check = $this->Scrape_Content_model->get_by_id(array( 'link_source' => $post['link_source'] ));
 				if (count($check) == 0) {
+					$insert_post++;
 					$result = $this->Scrape_Content_model->update($post);
 				}
 			}
+			$result['message'] = 'New post : '.$insert_post.' from '.count($array_post).' total post';
 		}
 		else if ($action == 'publish') {
 			$result['status'] = true;
