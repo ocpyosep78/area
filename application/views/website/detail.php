@@ -70,11 +70,6 @@
 						<div class="soc_label">recommend to friends</div>
 						<ul id="post_social_share" class="post_social_share">
 							<li>
-								<a href="http://www.facebook.com/share.php?u=<?php echo $post['post_link']; ?>" class="facebook_link">
-									<img src="<?php echo base_url('static/img/facebook-icon-big.png'); ?>" class="facebook_icon" alt="facebook">
-								</a>
-							</li>
-							<li>
 								<a href="https://twitter.com/share?text=<?php echo urlencode($post['name']); ?>" class="twitter_link">
 									<img src="<?php echo base_url('static/img/twitter-icon-big.png'); ?>" class="twitter_icon" alt="twitter">
 								</a>
