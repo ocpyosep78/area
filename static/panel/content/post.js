@@ -195,7 +195,7 @@ Ext.onReady(function() {
 							});
 							win.desc = new Ext.form.HtmlEditor({ renderTo: 'descED', width: 575, height: 150, enableFont: false });
 							win.download = new Ext.form.TextArea({ renderTo: 'downloadED', width: 575, height: 80, allowBlank: false, blankText: 'Masukkan Link Source' });
-							win.alias = new Ext.form.TextField({ renderTo: 'aliasED', width: 225, readOnly: true });
+							win.alias = new Ext.form.TextField({ renderTo: 'aliasED', width: 225 });
 							win.category = Combo.Class.Category({ renderTo: 'categoryED', width: 225, allowBlank: false, blankText: 'Masukkan Kategori' });
 							win.post_type = Combo.Class.PostType({ renderTo: 'post_typeED', width: 225, allowBlank: false, blankText: 'Masukkan Jenis Post', value: page_data.POST_TYPE_MULTI_LINK });
 							win.publish_date = new Ext.form.DateField({ renderTo: 'publish_dateED', width: 120, format: DATE_FORMAT, allowBlank: false, blankText: 'Masukkan Tanggal Publish', value: new Date() });

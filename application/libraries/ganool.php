@@ -1,5 +1,4 @@
 <?php
-set_time_limit(600);
 
 class ganool {
     function __construct() {
@@ -103,7 +102,21 @@ class ganool {
 		
 		// clean desc
 		$content = trim(strip_tags($content));
-		$content = preg_replace('/&nbsp;/i', '', $content);
+		
+		preg_match_all('/([\w\s]+)\s?:\s?(http:[\w\/\.]+)/i', $content, $match);
+		if (count($match) > 0) {
+			// remove single link text
+			$offset = 'Single Link';
+			$pos_end = strpos($content, $offset);
+			$content = substr($content, 0, $pos_end);
+			
+			$content .= "Single Link\n";
+			foreach ($match[0] as $key => $value) {
+				$title = trim($match[1][$key]);
+				$link = trim($match[2][$key]);
+				$content .= "$link $title\n";
+			}
+		}
 		
 		return $content;
 		
