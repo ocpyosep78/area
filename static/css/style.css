@@ -4698,10 +4698,7 @@ article.reviews .slider_container .flex-direction-nav a.flex-prev:hover {
 	display: inline-block;
 	margin-left: 12px;
 }
-#commentform .error {
-	color: #E50700;
-	font-size: 10px;
-}
+#commentform .error, .form-validation .error { color: #E50700; font-size: 10px; }
 #commentform p textarea {
 	height: 122px;
 	width: 100%;
@@ -6397,3 +6394,10 @@ form .result p.error_item:first {
 .cursor  { cursor: pointer; }
 .c_message { color: #666666; border: 1px solid #D29898; background: linear-gradient(to bottom, #FFFFFF 0%, #D29898 100%); margin: 0px; padding: 10px 20px; }
 .validation .error { padding: 5px 0 0 0; color: #E50700; }
+
+/*	FORM */
+.form-manual input { width: 440px; padding: 7px; border: 1px solid #D6D6D6; }
+.form-manual select { width: 455px; padding: 7px; border: 1px solid #D6D6D6; }
+.form-manual textarea { padding: 7px; border: 1px solid #D6D6D6; }
+.form-manual .left { float: left; width: 150px; padding: 5px 0 5px 0; }
+.form-manual .right { float: left; width: 460px; padding: 0 0 15px 0; }

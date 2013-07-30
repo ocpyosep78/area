@@ -23,6 +23,7 @@ if ($is_website) {
 	$route['ajax/(:any)'] = "website/ajax";
 	$route['logout'] = "website/logout";
 	
+	// list post
 	$route['rss'] = "website/rss";
 	$route['rss/(:any)'] = "website/rss";
 	$route['search'] = "website/search";
@@ -30,9 +31,15 @@ if ($is_website) {
 	$route['sitemap'] = "website/sitemap";
 	$route['sitemap/(:any)'] = "website/sitemap";
 	
+	// form
+	$route['submit'] = "website/submit";
+	$route['submit/(:any)'] = "website/submit";
+	$route['request'] = "website/request";
+	$route['request/(:any)'] = "website/request";
 	$route['contact'] = "website/contact";
 	$route['contact/(:any)'] = "website/contact";
 	
+	// comment
 	$route['comment'] = "comment/comment";
 }
 

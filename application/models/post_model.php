@@ -48,6 +48,8 @@ class Post_model extends CI_Model {
 			";
 		} else if (isset($param['year']) && isset($param['month']) && isset($param['alias'])) {
 			$select_query  = "SELECT * FROM ".POST." WHERE YEAR(create_date) = '".$param['year']."' AND MONTH(create_date) = '".$param['month']."' AND alias = '".$param['alias']."' LIMIT 1";
+        } else if (isset($param['alias'])) {
+			$select_query  = "SELECT alias FROM ".POST." WHERE alias = '".$param['alias']."' LIMIT 1";
         } 
 		
         $select_result = mysql_query($select_query) or die(mysql_error());
@@ -120,10 +122,17 @@ class Post_model extends CI_Model {
 	
 	function sync($row, $column = array()) {
 		$row = StripArray($row, array( 'create_date', 'publish_date' ));
-		$row['desc_limit'] = get_length_char(strip_tags($row['desc']), 250, ' ...');
 		
-		$date_temp = preg_replace('/-/i', '/', substr($row['create_date'], 0, 8));
-		$row['post_link'] = base_url($date_temp.$row['alias']);
+		// desc
+		if (isset($row['desc'])) {
+			$row['desc_limit'] = get_length_char(strip_tags($row['desc']), 250, ' ...');
+		}
+		
+		// create date
+		if (isset($row['create_date'])) {
+			$date_temp = preg_replace('/-/i', '/', substr($row['create_date'], 0, 8));
+			$row['post_link'] = base_url($date_temp.$row['alias']);
+		}
 		
 		if (!empty($row['thumbnail'])) {
 			$row['thumbnail_link'] = base_url('static/upload/'.$row['thumbnail']);
@@ -167,6 +176,31 @@ class Post_model extends CI_Model {
 		}
 		
 		return $post;
+	}
+	
+	function get_name($post_name) {
+		$post_name = get_name($post_name);
+		
+		$result = '';
+		for ($i = 0; $i <= 10; $i++) {
+			if (empty($i)) {
+				$name_check = $post_name;
+			} else {
+				$name_check = $post_name.'-'.$i;
+			}
+			
+			$post = $this->get_by_id(array( 'alias' => $name_check ));
+			if (count($post) == 0) {
+				$result = $name_check;
+				break;
+			}
+		}
+		
+		if (empty($result)) {
+			$result = $post_name.'-'.time();
+		}
+		
+		return $result;
 	}
 	
 	function increment_view($param) {

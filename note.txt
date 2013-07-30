@@ -15,7 +15,6 @@ Link About us
 Link Contact Us
 Link Twitter
 
-Sitemap
-
 Submit Link
 Request Movie
+Hasil Scrape tidak memiliki user => ???

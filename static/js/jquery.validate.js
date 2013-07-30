@@ -279,10 +279,10 @@ $.extend($.validator, {
 	},
 
 	messages: {
-		required: "This field is required.",
+		required: "Silahkan mengisi field ini.",
 		remote: "Please fix this field.",
-		email: "Please enter a valid email address.",
-		url: "Please enter a valid URL.",
+		email: "Silahkan mengisi email yang sesuai.",
+		url: "Silahkan mengisi URL yang sesuai.",
 		date: "Please enter a valid date.",
 		dateISO: "Please enter a valid date (ISO).",
 		number: "Please enter a valid number.",
