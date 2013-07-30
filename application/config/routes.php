@@ -21,11 +21,14 @@ if ($is_website) {
 	$route['(:num)/(:num)/(:any)'] = "website/detail";
 	$route['ajax'] = "website/ajax";
 	$route['ajax/(:any)'] = "website/ajax";
+	$route['logout'] = "website/logout";
+	
 	$route['rss'] = "website/rss";
 	$route['rss/(:any)'] = "website/rss";
 	$route['search'] = "website/search";
 	$route['search/(:any)'] = "website/search";
-	$route['logout'] = "website/logout";
+	$route['sitemap'] = "website/sitemap";
+	$route['sitemap/(:any)'] = "website/sitemap";
 	
 	$route['contact'] = "website/contact";
 	$route['contact/(:any)'] = "website/contact";
