@@ -32,6 +32,7 @@ class submit extends CI_Controller {
 		if ($action == 'update') {
 			$param = $_POST;
 			$param['user_id'] = $user['id'];
+			$param['desc'] = nl2br($_POST['desc']);
 			$param['post_type_id'] = POST_TYPE_SINGLE_LINK;
 			$param['alias'] = $this->Post_model->get_name($param['name']);
 			$param['create_date'] = $this->config->item('current_datetime');
