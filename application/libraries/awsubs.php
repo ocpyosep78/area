@@ -6,8 +6,7 @@ class awsubs {
     }
     
 	function get_array($scrape) {
-		$scrape['link'] = 'http://localhost:8666/suekarea/trunk/raw.xml';
-		
+	
 		$curl = new curl();
 		$array_item = array();
 		$content = $curl->get($scrape['link']);
@@ -16,9 +15,9 @@ class awsubs {
 		$array_result = array();
 		foreach ($array_content->channel->item as $array) {
 			// test purpose
-			/*
+			/*	
 			$title = trim((string)$array->title);
-			if ($title != 'Naruto Shippuden Episode 322 Subtitle Indonesia') {
+			if ($title != 'Shingeki no Kyojin Episode 16 Subtitle Indonesia') {
 				continue;
 			}
 			/*	*/
@@ -48,12 +47,19 @@ class awsubs {
 			$temp['scrape_time'] = $this->CI->config->item('current_datetime');
 			$array_result[] = $temp;
 		}
-		print_r($array_result); exit;
+		
 		return $array_result;
 	}
 	
 	function get_desc($content) {
+		$content = str_replace('&nbsp;', '', $content);
+		$content = preg_replace('/<\/?(b|span)([^\>]+)?>/i', '', $content);
+		$content = preg_replace('/\[\<strike\>[\w]+\<\/strike\>\]/i', '', $content);
+		$content = preg_replace('/(style|class)\=\"[^\"]+\"/i', '', $content);
+		$content = preg_replace('/\s+\>/i', '>', $content);
+		$content = preg_replace('/\:/i', ': ', $content);
 		preg_match('/<img [^>]+>(.+)<a[^>]+>Download/i', $content, $match);
+		
 		$temp = (isset($match[1])) ? $match[1] : '';
 		$temp = str_replace('</div>', "\n", $temp);
 		$temp = str_replace('<br />', "\n", $temp);
@@ -76,27 +82,45 @@ class awsubs {
 	}
 	
 	function get_download($content) {
+		$content = str_replace('&nbsp;', '', $content);
+		$content = preg_replace('/<\/?(b|span)([^\>]+)?>/i', '', $content);
 		$content = preg_replace('/\[\<strike\>[\w]+\<\/strike\>\]/i', '', $content);
-		preg_match_all('/(480p|720p)([\w\s\=\&\;]+)?(<\/?(span|b)([^>]+)?>)*((\[<a href\=\"[\w\:\/\.]+\">\w+<\/a>\])*)/i', $content, $match);
+		$content = preg_replace('/(style|class)\=\"[^\"]+\"/i', '', $content);
+		$content = preg_replace('/\s+\>/i', '>', $content);
+		preg_match_all('/(480p|720p)([\w\s\=\&\;]+)?(<\/?(span|b)([^>]+)?>)*((\[<a href\=\"[\w\:\/\.\?\=\_\-]+\">\w+<\/a>\])*)/i', $content, $match);
 		
-		$content = '';
+		// condition #1
+		$result = '';
 		if (isset($match[1])) {
 			foreach ($match[1] as $key => $value) {
-				if (!empty($content)) {
-					$content .= "\n";
+				if (!empty($result)) {
+					$result .= "\n";
 				}
 				
 				// write title
-				$content .= $value."\n";
+				$result .= $value."\n";
 				
 				// write link
 				preg_match_all('/href=\"([^\"]+)\">([^\<]+)</i', $match[6][$key], $array_link);
 				foreach ($array_link[1] as $key => $link) {
-					$content .= $array_link[1][$key].' '.$array_link[2][$key]."\n";
+					$result .= $array_link[1][$key].' '.$array_link[2][$key]."\n";
 				}
 			}
 		}
 		
-		return $content;
+		// condition #2
+		if (empty($result)) {
+			preg_match_all('/href=\"([^\"]+)\">([^\<]+)</i', $content, $match);
+			foreach ($match[1] as $key => $link) {
+				$check = preg_match('/wardhanime/i', $link, $check);
+				if ($check) {
+					continue;
+				}
+				
+				$result .= $match[1][$key].' '.$match[2][$key]."\n";
+			}
+		}
+		
+		return $result;
 	}
 }
