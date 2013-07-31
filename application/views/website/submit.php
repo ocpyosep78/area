@@ -30,21 +30,21 @@
 					<div class="clear"></div>
 					
 					<div class="left required">Title</div>
-					<div class="right"><input name="name" type="text" value="" maxlength="255" /></div>
+					<div class="right"><input name="name" type="text" value="" maxlength="255" placeholder="Judul Halaman" /></div>
 					<div class="clear"></div>
 					
 					<div class="left required">Description</div>
-					<div style="padding: 0 0 15px 0;"><textarea name="desc" rows="10" style="width: 95%;" ></textarea></div>
+					<div style="padding: 0 0 15px 0;"><textarea name="desc" rows="10" style="width: 95%;" placeholder="Deskripsi Halaman"></textarea></div>
 					<div class="clear"></div>
 					
-					<div class="left required">Link Download</div>
-					<div class="right"><input name="download" type="text" value="" maxlength="255" /></div>
+					<div class="left required">Link Page</div>
+					<div class="right"><input name="download" type="text" value="" maxlength="255" placeholder="Link Halaman Website" /></div>
 					<div class="clear"></div>
 					
 					<div class="left required">Thumbnail</div>
 					<div class="right">
 						<input name="browse" type="button" value="Browse" style="float: right; width: 125px; height: 29px; padding: 0px;" />
-						<input name="thumbnail" type="text" value="" style="width: 311px;" readonly="readonly" />
+						<input name="thumbnail" type="text" value="" style="width: 311px;" readonly="readonly" placeholder="Pilih Thumbnail" />
 					</div>
 					<div class="clear"></div>
 					

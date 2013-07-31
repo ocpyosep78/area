@@ -19,15 +19,15 @@
 					<input type="hidden" name="action" value="update" />
 					
 					<div class="left required">Title</div>
-					<div class="right"><input name="name" type="text" value="" maxlength="255" /></div>
+					<div class="right"><input name="name" type="text" value="" maxlength="255" placeholder="Judul Film" /></div>
 					<div class="clear"></div>
 					
 					<div class="left required">Link IMDB</div>
-					<div class="right"><input name="imdb" type="text" value="" maxlength="255" /></div>
+					<div class="right"><input name="imdb" type="text" value="" maxlength="255" placeholder="http://www.imdb.com/title/tt1690953/" /></div>
 					<div class="clear"></div>
 					
 					<div class="left required">Description</div>
-					<div style="padding: 0 0 15px 0;"><textarea name="desc" rows="10" style="width: 95%;" ></textarea></div>
+					<div style="padding: 0 0 15px 0;"><textarea name="desc" rows="10" style="width: 95%;" placeholder="Deskripsi Film"></textarea></div>
 					<div class="clear"></div>
 					
 					<div class="left">&nbsp;</div>

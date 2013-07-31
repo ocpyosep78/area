@@ -11,7 +11,6 @@
 	}
 	
 	// add menu
-	$array_menu[] = array( 'title' => 'Submit', 'color' => array_shift($array_color), 'link' => base_url('submit') );
 	$array_menu[] = array( 'title' => 'Request Board', 'color' => array_shift($array_color), 'link' => base_url('request/board') );
 	$array_menu[] = array( 'title' => 'About Us', 'color' => array_shift($array_color), 'link' => base_url('about-us') );
 	$array_menu[] = array( 'title' => 'Contact Us', 'color' => array_shift($array_color), 'link' => base_url('contact') );
