@@ -9,12 +9,7 @@ Note :
 - Normal Image : 194 * 123
 - Slide Image	 : 485 * 370
 
-Newscribe => di comment dulu
-
 Link About us
-Link Contact Us
 Link Twitter
 
-Submit Link
 Request Movie
-Hasil Scrape tidak memiliki user => ???
