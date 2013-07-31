@@ -22,8 +22,14 @@ class submit extends CI_Controller {
 		// user
 		$is_login = $this->User_model->is_login();
 		$user = $this->User_model->get_session();
+		$post_download = $this->Post_model->get_by_id(array( 'download' => $_POST['download'] ));
+		
 		if (! $is_login) {
 			$result = array( 'status' => false, 'message' => 'Session Anda sudah berakhir, silahkan login kembali.' );
+			echo json_encode($result);
+			exit;
+		} else if (count($post_download) > 0) {
+			$result = array( 'status' => false, 'message' => 'Link ini sudah ada dalam database kami.' );
 			echo json_encode($result);
 			exit;
 		}
@@ -32,7 +38,7 @@ class submit extends CI_Controller {
 		if ($action == 'update') {
 			$param = $_POST;
 			$param['user_id'] = $user['id'];
-			$param['desc'] = nl2br($_POST['desc']);
+			$param['desc'] = nl2br(strip_tags($_POST['desc']));
 			$param['post_type_id'] = POST_TYPE_SINGLE_LINK;
 			$param['alias'] = $this->Post_model->get_name($param['name']);
 			$param['create_date'] = $this->config->item('current_datetime');
@@ -43,7 +49,7 @@ class submit extends CI_Controller {
 			$post = $this->Post_model->get_by_id(array( 'id' => $result['id'] ));
 			$result['redirect'] = $post['post_link'];
 		}
-		
+		exit;
 		echo json_encode($result);
     }
 }

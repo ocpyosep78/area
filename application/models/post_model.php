@@ -50,6 +50,8 @@ class Post_model extends CI_Model {
 			$select_query  = "SELECT * FROM ".POST." WHERE YEAR(create_date) = '".$param['year']."' AND MONTH(create_date) = '".$param['month']."' AND alias = '".$param['alias']."' LIMIT 1";
         } else if (isset($param['alias'])) {
 			$select_query  = "SELECT alias FROM ".POST." WHERE alias = '".$param['alias']."' LIMIT 1";
+        } else if (isset($param['download'])) {
+			$select_query  = "SELECT * FROM ".POST." WHERE download = '".$param['download']."' LIMIT 1";
         } 
 		
         $select_result = mysql_query($select_query) or die(mysql_error());

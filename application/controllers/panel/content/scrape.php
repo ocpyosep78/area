@@ -26,6 +26,9 @@ class scrape extends SUEKAREA_Controller {
 		$action = (isset($_POST['action'])) ? $_POST['action'] : '';
 		unset($_POST['action']);
 		
+		// user
+		$user = $this->User_model->get_session();
+		
 		$result = array();
 		if ($action == 'update') {
 			$result = $this->Scrape_Content_model->update($_POST);
@@ -58,6 +61,7 @@ class scrape extends SUEKAREA_Controller {
 			if ($scrape['post_id'] == 0) {
 				$param_post = $scrape;
 				$param_post['id'] = 0;
+				$param_post['user_id'] = $user['id'];
 				$param_post['alias'] = get_name($param_post['name']);
 				$param_post['create_date'] = $this->config->item('current_datetime');
 				$param_post['publish_date'] = $this->config->item('current_datetime');
