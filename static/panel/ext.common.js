@@ -221,7 +221,7 @@ var Store = {
 		return Store;
 	},
 	CommentStatus: function() {
-		var Store = ['Pending', 'Approve'];
+		var Store = ['Cancel', 'Ongoing', 'Done'];
 		return Store;
 	},
 	PostType: function() {

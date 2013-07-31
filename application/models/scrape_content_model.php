@@ -51,6 +51,10 @@ class Scrape_Content_model extends CI_Model {
     function get_array($param = array()) {
         $array = array();
 		
+		// replace
+		$param['field_replace']['name'] = 'ScrapeContent.name';
+		$param['field_replace']['category_name'] = 'Category.name';
+		
 		$string_namelike = (!empty($param['namelike'])) ? "AND ScrapeContent.name LIKE '%".$param['namelike']."%'" : '';
 		$string_filter = GetStringFilter($param, @$param['column']);
 		$string_sorting = GetStringSorting($param, @$param['column'], 'scrape_time DESC');

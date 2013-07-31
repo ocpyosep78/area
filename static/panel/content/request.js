@@ -8,7 +8,7 @@ Ext.onReady(function() {
 	var main_store = Ext.create('Ext.data.Store', {
 		autoLoad: true, pageSize: 25, remoteSort: true,
         sorters: [{ property: 'request_time', direction: 'DESC' }],
-		fields: [ 'id', 'user_id', 'user_fullname', 'description', 'request_time', 'status' ],
+		fields: [ 'id', 'user_id', 'user_fullname', 'name', 'desc', 'imdb', 'request_time', 'status', 'request_link' ],
 		proxy: {
 			type: 'ajax',
 			url : URLS.base + 'panel/content/request/grid', actionMethods: { read: 'POST' },
@@ -22,8 +22,23 @@ Ext.onReady(function() {
 		columns: [ {
 					header: 'Time', dataIndex: 'request_time', sortable: true, filter: true, width: 125, align: 'center'
 			}, {	header: 'User', dataIndex: 'user_fullname', sortable: true, filter: true, width: 125
-			}, {	header: 'Content', dataIndex: 'description', sortable: true, filter: true, width: 100, flex: 1
+			}, {	header: 'Title', dataIndex: 'name', sortable: true, filter: true, width: 150
+			}, {	header: 'Content', dataIndex: 'desc', sortable: true, filter: true, width: 100, flex: 1
 			}, {	header: 'Status', dataIndex: 'status', sortable: true, filter: true, width: 100, align: 'center'
+			}, {	header: 'IMDB', xtype: 'actioncolumn', width: 75, align: 'center',
+					items: [ {
+							iconCls: 'linkIcon', tooltip: 'Link', handler: function(grid, rowIndex, colIndex) {
+								var row = grid.store.getAt(rowIndex).data;
+								window.open(row.imdb);
+							}
+					} ]
+			}, {	header: 'Action', xtype: 'actioncolumn', width: 75, align: 'center',
+					items: [ {
+							iconCls: 'linkIcon', tooltip: 'Link', handler: function(grid, rowIndex, colIndex) {
+								var row = grid.store.getAt(rowIndex).data;
+								window.open(row.request_link);
+							}
+					} ]
 		} ],
 		tbar: [ {
 				text: 'Ubah', iconCls: 'editIcon', tooltip: 'Ubah', handler: function() { main_grid.update({ }); }
@@ -105,7 +120,7 @@ Ext.onReady(function() {
 	
 	function main_win(param) {
 		var win = new Ext.Window({
-			layout: 'fit', width: 710, height: 255,
+			layout: 'fit', width: 710, height: 325,
 			closeAction: 'hide', plain: true, modal: true,
 			buttons: [ {
 						text: 'Save', handler: function() { win.save(); }
@@ -124,12 +139,18 @@ Ext.onReady(function() {
 							w.body.dom.innerHTML = Result.responseText;
 							
 							win.id = param.id;
-							win.description = new Ext.form.TextArea({ renderTo: 'descriptionED', width: 575, height: 150 });
+							win.name = new Ext.form.TextField({ renderTo: 'nameED', width: 575 });
+							win.imdb = new Ext.form.TextField({ renderTo: 'imdbED', width: 575 });
+							win.desc = new Ext.form.TextArea({ renderTo: 'descED', width: 575, height: 80 });
+							win.reply = new Ext.form.TextArea({ renderTo: 'replyED', width: 575, height: 80 });
 							win.status = Combo.Class.CommentStatus({ renderTo: 'request_statusED', width: 225 });
 							
 							// Populate Record
 							if (param.id > 0) {
-								win.description.setValue(param.description);
+								win.name.setValue(param.name);
+								win.imdb.setValue(param.imdb);
+								win.desc.setValue(param.desc);
+								win.reply.setValue(param.reply);
 								win.status.setValue(param.status);
 							}
 						}
@@ -144,7 +165,10 @@ Ext.onReady(function() {
 				var ajax = new Object();
 				ajax.action = 'update';
 				ajax.id = win.id;
-				ajax.description = win.description.getValue();
+				ajax.name = win.name.getValue();
+				ajax.imdb = win.imdb.getValue();
+				ajax.desc = win.desc.getValue();
+				ajax.reply = win.reply.getValue();
 				ajax.status = win.status.getValue();
 				
 				Func.ajax({ param: ajax, url: URLS.base + 'panel/content/request/action', callback: function(result) {

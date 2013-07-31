@@ -12,7 +12,7 @@
 	
 	// add menu
 	$array_menu[] = array( 'title' => 'Submit', 'color' => array_shift($array_color), 'link' => base_url('submit') );
-//	$array_menu[] = array( 'title' => 'Request', 'color' => array_shift($array_color), 'link' => base_url('request') );
+	$array_menu[] = array( 'title' => 'Request Board', 'color' => array_shift($array_color), 'link' => base_url('request/board') );
 	$array_menu[] = array( 'title' => 'About Us', 'color' => array_shift($array_color), 'link' => base_url('about-us') );
 	$array_menu[] = array( 'title' => 'Contact Us', 'color' => array_shift($array_color), 'link' => base_url('contact') );
 ?>
@@ -23,7 +23,7 @@
 			<div class="top-right">
 				<ul id="user-links">
 					<li><a href="<?php echo base_url('submit'); ?>">Submit</a></li>
-					<!-- <li><a href="<?php echo base_url('request'); ?>">Request</a></li>	-->
+					<li><a href="<?php echo base_url('request'); ?>">Request</a></li>
 					<?php if ($is_login) { ?>
 					<li><a href="<?php echo base_url('logout'); ?>">Logout</a></li>
 					<?php } else { ?>
