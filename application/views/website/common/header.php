@@ -88,11 +88,12 @@
 					<div class="newsletter-popup">
 						<span class="bg"><span></span></span>
 						<div class="indents">
-							<form action="http://feedburner.google.com/fb/a/mailverify?" method="post" target="_blank">
+							<form action="http://feedburner.google.com/fb/a/mailverify" method="post" target="_blank">
 								<div class="field">
 									<input type="text" placeholder="Enter Your E-mail addres" name="email" title="Enter Your Email Address" class="w_def_text" />
 								</div>
-								<input type="hidden" name="uri" value="" />
+								<input type="hidden" name="loc" value="en_US"/>
+								<input type="hidden" name="uri" value="suekarea-popular" />
 								<input type="submit" class="button" value="Subscribe">
 								<div class="clearboth"></div>
 							</form>
