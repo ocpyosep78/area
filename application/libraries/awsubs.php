@@ -15,9 +15,9 @@ class awsubs {
 		$array_result = array();
 		foreach ($array_content->channel->item as $array) {
 			// test purpose
-			/*	
+			/*	*/
 			$title = trim((string)$array->title);
-			if ($title != 'Shingeki no Kyojin Episode 16 Subtitle Indonesia') {
+			if ($title != 'Persona: Trinity Soul Episode 3 Subtitle Indonesia') {
 				continue;
 			}
 			/*	*/
@@ -87,7 +87,7 @@ class awsubs {
 		$content = preg_replace('/\[\<strike\>[\w]+\<\/strike\>\]/i', '', $content);
 		$content = preg_replace('/(style|class)\=\"[^\"]+\"/i', '', $content);
 		$content = preg_replace('/\s+\>/i', '>', $content);
-		preg_match_all('/(480p|720p)([\w\s\=\&\;]+)?(<\/?(span|b)([^>]+)?>)*((\[<a href\=\"[\w\:\/\.\?\=\_\-]+\">\w+<\/a>\])*)/i', $content, $match);
+		preg_match_all('/(480p|576p|720p)([\w\s\=\&\;]+)?(<\/?(span|b)([^>]+)?>)*((\[<a href\=\"[^\"]+\">\w+\<\/a\>\])*)/i', $content, $match);
 		
 		// condition #1
 		$result = '';

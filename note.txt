@@ -6,8 +6,8 @@ Link :
 - http://localhost/suekarea/trunk/full-page
 
 Note :
-- Normal Image : 194 * 123
-- Slide Image	 : 485 * 370
+- Normal Image	: 194 * 123
+- Slide Image	: 485 * 370
 
 Link Twitter
 

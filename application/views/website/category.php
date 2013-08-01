@@ -64,7 +64,7 @@
 								<?php $page_counter = $page_active + $i; ?>
 								<?php $page_link = $page_base.'/page-'.$page_counter; ?>
 								<?php if ($page_counter > 0 && $page_counter <= $page_count) { ?>
-								<li class="<?php echo $class; ?>"><a href="<?php echo $page_link; ?>" title=""><?php echo $page_counter; ?></a></li>
+								<li class="<?php echo $class; ?>"><a href="<?php echo $page_link; ?>" title="<?php echo $category['name'].' - Page '.$page_counter; ?>"><?php echo $page_counter; ?></a></li>
 								<?php } ?>
 							<?php } ?>
 						</ul>

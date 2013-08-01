@@ -21,6 +21,10 @@ class page_static extends SUEKAREA_Controller {
 		
 		$result = array();
 		if ($action == 'update') {
+			if (isset($_POST['desc'])) {
+				$_POST['desc'] = clean_html_style($_POST['desc']);
+			}
+			
 			$result = $this->Page_Static_model->update($_POST);
 		} else if ($action == 'get_by_id') {
 			$result = $this->Page_Static_model->get_by_id(array( 'id' => $_POST['id'] ));

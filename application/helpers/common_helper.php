@@ -871,6 +871,8 @@
 			$result = preg_replace('/<(\/)?font(.)?>/i', ' ', $result);
 			$result = preg_replace('/style=\"\"/i', ' ', $result);
 			$result = preg_replace('/ +/i', ' ', $result);
+			$result = preg_replace('/color\: rgb\([^\;]+\;/i', '', $result);
+			$result = preg_replace('/\s?style\=\"\s*\"/i', '', $result);
 			
 			return $result;
 		}
