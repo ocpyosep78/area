@@ -32,23 +32,17 @@
 
 <body class="blog boxed pattern-1 navigation-style-1">
 
-<style>
-.link-download {
-	text-decoration: none; background: linear-gradient(#FFFFFF 0%, #F5F5F5 100%) repeat scroll 0 0 transparent; border: 1px solid #CDD0D1;
-    border-radius: 2px 2px 2px 2px; box-shadow: 1px 1px rgba(0, 0, 0, 0.05); color: #6D6D6D !important; font-size: 12px;
-    font-weight: bold; height: 27px; line-height: 26px; padding: 5px 12px;
-}
-</style>
-
-<div id="page" class="hfeed site">
+<div id="page" class="site">
 	<?php $this->load->view( 'website/common/header' ); ?>
 	
     <div id="main" class="right_sidebar"><div class="inner"><div class="general_content clearboth">
-		<div class="main_content"><div id="primary" class="content-area"><div id="content" class="site-content" role="main">
-			<h2 class="page-title"><a href="<?php echo $post['post_link']; ?>" alt="<?php echo $post['name']; ?>" title="<?php echo $post['name']; ?>"><?php echo $post['name']; ?></a></h2>
+		<div class="main_content hfeed"><div id="primary" class="content-area"><div id="content" class="site-content hentry" role="main">
+			<h2 class="page-title entry-title">
+				<a href="<?php echo $post['post_link']; ?>" alt="<?php echo $post['name']; ?>" title="<?php echo $post['name']; ?>" class="bookmark"><?php echo $post['name']; ?></a>
+			</h2>
 			
 			<div id="post_content" class="post_content" role="main">
-                <article class="news type-news status-publish format-video hentry format-video gallery-style-1">
+                <article>
 					<?php if (!empty($post['thumbnail_link'])) { ?>
 					<div class="pic post_thumb">
 						<img width="1240" height="620" src="<?php echo $post['thumbnail_link']; ?>" alt="<?php echo $post['name']; ?>" title="<?php echo $post['name']; ?>" class="attachment-slider wp-post-image" />
@@ -56,6 +50,11 @@
 					<?php } ?>
 					
 					<div class="post_content" style="padding: 10px 0 15px 0;"><?php echo $post['desc']; ?></div>
+					
+					<div class="hide">
+						<div class="published date updated" title="<?php echo $post['publish_date']; ?>">Update : <?php echo GetFormatDate($post['publish_date'], array( 'FormatDate' => 'd F Y' )); ?></div>
+						<div class="vcard author">Publisher : <span class="fn"><?php echo $post['user_fullname']; ?></span></div>
+					</div>
 					
 					<?php if ($post['post_type_id'] == POST_TYPE_SINGLE_LINK) { ?>
 					<div style="text-align: center; padding: 0 0 15px 0;">

@@ -79,15 +79,11 @@
 <section class="ft_section_2">
 	<div class="footer-wrapper">
 		<ul id="footer_menu">
-			<li id="" class=""><a href="<?php echo base_url(); ?>">Home</a></li>
-			<li id="" class=""><a href="<?php echo base_url('about-us'); ?>">About us</a></li>
-			<li id="" class=""><a href="<?php echo base_url('contact'); ?>">Contact us</a></li>
-			<li id="" class=""><a href="<?php echo base_url('privacy-policy'); ?>">Privacy Policy</a></li>
-			<?php
-			/*
-			<li id="" class=""><a href="#">Contact Us</a></li>
-			/*	*/
-			?>
+			<li class=""><a href="<?php echo base_url(); ?>">Home</a></li>
+			<li class=""><a href="<?php echo base_url('about-us'); ?>">About us</a></li>
+			<li class=""><a href="<?php echo base_url('contact'); ?>">Contact us</a></li>
+			<li class=""><a href="<?php echo base_url('privacy-policy'); ?>">Privacy Policy</a></li>
+			<li class=""><a href="<?php echo base_url('advertising'); ?>">Advertising</a></li>
 		</ul>
 		<div class="copyright">
 			<div class="footer_text">© 2013. All Rights Reserved. Created by suekarea</div>
