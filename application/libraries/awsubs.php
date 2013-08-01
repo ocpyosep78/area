@@ -15,7 +15,7 @@ class awsubs {
 		$array_result = array();
 		foreach ($array_content->channel->item as $array) {
 			// test purpose
-			/*	*/
+			/*
 			$title = trim((string)$array->title);
 			if ($title != 'Persona: Trinity Soul Episode 3 Subtitle Indonesia') {
 				continue;
