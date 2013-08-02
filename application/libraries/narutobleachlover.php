@@ -6,8 +6,6 @@ class narutobleachlover {
     }
     
 	function get_array($scrape) {
-		$scrape['link'] = 'http://localhost/suekarea/trunk/temp.xml';
-		
 		$curl = new curl();
 		$array_item = array();
 		$content = $curl->get($scrape['link']);
@@ -21,9 +19,9 @@ class narutobleachlover {
 			$array['description'] = preg_replace('/[^\x20-\x7E|\x0A]/i', '', $array['description']);
 			
 			// test purpose
-			/*	*/
+			/*	
 			$title = $array['title'];
-			if ($title != 'Baca Komik One Piece 716 Bahasa Indonesia') {
+			if ($title != 'Mondaijitachi ga Isekai Kara Kuru Sou desu yo OVA Subtitle Indonesia') {
 				continue;
 			}
 			/*	*/
@@ -35,7 +33,7 @@ class narutobleachlover {
 			}
 			
 			// desc
-			$desc = $this->get_desc($array['description']);
+			$desc = $this->get_desc($array['description'], array( 'title' => $array['title'] ));
 			$download = $this->get_download($array['description']);
 			
 			// set to array
@@ -50,34 +48,26 @@ class narutobleachlover {
 			$temp['scrape_time'] = $this->CI->config->item('current_datetime');
 			$array_result[] = $temp;
 		}
-		print_r($array_result); exit;
 		
 		return $array_result;
 	}
 	
-	function get_desc($content) {
-		$content = str_replace('&nbsp;', '', $content);
-		$content = str_replace('<br />', "\n", $content);
-		$content = preg_replace('/<\/?(b|span)([^\>]+)?>/i', '', $content);
-		$content = preg_replace('/\[\<strike\>[\w]+\<\/strike\>\]/i', '', $content);
-		$content = preg_replace('/(style|class)\=\"[^\"]+\"/i', '', $content);
-		$content = preg_replace('/\s+\>/i', '>', $content);
-		$content = preg_replace('/\:/i', ': ', $content);
-		echo $content; exit;
-		preg_match('/\<\/table\>(\<\/?div\>)*([\w\s\:\<\>\/\-\~\.\,\"\'\=]+)\[?Download/i', $content, $match);
+	function get_desc($content, $param = array()) {
+		if (isset($param['title'])) {
+			$content = str_replace($param['title'], '', $content);
+		}
 		
-		$temp = (isset($match[2])) ? $match[2] : '';
-		$temp = str_replace('</div>', "\n", $temp);
-		$temp = str_replace('<br />', "\n", $temp);
-		$temp = str_replace('&nbsp;', ' ', $temp);
-		$temp = preg_replace('/\n+/i', "\n", $temp);
-		$temp = trim(strip_tags($temp));
+		$content = preg_replace('/\<(br \/|\/div)\>/i', "\n", $content);
+		$content = str_replace('&nbsp;', ' ', $content);
+		$content = strip_tags($content);
+		$content = preg_replace('/\[Download( Here)?\]/i', "", $content);
+		$content = trim(preg_replace('/[\n]+/i', "\n", $content));
 		
 		$result = '';
-		$array_temp = explode("\n", $temp);
+		$array_temp = explode("\n", $content);
 		foreach ($array_temp as $line) {
 			$line = (empty($line)) ? '&nbsp;' : $line;
-			$result .= '<div>'.$line.'</div>';
+			$result .= '<div>'.trim($line).'</div>';
 		}
 		
 		// endfix
@@ -88,46 +78,29 @@ class narutobleachlover {
 	}
 	
 	function get_download($content) {
-		return '';
+		// clean content
+		$content = preg_replace('/(rel|style|target)\=\"[^\"]+\"/i', '', $content);
+		$content = preg_replace('/ +\>/i', '>', $content);
+		preg_match_all('/\<a href\=\"([^\"]+)\"\>\[?([\w\s]+)\]?\<\/a\>/i', $content, $match);
 		
-		$content = str_replace('&nbsp;', '', $content);
-		$content = preg_replace('/<\/?(b|span)([^\>]+)?>/i', '', $content);
-		$content = preg_replace('/\[\<strike\>[\w]+\<\/strike\>\]/i', '', $content);
-		$content = preg_replace('/(style|class)\=\"[^\"]+\"/i', '', $content);
-		$content = preg_replace('/\s+\>/i', '>', $content);
-		preg_match_all('/(480p|576p|720p)([\w\s\=\&\;]+)?(<\/?(span|b)([^>]+)?>)*((\[<a href\=\"[^\"]+\">\w+\<\/a\>\])*)/i', $content, $match);
-		
-		// condition #1
 		$result = '';
 		if (isset($match[1])) {
 			foreach ($match[1] as $key => $value) {
-				if (!empty($result)) {
-					$result .= "\n";
-				}
+				$link = $match[1][$key];
+				$label = $match[2][$key];
 				
-				// write title
-				$result .= $value."\n";
-				
-				// write link
-				preg_match_all('/href=\"([^\"]+)\">([^\<]+)</i', $match[6][$key], $array_link);
-				foreach ($array_link[1] as $key => $link) {
-					$result .= $array_link[1][$key].' '.$array_link[2][$key]."\n";
-				}
-			}
-		}
-		
-		// condition #2
-		if (empty($result)) {
-			preg_match_all('/href=\"([^\"]+)\">([^\<]+)</i', $content, $match);
-			foreach ($match[1] as $key => $link) {
-				$check = preg_match('/wardhanime/i', $link, $check);
-				if ($check) {
+				// check link
+				$array_link = parse_url($link);
+				if (isset($array_link['host']) && $array_link['host'] == 'www.narutobleachlover.net') {
 					continue;
 				}
 				
-				$result .= $match[1][$key].' '.$match[2][$key]."\n";
+				$result .= $link.' '.$label."\n";
 			}
 		}
+		
+		// trim it
+		$result = trim($result);
 		
 		return $result;
 	}

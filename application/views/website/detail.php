@@ -87,12 +87,14 @@
 						<?php foreach ($array_post as $key => $item) { ?>
 						<?php if (($key % 2) == 0) { ?>
 						<article class="item_left" style="margin-top: 14px;">
+							<?php if (!empty($item['thumbnail_small_link'])) { ?>
 							<div class="pic">
 								<a href="<?php echo $item['post_link']; ?>" class="w_hover img-link img-wrap">
 									<img width="170" height="126" src="<?php echo $item['thumbnail_small_link']; ?>" class="attachment-category_news wp-post-image" />
 									<span class="overlay"></span>
 								</a>
 							</div>
+							<?php } ?>
 							<h3 style="margin: 0px;"><a href="<?php echo $item['post_link']; ?>" title="<?php echo $item['name']; ?>"><?php echo get_length_char(strip_tags($item['name']), 60, ' ...'); ?></a></h3>
 						</article>
 						<?php } else { ?>

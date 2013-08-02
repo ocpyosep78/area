@@ -72,6 +72,11 @@ class scrape extends SUEKAREA_Controller {
 				$this->Scrape_Content_model->update($param_scrape);
 			}
 		}
+		else if ($action == 'unpublish') {
+			$param_update['id'] = $_POST['id'];
+			$param_update['post_id'] = -1;
+			$result = $this->Scrape_Content_model->update($param_update);
+		}
 		
 		echo json_encode($result);
 	}

@@ -28,10 +28,13 @@ Ext.onReady(function() {
 			}, {	header: 'Post Type', dataIndex: 'post_type_name', sortable: true, filter: true, width: 100
 			}, {	header: 'Source', dataIndex: 'scrape_master_name', sortable: true, filter: true, width: 100
 			}, {	header: 'Time', dataIndex: 'scrape_time', sortable: true, filter: true, width: 125
-			}, {	header: 'Publish', xtype: 'actioncolumn', width: 75, align: 'center',
+			}, {	header: 'Status', xtype: 'actioncolumn', width: 75, align: 'center',
 					items: [ {
 						getClass: function(v, meta, rec) {
 							if (rec.get('post_id') == 0) {
+								this.items[0].tooltip = 'Pending';
+								return 'questionIcon';
+							} else if (rec.get('post_id') == -1) {
 								this.items[0].tooltip = 'Unpublish';
 								return 'delIcon';
 							} else {
@@ -41,19 +44,63 @@ Ext.onReady(function() {
 						},
 						handler: function(grid, rowIndex, colIndex) {
 							var rec = grid.store.getAt(rowIndex);
-							if (rec.data.post_id != 0) {
+							if (rec.data.post_id == 0) {
+								return false;
+							} else if (rec.data.post_id > 0) {
 								window.open(rec.data.post_link);
 								return false;
 							}
-							
-							var param = { action: 'publish', id: rec.data.id }
-							Func.ajax({ param: param, url: URLS.base + 'panel/content/scrape/action', callback: function(result) {
-								if (result.status) {
-									grid.store.load();
-								}
-							} });
 						}
 					} ]
+			}, {	header: 'Action', xtype: 'actioncolumn', width: 75, align: 'center',
+					items: [
+						{	getClass: function(v, meta, rec) {
+								if (rec.get('post_id') == 0) {
+									this.items[0].tooltip = 'Publish';
+									return 'addIcon';
+								} else {
+									this.items[0].tooltip = '';
+									return 'spaceIcon';
+								}
+							},
+							handler: function(grid, rowIndex, colIndex) {
+								var rec = grid.store.getAt(rowIndex);
+								if (rec.data.post_id != 0) {
+									return false;
+								}
+								
+								var param = { action: 'publish', id: rec.data.id }
+								Func.ajax({ param: param, url: URLS.base + 'panel/content/scrape/action', callback: function(result) {
+									if (result.status) {
+										grid.store.load();
+									}
+								} });
+							}
+						},
+						{	getClass: function(v, meta, rec) {
+								if (rec.get('post_id') == 0) {
+									this.items[0].tooltip = 'Unpublish';
+									return 'delIcon';
+								} else {
+									this.items[0].tooltip = '';
+									return 'spaceIcon';
+								}
+							},
+							handler: function(grid, rowIndex, colIndex) {
+								var rec = grid.store.getAt(rowIndex);
+								if (rec.data.post_id != 0) {
+									return false;
+								}
+								
+								var param = { action: 'unpublish', id: rec.data.id }
+								Func.ajax({ param: param, url: URLS.base + 'panel/content/scrape/action', callback: function(result) {
+									if (result.status) {
+										grid.store.load();
+									}
+								} });
+							}
+						}
+				]
 		} ],
 		tbar: [
 			{	xtype: 'label', text: 'Source :', margin: '0 5 0 5' },
