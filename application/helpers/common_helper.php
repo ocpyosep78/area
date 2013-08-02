@@ -911,7 +911,7 @@
 	
 	if (! function_exists('is_valid_link')) {
 		function is_valid_link($value) {
-			preg_match('/http:\/\/[\w]+/i', $value, $match);
+			preg_match('/https?:\/\/[\w]+/i', $value, $match);
 			$result = (count($match) > 0) ? true : false;
 			
 			return $result;
