@@ -11,21 +11,19 @@ Note :
 
 Link Twitter
 
-http://mir.cr/10HUP1AU
-http://mir.cr/EAYVQJK9
-http://mir.cr/XBPXECYF
-http://mir.cr/TOGNFX6G
-http://mir.cr/0AECMQQM
-http://mir.cr/M913MGHP
-http://mir.cr/KCFFQ4XY
-http://mir.cr/0NAI1P66 08
-http://mir.cr/0HNQDIAJ 09
-http://mir.cr/02OZYGET
-http://mir.cr/MBHJNTAN
-http://mir.cr/0T3XHOOB
-http://mir.cr/0DECPXD6
+Sedot Mini : http://www.sedotmini.com/feed/ => 2 step
+Oplovers : http://www.oploverz.net/feeds/posts/default?alt=rss => 2 step
+Unduh Film 21 => Expendable tidak dapat masuk ke table
 
-sedotmini.com		anime dengan size mini
-animechiby.com		//
-arga7.net			//
-oploverz.net		one piece terupdate
+
+Harusnya pada halaman index ada include RSS
+
+Buat Tag
+
+Buat Paste Bin & Addfly dll, nanti digeneratekan htmlnya
+
+Halaman List Post => Title untuk tag a belum ada
+
+
+Anime Chibi : [X] => no wording / no keyword
+Arga 7 : [X] => Many Episode at one page, too many efford with low result

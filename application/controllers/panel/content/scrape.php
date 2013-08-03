@@ -62,7 +62,7 @@ class scrape extends SUEKAREA_Controller {
 				$param_post = $scrape;
 				$param_post['id'] = 0;
 				$param_post['user_id'] = $user['id'];
-				$param_post['alias'] = get_name($param_post['name']);
+				$param_post['alias'] = $this->Post_model->get_name($param_post['name']);
 				$param_post['create_date'] = $this->config->item('current_datetime');
 				$param_post['publish_date'] = $this->config->item('current_datetime');
 				$result = $this->Post_model->update($param_post);
