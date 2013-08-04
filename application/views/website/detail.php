@@ -65,19 +65,14 @@
 					<div class="cnt-download" style="text-align: center; padding: 0 0 15px 0;"></div>
 					<?php } ?>
 					
-					<div class="block-social">
-						<div class="soc_label">recommend to friends</div>
-						<ul id="post_social_share" class="post_social_share">
-							<li>
-								<a href="https://twitter.com/share?text=<?php echo urlencode($post['name']); ?>" class="twitter_link">
-									<img src="<?php echo base_url('static/img/twitter-icon-big.png'); ?>" class="twitter_icon" alt="twitter">
-								</a>
-							</li>
-							<?php if ($this->config->item('online_widget')) { ?>
-							<li><?php $this->load->view( 'website/common/fb_like', array( 'href' => $post['post_link'] ) ); ?></li>
-							<li><?php $this->load->view( 'website/common/google_plus' ); ?></li>
-							<?php } ?>
-						</ul>
+					<div id="cnt-social">
+						<div class="title">recommend to friends</div>
+						<?php if ($this->config->item('online_widget')) { ?>
+						<div class="soc-fb"><?php $this->load->view( 'website/common/fb_like', array( 'href' => $post['post_link'] ) ); ?></div>
+						<div class="soc-plus"><?php $this->load->view( 'website/common/google_plus' ); ?></div>
+						<div class="soc-twitter"><?php $this->load->view( 'website/common/twitter', array( 'href' => $post['post_link'] ) ); ?></div>
+						<?php } ?>
+						<div class="clear"></div>
 					</div>
 				</article>
 				

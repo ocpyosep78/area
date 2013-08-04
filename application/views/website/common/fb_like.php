@@ -11,4 +11,4 @@
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
 
-<div class="fb-like" data-href="<?php echo $href; ?>" data-send="false" data-layout="button_count" data-width="450" data-show-faces="true"></div>
+<div class="fb-like" data-href="<?php echo $href; ?>" data-width="75" data-layout="button_count" data-show-faces="true"></div>

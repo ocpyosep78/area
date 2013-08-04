@@ -3450,9 +3450,6 @@ article .pic {
 .single article.hentry.img-floated .post_content {
 	padding-left: 20px;
 }
-.single article.hentry.img-floated .block-social {
-	clear: both;
-}
 .single article.hentry.img-floated .pic {
 	max-width: 300px;
 	float: left;
@@ -4430,41 +4427,6 @@ article.reviews .slider_container .flex-direction-nav a.flex-prev:hover {
 .single article .post_content {
 	margin-bottom: 4px;
 	overflow: hidden;
-}
-.block-social {
-	padding: 11px 0;
-	margin-bottom: 24px;
-	border-top: 1px solid #ededed;
-	border-bottom: 1px solid #ededed;
-	overflow: hidden;
-}
-.block-social .soc_label {
-	float: left;
-	margin-right: 17px;
-	text-transform: uppercase;
-	font-size: 10px;
-	word-spacing: 1px;
-	padding-top: 5px;
-	line-height: 12px;
-	font-family: 'Times New Roman', Times, serif;
-}
-.block-social ul {
-	overflow: hidden;
-	margin: 0;
-}
-.block-social ul li {
-	list-style: none;
-	float: left;
-	margin: 0 0 0 7px;
-}
-.block-social ul li:first-child {
-	margin-left: 0;
-}
-.block-social ul li a {
-	display: block;
-}
-.block-social ul li img {
-	vertical-align: top;
 }
 #post_author {
 	overflow: hidden;
@@ -6406,3 +6368,10 @@ form .result p.error_item:first {
 .form-manual textarea { padding: 7px; border: 1px solid #D6D6D6; }
 .form-manual .left { float: left; width: 150px; padding: 5px 0 5px 0; }
 .form-manual .right { float: left; width: 460px; padding: 0 0 15px 0; }
+
+/*	social */
+#cnt-social { padding: 10px 0; border-top: 1px solid #EDEDED; border-bottom: 1px solid #EDEDED; }
+#cnt-social .title { float: left; width: 150px; font-family: 'Times New Roman',Times,serif; font-size: 10px; text-transform: uppercase; word-spacing: 1px; }
+#cnt-social .soc-fb { float: left; width: 85px; }
+#cnt-social .soc-plus { float: left; width: 66px; }
+#cnt-social .soc-twitter { float: left; width: 85px; }
