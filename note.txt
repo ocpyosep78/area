@@ -9,13 +9,12 @@ Note :
 - Normal Image	: 194 * 123
 - Slide Image	: 485 * 370
 
-Tambahkan Link Tweeter
-Buatkan button Twitter (yang ada angkanya untuk menghitung yang ngetweeet)
-Harusnya pada halaman index ada include RSS => Referensi Ganool dkk
+Done => Tambahkan Link Tweeter
+Done => Buatkan button Twitter (yang ada angkanya untuk menghitung yang ngetweeet)
+Done => Harusnya pada halaman index ada include RSS => Referensi Ganool dkk
 
 Sedot Mini : http://www.sedotmini.com/feed/ => 2 step
 Oplovers : http://www.oploverz.net/feeds/posts/default?alt=rss => 2 step
-Unduh Film 21 => Expendable tidak dapat masuk ke table
 
 Halaman List Post => Title untuk tag a belum ada
 

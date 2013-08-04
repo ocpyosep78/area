@@ -140,7 +140,7 @@
 	</script>
 </aside>
 
-<?php if ($this->config->item('online_widget')) { ?>
+<?php if ($this->config->item('online_widget') && false) { ?>
 <aside>
 	<script type="text/javascript">google_ad_client = "ca-pub-0445723121454332"; google_ad_slot = "6005245942"; google_ad_width = 300; google_ad_height = 250;</script>
 	<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
