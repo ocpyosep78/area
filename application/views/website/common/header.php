@@ -64,11 +64,9 @@
 				<div class="block_social_top">
 					<div class="icons-label">Follow us:</div>
 					<ul>
-						<!--
-						<li><a href="#" class="tw">Twitter</a></li>
-						-->
 						<li><a href="https://www.facebook.com/suekarea" class="fb" title="Suekarea FB">Facebook</a></li>
-						<li><a href="https://plus.google.com/u/0/114002599803233293136?rel=author" class="gplus">Google+</a></li>
+						<li><a href="https://plus.google.com/u/0/114002599803233293136?rel=author" class="gplus" title="Suekarea Google Plus">Google+</a></li>
+						<li><a href="https://twitter.com/Suekarea" class="tw" title="Suekarea Twitter">Twitter</a></li>
 						<li><a href="<?php echo base_url('rss'); ?>" class="rss" title="Popular Post">RSS</a></li>
 						<li><a href="<?php echo base_url('rss/latest'); ?>" class="rss" title="Latest Post">RSS</a></li>
 					</ul>
