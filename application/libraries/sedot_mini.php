@@ -6,8 +6,6 @@ class sedot_mini {
     }
     
 	function get_array($scrape) {
-		$scrape['link'] = 'http://localhost/suekarea/trunk/temp.xml';
-		
 		$curl = new curl();
 		$array_item = array();
 		$content = $curl->get($scrape['link']);
@@ -53,7 +51,7 @@ class sedot_mini {
 			$array_result[] = $temp;
 			
 			// add limit
-			if (count($array_result) >= 5) {
+			if (count($array_result) >= 10) {
 				break;
 			}
 		}

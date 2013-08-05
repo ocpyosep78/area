@@ -13,14 +13,20 @@ Done => Tambahkan Link Tweeter
 Done => Buatkan button Twitter (yang ada angkanya untuk menghitung yang ngetweeet)
 Done => Harusnya pada halaman index ada include RSS => Referensi Ganool dkk
 
-Sedot Mini : http://www.sedotmini.com/feed/ => 2 step
-Oplovers : http://www.oploverz.net/feeds/posts/default?alt=rss => 2 step
+Done => Sedot Mini : http://www.sedotmini.com/feed/ => 2 step
+Done => Oplovers : http://www.oploverz.net/feeds/posts/default?alt=rss => 2 step
 
 Halaman List Post => Title untuk tag a belum ada
 
 Buat Tag
 
 Buat Paste Bin & Addfly dll, nanti digeneratekan htmlnya
+
+AWSubs : Contoh Scrape salah :
+Producers: Silver Link, Sentai FilmworksLGenres: Action, Comedy, Fantasy, Magic
+Translator: Hebbi
+TLC: Genkaku14Kara Effect: Naufal
+Uploader: Slametb111
 
 --------------------------------------------------------------------------------------------------------------------
 
