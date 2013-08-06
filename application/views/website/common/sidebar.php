@@ -1,6 +1,6 @@
 <?php
 	// recent post
-	$param_recent['limit'] = 12;
+	$param_recent['limit'] = 18;
 	$param_recent['not_draft'] = true;
 	$param_recent['publish_date'] = $this->config->item('current_datetime');
 	$param_recent['sort'] = '[{"property":"publish_date","direction":"DESC"}]';
@@ -16,6 +16,7 @@
 ?>
 
 <div id="secondary" class="widget-area main_sidebar right_sidebar" role="complementary">
+<?php if ($this->config->item('online_widget')) { ?>
 <aside id="recent-video-widget-2" class="widget widget_recent_video">
 	<div class="widget_header"><h3 class="widget_title">Social Media</h3></div>
 	<div class="widget_body" style="padding: 5px;">
@@ -35,8 +36,9 @@
 		</div>
 	</div>
 </aside>
+<?php } ?>
 
-<?php if ($this->config->item('online_widget')) { ?>
+<?php if ($this->config->item('online_widget') && false) { ?>
 <aside>
 	<script type="text/javascript">google_ad_client = "ca-pub-0445723121454332"; google_ad_slot = "9098313148"; google_ad_width = 300; google_ad_height = 250;</script>
 	<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
@@ -67,7 +69,7 @@
 			<div class="tab_content">
 				<?php for ($i = 0; $i < 8; $i++) { ?>
 				<div class="block_home_news_post">
-					<p class="title"><a href="<?php echo $array_popular[$i]['post_link']; ?>" title="<?php echo $array_recent[$i]['name']; ?>"><?php echo $array_popular[$i]['name']; ?></a></p>
+					<p class="title"><a href="<?php echo $array_popular[$i]['post_link']; ?>" title="<?php echo $array_popular[$i]['name']; ?>"><?php echo $array_popular[$i]['name']; ?></a></p>
 				</div>
 				<?php } ?>
 			</div>
@@ -81,7 +83,7 @@
 	</div>
 </aside>
 
-<?php if ($this->config->item('online_widget') && false) { ?>
+<?php if ($this->config->item('online_widget')) { ?>
 <aside>
 	<script type="text/javascript">google_ad_client = "ca-pub-0445723121454332"; google_ad_slot = "1575046342"; google_ad_width = 300; google_ad_height = 250;</script>
 	<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
@@ -96,27 +98,23 @@
 	<div class="widget_body">
 		<ul class="slides">
 			<li>
-				<?php for ($i = 8; $i < 10; $i++) { ?>
+				<?php for ($i = 8; $i < 13; $i++) { ?>
 				<div class="article">
 					<div class="pic">
-						<a href="<?php echo $array_recent[$i]['post_link']; ?>" class="w_hover img-link img-wrap">
-							<img width="388" height="246" src="<?php echo $array_recent[$i]['thumbnail_small_link']; ?>" title="<?php echo $array_recent[$i]['name']; ?>" class="attachment-recent_news_homepage wp-post-image" alt="1" />
+						<a href="<?php echo $array_recent[$i]['post_link']; ?>" class="w_hover img-link img-wrap" title="<?php echo $array_recent[$i]['name']; ?>">
+							<img width="388" height="246" src="<?php echo $array_recent[$i]['thumbnail_small_link']; ?>" class="attachment-recent_news_homepage wp-post-image" alt="1" />
 							<span class="overlay"></span>
 						</a>
 					</div>
 					<div class="text">
 						<p class="title"><a href="<?php echo $array_recent[$i]['post_link']; ?>" title="<?php echo $array_recent[$i]['name']; ?>"><?php echo $array_recent[$i]['name']; ?></a></p>
-						<?php if ($array_recent[$i]['post_type_id'] == POST_TYPE_SINGLE_LINK) { ?>
-						<div class="desc">by <a href="<?php echo $array_recent[$i]['download']; ?>"><?php echo $array_recent[$i]['user_fullname']; ?></a></div>
-						<?php } else { ?>
 						<div class="desc">by <a href="<?php echo $array_recent[$i]['post_link']; ?>"><?php echo $array_recent[$i]['user_fullname']; ?></a></div>
-						<?php } ?>
 					</div>
 				</div>
 				<?php } ?>
 			</li>
 			<li>
-				<?php for ($i = 10; $i < 12; $i++) { ?>
+				<?php for ($i = 13; $i < 18; $i++) { ?>
 				<div class="article">
 					<div class="pic">
 						<a href="<?php echo $array_recent[$i]['post_link']; ?>" title="<?php echo $array_recent[$i]['name']; ?>" class="w_hover img-link img-wrap">
@@ -126,11 +124,7 @@
 					</div>
 					<div class="text">
 						<p class="title"><a href="<?php echo $array_recent[$i]['post_link']; ?>" title="<?php echo $array_recent[$i]['name']; ?>"><?php echo $array_recent[$i]['name']; ?></a></p>
-						<?php if ($array_recent[$i]['post_type_id'] == POST_TYPE_SINGLE_LINK) { ?>
-						<div class="desc">by <a href="<?php echo $array_recent[$i]['download']; ?>"><?php echo $array_recent[$i]['user_fullname']; ?></a></div>
-						<?php } else { ?>
 						<div class="desc">by <a href="<?php echo $array_recent[$i]['post_link']; ?>"><?php echo $array_recent[$i]['user_fullname']; ?></a></div>
-						<?php } ?>
 					</div>
 				</div>
 				<?php } ?>
@@ -144,19 +138,10 @@
 		var curSlide = 1;
 		jQuery(document).ready(function() {
 			jQuery(".widget_recent_blogposts .widget_body").flexslider({
-			  animation: "fade",
-			  slideshow: false,
-			  controlNav: false,
-			  directionNav: true,
-			  prevText:"",
-			  nextText:"",
-			  smoothHeight: true,
-			  controlsContainer: ".flex-container",
-			  after: function(slider) {
-				jQuery(".widget_recent_blogposts .cur_page").eq(0).html(slider.currentSlide + 1);
-			  }
+				animation: "fade", slideshow: false, controlNav: false, directionNav: true, prevText:"", nextText:"",
+				smoothHeight: true, controlsContainer: ".flex-container", after: function(slider) { jQuery(".widget_recent_blogposts .cur_page").eq(0).html(slider.currentSlide + 1); }
 			});
-		});			
+		});
 	</script>
 </aside>
 

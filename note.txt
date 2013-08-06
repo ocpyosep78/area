@@ -5,17 +5,6 @@ Link :
 - http://localhost/suekarea/trunk/contact
 - http://localhost/suekarea/trunk/full-page
 
-Note :
-- Normal Image	: 194 * 123
-- Slide Image	: 485 * 370
-
-Done => Tambahkan Link Tweeter
-Done => Buatkan button Twitter (yang ada angkanya untuk menghitung yang ngetweeet)
-Done => Harusnya pada halaman index ada include RSS => Referensi Ganool dkk
-
-Done => Sedot Mini : http://www.sedotmini.com/feed/ => 2 step
-Done => Oplovers : http://www.oploverz.net/feeds/posts/default?alt=rss => 2 step
-
 Halaman List Post => Title untuk tag a belum ada
 
 Buat Tag
