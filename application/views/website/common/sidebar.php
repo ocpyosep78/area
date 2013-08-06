@@ -16,6 +16,26 @@
 ?>
 
 <div id="secondary" class="widget-area main_sidebar right_sidebar" role="complementary">
+<aside id="recent-video-widget-2" class="widget widget_recent_video">
+	<div class="widget_header"><h3 class="widget_title">Social Media</h3></div>
+	<div class="widget_body" style="padding: 5px;">
+		<div id="fb-root"></div>
+		<script>(function(d, s, id) {
+		  var js, fjs = d.getElementsByTagName(s)[0];
+		  if (d.getElementById(id)) return;
+		  js = d.createElement(s); js.id = id;
+		  js.src = "//connect.facebook.net/id_ID/all.js#xfbml=1";
+		  fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));</script>
+		<div class="fb-like-box" data-href="https://www.facebook.com/suekarea" data-width="292" data-show-faces="true" data-header="false" data-stream="false" data-show-border="false"></div>
+		
+		<div style="width: 130px; margin: 0px auto;">
+			<a href="https://twitter.com/suekarea" class="twitter-follow-button" data-width="130px" data-align="left" data-show-count="false">Follow @Suekarea</a>
+			<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="http://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+		</div>
+	</div>
+</aside>
+
 <?php if ($this->config->item('online_widget')) { ?>
 <aside>
 	<script type="text/javascript">google_ad_client = "ca-pub-0445723121454332"; google_ad_slot = "9098313148"; google_ad_width = 300; google_ad_height = 250;</script>
@@ -61,7 +81,7 @@
 	</div>
 </aside>
 
-<?php if ($this->config->item('online_widget')) { ?>
+<?php if ($this->config->item('online_widget') && false) { ?>
 <aside>
 	<script type="text/javascript">google_ad_client = "ca-pub-0445723121454332"; google_ad_slot = "1575046342"; google_ad_width = 300; google_ad_height = 250;</script>
 	<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>

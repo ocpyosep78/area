@@ -130,11 +130,7 @@
 						</div>
 					</div>
 					<div class="post-body"><?php echo $post['desc_limit']; ?></div>
-					<?php if ($post['post_type_id'] == POST_TYPE_SINGLE_LINK) { ?>
-					<div class="post-desc">by <a href="<?php echo $post['link_source']; ?>"><?php echo $post['user_fullname']; ?></a></div>
-					<?php } else { ?>
 					<div class="post-desc">by <a href="<?php echo $post['post_link']; ?>"><?php echo $post['user_fullname']; ?></a></div>
-					<?php } ?>
 				</div>
 				<?php } else if ($key <= 2) { ?>
 				<div class="block_home_post bd-bot">
@@ -152,11 +148,7 @@
 							</a>
 						</div>
 					</div>
-					<?php if ($post['post_type_id'] == POST_TYPE_SINGLE_LINK) { ?>
-					<div class="post-desc">by <a href="<?php echo $post['link_source']; ?>"><?php echo $post['user_fullname']; ?></a></div>
-					<?php } else { ?>
 					<div class="post-desc">by <a href="<?php echo $post['post_link']; ?>"><?php echo $post['user_fullname']; ?></a></div>
-					<?php } ?>
 				</div>
 				<?php } else { ?>
 				<div class="block_home_post">
@@ -174,11 +166,7 @@
 							</a>
 						</div>
 					</div>
-					<?php if ($post['post_type_id'] == POST_TYPE_SINGLE_LINK) { ?>
-					<div class="post-desc">by <a href="<?php echo $post['link_source']; ?>"><?php echo $post['user_fullname']; ?></a></div>
-					<?php } else { ?>
 					<div class="post-desc">by <a href="<?php echo $post['post_link']; ?>"><?php echo $post['user_fullname']; ?></a></div>
-					<?php } ?>
 				</div>
 				<?php } ?>
 				<?php } ?>
@@ -207,11 +195,7 @@
 						</div>
 					</div>
 					<div class="post-body"><?php echo $post['desc_limit']; ?></div>
-					<?php if ($post['post_type_id'] == POST_TYPE_SINGLE_LINK) { ?>
-					<div class="post-desc">by <a href="<?php echo $post['link_source']; ?>"><?php echo $post['user_fullname']; ?></a></div>
-					<?php } else { ?>
 					<div class="post-desc">by <a href="<?php echo $post['post_link']; ?>"><?php echo $post['user_fullname']; ?></a></div>
-					<?php } ?>
 				</div>
 				<?php } else if ($key <= 2) { ?>
 				<div class="block_home_post bd-bot">
@@ -229,11 +213,7 @@
 							</a>
 						</div>
 					</div>
-					<?php if ($post['post_type_id'] == POST_TYPE_SINGLE_LINK) { ?>
-					<div class="post-desc">by <a href="<?php echo $post['link_source']; ?>"><?php echo $post['user_fullname']; ?></a></div>
-					<?php } else { ?>
 					<div class="post-desc">by <a href="<?php echo $post['post_link']; ?>"><?php echo $post['user_fullname']; ?></a></div>
-					<?php } ?>
 				</div>
 				<?php } else { ?>
 				<div class="block_home_post">
@@ -251,11 +231,7 @@
 							</a>
 						</div>
 					</div>
-					<?php if ($post['post_type_id'] == POST_TYPE_SINGLE_LINK) { ?>
-					<div class="post-desc">by <a href="<?php echo $post['link_source']; ?>"><?php echo $post['user_fullname']; ?></a></div>
-					<?php } else { ?>
 					<div class="post-desc">by <a href="<?php echo $post['post_link']; ?>"><?php echo $post['user_fullname']; ?></a></div>
-					<?php } ?>
 				</div>
 				<?php } ?>
 				<?php } ?>
@@ -285,11 +261,7 @@
 							</div>
 						</div>
 						<div class="post-body"><?php echo get_length_char($post['desc_limit'], 125, ' ...'); ?></div>
-						<?php if ($post['post_type_id'] == POST_TYPE_SINGLE_LINK) { ?>
-						<div class="post-desc">by <a href="<?php echo $post['link_source']; ?>"><?php echo $post['user_fullname']; ?></a></div>
-						<?php } else { ?>
 						<div class="post-desc">by <a href="<?php echo $post['post_link']; ?>"><?php echo $post['user_fullname']; ?></a></div>
-						<?php } ?>
 					</div>
 					<?php } else { ?>
 					<div class="block_home_post">
@@ -307,11 +279,7 @@
 								</a>
 							</div>
 						</div>
-						<?php if ($post['post_type_id'] == POST_TYPE_SINGLE_LINK) { ?>
-						<div class="post-desc">by <a href="<?php echo $post['link_source']; ?>"><?php echo $post['user_fullname']; ?></a></div>
-						<?php } else { ?>
 						<div class="post-desc">by <a href="<?php echo $post['post_link']; ?>"><?php echo $post['user_fullname']; ?></a></div>
-						<?php } ?>
 					</div>
 					<?php } ?>
 					<?php } ?>
@@ -340,11 +308,7 @@
 							</div>
 						</div>
 						<div class="post-body"><?php echo get_length_char($post['desc_limit'], 125, ' ...'); ?></div>
-						<?php if ($post['post_type_id'] == POST_TYPE_SINGLE_LINK) { ?>
-						<div class="post-desc">by <a href="<?php echo $post['link_source']; ?>"><?php echo $post['user_fullname']; ?></a></div>
-						<?php } else { ?>
 						<div class="post-desc">by <a href="<?php echo $post['post_link']; ?>"><?php echo $post['user_fullname']; ?></a></div>
-						<?php } ?>
 					</div>
 					<?php } else { ?>
 					<div class="block_home_post">
@@ -362,11 +326,7 @@
 								</a>
 							</div>
 						</div>
-						<?php if ($post['post_type_id'] == POST_TYPE_SINGLE_LINK) { ?>
-						<div class="post-desc">by <a href="<?php echo $post['link_source']; ?>"><?php echo $post['user_fullname']; ?></a></div>
-						<?php } else { ?>
 						<div class="post-desc">by <a href="<?php echo $post['post_link']; ?>"><?php echo $post['user_fullname']; ?></a></div>
-						<?php } ?>
 					</div>
 					<?php } ?>
 					<?php } ?>
