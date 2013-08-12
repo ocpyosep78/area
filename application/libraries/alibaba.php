@@ -12,77 +12,132 @@ class alibaba {
 		$array_content = new SimpleXmlElement($content);
 		
 		$array_result = array();
-		foreach ($array_content->channel->item as $array) {
+		foreach ($array_content->channel->item as $array_temp) {
+			$array = (array)$array_temp;
+			$link_source = $array['link'];
+			
+			// content already exist
+			$check = $this->CI->Scrape_Content_model->get_by_id(array( 'link_source' => $link_source ));
+			if (count($check) > 0) {
+				continue;
+			}
+			
 			// test purpose
-			/*
-			$title = trim((string)$array->title);
-			if ($title != 'Naruto Shippuden Episode 322 Subtitle Indonesia') {
+			/*	
+			$title = trim($array['title']);
+			if ($title != 'Kiniro Mosaic Episode 6 Subtitle Indonesia') {
 				continue;
 			}
 			/*	*/
 			
-			$content_html = (string)$array->description;
-			$desc = $this->get_desc($content_html);
+			// make content clean
+			$content_item = $curl->get($link_source);
+			$content_item = preg_replace('/[^\x20-\x7E|\x0A]/i', '', $content_item);
 			
-			// image_source
-			preg_match('/border=\"0\" (height=\"\d+\" )?src=\"([^\"]+)\"/i', $content_html, $match);
-			$image_source = (isset($match[2])) ? $match[2] : '';
-			
-			// direct & download link
-			$array_download = array();
-			preg_match_all('/(([\w\d]+)\s*:\s*\|*\s*(<span style="color: black;">)?)?<a href=\"([^\"]+)\"( target=\"_blank\")?>([^<]+)<\/a>/i', $content_html, $match);
-			if (isset($match[1])) {
-				foreach ($match[1] as $key => $link) {
-					if (!empty($match[2][$key])) {
-						if (count($array_download) > 0) {
-							$array_download[] = '&nbsp;';
-						}
-						
-						$array_download[] = trim($match[2][$key]);
-					}
-					
-					$array_download[] = trim($match[4][$key]).' '.trim($match[6][$key]);
-				}
-			}
-			$download = "Jangan lupa like yaa gan\n".implode("\n", $array_download);
+			// collect data
+			$desc = $this->get_desc($content_item);
+			$download = $this->get_download($content_item);
+			$image_source = $this->get_image($content_item);
 			
 			// set to array
 			$temp = array();
-			$temp['name'] = trim((string)$array->title);
+			$temp['name'] = $array['title'];
 			$temp['desc'] = $desc;
-			$temp['image_source'] = $image_source;
 			$temp['download'] = $download;
-			$temp['link_source'] = (string)$array->link;
+			$temp['image_source'] = $image_source;
+			$temp['link_source'] = $array['link'];
 			$temp['category_id'] = $scrape['category_id'];
 			$temp['post_type_id'] = $scrape['post_type_id'];
 			$temp['scrape_master_id'] = $scrape['id'];
 			$temp['scrape_time'] = $this->CI->config->item('current_datetime');
 			$array_result[] = $temp;
+			
+			// add limit
+			if (count($array_result) >= 10) {
+				break;
+			}
 		}
 		
 		return $array_result;
 	}
 	
-	function get_desc($content, $param = array()) {
-		// desc
-		$content_desc = preg_replace('/[^\x20-\x7E|\x0A]/i', '', $content);
-		$content_desc = str_replace('</div>', "\n", $content_desc);
-		$content_desc = str_replace('<br />', "\n", $content_desc);
-		$content_desc = str_replace('&nbsp;', "", $content_desc);
-		$content_desc = preg_replace("/\n+/i", "\n", $content_desc);
-		$content_desc = trim(strip_tags($content_desc));
+	function get_desc($content) {
+		// remove start offset
+		$offset = '<div class="single_post">';
+		$pos_first = strpos($content, $offset);
+		$content = substr($content, $pos_first, strlen($content) - $pos_first);
 		
-		$content_desc = preg_replace('/Sebagai downloader[\x20-\x7E\s]+/i', "", $content_desc);
-		$array_temp = explode("\n", $content_desc);
-		$desc = '';
-		foreach ($array_temp as $line) {
-			$desc .= '<div>'.$line.'</div>';
-		}
+		// remove end offset
+		$offset = '<div class="related-posts">';
+		$pos_end = strpos($content, $offset);
+		$content = substr($content, 0, $pos_end);
+		
+		// remove string from website
+		$content = str_replace(array('Sebagai downloader yang baik tentunya tahu apa yang harus dilakukan, dan jangan lupa untuk selalu meninggalkan jejak di blog ini!'), '', $content);
+		$content = preg_replace('/Silahkan download [a-z0-9 ]+ di bawah ini:/i', '', $content);
+		
+		// additional ofset
+		$offset = '</header>';
+		$pos_first = strpos($content, $offset);
+		$content = substr($content, $pos_first, strlen($content) - $pos_first);
+		
+		// make it clean
+		$temp = trim(strip_tags($content));
+		$temp = preg_replace("/\n+/i", "\n", $temp);
+		$array_temp = explode("\n", $temp);
+		$result = implode("<br />", $array_temp);
 		
 		// endfix
-		$desc .= '<div>&nbsp;</div>';
-		$desc .= '<div>Sumber : Alibaba</div>';
+		$result .= '<div>&nbsp;</div>';
+		$result .= '<div>Sumber : Alibaba</div>';
 		
-		return $desc;
+		return $result;
+	}
+	
+	function get_download($content) {
+		// remove start offset
+		$offset = '<div class="single_post">';
+		$pos_first = strpos($content, $offset);
+		$content = substr($content, $pos_first, strlen($content) - $pos_first);
+		
+		// remove end offset
+		$offset = '<div class="related-posts">';
+		$pos_end = strpos($content, $offset);
+		$content = substr($content, 0, $pos_end);
+		
+		// make it consistent
+		$content = preg_replace('/<\/a>\s?\/\s?<a /i', '</a> / <a ', $content);
+		$content = preg_replace('/(480|720)p?\s*=\s*/i', "$1 ", $content);
+		$content = str_replace(' target="_blank"', "", $content);
+		
+		$result = '';
+		preg_match_all('/(480|720) (<a href=\"([^\"]+)\">([a-z0-9 ]+)<\/a>( \/ )*)*/i', $content, $match);
+		if (is_array($match[0]) && count($match[0]) > 0) {
+			foreach ($match[0] as $key => $raw_value) {
+				$label = $match[1][$key];
+				preg_match_all('/<a href=\"([^\"]+)\">([a-z0-9 ]+)<\/a>/i', $raw_value, $raw_link);
+				
+				if (is_array($raw_link[0]) && count($raw_link[0]) > 0) {
+					$result .= (empty($result)) ? $label."\n" : "\n".$label."\n";
+					foreach ($raw_link[0] as $key => $raw) {
+						$link = $raw_link[1][$key];
+						$title = $raw_link[2][$key];
+						$result .= $link.' '.$title."\n";
+					}
+				}
+			}
+		}
+		
+		// trim it
+		$result = trim($result);
+		
+		return $result;
+	}
+	
+	function get_image($content) {
+		preg_match('/ width=\"\d+\" height=\"\d+\" src=\"([^\"]+)\"/i', $content, $match);
+		$result = (isset($match[1]) && !empty($match[1])) ? $match[1] : '';
+		
+		return $result;
 	}
 }

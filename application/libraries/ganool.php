@@ -19,9 +19,9 @@ class ganool {
 			$link_source = $array_link[0];
 			
 			// test purpose
-			/*
+			/*	
 			$title = trim((string)$array->title);
-			if ($title != 'Naruto Shippuden Episode 322 Subtitle Indonesia') {
+			if ($title != 'The Switch (2010) BluRay 720p 600MB Ganool') {
 				continue;
 			}
 			/*	*/
@@ -91,34 +91,57 @@ class ganool {
 	
 	function get_download($content) {
 		// remove start offset
-		$offset = 'spoiler-body';
+		$offset = 'id="content"';
 		$pos_first = strpos($content, $offset);
-		$content = substr($content, $pos_first, strlen($content) - $pos_first);
+		$content = '<div '.substr($content, $pos_first, strlen($content) - $pos_first);
 		
 		// remove end offset
 		$offset = 'crp_related';
 		$pos_end = strpos($content, $offset);
-		$content = '<div class=\''.substr($content, 0, $pos_end);
+		$content = substr($content, 0, $pos_end);
 		
 		// clean desc
-		$content = trim(strip_tags($content));
+		$content = str_replace('http://www.imdb.com/', '', $content);
+		$content_clean = trim(strip_tags($content));
 		
-		preg_match_all('/([\w\s]+)\s?:\s?(http:[\w\/\.]+)/i', $content, $match);
-		if (count($match) > 0) {
-			// remove single link text
-			$offset = 'Single Link';
-			$pos_end = strpos($content, $offset);
-			$content = substr($content, 0, $pos_end);
-			
-			$content .= "Single Link\n";
-			foreach ($match[0] as $key => $value) {
-				$title = trim($match[1][$key]);
-				$link = trim($match[2][$key]);
-				$content .= "$link $title\n";
+		// data
+		$result = '';
+		$is_write_single_link = false;
+		
+		// get from href
+		$content_format = str_replace("<br />", "", $content);
+		preg_match_all('/<strong>([a-z0-9 ]+)<\/strong>(\s*<a href=\"([^\"]+)\" onclick=\"[^\"]+\">([^\<]+)<\/a>)*/i', $content_format, $match);
+		foreach ($match[0] as $key => $string_check) {
+			$label = $match[1][$key];
+			preg_match_all('/<a href=\"([^\"]+)\" onclick=\"[^\"]+\">([^\<]+)</i', $string_check, $array_link);
+			if (count($array_link[0]) > 0) {
+				$result .= (empty($result)) ? "" : "\n";
+				$result .= $label."\n";
+				foreach ($array_link[0] as $key => $value) {
+					$result .= $array_link[1][$key].' '.$array_link[2][$key]."\n";
+				}
 			}
 		}
 		
-		return $content;
+		// get from label
+		preg_match_all('/(Akafile|Mightyupload|UpAfile|Putlocker|UpToBox|PFU|Uploadscenter|Netload|Turbobit|Uploaded|FileClod|FileHostPro|Ezzyfile|Tubobit)[: ]+(full speed)?\s*((http:[\w\/\.]+\s?)+)/i', $content_clean, $match);
+		if (count($match) > 0) {
+			foreach ($match[0] as $value) {
+				$value = trim($value);
+				
+				if (! $is_write_single_link) {
+					$array_check = explode("\n", $value);
+					$is_single_link = (count($array_check) == 1) ? true : false;
+					if ($is_single_link) {
+						$is_write_single_link = true;
+						$result .= "\n\nSingle Link";
+					}
+				}
+				
+				$result .= (empty($result)) ? $value : "\n\n".$value;
+			}
+		}
 		
+		return $result;
 	}
 }
