@@ -105,12 +105,7 @@
 		<div class="section-wrap clearboth">
 			<div class="banner-block">
 				<div class="banner">
-					<?php if ($this->config->item('online_widget')) { ?>
-					<script type="text/javascript">google_ad_client = "ca-pub-0445723121454332"; google_ad_slot = "8797261949"; google_ad_width = 468; google_ad_height = 60;</script>
-					<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"> </script>
-					<?php } else { ?>
 					<a href="#"><img src="<?php echo base_url('static/upload/banner.jpg'); ?>" alt="banner" /></a>
-					<?php } ?>
 				</div>
 			</div>
 			<div class="name-and-slogan">

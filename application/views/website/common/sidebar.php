@@ -38,13 +38,6 @@
 </aside>
 <?php } ?>
 
-<?php if ($this->config->item('online_widget') && false) { ?>
-<aside>
-	<script type="text/javascript">google_ad_client = "ca-pub-0445723121454332"; google_ad_slot = "9098313148"; google_ad_width = 300; google_ad_height = 250;</script>
-	<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
-</aside>
-<?php } ?>
-
 <aside id="news-combine-widget-2" class="widget widget_news_combine">
 	<div class="widget_header">
 		<h3 class="widget_title">Main News</h3>
@@ -82,13 +75,6 @@
 		</div>
 	</div>
 </aside>
-
-<?php if ($this->config->item('online_widget')) { ?>
-<aside>
-	<script type="text/javascript">google_ad_client = "ca-pub-0445723121454332"; google_ad_slot = "1575046342"; google_ad_width = 300; google_ad_height = 250;</script>
-	<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
-</aside>
-<?php } ?>
 
 <aside id="recent-blogposts-widget-2" class="widget widget_recent_blogposts">
 	<div class="widget_header">
