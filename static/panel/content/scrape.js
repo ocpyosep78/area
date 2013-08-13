@@ -104,7 +104,11 @@ Ext.onReady(function() {
 		} ],
 		tbar: [
 			{	xtype: 'label', text: 'Source :', margin: '0 5 0 5' },
-			Combo.Param.ScrapeMaster({ id: 'scrape-master', width: 200 }),
+			Combo.Param.ScrapeMaster({ id: 'scrape-master', width: 200, listeners: {
+				select: function() {
+					Ext.getCmp('do_scrape').setDisabled(false);
+				}
+			} }),
 			{	text: 'Start', iconCls: 'addIcon', tooltip: 'Start', id: 'do_scrape', handler: function() {
 				if (Ext.getCmp('scrape-master').getValue() == null) {
 					return;
