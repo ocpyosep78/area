@@ -33,6 +33,7 @@
 			<section id="reviews_body">
 				<?php foreach ($array_post as $post) { ?>
 				<article class="post-562 reviews type-reviews status-publish format-standard hentry">
+					<?php if (!empty($post['thumbnail_small_link'])) { ?>
 					<div class="pic">
 						<a href="<?php echo $post['post_link']; ?>" class="w_hover img-link img-wrap">
 							<img width="340" height="244" src="<?php echo $post['thumbnail_small_link']; ?>" class="attachment-category_news_small wp-post-image" alt="5">
@@ -40,6 +41,7 @@
 							<span class="link-icon"></span>
 						</a>
 					</div>
+					<?php } ?>
 					<h3><a href="<?php echo $post['post_link']; ?>"><?php echo $post['name']; ?></a></h3>
 					<div class="text"><?php echo $post['desc_limit']; ?></div>
 				</article>

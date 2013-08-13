@@ -82,8 +82,8 @@ class unduhfilm21 {
 		// clean content
 		$content = preg_replace('/(rel|style|target)\=\"[^\"]+\"/i', '', $content);
 		$content = preg_replace('/ +\>/i', '>', $content);
-		$content = preg_replace('/\<\/?b\>/i', '', $content);
-		preg_match_all('/\<a href\=\"([^\"]+)\"\>\[?([\w\s]+)\]?\<\/a\>/i', $content, $match);
+		$content = preg_replace('/\<\/?(b|span)\>/i', '', $content);
+		preg_match_all('/\<a href\=\"([^\"]+)\"\>\[?([^\<]+)\]?\<\/a\>/i', $content, $match);
 		
 		$result = '';
 		if (isset($match[1])) {
