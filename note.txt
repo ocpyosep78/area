@@ -44,6 +44,9 @@ Pebaiki Layout Panel
 
 Klo ada post yang dihapus, maka dia hapus gambarnya juga
 
+<<<<<<< .mine
+Uchouten Kazoku														: 7.37
+Watashi ga Motenai no wa Dou Kangaetemo Omaera ga Warui!			: 7.85=======
 
 CREATE TABLE IF NOT EXISTS `post_tag` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -59,4 +62,4 @@ CREATE TABLE IF NOT EXISTS `tag` (
   `alias` varchar(100) NOT NULL,
   `name` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;>>>>>>> .r111
