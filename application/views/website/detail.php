@@ -1,6 +1,7 @@
 <?php
 	$post = $this->Post_model->get_link();
 	if (count($post) == 0 || $post['post_type_id'] == POST_TYPE_DRAFT) {
+		header("HTTP/1.1 301 Moved Permanently");
 		header('Location: '.base_url());
 		exit;
 	} else {
