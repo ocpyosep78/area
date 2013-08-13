@@ -203,7 +203,7 @@ Ext.onReady(function() {
 	
 	function main_win(param) {
 		var win = new Ext.Window({
-			layout: 'fit', width: 710, height: 460,
+			layout: 'fit', width: 1070, height: 535,
 			closeAction: 'hide', plain: true, modal: true, title: 'Entry Post - [Edit]',
 			buttons: [ {
 						text: 'Save', handler: function() { win.save(); }
@@ -219,16 +219,17 @@ Ext.onReady(function() {
 							w.body.dom.innerHTML = Result.responseText;
 							
 							win.id = param.id;
-							win.name = new Ext.form.TextField({ renderTo: 'nameED', width: 225, allowBlank: false, blankText: 'Masukkan Judul' });
-							win.desc = new Ext.form.HtmlEditor({ renderTo: 'descED', width: 575, height: 150, enableFont: false });
-							win.download = new Ext.form.TextArea({ renderTo: 'downloadED', width: 575, height: 80, allowBlank: false, blankText: 'Masukkan Link Source' });
+							win.name = new Ext.form.TextField({ renderTo: 'nameED', width: 575, allowBlank: false, blankText: 'Masukkan Judul' });
+							win.desc = new Ext.form.HtmlEditor({ renderTo: 'descED', width: 575, height: 250, enableFont: false });
+							win.download = new Ext.form.TextArea({ renderTo: 'downloadED', width: 575, height: 120, allowBlank: false, blankText: 'Masukkan Link Source' });
 							win.category = Combo.Class.Category({ renderTo: 'categoryED', width: 225, allowBlank: false, blankText: 'Masukkan Kategori' });
 							win.post_type = Combo.Class.PostType({ renderTo: 'post_typeED', width: 225, allowBlank: false, blankText: 'Masukkan Jenis Post', value: page_data.POST_TYPE_MULTI_LINK });
 							win.publish_date = new Ext.form.DateField({ renderTo: 'publish_dateED', width: 120, format: DATE_FORMAT, allowBlank: false, blankText: 'Masukkan Tanggal Publish', value: new Date() });
 							win.publish_time = Combo.Class.Time({ renderTo: 'publish_timeED', width: 100, allowBlank: false, blankText: 'Masukkan Jam Publish', value: new Date() });
-							win.thumbnail = new Ext.form.TextField({ renderTo: 'thumbnailED', width: 490, readOnly: true });
-							win.link_source = new Ext.form.TextField({ renderTo: 'link_sourceED', width: 490, readOnly: true });
-							win.image_source = new Ext.form.TextField({ renderTo: 'image_sourceED', width: 490, readOnly: true });
+							win.tag = new Ext.form.TextField({ renderTo: 'tagED', width: 225 });
+							win.thumbnail = new Ext.form.TextField({ renderTo: 'thumbnailED', width: 225, readOnly: true });
+							win.link_source = new Ext.form.TextField({ renderTo: 'link_sourceED', width: 575, readOnly: true });
+							win.image_source = new Ext.form.TextField({ renderTo: 'image_sourceED', width: 575, readOnly: true });
 							win.thumbnail_button = new Ext.Button({ renderTo: 'btn_thumbnailED', text: 'Browse', width: 75, handler: function(btn) {
 								window.iframe_thumbnail.browse();
 							} });
@@ -237,6 +238,7 @@ Ext.onReady(function() {
 							if (param.id > 0) {
 								win.name.setValue(param.name);
 								win.desc.setValue(param.desc);
+								win.tag.setValue(param.tag);
 								win.thumbnail.setValue(param.thumbnail);
 								win.category.setValue(param.category_id);
 								win.post_type.setValue(param.post_type_id);
@@ -263,6 +265,7 @@ Ext.onReady(function() {
 				ajax.id = win.id;
 				ajax.name = win.name.getValue();
 				ajax.desc = win.desc.getValue();
+				ajax.tag = win.tag.getValue();
 				ajax.download = win.download.getValue();
 				ajax.thumbnail = win.thumbnail.getValue();
 				ajax.category_id = win.category.getValue();

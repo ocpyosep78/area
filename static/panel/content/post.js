@@ -163,7 +163,7 @@ Ext.onReady(function() {
 	
 	function main_win(param) {
 		var win = new Ext.Window({
-			layout: 'fit', width: 710, height: 425,
+			layout: 'fit', width: 1070, height: 535,
 			closeAction: 'hide', plain: true, modal: true,
 			buttons: [ {
 						text: 'Save', handler: function() { win.save(); }
@@ -183,7 +183,7 @@ Ext.onReady(function() {
 							
 							win.id = param.id;
 							win.name = new Ext.form.TextField({
-								renderTo: 'nameED', width: 225, allowBlank: false, blankText: 'Masukkan Judul',
+								renderTo: 'nameED', width: 575, allowBlank: false, blankText: 'Masukkan Judul',
 								enableKeyEvents: true, listeners: {
 									keyup: function(me, b, c) {
 										if (param.id == 0) {
@@ -193,14 +193,15 @@ Ext.onReady(function() {
 									}
 								}
 							});
-							win.desc = new Ext.form.HtmlEditor({ renderTo: 'descED', width: 575, height: 150, enableFont: false });
-							win.download = new Ext.form.TextArea({ renderTo: 'downloadED', width: 575, height: 80, allowBlank: false, blankText: 'Masukkan Link Source' });
-							win.alias = new Ext.form.TextField({ renderTo: 'aliasED', width: 225 });
+							win.alias = new Ext.form.TextField({ renderTo: 'aliasED', width: 575 });
+							win.desc = new Ext.form.HtmlEditor({ renderTo: 'descED', width: 575, height: 265, enableFont: false });
+							win.download = new Ext.form.TextArea({ renderTo: 'downloadED', width: 575, height: 130, allowBlank: false, blankText: 'Masukkan Link Source' });
 							win.category = Combo.Class.Category({ renderTo: 'categoryED', width: 225, allowBlank: false, blankText: 'Masukkan Kategori' });
 							win.post_type = Combo.Class.PostType({ renderTo: 'post_typeED', width: 225, allowBlank: false, blankText: 'Masukkan Jenis Post', value: page_data.POST_TYPE_MULTI_LINK });
 							win.publish_date = new Ext.form.DateField({ renderTo: 'publish_dateED', width: 120, format: DATE_FORMAT, allowBlank: false, blankText: 'Masukkan Tanggal Publish', value: new Date() });
 							win.publish_time = Combo.Class.Time({ renderTo: 'publish_timeED', width: 100, allowBlank: false, blankText: 'Masukkan Jam Publish', value: new Date() });
-							win.thumbnail = new Ext.form.TextField({ renderTo: 'thumbnailED', width: 140, readOnly: true });
+							win.tag = new Ext.form.TextField({ renderTo: 'tagED', width: 225 });
+							win.thumbnail = new Ext.form.TextField({ renderTo: 'thumbnailED', width: 225, readOnly: true });
 							win.thumbnail_button = new Ext.Button({ renderTo: 'btn_thumbnailED', text: 'Browse', width: 75, handler: function(btn) {
 								window.iframe_thumbnail.browse();
 							} });
@@ -218,6 +219,15 @@ Ext.onReady(function() {
 								
 								win.publish_date.setValue(Renderer.GetDateFromString.Date(param.publish_date));
 								win.publish_time.setValue(Renderer.GetDateFromString.Time(param.publish_date));
+								
+								// tag
+								if (param.array_tag != null) {
+									var string_tag = '';
+									for (var i = 0; i < param.array_tag.length; i++) {
+										string_tag += (string_tag == '') ? param.array_tag[i].name : ',' + param.array_tag[i].name;
+									}
+									win.tag.setValue(string_tag);
+								}
 							}
 						}
 					});
@@ -238,6 +248,7 @@ Ext.onReady(function() {
 				ajax.download = win.download.getValue();
 				ajax.category_id = win.category.getValue();
 				ajax.post_type_id = win.post_type.getValue();
+				ajax.tag = win.tag.getValue();
 				
 				// Validation
 				var is_valid = true;
