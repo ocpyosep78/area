@@ -5,7 +5,7 @@ class Scrape_Content_model extends CI_Model {
         parent::__construct();
 		
         $this->field = array(
-			'id', 'post_id', 'category_id', 'post_type_id', 'scrape_master_id', 'name', 'desc', 'link_source', 'image_source', 'thumbnail', 'scrape_time', 'download'
+			'id', 'post_id', 'category_id', 'post_type_id', 'scrape_master_id', 'name', 'desc', 'link_source', 'image_source', 'thumbnail', 'scrape_time', 'download', 'tag'
 		);
     }
 
