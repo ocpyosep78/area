@@ -29,13 +29,33 @@ class Post_model extends CI_Model {
             $result['message'] = 'Data berhasil diperbaharui.';
         }
 		
+		$param['id'] = $result['id'];
+		$this->update_tag($param);
 		$this->resize_image($param);
 		
         return $result;
     }
-
+	
+	function update_tag($param) {
+		if (isset($param['tag'])) {
+			$this->Post_Tag_model->delete(array( 'post_id' => $param['id'] ));
+			$array_tag = explode(',', $param['tag']);
+			foreach ($array_tag as $tag_queue) {
+				$tag_name = trim($tag_queue);
+				$tag_alias = $this->Tag_model->get_name($tag_name);
+				$tag = $this->Tag_model->get_by_id(array( 'alias' => $tag_alias, 'name' => $tag_name, 'force_insert' => true ));
+				
+				// insert
+				$param_tag['post_id'] = $param['id'];
+				$param_tag['tag_id'] = $tag['id'];
+				$this->Post_Tag_model->update($param_tag);
+			}
+		}
+	}
+	
     function get_by_id($param) {
         $array = array();
+		$param['tag_include'] = (isset($param['tag_include'])) ? $param['tag_include'] : false;
        
         if (isset($param['id'])) {
             $select_query  = "
@@ -58,6 +78,10 @@ class Post_model extends CI_Model {
         if (false !== $row = mysql_fetch_assoc($select_result)) {
             $array = $this->sync($row);
         }
+		
+		if ($param['tag_include']) {
+			$array['array_tag'] = $this->Post_Tag_model->get_array(array( 'post_id' => $array['id'] ));
+		}
 		
         return $array;
     }
