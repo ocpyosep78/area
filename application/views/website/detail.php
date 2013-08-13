@@ -1,7 +1,7 @@
 <?php
 	$post = $this->Post_model->get_link();
-	if (count($post) == 0) {
-		show_404();
+	if (count($post) == 0 || $post['post_type_id'] == POST_TYPE_DRAFT) {
+		header('Location: '.base_url());
 		exit;
 	} else {
 		$this->Post_model->increment_view(array( 'id' => $post['id'], 'view_count' => $post['view_count'] ));
@@ -65,6 +65,16 @@
 					<div class="cnt-download" style="text-align: center; padding: 0 0 15px 0;"></div>
 					<?php } ?>
 					
+					<?php
+					/*
+					<ul id="post_tags">
+						<li><a href="http://wpspace.net/?tag=business">Business</a></li>
+						<li><a href="http://wpspace.net/?tag=finance">Finance</a></li>
+						<li><a href="http://wpspace.net/?tag=partners">Partners</a></li>
+					</ul>
+					*/
+					?>
+					
 					<div id="cnt-social">
 						<div class="title">recommend to friends</div>
 						<?php if ($this->config->item('online_widget')) { ?>
@@ -94,12 +104,14 @@
 						</article>
 						<?php } else { ?>
 						<article class="item_right" style="margin-top: 14px;">
+							<?php if (!empty($item['thumbnail_small_link'])) { ?>
 							<div class="pic">
 								<a href="<?php echo $item['post_link']; ?>" class="w_hover img-link img-wrap">
 									<img width="170" height="126" src="<?php echo $item['thumbnail_small_link']; ?>" class="attachment-category_news wp-post-image" />
 									<span class="overlay"></span>
 								</a>
 							</div>
+							<?php } ?>
 							<h3 style="margin: 0px;"><a href="<?php echo $item['post_link']; ?>" title="<?php echo $item['name']; ?>"><?php echo get_length_char(strip_tags($item['name']), 60, ' ...'); ?></a></h3>
 						</article>
 						<?php } ?>

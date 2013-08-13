@@ -26,19 +26,14 @@
 			<div id="post_content" class="post_content" role="main">
                 <article>
 					<div class="post_content" style="padding: 0 0 25px 0;"><?php echo $page_static['desc']; ?></div>
-					<div class="block-social">
-						<div class="soc_label">recommend to friends</div>
-						<ul id="post_social_share" class="post_social_share">
-							<li>
-								<a href="https://twitter.com/share?text=<?php echo urlencode($page_static['name']); ?>" class="twitter_link">
-									<img src="<?php echo base_url('static/img/twitter-icon-big.png'); ?>" class="twitter_icon" alt="twitter">
-								</a>
-							</li>
-							<?php if ($this->config->item('online_widget')) { ?>
-							<li><?php $this->load->view( 'website/common/fb_like', array( 'href' => $page_static['page_link'] ) ); ?></li>
-							<li><?php $this->load->view( 'website/common/google_plus' ); ?></li>
-							<?php } ?>
-						</ul>
+					<div id="cnt-social">
+						<div class="title">recommend to friends</div>
+						<?php if ($this->config->item('online_widget')) { ?>
+						<div class="soc-fb"><?php $this->load->view( 'website/common/fb_like', array( 'href' => $page_static['page_link'] ) ); ?></div>
+						<div class="soc-plus"><?php $this->load->view( 'website/common/google_plus' ); ?></div>
+						<div class="soc-twitter"><?php $this->load->view( 'website/common/twitter', array( 'href' => $page_static['page_link'] ) ); ?></div>
+						<?php } ?>
+						<div class="clear"></div>
 					</div>
 					
 					<?php	/*

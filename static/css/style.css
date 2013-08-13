@@ -4993,9 +4993,7 @@ article .mejs-container {
 #post_tags {
 	overflow: hidden;
 	margin: 0;
-	padding: 0 0 23px;
-	border-bottom: 3px solid #f0f0f0;
-	margin-bottom: 35px;
+	padding: 0 0 10px;
 }
 #post_tags li {
 	float: left;
