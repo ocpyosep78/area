@@ -44,7 +44,7 @@ class post extends SUEKAREA_Controller {
 			
 			$result = $this->Post_model->update($_POST);
 		} else if ($action == 'get_by_id') {
-			$result = $this->Post_model->get_by_id(array( 'id' => $_POST['id'] ));
+			$result = $this->Post_model->get_by_id(array( 'id' => $_POST['id'], 'tag_include' => true ));
 		} else if ($action == 'delete') {
 			$result = $this->Post_model->delete($_POST);
 		}
