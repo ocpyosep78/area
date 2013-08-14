@@ -54,6 +54,7 @@ class Scrape_Content_model extends CI_Model {
 		// replace
 		$param['field_replace']['name'] = 'ScrapeContent.name';
 		$param['field_replace']['category_name'] = 'Category.name';
+		$param['field_replace']['scrape_master_name'] = 'ScrapeMaster.name';
 		
 		$string_namelike = (!empty($param['namelike'])) ? "AND ScrapeContent.name LIKE '%".$param['namelike']."%'" : '';
 		$string_filter = GetStringFilter($param, @$param['column']);

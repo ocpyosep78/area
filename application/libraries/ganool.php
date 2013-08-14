@@ -138,7 +138,11 @@ class ganool {
 					}
 				}
 				
-				$result .= (empty($result)) ? $value : "\n\n".$value;
+				if ($is_write_single_link) {
+					$result .= (empty($result)) ? $value : "\n".$value;
+				} else {
+					$result .= (empty($result)) ? $value : "\n\n".$value;
+				}
 			}
 		}
 		
