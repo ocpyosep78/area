@@ -22,6 +22,7 @@ if ($is_website) {
 	$route['tag/(:any)'] = "website/tag";
 	$route['ajax'] = "website/ajax";
 	$route['ajax/(:any)'] = "website/ajax";
+	$route['widget/(:any)'] = "website/widget";
 	$route['logout'] = "website/logout";
 	
 	// list post
