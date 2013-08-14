@@ -224,7 +224,7 @@ Ext.onReady(function() {
 								if (param.array_tag != null) {
 									var string_tag = '';
 									for (var i = 0; i < param.array_tag.length; i++) {
-										string_tag += (string_tag == '') ? param.array_tag[i].name : ',' + param.array_tag[i].name;
+										string_tag += (string_tag == '') ? param.array_tag[i].tag_name : ',' + param.array_tag[i].tag_name;
 									}
 									win.tag.setValue(string_tag);
 								}

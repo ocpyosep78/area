@@ -96,6 +96,7 @@ class Tag_model extends CI_Model {
 	
 	function sync($row, $column = array()) {
 		$row = StripArray($row);
+		$row['tag_link'] = base_url('tag/'.$row['alias']);
 		
 		return $row;
 	}

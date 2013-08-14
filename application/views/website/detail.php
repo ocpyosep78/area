@@ -9,7 +9,7 @@
 	}
 	
 	// post detail
-	$post = $this->Post_model->get_by_id(array( 'id' => $post['id'] ));
+	$post = $this->Post_model->get_by_id(array( 'id' => $post['id'], 'tag_include' => true ));
 	
 	$param_post['max_id'] = $post['id'];
 	$param_post['category_id'] = $post['category_id'];
@@ -66,15 +66,13 @@
 					<div class="cnt-download" style="text-align: center; padding: 0 0 15px 0;"></div>
 					<?php } ?>
 					
-					<?php
-					/*
+					<?php if (isset($post['array_tag']) && count($post['array_tag']) > 0) { ?>
 					<ul id="post_tags">
-						<li><a href="http://wpspace.net/?tag=business">Business</a></li>
-						<li><a href="http://wpspace.net/?tag=finance">Finance</a></li>
-						<li><a href="http://wpspace.net/?tag=partners">Partners</a></li>
+						<?php foreach ($post['array_tag'] as $tag) { ?>
+						<li><a href="<?php echo $tag['tag_link']; ?>"><?php echo $tag['tag_name']; ?></a></li>
+						<?php } ?>
 					</ul>
-					*/
-					?>
+					<?php } ?>
 					
 					<div id="cnt-social">
 						<div class="title">recommend to friends</div>
