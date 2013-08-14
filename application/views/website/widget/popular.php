@@ -20,8 +20,9 @@
 	<meta name="title" content="<?php echo $title; ?>" />
 	<meta name="description" content="<?php echo $desc; ?>" />
 	<style type="text/css">
-	#popular .box { width: 300px; border: 1px solid #CCCCCC; }
-	#popular .post { float: left; width: 146px; height: 94px; padding: 1px 2px; }
+	#popular { margin: 0px; padding: 0px; }
+	#popular .box { width: 298px; border: 1px solid #CCCCCC; }
+	#popular .post { float: left; width: 145px; height: 94px; padding: 1px 2px; }
 	#popular .post img { width: 100%; }
 	</style>
 </head>
