@@ -2058,6 +2058,7 @@ a.gal_link:hover span.link-icon {
 	padding-top: 10px;
 	margin-top: 10px;
 	border-top: 1px solid #ededed;
+	height: 65px;
 } 
 .home_category_news .view-all,
 .home_reviews .view-all {
