@@ -30,7 +30,7 @@
 	<div class="box">
 		<?php foreach ($array_popular as $post) { ?>
 		<div class="post">
-			<a href="<?php echo $post['post_link']; ?>" title="<?php echo $post['name']; ?>">
+			<a href="<?php echo $post['post_link']; ?>" title="<?php echo $post['name']; ?>" target="_blank">
 				<img src="<?php echo $post['thumbnail_small_link']; ?>" alt="<?php echo $post['name']; ?>" /></a>
 		</div>
 		<?php } ?>

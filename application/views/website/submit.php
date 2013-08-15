@@ -1,6 +1,9 @@
 <?php
 	$is_login = $this->User_model->is_login();
 	$array_category = $this->Category_model->get_array();
+	
+	// default data
+	$download = (isset($_GET['link'])) ? $_GET['link'] : '';
 ?>
 
 <?php $this->load->view( 'website/common/meta' ); ?>
@@ -38,7 +41,7 @@
 					<div class="clear"></div>
 					
 					<div class="left required">Link Page</div>
-					<div class="right"><input name="download" type="text" value="" maxlength="255" placeholder="Link Halaman Website" /></div>
+					<div class="right"><input name="download" type="text" value="<?php echo $download; ?>" maxlength="255" placeholder="Link Halaman Website" /></div>
 					<div class="clear"></div>
 					
 					<div class="left required">Thumbnail</div>

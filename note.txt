@@ -65,3 +65,5 @@ CREATE TABLE IF NOT EXISTS `tag` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1
 
 ALTER TABLE `scrape_content` ADD `tag` VARCHAR( 255 ) NOT NULL AFTER `thumbnail`;
+
+update submit form via web
