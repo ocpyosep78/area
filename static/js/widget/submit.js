@@ -1,7 +1,7 @@
 (function(){
-	if (web == null) {
+	if (typeof(web) == 'undefined') {
 		var base_url = 'http://suekarea.com/';
-	} else if (web.host == null) {
+	} else if (typeof(web.host) == 'undefined') {
 		var base_url = 'http://suekarea.com/';
 	} else {
 		var base_url = web.host;
