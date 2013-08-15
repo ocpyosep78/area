@@ -39,7 +39,7 @@
     <div id="main" class="right_sidebar"><div class="inner"><div class="general_content clearboth">
 		<div class="main_content hfeed"><div id="primary" class="content-area"><div id="content" class="site-content hentry" role="main">
 			<h2 class="page-title entry-title">
-				<a href="<?php echo $post['post_link']; ?>" alt="<?php echo $post['name']; ?>" title="<?php echo $post['name']; ?>" class="bookmark"><?php echo $post['name']; ?></a>
+				<a href="<?php echo $post['post_link']; ?>" title="<?php echo $post['name']; ?>" class="bookmark"><?php echo $post['name']; ?></a>
 			</h2>
 			
 			<div id="post_content" class="post_content" role="main">

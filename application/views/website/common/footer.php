@@ -44,14 +44,14 @@
 							<div class="article">
 								<?php if (!empty($post['thumbnail_small_link'])) { ?>
 								<div class="pic">
-									<a href="<?php echo $post['post_link']; ?>" class="w_hover" alt="<?php echo $post['name']; ?>" title="<?php echo $post['name']; ?>">
-										<img width="112" height="80" src="<?php echo $post['thumbnail_small_link']; ?>" class="attachment-widget_popular_footer wp-post-image" alt="<?php echo $post['name']; ?>" title="<?php echo $post['name']; ?>" />
+									<a href="<?php echo $post['post_link']; ?>" class="w_hover" title="<?php echo $post['name']; ?>">
+										<img width="112" height="80" src="<?php echo $post['thumbnail_small_link']; ?>" class="attachment-widget_popular_footer wp-post-image" alt="<?php echo $post['name']; ?>" />
 										<span class="overlay"></span>
 									</a>
 								</div>
 								<?php } ?>
 								<div class="text">
-									<p class="title"><a href="<?php echo $post['post_link']; ?>" alt="<?php echo $post['name']; ?>" title="<?php echo $post['name']; ?>"><?php echo $post['name']; ?></a></p>
+									<p class="title"><a href="<?php echo $post['post_link']; ?>" title="<?php echo $post['name']; ?>"><?php echo $post['name']; ?></a></p>
 									<?php
 									/*
 									<div class="icons">

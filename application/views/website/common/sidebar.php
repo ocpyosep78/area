@@ -88,7 +88,7 @@
 				<div class="article">
 					<div class="pic">
 						<a href="<?php echo $array_recent[$i]['post_link']; ?>" class="w_hover img-link img-wrap" title="<?php echo $array_recent[$i]['name']; ?>">
-							<img width="388" height="246" src="<?php echo $array_recent[$i]['thumbnail_small_link']; ?>" class="attachment-recent_news_homepage wp-post-image" alt="1" />
+							<img width="388" height="246" src="<?php echo $array_recent[$i]['thumbnail_small_link']; ?>" class="attachment-recent_news_homepage wp-post-image" />
 							<span class="overlay"></span>
 						</a>
 					</div>
@@ -104,7 +104,7 @@
 				<div class="article">
 					<div class="pic">
 						<a href="<?php echo $array_recent[$i]['post_link']; ?>" title="<?php echo $array_recent[$i]['name']; ?>" class="w_hover img-link img-wrap">
-							<img width="388" height="246" src="<?php echo $array_recent[$i]['thumbnail_small_link']; ?>" class="attachment-recent_news_homepage wp-post-image" alt="1" />
+							<img width="388" height="246" src="<?php echo $array_recent[$i]['thumbnail_small_link']; ?>" class="attachment-recent_news_homepage wp-post-image" />
 							<span class="overlay"></span>
 						</a>
 					</div>
