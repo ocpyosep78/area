@@ -13,17 +13,17 @@ class awsubs {
 		$array_content = new SimpleXmlElement($content);
 		
 		$array_result = array();
-		foreach ($array_content->channel->item as $array) {
+		foreach ($array_content->channel->item as $temp) {
+			$array = (array)$temp;
+			$array['title'] = trim($array['title']);
+			$link_source = $array['link'];
+			
 			// test purpose
 			/*
-			$title = trim((string)$array->title);
-			if ($title != 'Persona: Trinity Soul Episode 3 Subtitle Indonesia') {
+			if ($array['title'] != 'Persona: Trinity Soul Episode 3 Subtitle Indonesia') {
 				continue;
 			}
 			/*	*/
-			
-			// link
-			$link_source = (string)$array->link;
 			
 			// content already exist
 			$check = $this->CI->Scrape_Content_model->get_by_id(array( 'link_source' => $link_source ));
@@ -32,15 +32,17 @@ class awsubs {
 			}
 			
 			// desc
-			$desc = $this->get_desc((string)$array->description);
-			$download = $this->get_download((string)$array->description);
+			$desc = $this->get_desc($array['description']);
+			$download = $this->get_download($array['description']);
+			$image_source = $this->get_image($array['description']);
 			
 			// set to array
 			$temp = array();
-			$temp['name'] = trim((string)$array->title);
+			$temp['name'] = $array['title'];
 			$temp['desc'] = $desc;
 			$temp['download'] = $download;
 			$temp['link_source'] = $link_source;
+			$temp['image_source'] = $image_source;
 			$temp['category_id'] = $scrape['category_id'];
 			$temp['post_type_id'] = $scrape['post_type_id'];
 			$temp['scrape_master_id'] = $scrape['id'];
@@ -120,6 +122,14 @@ class awsubs {
 				$result .= $match[1][$key].' '.$match[2][$key]."\n";
 			}
 		}
+		
+		return $result;
+	}
+	
+	function get_image($content) {
+		$content = preg_replace('/(border|height|width)\=\"\d+\"/i', '', $content);
+		preg_match('/<img +src=\"([^\"]+)\"/i', $content, $match);
+		$result = (isset($match[1]) && !empty($match[1])) ? $match[1] : '';
 		
 		return $result;
 	}

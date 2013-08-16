@@ -14,6 +14,7 @@ class alibaba {
 		$array_result = array();
 		foreach ($array_content->channel->item as $array_temp) {
 			$array = (array)$array_temp;
+			$array['title'] = trim($array['title']);
 			$link_source = $array['link'];
 			
 			// content already exist
@@ -24,8 +25,7 @@ class alibaba {
 			
 			// test purpose
 			/*	
-			$title = trim($array['title']);
-			if ($title != 'Kiniro Mosaic Episode 6 Subtitle Indonesia') {
+			if ($array['title'] != 'Kiniro Mosaic Episode 6 Subtitle Indonesia') {
 				continue;
 			}
 			/*	*/
@@ -53,7 +53,7 @@ class alibaba {
 			$array_result[] = $temp;
 			
 			// add limit
-			if (count($array_result) >= 10) {
+			if (count($array_result) >= 5) {
 				break;
 			}
 		}
@@ -76,10 +76,15 @@ class alibaba {
 		$content = str_replace(array('Sebagai downloader yang baik tentunya tahu apa yang harus dilakukan, dan jangan lupa untuk selalu meninggalkan jejak di blog ini!'), '', $content);
 		$content = preg_replace('/Silahkan download [a-z0-9 ]+ di bawah ini:/i', '', $content);
 		
-		// additional ofset
+		// additional start offset
 		$offset = '</header>';
 		$pos_first = strpos($content, $offset);
 		$content = substr($content, $pos_first, strlen($content) - $pos_first);
+		
+		// additional end offset
+		$offset = '<div class="bottomad">';
+		$pos_end = strpos($content, $offset);
+		$content = substr($content, 0, $pos_end);
 		
 		// make it clean
 		$temp = trim(strip_tags($content));

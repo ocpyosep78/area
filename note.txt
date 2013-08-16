@@ -35,5 +35,3 @@ Makin Bunawas	:		410 Friend
 
 Uchouten Kazoku														: 7.37
 Watashi ga Motenai no wa Dou Kangaetemo Omaera ga Warui!			: 7.85
-
-update submit form via web
