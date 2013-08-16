@@ -90,13 +90,6 @@ class unduhfilm21 {
 			foreach ($match[1] as $key => $value) {
 				$link = $match[1][$key];
 				$label = $match[2][$key];
-				
-				// check link
-				$array_link = parse_url($link);
-				if (isset($array_link['host']) && $array_link['host'] == 'www.narutobleachlover.net') {
-					continue;
-				}
-				
 				$result .= $link.' '.$label."\n";
 			}
 		}

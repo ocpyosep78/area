@@ -5,12 +5,6 @@ Link :
 - http://localhost/suekarea/trunk/contact
 - http://localhost/suekarea/trunk/full-page
 
-AWSubs : Contoh Scrape salah :
-Producers: Silver Link, Sentai FilmworksLGenres: Action, Comedy, Fantasy, Magic
-Translator: Hebbi
-TLC: Genkaku14Kara Effect: Naufal
-Uploader: Slametb111
-
 --------------------------------------------------------------------------------------------------------------------
 
 First at alexa : 23,869,144 2013-08-10
@@ -35,3 +29,6 @@ Makin Bunawas	:		410 Friend
 
 Uchouten Kazoku														: 7.37
 Watashi ga Motenai no wa Dou Kangaetemo Omaera ga Warui!			: 7.85
+
+--------------------------------------------------------------------------------------------------------------------
+
