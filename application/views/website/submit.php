@@ -44,6 +44,10 @@
 					<div class="right"><input name="download" type="text" value="<?php echo $download; ?>" maxlength="255" placeholder="Link Halaman Website" /></div>
 					<div class="clear"></div>
 					
+					<div class="left">Tag</div>
+					<div class="right"><input name="tag" type="text" value="" maxlength="255" placeholder="Tag Halaman Anda (pisahkan dengan tanda koma)" /></div>
+					<div class="clear"></div>
+					
 					<div class="left required">Thumbnail</div>
 					<div class="right">
 						<input name="browse" type="button" value="Browse" style="float: right; width: 125px; height: 29px; padding: 0px;" />

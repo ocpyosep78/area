@@ -49,7 +49,7 @@ class submit extends CI_Controller {
 			$post = $this->Post_model->get_by_id(array( 'id' => $result['id'] ));
 			$result['redirect'] = $post['post_link'];
 		}
-		exit;
+		
 		echo json_encode($result);
     }
 }

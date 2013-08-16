@@ -12,7 +12,11 @@ class Post_model extends CI_Model {
 
     function update($param) {
         $result = array();
-       
+		
+		if (isset($param['download'])) {
+			$param['download'] = trim($param['download']);
+		}
+		
         if (empty($param['id'])) {
             $insert_query  = GenerateInsertQuery($this->field, $param, POST);
             $insert_result = mysql_query($insert_query) or die(mysql_error());
