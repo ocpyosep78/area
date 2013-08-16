@@ -41,7 +41,7 @@
 					<div class="clear"></div>
 					
 					<div class="left required">Link Page</div>
-					<div class="right"><input name="download" type="text" value="<?php echo $download; ?>" maxlength="255" placeholder="Link Halaman Website" /></div>
+					<div class="right"><input name="used_link" type="text" value="<?php echo $download; ?>" maxlength="255" placeholder="Link Halaman Website" /></div>
 					<div class="clear"></div>
 					
 					<div class="left">Tag</div>

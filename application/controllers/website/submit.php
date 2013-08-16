@@ -22,7 +22,12 @@ class submit extends CI_Controller {
 		// user
 		$is_login = $this->User_model->is_login();
 		$user = $this->User_model->get_session();
-		$post_download = $this->Post_model->get_by_id(array( 'download' => $_POST['download'] ));
+		
+		// fix bug idwebhost
+		$param = $_POST;
+		$param['download'] = $param['used_link'];
+		
+		$post_download = $this->Post_model->get_by_id(array( 'download' => $param['download'] ));
 		
 		if (! $is_login) {
 			$result = array( 'status' => false, 'message' => 'Session Anda sudah berakhir, silahkan login kembali.' );
@@ -36,7 +41,6 @@ class submit extends CI_Controller {
 		
 		$result = array( 'status' => false );
 		if ($action == 'update') {
-			$param = $_POST;
 			$param['user_id'] = $user['id'];
 			$param['desc'] = nl2br(strip_tags($_POST['desc']));
 			$param['post_type_id'] = POST_TYPE_SINGLE_LINK;

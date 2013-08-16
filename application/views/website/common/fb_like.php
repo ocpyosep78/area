@@ -1,5 +1,8 @@
 <?php
 	$href = (empty($href)) ? base_url() : $href;
+	
+	// hack
+	$href = 'https://www.facebook.com/suekarea';
 ?>
 
 <div id="fb-root"></div>
