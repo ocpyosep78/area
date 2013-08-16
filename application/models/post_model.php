@@ -137,6 +137,16 @@ class Post_model extends CI_Model {
     }
 	
     function delete($param) {
+		// detele image
+		if (isset($param['id'])) {
+			$post = $this->get_by_id(array( 'id' => $param['id'] ));
+			$image_path = $this->config->item('base_path') . '/static/upload/';
+			$image_source = $image_path . $post['thumbnail'];
+			$image_small = preg_replace('/\.(jpg|jpeg|png|gif)/i', '_s.$1', $image_source);
+			@unlink($image_source);
+			@unlink($image_small);
+		}
+		
 		$delete_query  = "DELETE FROM ".POST." WHERE id = '".$param['id']."' LIMIT 1";
 		$delete_result = mysql_query($delete_query) or die(mysql_error());
 		

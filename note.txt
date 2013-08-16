@@ -5,12 +5,6 @@ Link :
 - http://localhost/suekarea/trunk/contact
 - http://localhost/suekarea/trunk/full-page
 
-Halaman List Post => Title untuk tag a belum ada
-
-Buat Tag
-
-Buat Paste Bin & Addfly dll, nanti digeneratekan htmlnya
-
 AWSubs : Contoh Scrape salah :
 Producers: Silver Link, Sentai FilmworksLGenres: Action, Comedy, Fantasy, Magic
 Translator: Hebbi
@@ -19,8 +13,9 @@ Uploader: Slametb111
 
 --------------------------------------------------------------------------------------------------------------------
 
-First at alexa : 23,869,144
+First at alexa : 23,869,144 2013-08-10
 First at alexa :  8,429,043 2013-08-13
+First at alexa :  8,502,494 2013-08-16
 
 Facebook :
 Sehari => 5 add friend pagi + 5 sore termasuk teman yang "request friend"
@@ -38,32 +33,7 @@ Tersangka 2		:		450 Friend
 Bunga Low		: 		463 Friend
 Makin Bunawas	:		410 Friend
 
-Uchouten Kazoku			: 7.37
-
-Pebaiki Layout Panel
-
-Klo ada post yang dihapus, maka dia hapus gambarnya juga
-
-
 Uchouten Kazoku														: 7.37
 Watashi ga Motenai no wa Dou Kangaetemo Omaera ga Warui!			: 7.85
-
-CREATE TABLE IF NOT EXISTS `post_tag` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `post_id` int(11) NOT NULL,
-  `tag_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
-
-
-
-CREATE TABLE IF NOT EXISTS `tag` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `alias` varchar(100) NOT NULL,
-  `name` varchar(100) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1
-
-ALTER TABLE `scrape_content` ADD `tag` VARCHAR( 255 ) NOT NULL AFTER `thumbnail`;
 
 update submit form via web
