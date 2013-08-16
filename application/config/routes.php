@@ -10,7 +10,7 @@ if (count($array_arg) >= 1) {
 	$key = $array_arg[0];
 	if (in_array($key, array( 'panel' ))) {
 		$is_website = false;
-	} else if (in_array($key, array( 'full-page', 'about-us', 'privacy-policy', 'advertising' ))) {
+	} else if (in_array($key, array( 'full-page', 'about-us', 'privacy-policy', 'advertising', 'referer' ))) {
 		$is_other_page = true;
 	}
 }

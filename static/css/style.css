@@ -3171,6 +3171,9 @@ a.gal_link:hover span.link-icon {
 .block_social_footer li a.pin {
 	background: url(../img/footer-pin-icon.png) 0 0 no-repeat;
 }
+.block_social_footer li a.referer {
+	background: url(../img/footer-referer-icon.png) 0 0 no-repeat;
+}
 .block_social_footer li a:hover {
 	background-position: 0 bottom;
 }

@@ -32,3 +32,5 @@ Watashi ga Motenai no wa Dou Kangaetemo Omaera ga Warui!			: 7.85
 
 --------------------------------------------------------------------------------------------------------------------
 
+Referer ini : Kita mau pakai referer atau tidak ?
+Rencananya suekarea punya 1 account, tapi ini ambil nya dari referer site

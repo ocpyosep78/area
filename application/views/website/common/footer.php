@@ -26,6 +26,7 @@
 					<li><a href="https://twitter.com/Suekarea" class="tw" title="Suekarea Twitter">Twitter</a></li>
 					<li><a href="<?php echo base_url('rss'); ?>" class="rss" title="Popular RSS">RSS</a></li>
 					<li><a href="<?php echo base_url('rss/latest'); ?>" class="rss" title="Latest RSS">RSS</a></li>
+					<li><a href="<?php echo base_url('referer'); ?>" class="referer" title="Referer">Referer</a></li>
 				</ul>
 			</div>
 		</div>
