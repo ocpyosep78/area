@@ -24,8 +24,8 @@ class alibaba {
 			}
 			
 			// test purpose
-			/*	
-			if ($array['title'] != 'Kiniro Mosaic Episode 6 Subtitle Indonesia') {
+			/*
+			if ($array['title'] != 'Gatchaman Crowds Episode 6 Subtitle Indonesia') {
 				continue;
 			}
 			/*	*/
@@ -112,7 +112,7 @@ class alibaba {
 		
 		// make it consistent
 		$content = preg_replace('/<\/a>\s?\/\s?<a /i', '</a> / <a ', $content);
-		$content = preg_replace('/(480|720)p?\s*=\s*/i', "$1 ", $content);
+		$content = preg_replace('/(480|720)p?\s*[=:]\s*/i', "$1 ", $content);
 		$content = str_replace(' target="_blank"', "", $content);
 		
 		$result = '';

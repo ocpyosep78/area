@@ -85,6 +85,7 @@
 			<li class=""><a href="<?php echo base_url('contact'); ?>">Contact us</a></li>
 			<li class=""><a href="<?php echo base_url('privacy-policy'); ?>">Privacy Policy</a></li>
 			<li class=""><a href="<?php echo base_url('advertising'); ?>">Advertising</a></li>
+			<li class=""><a href="<?php echo base_url('widget'); ?>">Widget</a></li>
 		</ul>
 		<div class="copyright">
 			<div class="footer_text">© 2013. All Rights Reserved. Created by suekarea</div>
