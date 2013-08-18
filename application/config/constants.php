@@ -28,6 +28,7 @@ define('USER_TYPE_MEMBER',						2);
 define('CATEGORY',								'category');
 define('COMMENT',								'comment');
 define('CONTACT',								'contact');
+define('LINK_SHORT',							'link_short');
 define('PAGE_STATIC',							'page_static');
 define('POST',									'post');
 define('POST_TAG',								'post_tag');
