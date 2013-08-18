@@ -7,7 +7,7 @@ if ($_SERVER['SERVER_NAME'] == 'localhost') {
 	$db['default']['hostname'] = 'localhost';
 	$db['default']['username'] = 'root';
 	$db['default']['password'] = '';
-	$db['default']['database'] = 'suekarea_bd';
+	$db['default']['database'] = 'suekarea_db';
 } else if ($_SERVER['SERVER_NAME'] == 'suekarea.com' || $_SERVER['SERVER_NAME'] == 'www.suekarea.com') {
 	$db['default']['hostname'] = 'localhost';
 	$db['default']['username'] = 'suekare1_315';

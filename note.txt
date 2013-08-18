@@ -34,3 +34,25 @@ Watashi ga Motenai no wa Dou Kangaetemo Omaera ga Warui!			: 7.85
 
 Referer ini : Kita mau pakai referer atau tidak ?
 Rencananya suekarea punya 1 account, tapi ini ambil nya dari referer site
+
+
+http://www.nekonime.com/
+http://ten-subs.blogspot.com/
+http://gamaku14.blogspot.com/
+http://animerex.web.id/
+http://www.ostanimelover.com/
+
+Fansubsupdate : untuk ngecek fansub mana yang paling cepet update
+Di Post tambah nama user nya (sapa tau ada user yang baru submit)
+
+Untuk website yang traffictnya lebih tinggi, kita pakai blogspot untuk tempat posting mereka
+Untuk website yang traffictnya lebih rendah, kita pakai post dengan type single agar langsung redirect ke mereka
+
+Referernya belum selesai (kurang logo)
+Widget Logonya belum selesai
+Halaman Widnget nya belum selesai
+
+Scrape tidak dapat link download : http://www.alibabasub.net/2013/08/gatchaman-crowds-episode-6-subtitle-indonesia.html
+Ini juga ngak jalan scrape nya : http://www.cupux-movie.com/2013/08/when-lights-went-out-2012-brrip.html
+
+Adfly shink on suekarea
