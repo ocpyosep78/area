@@ -113,7 +113,8 @@ class User_model extends CI_Model {
 					array( 'Title' => 'Scrape', 'Link' => base_url('panel/content/scrape') ),
 					array( 'Title' => 'Comment', 'Link' => base_url('panel/content/comment') ),
 					array( 'Title' => 'Request', 'Link' => base_url('panel/content/request') ),
-					array( 'Title' => 'Contact', 'Link' => base_url('panel/content/contact') )
+					array( 'Title' => 'Contact', 'Link' => base_url('panel/content/contact') ),
+					array( 'Title' => 'Shink Link', 'Link' => base_url('panel/content/shink_link') )
 				)
 			),
 			array(

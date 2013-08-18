@@ -224,6 +224,18 @@ var Store = {
 		var Store = ['Cancel', 'Ongoing', 'Done'];
 		return Store;
 	},
+	LinkShort: function() {
+		var Store = new Ext.create('Ext.data.Store', {
+			fields: ['id', 'name'],
+			autoLoad: true, proxy: {
+				type: 'ajax', extraParams: { action: 'link_short' },
+				url: URLS.base + 'panel/combo',
+				reader: { type: 'json', root: 'res' },
+				actionMethods: { read: 'POST' }
+			}
+		});
+		return Store;
+	},
 	PostType: function() {
 		var Store = new Ext.create('Ext.data.Store', {
 			fields: ['id', 'name'],
@@ -276,6 +288,15 @@ var Combo = {
 		CommentStatus: function(Param) {
 			var p = {
 				xtype: 'combo', store: Store.CommentStatus(), selectOnFocus: true, readonly: true, editable: false
+			}
+			p = Func.SyncComboParam(p, Param);
+			
+			return p;
+		},
+		LinkShort: function(Param) {
+			var p = {
+				xtype: 'combo', store: Store.LinkShort(), minChars: 1, selectOnFocus: true,
+				valueField: 'id', displayField: 'name', readonly: true, editable: false
 			}
 			p = Func.SyncComboParam(p, Param);
 			
@@ -335,6 +356,10 @@ Combo.Class = {
 	},
 	CommentStatus: function(Param) {
 		var c = new Ext.form.ComboBox(Combo.Param.CommentStatus(Param));
+		return c;
+	},
+	LinkShort: function(Param) {
+		var c = new Ext.form.ComboBox(Combo.Param.LinkShort(Param));
 		return c;
 	},
 	PostType: function(Param) {

@@ -13,7 +13,7 @@ Ext.onReady(function() {
         sorters: [{ property: 'create_date', direction: 'DESC' }],
 		fields: [
 			'id', 'user_id', 'category_id', 'category_name', 'post_type_id', 'post_type_name', 'alias', 'name', 'desc', 'create_date',
-			'publish_date', 'view_count', 'post_link', 'is_hot', 'is_popular'
+			'publish_date', 'view_count', 'post_link', 'is_hot', 'is_popular', 'user_fullname'
 		],
 		proxy: {
 			type: 'ajax',
@@ -27,10 +27,11 @@ Ext.onReady(function() {
 		features: [{ ftype: 'filters', encode: true, local: false }],
 		columns: [ {
 					header: 'Judul', dataIndex: 'name', sortable: true, filter: true, width: 200, flex: 1
-			}, {	header: 'Kategori', dataIndex: 'category_name', sortable: true, filter: true, width: 200
-			}, {	header: 'Tipe Post', dataIndex: 'post_type_name', sortable: true, filter: true, width: 100
+			}, {	header: 'User', dataIndex: 'user_fullname', sortable: true, filter: true, width: 100
+			}, {	header: 'Kategori', dataIndex: 'category_name', sortable: true, filter: true, width: 75
+			}, {	header: 'Tipe Post', dataIndex: 'post_type_name', sortable: true, filter: true, width: 75
 			}, {	header: 'Publish', dataIndex: 'publish_date', sortable: true, filter: true, width: 150, align: 'center'
-			}, {	header: 'Dilihat', dataIndex: 'view_count', sortable: true, filter: true, width: 100, align: 'right'
+			}, {	header: 'Dilihat', dataIndex: 'view_count', sortable: true, filter: true, width: 60, align: 'right'
 			}, {	header: 'Hot', xtype: 'actioncolumn', width: 75, align: 'center',
 					items: [ {
 						getClass: function(v, meta, rec) {
