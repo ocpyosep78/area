@@ -36,20 +36,47 @@ Watashi ga Motenai no wa Dou Kangaetemo Omaera ga Warui!			: 7.85
 Referer ini : Kita mau pakai referer atau tidak ?
 Rencananya suekarea punya 1 account, tapi ini ambil nya dari referer site
 
+--------------------------------------------------------------------------------------------------------------------
 
-http://www.nekonime.com/
-http://ten-subs.blogspot.com/
-http://gamaku14.blogspot.com/
-http://animerex.web.id/
-http://www.ostanimelover.com/
-
-http://sandisubs.blogspot.com/			 1,786,624
-http://www.gantzid.net/					 2,802,844
 http://eternity-fansubs.blogspot.com/	10,997,494
+http://bishounen-team.blogspot.com/		 8,386,314
+http://shirosubs.blogspot.com/			 6,722,689
+http://lolisubs-hendro.blogspot.com/	 5,024,097
+http://www.shuhensubs.com/				 3,705,465
+http://ten-subs.blogspot.com/			 3,685,599
+http://www.gantzid.net/					 2,802,844
+http://animerex.web.id/					 2,567,183
+http://izaraesubs.blogspot.com/			 2,515,774
+http://ngepetsub.blogspot.com/			 2,489,226
+http://www.upiysub.us/					 2,184,980
+http://aoisorasubs.blogspot.com/		 1,764,893
+http://sandisubs.blogspot.com/			 1,786,624
+http://www.indonesia-coder.org/			 1,581,357
 http://subskun.com/						 1,552,770
-http://www.eater-team.com/				   319,144
-http://www.zagarer.com/					 1,000,308
+http://www.cybercropz.net/				 1,421,040
 http://www.antifansub.com/				 1,005,680
+http://www.zagarer.com/					 1,000,308
+http://mirai-team.blogspot.com/			   901,523
+http://zura-subs.blogspot.com/			   863,026
+http://www.ostanimelover.com/			   781,796
+http://www.metroanime.us/				   772,839
+http://www.hidesubs.com/				   767,544
+http://animeslash.blogspot.com/			   756,107
+http://tiramisubs.blogspot.com/			   734,844
+http://wizardsub.blogspot.com/			   645,373
+http://www.jalsubs.com/					   519,646
+http://www.mahasiswa-padang.com/		   514,372
+http://www.nekonime.com/				   497,222
+http://www.nsif.org/					   447,923
+http://www.kaorinusantara.web.id/		   384,659
+http://www.eater-team.com/				   319,144
+http://anime.greatz.us/					   no data
+http://gamaku14.blogspot.com/              no data
+
+--------------------------------------------------------------------------------------------------------------------
+
+http://www.wholinks2me.com/ => checker paling update untuk ranking alexa
+Pastikan 1 halaman kemiliki 1 keyword yang diincar sebagai identitas halaman itu
 
 Fansubsupdate : untuk ngecek fansub mana yang paling cepet update
 Di Post tambah nama user nya (sapa tau ada user yang baru submit)
@@ -60,5 +87,3 @@ Untuk website yang traffictnya lebih rendah, kita pakai post dengan type single 
 Referernya belum selesai (kurang logo)
 Widget Logonya belum selesai (kurang logo)
 Halaman Widnget nya belum selesai (kurang logo)
-
-Adfly shink on suekarea
