@@ -24,8 +24,8 @@ class alibaba {
 			}
 			
 			// test purpose
-			/*
-			if ($array['title'] != 'Gatchaman Crowds Episode 6 Subtitle Indonesia') {
+			/*	
+			if ($array['title'] != 'Makai Ouji: Devils and Realist Episode 7 Subtitle Indonesia') {
 				continue;
 			}
 			/*	*/
@@ -113,14 +113,14 @@ class alibaba {
 		// make it consistent
 		$content = preg_replace('/<\/a>\s?\/\s?<a /i', '</a> / <a ', $content);
 		$content = preg_replace('/(480|720)p?\s*[=:]\s*/i', "$1 ", $content);
-		$content = str_replace(' target="_blank"', "", $content);
+		$content = preg_replace('/(title|class|rel|target)="[a-z \-\_]*"/i', '', $content);
 		
 		$result = '';
-		preg_match_all('/(480|720) (<a href=\"([^\"]+)\">([a-z0-9 ]+)<\/a>( \/ )*)*/i', $content, $match);
+		preg_match_all('/(480|720) (<a href=\"([^\"]+)\" *>([a-z0-9 ]+)<\/a>( \/ )*)*/i', $content, $match);
 		if (is_array($match[0]) && count($match[0]) > 0) {
 			foreach ($match[0] as $key => $raw_value) {
 				$label = $match[1][$key];
-				preg_match_all('/<a href=\"([^\"]+)\">([a-z0-9 ]+)<\/a>/i', $raw_value, $raw_link);
+				preg_match_all('/<a href=\"([^\"]+)\" *>([a-z0-9 ]+)<\/a>/i', $raw_value, $raw_link);
 				
 				if (is_array($raw_link[0]) && count($raw_link[0]) > 0) {
 					$result .= (empty($result)) ? $label."\n" : "\n".$label."\n";
