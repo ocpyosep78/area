@@ -435,9 +435,6 @@
 	.recent_news_home .block_home_post + .block_home_post {
 		margin-left: 12px;
 	}
-	a.w_hover span.link-icon {
-		background: url(../images/img-small-icon.png) center center no-repeat;
-	}
 	a.w_hover.gal_link span.link-icon {
 		background: url(../images/gallery-icon.png) center center no-repeat;
 	}
@@ -465,8 +462,8 @@
 	.home_reviews .block_home_post.first-post,
 	.home_reviews .block_home_post.bd-bot {
 		display: block;
-		padding-bottom: 17px;
-		margin-bottom: 14px;
+		padding-bottom: 0;
+		margin-bottom: 0;
 	}
 	.home_reviews .block_home_post.bd-bot + .bd-bot,
 	.home_category_news .block_home_post.bd-bot + .bd-bot {

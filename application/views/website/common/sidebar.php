@@ -39,39 +39,27 @@
 <?php } ?>
 
 <aside id="news-combine-widget-2" class="widget widget_news_combine">
-	<div class="widget_header">
-		<h3 class="widget_title">Main News</h3>
-	</div>
+	<div class="widget_header"><h3 class="widget_title">Main News</h3></div>
 	<div class="widget_body">
 		<div class="block_news_tabs">
-			<div class="tabs">
-				<ul>
-					<li><a href="#1" class="current"><span>Latest</span></a></li>
-					<li><a href="#2"><span>Popular</span></a></li>
-				</ul>
-			</div>
-		 
-			<div class="tab_content" id="1">
-				<?php for ($i = 0; $i < 8; $i++) { ?>
-				<div class="block_home_news_post">
-					<p class="title"><a href="<?php echo $array_recent[$i]['post_link']; ?>" title="<?php echo $array_recent[$i]['name']; ?>"><?php echo $array_recent[$i]['name']; ?></a></p>
-				</div>
-				<?php } ?>
-			</div>
-			
-			<div class="tab_content">
-				<?php for ($i = 0; $i < 8; $i++) { ?>
-				<div class="block_home_news_post">
-					<p class="title"><a href="<?php echo $array_popular[$i]['post_link']; ?>" title="<?php echo $array_popular[$i]['name']; ?>"><?php echo $array_popular[$i]['name']; ?></a></p>
-				</div>
-				<?php } ?>
-			</div>
-			
-			<script type="text/javascript">
-				jQuery(document).ready(function() {
-					jQuery('.block_news_tabs').tabs('div.tab_content', { tabs: 'div.tabs a', initialIndex: 0 });
-				});
-			</script>
+<div class="tabs">
+	<ul>
+		<li><a href="#1" class="current"><span>Latest</span></a></li>
+		<li><a href="#2"><span>Popular</span></a></li>
+	</ul>
+</div>
+
+<div class="tab_content" id="1">
+	<?php for ($i = 0; $i < 8; $i++) { ?>
+	<div class="block_home_news_post"><p class="title"><a href="<?php echo $array_recent[$i]['post_link']; ?>" title="<?php echo $array_recent[$i]['name']; ?>"><?php echo $array_recent[$i]['name']; ?></a></p></div>
+	<?php } ?>
+</div>
+
+<div class="tab_content">
+	<?php for ($i = 0; $i < 8; $i++) { ?>
+	<div class="block_home_news_post"><p class="title"><a href="<?php echo $array_popular[$i]['post_link']; ?>" title="<?php echo $array_popular[$i]['name']; ?>"><?php echo $array_popular[$i]['name']; ?></a></p></div>
+	<?php } ?>
+</div>
 		</div>
 	</div>
 </aside>
@@ -82,53 +70,44 @@
 		<h3 class="widget_title">Recent posts</h3>
 	</div>
 	<div class="widget_body">
-		<ul class="slides">
-			<li>
-				<?php for ($i = 8; $i < 13; $i++) { ?>
-				<div class="article">
-					<div class="pic">
-						<a href="<?php echo $array_recent[$i]['post_link']; ?>" class="w_hover img-link img-wrap" title="<?php echo $array_recent[$i]['name']; ?>">
-							<img width="388" height="246" src="<?php echo $array_recent[$i]['thumbnail_small_link']; ?>" class="attachment-recent_news_homepage wp-post-image" />
-							<span class="overlay"></span>
-						</a>
-					</div>
-					<div class="text">
-						<p class="title"><a href="<?php echo $array_recent[$i]['post_link']; ?>" title="<?php echo $array_recent[$i]['name']; ?>"><?php echo $array_recent[$i]['name']; ?></a></p>
-						<div class="desc">by <a href="<?php echo $array_recent[$i]['post_link']; ?>"><?php echo $array_recent[$i]['user_fullname']; ?></a></div>
-					</div>
-				</div>
-				<?php } ?>
-			</li>
-			<li>
-				<?php for ($i = 13; $i < 18; $i++) { ?>
-				<div class="article">
-					<div class="pic">
-						<a href="<?php echo $array_recent[$i]['post_link']; ?>" title="<?php echo $array_recent[$i]['name']; ?>" class="w_hover img-link img-wrap">
-							<img width="388" height="246" src="<?php echo $array_recent[$i]['thumbnail_small_link']; ?>" class="attachment-recent_news_homepage wp-post-image" />
-							<span class="overlay"></span>
-						</a>
-					</div>
-					<div class="text">
-						<p class="title"><a href="<?php echo $array_recent[$i]['post_link']; ?>" title="<?php echo $array_recent[$i]['name']; ?>"><?php echo $array_recent[$i]['name']; ?></a></p>
-						<div class="desc">by <a href="<?php echo $array_recent[$i]['post_link']; ?>"><?php echo $array_recent[$i]['user_fullname']; ?></a></div>
-					</div>
-				</div>
-				<?php } ?>
-			</li>
-		</ul>
-		<div class="pages_info">
-			<span class="cur_page">1</span> of <span class="all_pages">2</span>
-		</div>
+<ul class="slides">
+<li>
+<?php for ($i = 8; $i < 13; $i++) { ?>
+<div class="article">
+	<div class="pic">
+		<a href="<?php echo $array_recent[$i]['post_link']; ?>" class="w_hover img-link img-wrap" title="<?php echo $array_recent[$i]['name']; ?>">
+			<img width="388" height="246" src="<?php echo $array_recent[$i]['thumbnail_small_link']; ?>" />
+			<span class="overlay"></span>
+		</a>
 	</div>
-	<script type="text/javascript">
-		var curSlide = 1;
-		jQuery(document).ready(function() {
-			jQuery(".widget_recent_blogposts .widget_body").flexslider({
-				animation: "fade", slideshow: false, controlNav: false, directionNav: true, prevText:"", nextText:"",
-				smoothHeight: true, controlsContainer: ".flex-container", after: function(slider) { jQuery(".widget_recent_blogposts .cur_page").eq(0).html(slider.currentSlide + 1); }
-			});
-		});
-	</script>
+	<div class="text">
+		<p class="title"><a href="<?php echo $array_recent[$i]['post_link']; ?>" title="<?php echo $array_recent[$i]['name']; ?>"><?php echo $array_recent[$i]['name']; ?></a></p>
+		<div class="desc">by <a href="<?php echo $array_recent[$i]['post_link']; ?>"><?php echo $array_recent[$i]['user_fullname']; ?></a></div>
+	</div>
+</div>
+<?php } ?>
+</li>
+<li>
+<?php for ($i = 13; $i < 18; $i++) { ?>
+<div class="article">
+	<div class="pic">
+		<a href="<?php echo $array_recent[$i]['post_link']; ?>" title="<?php echo $array_recent[$i]['name']; ?>" class="w_hover img-link img-wrap">
+			<img width="388" height="246" src="<?php echo $array_recent[$i]['thumbnail_small_link']; ?>" />
+			<span class="overlay"></span>
+		</a>
+	</div>
+	<div class="text">
+		<p class="title"><a href="<?php echo $array_recent[$i]['post_link']; ?>" title="<?php echo $array_recent[$i]['name']; ?>"><?php echo $array_recent[$i]['name']; ?></a></p>
+		<div class="desc">by <a href="<?php echo $array_recent[$i]['post_link']; ?>"><?php echo $array_recent[$i]['user_fullname']; ?></a></div>
+	</div>
+</div>
+<?php } ?>
+</li>
+</ul>
+<div class="pages_info">
+	<span class="cur_page">1</span> of <span class="all_pages">2</span>
+</div>
+	</div>
 </aside>
 
 <?php if ($this->config->item('online_widget') && false) { ?>
