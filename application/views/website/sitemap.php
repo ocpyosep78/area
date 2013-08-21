@@ -5,7 +5,7 @@
 	
 	$param_post['year'] = $year;
 	$param_post['month'] = $month;
-	$param_post['limit'] = 500;
+	$param_post['limit'] = 1000;
 	$array_post = $this->Post_model->get_array($param_post);
 	
 	header('content-type: application/xhtml+xml; charset=utf-8');
