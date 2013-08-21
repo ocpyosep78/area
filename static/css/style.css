@@ -3281,6 +3281,7 @@ form .result p.error_item:first {
 .cursor  { cursor: pointer; }
 .c_message { color: #666666; border: 1px solid #D29898; background: linear-gradient(to bottom, #FFFFFF 0%, #D29898 100%); margin: 0px; padding: 10px 20px; }
 .validation .error { padding: 5px 0 0 0; color: #E50700; }
+.blocking { background:#CCC; padding: 10px 10px 10px 20px; margin-bottom: 10px; }
 .link-download {
 	text-decoration: none; background: linear-gradient(#FFFFFF 0%, #F5F5F5 100%) repeat scroll 0 0 transparent; border: 1px solid #CDD0D1;
     border-radius: 2px 2px 2px 2px; box-shadow: 1px 1px rgba(0, 0, 0, 0.05); color: #6D6D6D !important; font-size: 12px;
