@@ -14,9 +14,9 @@
 <?php foreach ($tag_meta as $meta) { ?>
 <meta property="<?php echo $meta['property']; ?>" content="<?php echo $meta['content']; ?>">
 <?php } ?>
-<meta name="title" content="<?php echo $title; ?>" />
-<meta name="description" content="<?php echo $desc; ?>" />
-<title><?php echo $title; ?></title>
+<meta name="title" content="<?php echo htmlspecialchars($title); ?>" />
+<meta name="description" content="<?php echo htmlspecialchars($desc); ?>" />
+<title><?php echo htmlspecialchars($title); ?></title>
 <link href="https://plus.google.com/114002599803233293136/posts" rel="author"/>
 <link rel="stylesheet" type="text/css" media="all" id="primetime-style-css" href="<?php echo base_url('static/css/style.css'); ?>" />
 <link rel="stylesheet" type="text/css" media="all" id="responsive-css" href="<?php echo base_url('static/css/responsive.css'); ?>" />

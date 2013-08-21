@@ -11,9 +11,13 @@
 	$param_popular['publish_date'] = $this->config->item('current_datetime');
 	$param_popular['sort'] = '[{"property":"publish_date","direction":"DESC"}]';
 	$array_popular = $this->Post_model->get_array($param_popular);
+	
+	// meta
+	$title = 'Suekarea - '.$page_static['name'];
+	$desc = 'Suekarea - '.get_length_char(strip_tags($page_static['desc']), 125, ' ...');
 ?>
 
-<?php $this->load->view( 'website/common/meta' ); ?>
+<?php $this->load->view( 'website/common/meta', array( 'title' => $title, 'desc' => $desc ) ); ?>
 
 <body class="blog boxed pattern-1 navigation-style-1">
 

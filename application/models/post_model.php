@@ -98,7 +98,7 @@ class Post_model extends CI_Model {
 		$param['field_replace']['category_name'] = 'Category.name';
 		
 		$string_is_hot = (isset($param['is_hot'])) ? "AND Post.is_hot = '".$param['is_hot']."'" : '';
-		$string_is_popular = (isset($param['is_popular'])) ? "AND Post.is_popular = '".$param['is_popular']."'" : '';
+		$string_is_popular = (!empty($param['is_popular'])) ? "AND Post.is_popular = '1'" : '';
 		$string_month = (isset($param['month'])) ? "AND MONTH(Post.create_date) = '".$param['month']."'" : '';
 		$string_year = (isset($param['year'])) ? "AND YEAR(Post.create_date) = '".$param['year']."'" : '';
 		$string_namelike = (!empty($param['namelike'])) ? "AND Post.name LIKE '%".$param['namelike']."%'" : '';

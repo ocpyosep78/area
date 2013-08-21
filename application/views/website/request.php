@@ -2,7 +2,7 @@
 	$is_login = $this->User_model->is_login();
 ?>
 
-<?php $this->load->view( 'website/common/meta' ); ?>
+<?php $this->load->view( 'website/common/meta', array( 'title' => 'Suekarea - Request', 'desc' => 'Suekarea - Request Form' ) ); ?>
 
 <body class="blog boxed pattern-1 navigation-style-1">
 

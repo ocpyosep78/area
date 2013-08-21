@@ -9,11 +9,11 @@
 	
 	// page link
 	$page_base  = $category['link'];
-	$page_base .= ($is_popular) ? '' : '/latest';
+	$page_base .= ($is_popular) ? '' : '/popular';
 	
 	// toggle
 	$toggle_title = ($is_popular) ? 'Latest Post' : 'Popular Post';
-	$toggle_page = ($is_popular) ? $category['link'].'/latest' : $category['link'];
+	$toggle_page = ($is_popular) ? $category['link'] : $category['link'].'/popular';
 	
 	// post
 	$param_post['is_popular'] = $is_popular;
@@ -25,9 +25,16 @@
 	$param_post['limit'] = $page_item;
 	$array_post = $this->Post_model->get_array($param_post);
 	$page_count = ceil($this->Post_model->get_count() / $page_item);
+	
+	// meta
+	$desc = 'Download';
+	$title = 'Suekarea - '.$category['name'].' - Page '.$page_active;
+	foreach ($array_post as $post) {
+		$desc .= ' - '.$post['name'];
+	}
 ?>
 
-<?php $this->load->view( 'website/common/meta' ); ?>
+<?php $this->load->view( 'website/common/meta', array( 'title' => $title, 'desc' => $desc ) ); ?>
 
 <body class="blog boxed pattern-1 navigation-style-1">
 

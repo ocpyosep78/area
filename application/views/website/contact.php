@@ -1,4 +1,4 @@
-<?php $this->load->view( 'website/common/meta' ); ?>
+<?php $this->load->view( 'website/common/meta', array( 'title' => 'Suekarea - Contact Us', 'desc' => 'Suekarea - Contact Us Form' ) ); ?>
 
 <body class="blog boxed pattern-1 navigation-style-1">
 

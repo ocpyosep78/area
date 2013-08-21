@@ -16,9 +16,16 @@
 	$param_post['limit'] = $page_item;
 	$array_post = $this->Post_Tag_model->get_array($param_post);
 	$page_count = ceil($this->Post_Tag_model->get_count() / $page_item);
+	
+	// meta
+	$desc = 'Download';
+	$title = 'Suekarea - '.$category['name'].' - Page '.$page_active;
+	foreach ($array_post as $post) {
+		$desc .= ' - '.$post['name'];
+	}
 ?>
 
-<?php $this->load->view( 'website/common/meta' ); ?>
+<?php $this->load->view( 'website/common/meta', array( 'title' => $title, 'desc' => $desc ) ); ?>
 
 <body class="blog boxed pattern-1 navigation-style-1">
 

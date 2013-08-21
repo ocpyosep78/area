@@ -880,8 +880,15 @@
 	
 	if (! function_exists('get_popular')) {
 		function get_popular() {
-			preg_match('/latest/i', $_SERVER['REQUEST_URI'], $match);
-			$is_popular = (isset($match[0])) ? 0 : 1;
+			preg_match('/(latest|popular)/i', $_SERVER['REQUEST_URI'], $match);
+			$keyword = (isset($match[1])) ? $match[1] : '';
+			
+			if ($keyword == 'popular') {
+				$is_popular = 1;
+			} else {
+				$is_popular = 0;
+			}
+			
 			return $is_popular;
 		}
 	}

@@ -6,7 +6,7 @@
 	$download = (isset($_GET['link'])) ? $_GET['link'] : '';
 ?>
 
-<?php $this->load->view( 'website/common/meta' ); ?>
+<?php $this->load->view( 'website/common/meta', array( 'title' => 'Suekarea - Submit', 'desc' => 'Suekarea - Submit Form' ) ); ?>
 
 <body class="blog boxed pattern-1 navigation-style-1">
 
