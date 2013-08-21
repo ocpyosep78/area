@@ -3026,6 +3026,67 @@ body.boxed .body_patterns {
 body.wide #page {
 	width:100%;
 }
+
+/*	Select Menu */
+
+.select-menu {
+	height: 30px;
+	position: relative;
+}
+.select-menu .holder {
+	border: 1px solid #e0e0e0;
+	border-radius: 2px;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 28px;
+	line-height: 28px;
+	font-size: 13px;
+	color: #959595;
+	padding: 0 7px;
+	pointer-events:none;
+	z-index: 999;
+	background: #fcfcfc;
+}
+.select-menu .icon {
+	height: 29px;
+	right: 0;
+	border-left: 1px solid #e0e0e0;
+	background: url(../img/menu-select.gif) 11px 10px no-repeat;
+	width: 28px;
+	position: absolute;
+	z-index: 1100;
+	pointer-events:none;
+}
+.select-menu .selected-item.first {
+	position: relative;
+	padding: 0 6px;
+	margin: 0;
+	border: 1px solid #e0e0e0;
+	color: #959595;
+	font-size: 13px;
+	border-radius: 2px;
+	background: #FCFCFC;
+	z-index: 999;
+	background: #fcfcfc;
+	height: 28px;
+	line-height: 28px;
+}
+.select-menu .select-menu-list {
+	width: 100%;
+	height: 30px;
+}
+.select-menu .select-menu-list li {
+	list-style: none;
+	line-height: 20px;
+	margin: 0 0 5px 0;
+}
+.select-menu .select-menu-list li a {
+	text-decoration: none;
+	display: block;
+}
+
 /* ==================================== Registration ========================================== */
 .required:after {
 	color: #e50700;
