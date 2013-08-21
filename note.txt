@@ -90,4 +90,16 @@ Referernya belum selesai (kurang logo)
 Widget Logonya belum selesai (kurang logo)
 Halaman Widnget nya belum selesai (kurang logo)
 
-ALTER TABLE  `post` ADD  `link_canonical` VARCHAR( 255 ) NOT NULL
+--------------------------------------------------------------------------------------------------------------------
+
+Urgent
+- Compress JS + CSS + google insight + dkk
+- Meta Structure
+- Invite fansub dibawah raking
+
+--------------------------------------------------------------------------------------------------------------------
+
+Later (Pageview 10K++) :
+- Adsense
+- LInk Addfly dkk
+- User Idea

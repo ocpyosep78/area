@@ -18,8 +18,8 @@
 <meta name="description" content="<?php echo htmlspecialchars($desc); ?>" />
 <title><?php echo htmlspecialchars($title); ?></title>
 <link href="https://plus.google.com/114002599803233293136/posts" rel="author"/>
-<link rel="stylesheet" type="text/css" media="all" id="primetime-style-css" href="<?php echo base_url('static/css/style.css'); ?>" />
-<link rel="stylesheet" type="text/css" media="all" id="responsive-css" href="<?php echo base_url('static/css/responsive.css'); ?>" />
+<link rel="stylesheet" type="text/css" media="all" id="primetime-style-css" href="<?php echo base_url('static/css/style.min.css'); ?>" />
+<link rel="stylesheet" type="text/css" media="all" id="responsive-css" href="<?php echo base_url('static/css/responsive.min.css'); ?>" />
 <link rel="icon shortcut" href="<?php echo base_url('static/img/favicon.png'); ?>" type="image/x-icon" />
 <link rel="alternate" type="application/rss+xml" title="Suekarea Popular Post" href="<?php echo base_url('rss'); ?>" />
 <link rel="alternate" type="application/rss+xml" title="Suekarea Latest Post" href="<?php echo base_url('rss/latest'); ?>" />
