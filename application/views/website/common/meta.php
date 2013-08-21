@@ -12,7 +12,7 @@
 <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 <?php foreach ($tag_meta as $meta) { ?>
-<meta property="<?php echo $meta['property']; ?>" content="<?php echo $meta['content']; ?>">
+<meta property="<?php echo $meta['property']; ?>" content="<?php echo htmlspecialchars($meta['content']); ?>">
 <?php } ?>
 <meta name="title" content="<?php echo htmlspecialchars($title); ?>" />
 <meta name="description" content="<?php echo htmlspecialchars($desc); ?>" />
@@ -23,6 +23,8 @@
 <link rel="icon shortcut" href="<?php echo base_url('static/img/favicon.png'); ?>" type="image/x-icon" />
 <link rel="alternate" type="application/rss+xml" title="Suekarea Popular Post" href="<?php echo base_url('rss'); ?>" />
 <link rel="alternate" type="application/rss+xml" title="Suekarea Latest Post" href="<?php echo base_url('rss/latest'); ?>" />
+<?php if (!empty($link_canonical)) { ?><link rel="canonical" href="<?php echo $link_canonical; ?>"/>
+<?php } ?>
 <script type="text/javascript" src="<?php echo base_url('static/js/jquery.js'); ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('static/js/modernizr.js'); ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('static/js/utils.js'); ?>"></script>

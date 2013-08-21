@@ -19,9 +19,9 @@
 	
 	// meta
 	$desc = 'Download';
-	$title = 'Suekarea - '.$category['name'].' - Page '.$page_active;
+	$title = 'Suekarea - '.$tag['name'].' - Page '.$page_active;
 	foreach ($array_post as $post) {
-		$desc .= ' - '.$post['name'];
+		$desc .= ' - '.$post['post_name'];
 	}
 ?>
 

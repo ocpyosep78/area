@@ -27,6 +27,9 @@
 	if (!empty($post['thumbnail_link'])) {
 		$param_meta['tag_meta'][] = array( 'property' => 'og:image', 'content' => $post['thumbnail_link'] );
 	}
+	if (!empty($post['link_canonical'])) {
+		$param_meta['link_canonical'] = $post['link_canonical'];
+	}
 ?>
 
 <?php $this->load->view( 'website/common/meta', $param_meta ); ?>

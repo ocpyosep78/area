@@ -6,7 +6,7 @@ class Post_model extends CI_Model {
 		
         $this->field = array(
 			'id', 'user_id', 'category_id', 'post_type_id', 'alias', 'name', 'desc', 'download', 'thumbnail', 'create_date', 'publish_date', 'view_count',
-			'is_hot', 'is_popular'
+			'is_hot', 'is_popular', 'link_canonical'
 		);
     }
 

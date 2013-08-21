@@ -201,7 +201,8 @@ Ext.onReady(function() {
 							win.post_type = Combo.Class.PostType({ renderTo: 'post_typeED', width: 225, allowBlank: false, blankText: 'Masukkan Jenis Post', value: page_data.POST_TYPE_MULTI_LINK });
 							win.publish_date = new Ext.form.DateField({ renderTo: 'publish_dateED', width: 120, format: DATE_FORMAT, allowBlank: false, blankText: 'Masukkan Tanggal Publish', value: new Date() });
 							win.publish_time = Combo.Class.Time({ renderTo: 'publish_timeED', width: 100, allowBlank: false, blankText: 'Masukkan Jam Publish', value: new Date() });
-							win.tag = new Ext.form.TextField({ renderTo: 'tagED', width: 225 });
+							win.tag = new Ext.form.TextArea({ renderTo: 'tagED', width: 225, height: 50 });
+							win.link_canonical = new Ext.form.TextField({ renderTo: 'link_canonicalED', width: 225 });
 							win.thumbnail = new Ext.form.TextField({ renderTo: 'thumbnailED', width: 225, readOnly: true });
 							win.thumbnail_button = new Ext.Button({ renderTo: 'btn_thumbnailED', text: 'Browse', width: 75, handler: function(btn) {
 								window.iframe_thumbnail.browse();
@@ -217,6 +218,7 @@ Ext.onReady(function() {
 								win.category.setValue(param.category_id);
 								win.post_type.setValue(param.post_type_id);
 								win.download.setValue(param.download);
+								win.link_canonical.setValue(param.link_canonical);
 								
 								win.publish_date.setValue(Renderer.GetDateFromString.Date(param.publish_date));
 								win.publish_time.setValue(Renderer.GetDateFromString.Time(param.publish_date));
@@ -250,6 +252,7 @@ Ext.onReady(function() {
 				ajax.category_id = win.category.getValue();
 				ajax.post_type_id = win.post_type.getValue();
 				ajax.tag = win.tag.getValue();
+				ajax.link_canonical = win.link_canonical.getValue();
 				
 				// Validation
 				var is_valid = true;

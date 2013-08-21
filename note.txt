@@ -89,3 +89,5 @@ Untuk website yang traffictnya lebih rendah, kita pakai post dengan type single 
 Referernya belum selesai (kurang logo)
 Widget Logonya belum selesai (kurang logo)
 Halaman Widnget nya belum selesai (kurang logo)
+
+ALTER TABLE  `post` ADD  `link_canonical` VARCHAR( 255 ) NOT NULL
