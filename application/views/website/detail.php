@@ -62,7 +62,7 @@
 					
 					<?php if ($post['post_type_id'] == POST_TYPE_SINGLE_LINK) { ?>
 					<div style="text-align: center; padding: 0 0 15px 0;">
-						<a href="<?php echo $post['download']; ?>" class="link-download" target="_blank">Lihat Sumber</a>
+						<a rel="nofollow" href="<?php echo $post['download']; ?>" class="link-download" target="_blank">Lihat Sumber</a>
 					</div>
 					<?php } else { ?>
 					<div style="text-align: center; padding: 0 0 15px 0;"><input type="button" class="reload-download" value="Download" data-id="<?php echo $post['id']; ?>" /></div>

@@ -17,12 +17,12 @@
 	<div class="footer_text" style="text-align: justify;">Suekarea.com didirikan pada tahun 2013, di sini kami berbagi film, anime, kartun, dll secara gratis. Jadi anda bisa mendowloadnya secara gratis.<br />Seiring berjalannya waktu, Suekarea.com akan mengalami perubahan. Kami berharap anda menikmati apa yang kami berikan</div>
 	<div class="block_social_footer">
 	<ul>
-		<li><a href="https://www.facebook.com/suekarea" class="fb" title="Suekarea FB">Facebook</a></li>
-		<li><a href="https://plus.google.com/u/0/114002599803233293136?rel=author" class="gplus" title="Suekarea Google Plus">Google+</a></li>
-		<li><a href="https://twitter.com/Suekarea" class="tw" title="Suekarea Twitter">Twitter</a></li>
-		<li><a href="<?php echo base_url('rss'); ?>" class="rss" title="Popular RSS">RSS</a></li>
-		<li><a href="<?php echo base_url('rss/latest'); ?>" class="rss" title="Latest RSS">RSS</a></li>
-		<li><a href="<?php echo base_url('referer'); ?>" class="referer" title="Referer">Referer</a></li>
+		<li><a rel="nofollow" href="https://www.facebook.com/suekarea" class="fb" title="Suekarea FB">Facebook</a></li>
+		<li><a rel="nofollow" href="https://plus.google.com/u/0/114002599803233293136?rel=author" class="gplus" title="Suekarea Google Plus">Google+</a></li>
+		<li><a rel="nofollow" href="https://twitter.com/Suekarea" class="tw" title="Suekarea Twitter">Twitter</a></li>
+		<li><a rel="nofollow" href="<?php echo base_url('rss'); ?>" class="rss" title="Popular RSS">RSS</a></li>
+		<li><a rel="nofollow" href="<?php echo base_url('rss/latest'); ?>" class="rss" title="Latest RSS">RSS</a></li>
+		<li><a rel="nofollow" href="<?php echo base_url('referer'); ?>" class="referer" title="Referer">Referer</a></li>
 	</ul>
 	</div>
 </div>

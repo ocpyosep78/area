@@ -20,13 +20,13 @@
 	<div class="inner clearboth">
 		<div class="top-right">
 			<ul id="user-links">
-				<li><a href="<?php echo base_url('submit'); ?>">Submit</a></li>
-				<li><a href="<?php echo base_url('request'); ?>">Request</a></li>
+				<li><a rel="nofollow" href="<?php echo base_url('submit'); ?>">Submit</a></li>
+				<li><a rel="nofollow" href="<?php echo base_url('request'); ?>">Request</a></li>
 				<?php if ($is_login) { ?>
-				<li><a href="<?php echo base_url('logout'); ?>">Logout</a></li>
+				<li><a rel="nofollow" href="<?php echo base_url('logout'); ?>">Logout</a></li>
 				<?php } else { ?>
-				<li><a class="cursor login-popup-link">Login</a></li>
-				<li><a class="cursor registration-popup-link">Registration</a></li>
+				<li><a rel="nofollow" class="cursor login-popup-link">Login</a></li>
+				<li><a rel="nofollow" class="cursor registration-popup-link">Registration</a></li>
 				<?php } ?>
 			</ul>
 		</div>
@@ -63,11 +63,11 @@
 			<div class="block_social_top">
 				<div class="icons-label">Follow us:</div>
 				<ul>
-					<li><a href="https://www.facebook.com/suekarea" class="fb" title="Suekarea FB">Facebook</a></li>
-					<li><a href="https://plus.google.com/u/0/114002599803233293136?rel=author" class="gplus" title="Suekarea Google Plus">Google+</a></li>
-					<li><a href="https://twitter.com/Suekarea" class="tw" title="Suekarea Twitter">Twitter</a></li>
-					<li><a href="<?php echo base_url('rss'); ?>" class="rss" title="Popular Post">RSS</a></li>
-					<li><a href="<?php echo base_url('rss/latest'); ?>" class="rss" title="Latest Post">RSS</a></li>
+					<li><a rel="nofollow" href="https://www.facebook.com/suekarea" class="fb" title="Suekarea FB">Facebook</a></li>
+					<li><a rel="nofollow" href="https://plus.google.com/u/0/114002599803233293136?rel=author" class="gplus" title="Suekarea Google Plus">Google+</a></li>
+					<li><a rel="nofollow" href="https://twitter.com/Suekarea" class="tw" title="Suekarea Twitter">Twitter</a></li>
+					<li><a rel="nofollow" href="<?php echo base_url('rss'); ?>" class="rss" title="Popular Post">RSS</a></li>
+					<li><a rel="nofollow" href="<?php echo base_url('rss/latest'); ?>" class="rss" title="Latest Post">RSS</a></li>
 				</ul>
 			</div>
 			
