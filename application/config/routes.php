@@ -19,6 +19,7 @@ if ($is_website) {
 	$route['(anime|film|tv-serial|cartoon)'] = "website/category";
 	$route['(anime|film|tv-serial|cartoon)/(:any)'] = "website/category";
 	$route['(:num)/(:num)/(:any)'] = "website/detail";
+	$route['tag'] = "website/tag";
 	$route['tag/(:any)'] = "website/tag";
 	$route['ajax'] = "website/ajax";
 	$route['ajax/(:any)'] = "website/ajax";
