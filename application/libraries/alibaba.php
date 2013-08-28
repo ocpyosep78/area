@@ -9,11 +9,10 @@ class alibaba {
 		$curl = new curl();
 		$array_item = array();
 		$content = $curl->get($scrape['link']);
-		$array_content = new SimpleXmlElement($content);
+		$array_post = $this->get_array_clear($content);
 		
 		$array_result = array();
-		foreach ($array_content->channel->item as $array_temp) {
-			$array = (array)$array_temp;
+		foreach ($array_post as $array) {
 			$array['title'] = trim($array['title']);
 			$link_source = $array['link'];
 			
@@ -56,6 +55,34 @@ class alibaba {
 			if (count($array_result) >= 5) {
 				break;
 			}
+		}
+		
+		return $array_result;
+	}
+	
+	function get_array_clear($content) {
+		$array_result = array();
+		$array_content = new SimpleXmlElement($content);
+		
+		/*
+		// add link here
+		$array_result[] = array('title' => 'Love Lab Episode 8 Subtitle Indonesia', 'link' => 'http://www.alibabasub.net/2013/08/love-lab-episode-8-subtitle-indonesia.html');
+		$array_result[] = array('title' => 'Gatchaman Crowds Episode 7 Subtitle Indonesia', 'link' => 'http://www.alibabasub.net/2013/08/gatchaman-crowds-episode-7-subtitle-indonesia.html');
+		$array_result[] = array('title' => 'Kiniro Mosaic Episode 8 Subtitle Indonesia', 'link' => 'http://www.alibabasub.net/2013/08/kiniro-mosaic-episode-8-subtitle-indonesia.html');
+		$array_result[] = array('title' => 'Rozen Maiden (2013) Episode 8 Subtitle Indonesia', 'link' => 'http://www.alibabasub.net/2013/08/rozen-maiden-2013-episode-8-subtitle-indonesia.html');
+		$array_result[] = array('title' => 'Genei o Kakeru Taiyou Episode 8 Subtitle Indonesia', 'link' => 'http://www.alibabasub.net/2013/08/genei-o-kakeru-taiyou-episode-8-subtitle-indonesia.html');
+		$array_result[] = array('title' => 'Uchouten Kazoku Episode 8 Subtitle Indonesia', 'link' => 'http://www.alibabasub.net/2013/08/uchouten-kazoku-episode-8-subtitle-indonesia.html');
+		$array_result[] = array('title' => 'Toaru Kagaku no Railgun S Episode 19 Subtitle Indonesia', 'link' => 'http://www.alibabasub.net/2013/08/toaru-kagaku-no-railgun-s-episode-19-subtitle-indonesia.html');
+		$array_result[] = array('title' => 'Blood Lad Episode 8 Subtitle Indonesia', 'link' => 'http://www.alibabasub.net/2013/08/blood-lad-episode-8-subtitle-indonesia.html');
+		$array_result[] = array('title' => 'Mushibugyou Episode 21 Subtitle Indonesia', 'link' => 'http://www.alibabasub.net/2013/08/mushibugyou-episode-21-subtitle-indonesia.html');
+		/*	*/
+		
+		foreach ($array_content->channel->item as $array_temp) {
+			$array_temp = (array)$array_temp;
+			unset($array_temp['category']);
+			unset($array_temp['description']);
+			
+			$array_result[] = (array)$array_temp;
 		}
 		
 		return $array_result;
@@ -113,7 +140,7 @@ class alibaba {
 		// make it consistent
 		$content = preg_replace('/<\/a>\s?\/\s?<a /i', '</a> / <a ', $content);
 		$content = preg_replace('/(480|720)p?\s*[=:]\s*/i', "$1 ", $content);
-		$content = preg_replace('/(title|class|rel|target)="[a-z \-\_]*"/i', '', $content);
+		$content = preg_replace('/(title|class|rel|target)="[a-z0-9 \-\_]*"/i', '', $content);
 		
 		$result = '';
 		preg_match_all('/(480|720) (<a href=\"([^\"]+)\" *>([a-z0-9 ]+)<\/a>( \/ )*)*/i', $content, $match);
