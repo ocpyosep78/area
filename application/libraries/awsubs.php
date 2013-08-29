@@ -6,7 +6,6 @@ class awsubs {
     }
     
 	function get_array($scrape) {
-	
 		$curl = new curl();
 		$array_item = array();
 		$content = $curl->get($scrape['link']);
@@ -87,7 +86,7 @@ class awsubs {
 		$content = str_replace('&nbsp;', '', $content);
 		$content = preg_replace('/<\/?(b|span)([^\>]+)?>/i', '', $content);
 		$content = preg_replace('/\[\<strike\>[\w]+\<\/strike\>\]/i', '', $content);
-		$content = preg_replace('/(style|class)\=\"[^\"]+\"/i', '', $content);
+		$content = preg_replace('/(style|class|rel|target)\=\"[^\"]+\"/i', '', $content);
 		$content = preg_replace('/\s+\>/i', '>', $content);
 		preg_match_all('/(480p|576p|720p)([\w\s\=\&\;]+)?(<\/?(span|b)([^>]+)?>)*((\[<a href\=\"[^\"]+\">\w+\<\/a\>\])*)/i', $content, $match);
 		
