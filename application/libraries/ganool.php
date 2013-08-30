@@ -6,22 +6,25 @@ class ganool {
     }
     
 	function get_array($scrape) {
+//		$scrape['link'] = 'http://localhost:8666/suekarea/trunk/temp.xml';
+		
 		$curl = new curl();
 		$array_item = array();
 		$content = $curl->get($scrape['link']);
-		$array_content = new SimpleXmlElement($content);
+		$array_post = $this->get_array_clear($content);
 		
 		$array_result = array();
-		foreach ($array_content->channel->item as $array) {
+		foreach ($array_post as $array) {
+			$array['title'] = trim($array['title']);
+			
 			// link
-			$link_temp = (string)$array->link;
+			$link_temp = $array['link'];
 			$array_link = explode('?', $link_temp, 2);
 			$link_source = $array_link[0];
 			
 			// test purpose
 			/*	
-			$title = trim((string)$array->title);
-			if ($title != 'The Switch (2010) BluRay 720p 600MB Ganool') {
+			if ($array['title'] != 'The Switch (2010) BluRay 720p 600MB Ganool') {
 				continue;
 			}
 			/*	*/
@@ -31,6 +34,8 @@ class ganool {
 			if (count($check) > 0) {
 				continue;
 			}
+			
+//			$link_source = 'http://localhost:8666/suekarea/trunk/post.html';
 			
 			// make content clean
 			$content_item = $curl->get($link_source);
@@ -42,7 +47,7 @@ class ganool {
 			
 			// set to array
 			$temp = array();
-			$temp['name'] = trim((string)$array->title);
+			$temp['name'] = $array['title'];
 			$temp['desc'] = $desc;
 			$temp['download'] = $download;
 			$temp['link_source'] = $link_source;
@@ -53,7 +58,7 @@ class ganool {
 			$array_result[] = $temp;
 			
 			// add limit
-			if (count($array_result) >= 10) {
+			if (count($array_result) >= 5) {
 				break;
 			}
 		}
@@ -61,7 +66,32 @@ class ganool {
 		return $array_result;
 	}
 	
-	function get_desc($content) {
+	function get_array_clear($content) {
+		$array_result = array();
+		$array_content = new SimpleXmlElement($content);
+		
+		/*
+		// add link here
+		$array_result[] = array('title' => 'Mobile Suit Crossbone Gundam', 'link' => 'http://ganool.com/mobile-suit-crossbone-gundam');
+		$array_result[] = array('title' => 'Gundam Sousei', 'link' => 'http://ganool.com/gundam-sousei');
+		$array_result[] = array('title' => 'Mobile Suit Gundam: The Revival of Zeon', 'link' => 'http://ganool.com/mobile-suit-gundam-the-revival-of-zeon-2');
+		/*	*/
+		
+		foreach ($array_content->channel->item as $array_temp) {
+			$array_temp = (array)$array_temp;
+			unset($array_temp['category']);
+			unset($array_temp['comments']);
+			unset($array_temp['description']);
+			
+			$array_result[] = (array)$array_temp;
+		}
+		
+		return $array_result;
+	}
+	
+	function get_desc($content_raw) {
+		$content = $content_raw;
+		
 		// remove start offset
 		$offset = '<!-- .entry-meta -->';
 		$pos_first = strpos($content, $offset);
@@ -72,19 +102,42 @@ class ganool {
 		$pos_end = strpos($content, $offset);
 		$content = substr($content, 0, $pos_end);
 		
+		
+		// anime condition
+		if (empty($result)) {
+			// remove start offset
+			$offset = '<div class="entry-content">';
+			$pos_first = strpos($content_raw, $offset);
+			$content = substr($content_raw, $pos_first, strlen($content_raw) - $pos_first);
+			
+			// remove end offset
+			$offset = 'crp_related';
+			$pos_end = strpos($content, $offset);
+			$content = substr($content, 0, $pos_end);
+			
+			// remove download link
+			$offset = 'spoiler-body';
+			$pos_end = strpos($content, $offset);
+			$content = substr($content, 0, $pos_end);
+		}
+		
 		// clean desc
 		$content = strip_tags($content);
 		$temp = trim(preg_replace('/info: [\w\:\/\.]+/i', '', $content));
 		
 		$result = '';
-		$array_temp = explode("\n", $temp);
-		foreach ($array_temp as $line) {
-			$result .= '<div>'.$line.'</div>';
+		if (!empty($temp)) {
+			$array_temp = explode("\n", $temp);
+			foreach ($array_temp as $line) {
+				$result .= '<div>'.$line.'</div>';
+			}
 		}
 		
 		// endfix
-		$result .= '<div>&nbsp;</div>';
-		$result .= '<div>Sumber : Ganool</div>';
+		if (!empty($result)) {
+			$result .= '<div>&nbsp;</div>';
+			$result .= '<div>Sumber : Ganool</div>';
+		}
 		
 		return $result;
 	}
@@ -102,6 +155,7 @@ class ganool {
 		
 		// clean desc
 		$content = str_replace('http://www.imdb.com/', '', $content);
+		$content = preg_replace('/ (onclick|target)=\"[^\"]+\"/i', '', $content);
 		$content_clean = trim(strip_tags($content));
 		
 		// data
@@ -143,6 +197,22 @@ class ganool {
 				} else {
 					$result .= (empty($result)) ? $value : "\n\n".$value;
 				}
+			}
+		}
+		
+		// get from anime
+		if (empty($result)) {
+			preg_match_all('/([a-z0-9 ]+): \|( <a href="([^\"]+)">([a-z0-9 ]+)<\/a>\|)*/i', $content, $match);
+			foreach ($match[0] as $key => $value) {
+				$label = $match[1][$key];
+				$result .= $label."\n";
+				
+				// get link
+				preg_match_all('/<a href="([^\"]+)">([a-z0-9 ]+)<\/a>/i', $value, $array_link);
+				foreach ($array_link[0] as $key_link => $link_value) {
+					$result .= $array_link[1][$key_link].' '.$array_link[2][$key_link]."\n";
+				}
+				$result .= "\n";
 			}
 		}
 		
