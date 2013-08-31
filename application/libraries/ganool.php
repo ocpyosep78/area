@@ -6,7 +6,7 @@ class ganool {
     }
     
 	function get_array($scrape) {
-//		$scrape['link'] = 'http://localhost:8666/suekarea/trunk/temp.xml';
+//		$scrape['link'] = 'http://localhost/suekarea/trunk/temp.txt';
 		
 		$curl = new curl();
 		$array_item = array();
@@ -70,11 +70,10 @@ class ganool {
 		$array_result = array();
 		$array_content = new SimpleXmlElement($content);
 		
-		/*
+		/*	
 		// add link here
-		$array_result[] = array('title' => 'Mobile Suit Crossbone Gundam', 'link' => 'http://ganool.com/mobile-suit-crossbone-gundam');
-		$array_result[] = array('title' => 'Gundam Sousei', 'link' => 'http://ganool.com/gundam-sousei');
-		$array_result[] = array('title' => 'Mobile Suit Gundam: The Revival of Zeon', 'link' => 'http://ganool.com/mobile-suit-gundam-the-revival-of-zeon-2');
+		$array_result[] = array('title' => 'Snow Babies (2012) BluRay 720p 400MB Ganool', 'link' => 'http://ganool.com/snow-babies-2012-bluray-720p-400mb-ganool');
+		$array_result[] = array('title' => 'Kick-Ass 2 (2013) 720p R6 WEBRip 650MB Ganool', 'link' => 'http://ganool.com/kick-ass-2-2013-720p-r6-webrip-650mb-ganool');
 		/*	*/
 		
 		foreach ($array_content->channel->item as $array_temp) {
@@ -90,6 +89,7 @@ class ganool {
 	}
 	
 	function get_desc($content_raw) {
+		$result = '';
 		$content = $content_raw;
 		
 		// remove start offset
@@ -102,6 +102,17 @@ class ganool {
 		$pos_end = strpos($content, $offset);
 		$content = substr($content, 0, $pos_end);
 		
+		// clean desc
+		$content = strip_tags($content);
+		$temp = trim(preg_replace('/info: [\w\:\/\.]+/i', '', $content));
+		
+		// normal post
+		if (!empty($temp)) {
+			$array_temp = explode("\n", $temp);
+			foreach ($array_temp as $line) {
+				$result .= '<div>'.$line.'</div>';
+			}
+		}
 		
 		// anime condition
 		if (empty($result)) {
@@ -119,18 +130,6 @@ class ganool {
 			$offset = 'spoiler-body';
 			$pos_end = strpos($content, $offset);
 			$content = substr($content, 0, $pos_end);
-		}
-		
-		// clean desc
-		$content = strip_tags($content);
-		$temp = trim(preg_replace('/info: [\w\:\/\.]+/i', '', $content));
-		
-		$result = '';
-		if (!empty($temp)) {
-			$array_temp = explode("\n", $temp);
-			foreach ($array_temp as $line) {
-				$result .= '<div>'.$line.'</div>';
-			}
 		}
 		
 		// endfix
