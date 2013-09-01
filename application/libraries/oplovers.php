@@ -6,20 +6,22 @@ class oplovers {
     }
     
 	function get_array($scrape) {
+		// debug
+		// $scrape['link'] = 'http://localhost/suekarea/trunk/temp.xml';
+		
 		$curl = new curl();
 		$array_item = array();
 		$content = $curl->get($scrape['link']);
-		$array_content = new SimpleXmlElement($content);
+		$array_post = $this->get_array_clear($content);
 		
 		$array_result = array();
-		foreach ($array_content->channel->item as $array) {
-			$array = (array)$array;
+		foreach ($array_post as $array) {
+			$array['title'] = trim($array['title']);
 			$link_source = $array['link'];
 			
 			// test purpose
 			/*	
-			$title = $array['title'];
-			if ($title != 'PV - Opening Shingeki no Kyojin') {
+			if ($array['title'] != 'PV - Opening Shingeki no Kyojin') {
 				continue;
 			}
 			/*	*/
@@ -30,16 +32,18 @@ class oplovers {
 				continue;
 			}
 			
+			// debug
+			// $link_source = 'http://localhost/suekarea/trunk/post.txt';
+			
 			// collect
 			$content_html = $this->get_content($link_source);
-			$title = trim($array['title']);
 			$desc = $this->get_desc($content_html);
 			$image = $this->get_image($content_html);
 			$download = $this->get_download($content_html);
 			
 			// set to array
 			$temp = array();
-			$temp['name'] = $title;
+			$temp['name'] = $array['title'];
 			$temp['desc'] = $desc;
 			$temp['download'] = $download;
 			$temp['link_source'] = $link_source;
@@ -54,6 +58,26 @@ class oplovers {
 			if (count($array_result) >= 10) {
 				break;
 			}
+		}
+		
+		return $array_result;
+	}
+	
+	function get_array_clear($content) {
+		$array_result = array();
+		$array_content = new SimpleXmlElement($content);
+		
+		/*	*/
+		// add link here
+		$array_result[] = array('title' => 'Shingeki no Kyojin Episode 21 Subtitle Indonesia', 'link' => 'http://www.oploverz.net/2013/09/shingeki-no-kyojin-episode-21-subtitle.html');
+		/*	*/
+		
+		foreach ($array_content->channel->item as $array_temp) {
+			$array_temp = (array)$array_temp;
+			unset($array_temp['category']);
+			unset($array_temp['description']);
+			
+			$array_result[] = (array)$array_temp;
 		}
 		
 		return $array_result;

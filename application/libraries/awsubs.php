@@ -52,6 +52,28 @@ class awsubs {
 		return $array_result;
 	}
 	
+	function get_array_clear($content) {
+		$array_result = array();
+		$array_content = new SimpleXmlElement($content);
+		
+		/*
+		// add link here
+		$array_result[] = array('title' => 'Gin no Saji Episode 8 Subtitle Indonesia', 'link' => 'http://www.wardhanime.net/2013/08/watamote-episode-8-subtitle-indonesia.html');
+		$array_result[] = array('title' => 'Gin no Saji Episode 8 Subtitle Indonesia', 'link' => 'http://www.wardhanime.net/2013/08/monogatari-S2-08.html');
+		$array_result[] = array('title' => 'Gin no Saji Episode 8 Subtitle Indonesia', 'link' => 'http://www.wardhanime.net/2013/08/kimi-no-iru-machi-episode-7-subtitle.html');
+		/*	*/
+		
+		foreach ($array_content->channel->item as $array_temp) {
+			$array_temp = (array)$array_temp;
+			unset($array_temp['category']);
+			unset($array_temp['description']);
+			
+			$array_result[] = (array)$array_temp;
+		}
+		
+		return $array_result;
+	}
+	
 	function get_desc($content) {
 		$content = str_replace('&nbsp;', '', $content);
 		$content = preg_replace('/<\/?(b|span)([^\>]+)?>/i', '', $content);
@@ -133,7 +155,3 @@ class awsubs {
 		return $result;
 	}
 }
-
-// http://www.wardhanime.net/2013/08/watamote-episode-8-subtitle-indonesia.html
-// http://www.wardhanime.net/2013/08/monogatari-S2-08.html
-// http://www.wardhanime.net/2013/08/kimi-no-iru-machi-episode-7-subtitle.html
