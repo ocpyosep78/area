@@ -133,3 +133,7 @@ class awsubs {
 		return $result;
 	}
 }
+
+// http://www.wardhanime.net/2013/08/watamote-episode-8-subtitle-indonesia.html
+// http://www.wardhanime.net/2013/08/monogatari-S2-08.html
+// http://www.wardhanime.net/2013/08/kimi-no-iru-machi-episode-7-subtitle.html
