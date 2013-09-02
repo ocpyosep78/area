@@ -9,11 +9,10 @@ class awsubs {
 		$curl = new curl();
 		$array_item = array();
 		$content = $curl->get($scrape['link']);
-		$array_content = new SimpleXmlElement($content);
+		$array_post = $this->get_array_clear($content);
 		
 		$array_result = array();
-		foreach ($array_content->channel->item as $temp) {
-			$array = (array)$temp;
+		foreach ($array_post as $array) {
 			$array['title'] = trim($array['title']);
 			$link_source = $array['link'];
 			
@@ -30,10 +29,10 @@ class awsubs {
 				continue;
 			}
 			
-			// desc
-			$desc = $this->get_desc($array['description']);
-			$download = $this->get_download($array['description']);
-			$image_source = $this->get_image($array['description']);
+			$content_html = $this->get_content($link_source);
+			$desc = $this->get_desc($content_html);
+			$download = $this->get_download($content_html);
+			$image_source = $this->get_image($content_html);
 			
 			// set to array
 			$temp = array();
@@ -47,6 +46,11 @@ class awsubs {
 			$temp['scrape_master_id'] = $scrape['id'];
 			$temp['scrape_time'] = $this->CI->config->item('current_datetime');
 			$array_result[] = $temp;
+			
+			// add limit
+			if (count($array_result) >= 10) {
+				break;
+			}
 		}
 		
 		return $array_result;
@@ -56,11 +60,12 @@ class awsubs {
 		$array_result = array();
 		$array_content = new SimpleXmlElement($content);
 		
-		/*
+		/*	*/
 		// add link here
-		$array_result[] = array('title' => 'Gin no Saji Episode 8 Subtitle Indonesia', 'link' => 'http://www.wardhanime.net/2013/08/watamote-episode-8-subtitle-indonesia.html');
-		$array_result[] = array('title' => 'Gin no Saji Episode 8 Subtitle Indonesia', 'link' => 'http://www.wardhanime.net/2013/08/monogatari-S2-08.html');
-		$array_result[] = array('title' => 'Gin no Saji Episode 8 Subtitle Indonesia', 'link' => 'http://www.wardhanime.net/2013/08/kimi-no-iru-machi-episode-7-subtitle.html');
+		$array_result[] = array('title' => 'Persona: Trinity Soul Episode 4 Subtitle Indonesia', 'link' => 'http://www.wardhanime.net/2013/09/persona-trinity-soul-episode-4-subtitle.html');
+		$array_result[] = array('title' => 'Watamote Episode 8 Subtitle Indonesia', 'link' => 'http://www.wardhanime.net/2013/08/watamote-episode-8-subtitle-indonesia.html');
+		$array_result[] = array('title' => 'Monogatari Series: Second Season Episode 8 Subtitle Indonesia', 'link' => 'http://www.wardhanime.net/2013/08/monogatari-S2-08.html');
+		$array_result[] = array('title' => 'Kimi no Iru Machi Episode 7 Subtitle Indonesia', 'link' => 'http://www.wardhanime.net/2013/08/kimi-no-iru-machi-episode-7-subtitle.html');
 		/*	*/
 		
 		foreach ($array_content->channel->item as $array_temp) {
@@ -74,31 +79,40 @@ class awsubs {
 		return $array_result;
 	}
 	
-	function get_desc($content) {
-		$content = str_replace('&nbsp;', '', $content);
-		$content = preg_replace('/<\/?(b|span)([^\>]+)?>/i', '', $content);
-		$content = preg_replace('/\[\<strike\>[\w]+\<\/strike\>\]/i', '', $content);
-		$content = preg_replace('/(style|class)\=\"[^\"]+\"/i', '', $content);
-		$content = preg_replace('/\s+\>/i', '>', $content);
-		$content = preg_replace('/\:/i', ': ', $content);
-		preg_match('/<img [^>]+>(.+)<a[^>]+>Download/i', $content, $match);
+	function get_content($link_source) {
+		$curl = new curl();
+		$content = $curl->get($link_source);
+		$content = preg_replace('/[^\x20-\x7E|\x0A]/i', '', $content);
 		
-		$temp = (isset($match[1])) ? $match[1] : '';
-		$temp = str_replace('</div>', "\n", $temp);
-		$temp = str_replace('<br />', "\n", $temp);
-		$temp = str_replace('&nbsp;', ' ', $temp);
-		$temp = preg_replace('/\n+/i', "\n", $temp);
-		$temp = trim(strip_tags($temp));
+		// remove start offset
+		$offset = "<div class='post-body entry-content'>";
+		$pos_first = strpos($content, $offset);
+		$content = substr($content, $pos_first, strlen($content) - $pos_first);
+		
+		// remove end offset
+		$offset = "<div id='area-bawah'>";
+		$pos_end = strpos($content, $offset);
+		$content = substr($content, 0, $pos_end);
+		
+		return $content;
+	}
+	
+	function get_desc($content) {
+		$content = strip_tags($content);
+		$content = preg_replace('/(480|720).+/i', '', $content);
+		$content = preg_replace("/[\n]+/i", "\n", $content);
+		$content = str_replace('&nbsp;', ' ', $content);
+		$content = trim($content);
 		
 		$result = '';
-		$array_temp = explode("\n", $temp);
+		$array_temp = explode("\n", $content);
 		foreach ($array_temp as $line) {
 			$line = (empty($line)) ? '&nbsp;' : $line;
 			$result .= '<div>'.$line.'</div>';
 		}
 		
 		// endfix
-		$result .= '<div>&nbsp;</div>';
+		$result .= '<div></div>';
 		$result .= '<div>Sumber : AWSubs</div>';
 		
 		return $result;
@@ -110,7 +124,7 @@ class awsubs {
 		$content = preg_replace('/\[\<strike\>[\w]+\<\/strike\>\]/i', '', $content);
 		$content = preg_replace('/(style|class|rel|target)\=\"[^\"]+\"/i', '', $content);
 		$content = preg_replace('/\s+\>/i', '>', $content);
-		preg_match_all('/(480p|576p|720p)([\w\s\=\&\;]+)?(<\/?(span|b)([^>]+)?>)*((\[<a href\=\"[^\"]+\">\w+\<\/a\>\])*)/i', $content, $match);
+		preg_match_all('/(480p|576p|720p)([\w\s\=\&\;]+)?(<\/?(span|b)([^>]+)?>)*((\[<a href\=\"[^\"]+\">[\w ]+\<\/a\>\])*)/i', $content, $match);
 		
 		// condition #1
 		$result = '';
