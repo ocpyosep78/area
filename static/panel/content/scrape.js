@@ -28,7 +28,7 @@ Ext.onReady(function() {
 			}, {	header: 'Post Type', dataIndex: 'post_type_name', sortable: true, filter: true, width: 100
 			}, {	header: 'Source', dataIndex: 'scrape_master_name', sortable: true, filter: true, width: 100
 			}, {	header: 'Time', dataIndex: 'scrape_time', sortable: true, filter: true, width: 125
-			}, {	header: 'Post ID', dataIndex: 'post_id', sortable: true, filter: true, width: 100, align: 'center', hidden: true
+			}, {	header: 'Post ID', dataIndex: 'post_id', sortable: true, filter: { type: 'numeric' }, width: 100, align: 'center', hidden: true
 			}, {	header: 'Status', xtype: 'actioncolumn', width: 75, align: 'center',
 					items: [ {
 						getClass: function(v, meta, rec) {
