@@ -8,6 +8,7 @@
 	$page_active = get_page();
 	
 	// page link
+	$page_title = ($is_popular) ? 'Popular Post' : 'Latest Post';
 	$page_base  = $category['link'];
 	$page_base .= ($is_popular) ? '/popular' : '';
 	
@@ -28,7 +29,7 @@
 	
 	// meta
 	$desc = 'Download';
-	$title = 'Suekarea - '.$category['name'].' - Page '.$page_active;
+	$title = 'Suekarea - '.$category['name'].' - '.$page_title.' - Page '.$page_active;
 	foreach ($array_post as $post) {
 		$desc .= ' - '.$post['name'];
 	}

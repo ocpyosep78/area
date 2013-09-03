@@ -12,10 +12,10 @@
 <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 <?php foreach ($tag_meta as $meta) { ?>
-<meta property="<?php echo $meta['property']; ?>" content="<?php echo htmlspecialchars($meta['content']); ?>">
+<meta property="<?php echo $meta['property']; ?>" content="<?php echo save_html_tag($meta['content']); ?>">
 <?php } ?>
-<meta name="title" content="<?php echo htmlspecialchars($title); ?>" />
-<meta name="description" content="<?php echo htmlspecialchars($desc); ?>" />
+<meta name="title" content="<?php echo save_html_tag($title); ?>" />
+<meta name="description" content="<?php echo save_html_tag($desc); ?>" />
 <title><?php echo htmlspecialchars($title); ?></title>
 <link href="https://plus.google.com/114002599803233293136/posts" rel="author"/>
 <link rel="stylesheet" type="text/css" media="all" id="primetime-style-css" href="<?php echo base_url('static/css/style.min.css'); ?>" />

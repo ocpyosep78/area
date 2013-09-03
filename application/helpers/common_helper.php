@@ -841,6 +841,15 @@
 		}
 	}
 	
+	if (! function_exists('save_html_tag')) {
+		function save_html_tag($value) {
+			$result = $value;
+			$result = preg_replace('/[\"\'\:]/i', "", $result);
+			
+			return $result;
+		}
+	}
+	
 	if (! function_exists('get_page')) {
 		function get_page() {
 			preg_match('/page-(\d+)/i', $_SERVER['REQUEST_URI'], $match);

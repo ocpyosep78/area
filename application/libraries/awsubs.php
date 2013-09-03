@@ -60,12 +60,9 @@ class awsubs {
 		$array_result = array();
 		$array_content = new SimpleXmlElement($content);
 		
-		/*	*/
+		/*	
 		// add link here
-		$array_result[] = array('title' => 'Persona: Trinity Soul Episode 4 Subtitle Indonesia', 'link' => 'http://www.wardhanime.net/2013/09/persona-trinity-soul-episode-4-subtitle.html');
-		$array_result[] = array('title' => 'Watamote Episode 8 Subtitle Indonesia', 'link' => 'http://www.wardhanime.net/2013/08/watamote-episode-8-subtitle-indonesia.html');
-		$array_result[] = array('title' => 'Monogatari Series: Second Season Episode 8 Subtitle Indonesia', 'link' => 'http://www.wardhanime.net/2013/08/monogatari-S2-08.html');
-		$array_result[] = array('title' => 'Kimi no Iru Machi Episode 7 Subtitle Indonesia', 'link' => 'http://www.wardhanime.net/2013/08/kimi-no-iru-machi-episode-7-subtitle.html');
+		$array_result[] = array('title' => 'Fate/kaleid liner PrismaIllya Episode 7 Subtitle Indonesia', 'link' => 'http://www.wardhanime.net/2013/08/fatekaleid-liner-prismaillya-episode-7.html');
 		/*	*/
 		
 		foreach ($array_content->channel->item as $array_temp) {
