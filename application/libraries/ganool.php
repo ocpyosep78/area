@@ -72,8 +72,7 @@ class ganool {
 		
 		/*	
 		// add link here
-		$array_result[] = array('title' => 'Snow Babies (2012) BluRay 720p 400MB Ganool', 'link' => 'http://ganool.com/snow-babies-2012-bluray-720p-400mb-ganool');
-		$array_result[] = array('title' => 'Kick-Ass 2 (2013) 720p R6 WEBRip 650MB Ganool', 'link' => 'http://ganool.com/kick-ass-2-2013-720p-r6-webrip-650mb-ganool');
+		$array_result[] = array('title' => 'The East (2013) 720p WEB-DL 800MB Ganool', 'link' => 'http://ganool.com/the-east-2013-720p-web-dl-800mb-ganool');
 		/*	*/
 		
 		foreach ($array_content->channel->item as $array_temp) {
@@ -116,10 +115,13 @@ class ganool {
 		
 		// anime condition
 		if (empty($result)) {
+			// retrive content
+			$content = preg_replace('/src=/i', 'nosrc=', $content_raw);
+			
 			// remove start offset
 			$offset = '<div class="entry-content">';
-			$pos_first = strpos($content_raw, $offset);
-			$content = substr($content_raw, $pos_first, strlen($content_raw) - $pos_first);
+			$pos_first = strpos($content, $offset);
+			$content = substr($content, $pos_first, strlen($content) - $pos_first);
 			
 			// remove end offset
 			$offset = 'crp_related';
@@ -129,7 +131,11 @@ class ganool {
 			// remove download link
 			$offset = 'spoiler-body';
 			$pos_end = strpos($content, $offset);
-			$content = substr($content, 0, $pos_end);
+			if ($pos_end === false) {
+				$result = preg_replace('/ (class|alt|title|src|href|onclick)="[^\"]+"/i', '', $content);
+			} else {
+				$result = substr($content, 0, $pos_end);
+			}
 		}
 		
 		// endfix
@@ -142,6 +148,9 @@ class ganool {
 	}
 	
 	function get_download($content) {
+		// clean image | js
+		$content = preg_replace('/src=/i', 'nosrc=', $content);
+		
 		// remove start offset
 		$offset = 'id="content"';
 		$pos_first = strpos($content, $offset);
@@ -212,6 +221,23 @@ class ganool {
 					$result .= $array_link[1][$key_link].' '.$array_link[2][$key_link]."\n";
 				}
 				$result .= "\n";
+			}
+		}
+		
+		// get form p => ul
+		if (empty($result)) {
+			$content = preg_replace('/<\/?strong>/i', '', $content);
+			preg_match_all('/([a-z0-9 ]+)<\/p>\n<ul>\n(<li><a href="[^\"]+">[a-z0-9 ]+<\/a><\/li>\n)*/i', $content, $match);
+			foreach ($match[0] as $key => $value) {
+				$label = $match[1][$key];
+				preg_match_all('/href="([^\"]+)">([^>]+)</i', $value, $array_link);
+				
+				$result .= (empty($result)) ? $label : "\n\n".$label;
+				foreach ($array_link[0] as $counter => $link_html) {
+					$link_href = $array_link[1][$counter];
+					$link_name = $array_link[2][$counter];
+					$result .= "\n".$link_href.' '.$link_name;
+				}
 			}
 		}
 		
