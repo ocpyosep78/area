@@ -62,7 +62,17 @@ class awsubs {
 		
 		/*	
 		// add link here
-		$array_result[] = array('title' => 'Fate/kaleid liner PrismaIllya Episode 7 Subtitle Indonesia', 'link' => 'http://www.wardhanime.net/2013/08/fatekaleid-liner-prismaillya-episode-7.html');
+		$array_result[] = array('title' => 'Free! Episode 9 Subtitle Indonesia', 'link' => 'http://www.wardhanime.net/2013/09/free-episode-9-subtitle-indonesia.html');
+		$array_result[] = array('title' => 'Brothers Conflict Episode 10 Subtitle Indonesia', 'link' => 'http://www.wardhanime.net/2013/09/brothers-conflict-episode-10-subtitle.html');
+		$array_result[] = array('title' => 'Busou Shinki Episode 13 OVA Subtitle Indonesia', 'link' => 'http://www.wardhanime.net/2013/09/busou-shinki-episode-13-ova-subtitle.html');
+		$array_result[] = array('title' => 'Watamote Episode 9 Subtitle Indonesia', 'link' => 'http://www.wardhanime.net/2013/09/watamote-episode-9-subtitle-indonesia.html');
+		$array_result[] = array('title' => 'Watamote Episode 8 Subtitle Indonesia', 'link' => 'http://www.wardhanime.net/2013/08/watamote-episode-8-subtitle-indonesia.html');
+		$array_result[] = array('title' => 'Monogatari Series: Second Season Episode 8 Subtitle Indonesia', 'link' => 'http://www.wardhanime.net/2013/08/monogatari-S2-08.html');
+		$array_result[] = array('title' => 'Kimi no Iru Machi Episode 7 Subtitle Indonesia', 'link' => 'http://www.wardhanime.net/2013/08/kimi-no-iru-machi-episode-7-subtitle.html');
+		$array_result[] = array('title' => 'Genei wo Kakeru Taiyou Episode 8 Subtitle Indonesia', 'link' => 'http://www.wardhanime.net/2013/08/genei-wo-kakeru-taiyou-episode-8.html');
+		$array_result[] = array('title' => 'Senki Zesshou Symphogear G Episode 8 Subtitle Indonesia', 'link' => 'http://www.wardhanime.net/2013/08/senki-zesshou-symphogear-g-episode-8.html');
+		$array_result[] = array('title' => 'To Aru Kagaku no Railgun S Episode 19 Subtitle Indonesia', 'link' => 'http://www.wardhanime.net/2013/08/to-aru-kagaku-no-railgun-s-episode-19.html');
+		$array_result[] = array('title' => 'Kamisama no Inai Nichiyoubi Episode 8 Subtitle Indonesia', 'link' => 'http://www.wardhanime.net/2013/08/kamisama-no-inai-nichiyoubi-episode-8.html');
 		/*	*/
 		
 		foreach ($array_content->channel->item as $array_temp) {
@@ -131,13 +141,36 @@ class awsubs {
 					$result .= "\n";
 				}
 				
+				preg_match_all('/href=\"([^\"]+)\">([^\<]+)</i', $match[6][$key], $array_link);
+				if (count($array_link[0]) == 0) {
+					continue;
+				}
+				
 				// write title
 				$result .= $value."\n";
 				
 				// write link
-				preg_match_all('/href=\"([^\"]+)\">([^\<]+)</i', $match[6][$key], $array_link);
 				foreach ($array_link[1] as $key => $link) {
 					$result .= $array_link[1][$key].' '.$array_link[2][$key]."\n";
+				}
+			}
+		}
+		
+		// condition #1 update new design 2013-09-05
+		if (empty($result)) {
+			$content_update = preg_replace('/ (rel|target|style)="[^"]+"/i', '', $content);
+			$content_update = preg_replace('/(&nbsp;|\|)+/i', ' ', $content_update);
+			$content_update = preg_replace('/<\/?(span|div)>/i', '', $content_update);
+			$content_update = preg_replace('/\s+/i', ' ', $content_update);
+			preg_match_all('/trbidi="on">([^>]+) (<a href="[^"]+"\>[a-z]+<\/a> *)+/i', $content_update, $match);
+			foreach ($match[1] as $key => $label) {
+				$label = trim(preg_replace('/\[AWSubs\]/i', '', $label));
+				preg_match_all('/<a href="([^"]+)"\>([^\<]+)<\/a>/i', $match[0][$key], $array_link);
+				
+				$result .= (empty($result)) ? $label : "\n\n".$label;
+				foreach ($array_link[1] as $key => $link) {
+					$link_name = $array_link[2][$key];
+					$result .= "\n".$link.' '.$link_name;
 				}
 			}
 		}
