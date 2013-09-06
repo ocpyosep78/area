@@ -9,20 +9,12 @@ class sedot_mini {
 		$curl = new curl();
 		$array_item = array();
 		$content = $curl->get($scrape['link']);
-		$array_content = new SimpleXmlElement($content);
+		$array_post = $this->get_array_clear($content);
 		
 		$array_result = array();
-		foreach ($array_content->channel->item as $array) {
-			$array = (array)$array;
+		foreach ($array_post as $array) {
+			$array['title'] = trim($array['title']);
 			$link_source = $array['link'];
-			
-			// test purpose
-			/*	
-			$title = $array['title'];
-			if ($title != 'PV - Opening Shingeki no Kyojin') {
-				continue;
-			}
-			/*	*/
 			
 			// content already exist
 			$check = $this->CI->Scrape_Content_model->get_by_id(array( 'link_source' => $link_source ));
@@ -54,6 +46,34 @@ class sedot_mini {
 			if (count($array_result) >= 10) {
 				break;
 			}
+		}
+		
+		return $array_result;
+	}
+	
+	function get_array_clear($content) {
+		$array_result = array();
+		$array_content = new SimpleXmlElement($content);
+		
+		/*	
+		// add link here
+		$array_result[] = array('title' => '[EveTaku] Ore no Imouto ga Konnani Kawaii Wake ga Nai 2  16', 'link' => 'http://www.sedotmini.com/evetaku-ore-no-imouto-ga-konnani-kawaii-wake-ga-nai-2-16/');
+		$array_result[] = array('title' => '[Commie] Senki Zesshou Symphogear G  09', 'link' => 'http://www.sedotmini.com/commie-senki-zesshou-symphogear-g-09/');
+		$array_result[] = array('title' => '[FTW] Watashi ga Motenai no wa Dou Kangaetemo Omaera ga Warui  09', 'link' => 'http://www.sedotmini.com/ftw-watashi-ga-motenai-no-wa-dou-kangaetemo-omaera-ga-warui-09-2/');
+		$array_result[] = array('title' => '[Tsuki] Hunter X Hunter  94', 'link' => 'http://www.sedotmini.com/tsuki-hunter-x-hunter-94/');
+		$array_result[] = array('title' => '[A-Destiny] Toriko  119', 'link' => 'http://www.sedotmini.com/a-destiny-toriko-119/');
+		$array_result[] = array('title' => '[HorribleSubs] Inu to Hasami wa Tsukaiyou  10', 'link' => 'http://www.sedotmini.com/horriblesubs-inu-to-hasami-wa-tsukaiyou-10/');
+		/*	*/
+		
+		foreach ($array_content->channel->item as $array_temp) {
+			$array_temp = (array)$array_temp;
+			unset($array_temp['category']);
+			unset($array_temp['description']);
+			unset($array_temp['comments']);
+			unset($array_temp['pubDate']);
+			unset($array_temp['guid']);
+			
+			$array_result[] = (array)$array_temp;
 		}
 		
 		return $array_result;

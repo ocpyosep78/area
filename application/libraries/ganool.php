@@ -172,10 +172,10 @@ class ganool {
 		
 		// get from href
 		$content_format = str_replace("<br />", "", $content);
-		preg_match_all('/<strong>([a-z0-9 ]+)<\/strong>(\s*<a href=\"([^\"]+)\" onclick=\"[^\"]+\">([^\<]+)<\/a>)*/i', $content_format, $match);
+		preg_match_all('/<strong>([a-z0-9 ]+)<\/strong>(\s*<a href=\"([^\"]+)\">([^\<]+)<\/a>)*/i', $content_format, $match);
 		foreach ($match[0] as $key => $string_check) {
 			$label = $match[1][$key];
-			preg_match_all('/<a href=\"([^\"]+)\" onclick=\"[^\"]+\">([^\<]+)</i', $string_check, $array_link);
+			preg_match_all('/<a href=\"([^\"]+)\">([^\<]+)</i', $string_check, $array_link);
 			if (count($array_link[0]) > 0) {
 				$result .= (empty($result)) ? "" : "\n";
 				$result .= $label."\n";
