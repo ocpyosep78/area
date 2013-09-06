@@ -4,7 +4,7 @@
 	include 'C:\Program Files\xampplite\htdocs\suekarea\trunk\application\libraries\awsubs.php';
 	
 	/*	
-	$link = 'http://www.wardhanime.net/2013/09/free-episode-9-subtitle-indonesia.html';
+	$link = 'http://ganool.com/never-let-me-go-2010-bluray-720p-600mb-ganool';
 	$content = file_get_contents($link);
 	Write('C:\Program Files\xampplite\htdocs\suekarea\trunk\post.txt', $content);
 	exit;
@@ -15,9 +15,9 @@
 	$content = preg_replace('/[^\x20-\x7E|\x0A]/i', '', $content);
 	
 	// scrape
-	$desc = awsubs::get_desc($content);
+	$desc = ganool::get_desc($content);
 	
-	$download = awsubs::get_download($content);
+	$download = ganool::get_download($content);
 	echo $download; exit;
 	
 	
