@@ -174,7 +174,7 @@ class alibaba {
 		
 		// new design on 2013-09-09
 		if (empty($result)) {
-			preg_match_all('/<div>([a-z0-9 \!\:\[\]]+)<\/div>\s*<div>(<a href="[^\"]+\">[a-z0-9\/\[\] ]+<\/a>[ \|]*)*<\/div/i', $content, $match);
+			preg_match_all('/<div>([^\<]+)<\/div>\s*<div>(<a href="[^\"]+\">[a-z0-9\/\[\] ]+<\/a>[ \|]*)*<\/div/i', $content, $match);
 			foreach ($match[0] as $key => $value) {
 				preg_match_all('/<a href="([^\"]+)\">([a-z0-9\/\[\] ]+)<\/a>/i', $value, $array_link);
 				
