@@ -70,21 +70,8 @@ class alibaba {
 		$array_result = array();
 		$array_content = new SimpleXmlElement($content);
 		
-		/*	*/
+		/*	
 		// add link here
-		$array_result[] = array('title' => 'Gatchaman Crowds Episode 9 Subtitle Indonesia', 'link' => 'http://www.alibabasub.net/2013/09/gatchaman-crowds-episode-9-subtitle-indonesia.html');
-		$array_result[] = array('title' => 'Senki Zesshou Symphogear G Episode 10 Subtitle Indonesia', 'link' => 'http://www.alibabasub.net/2013/09/senki-zesshou-symphogear-g-episode-10-subtitle-indonesia.html');
-		$array_result[] = array('title' => 'Kiniro Mosaic Episode 10 Subtitle Indonesia', 'link' => 'http://www.alibabasub.net/2013/09/kiniro-mosaic-episode-10-subtitle-indonesia.html');
-		$array_result[] = array('title' => 'One Piece Episode 611 Subtitle Indonesia', 'link' => 'http://www.alibabasub.net/2013/09/one-piece-episode-611-subtitle-indonesia.html');
-		$array_result[] = array('title' => 'Kamisama no Inai Nichiyoubi Episode 10 Subtitle Indonesia', 'link' => 'http://www.alibabasub.net/2013/09/kamisama-no-inai-nichiyoubi-episode-10-subtitle-indonesia.html');
-		$array_result[] = array('title' => 'Shingeki no Kyojin Episode 22 Subtitle Indonesia', 'link' => 'http://www.alibabasub.net/2013/09/shingeki-no-kyojin-episode-22-subtitle-indonesia.html');
-		$array_result[] = array('title' => 'Hunter x Hunter (2011) Episode 95 Subtitle Indonesia', 'link' => 'http://www.alibabasub.net/2013/09/hunter-x-hunter-2011-episode-95-subtitle-indonesia.html');
-		$array_result[] = array('title' => 'Genei o Kakeru Taiyou Episode 10 Subtitle Indonesia', 'link' => 'http://www.alibabasub.net/2013/09/genei-o-kakeru-taiyou-episode-10-subtitle-indonesia.html');
-		$array_result[] = array('title' => 'Toaru Kagaku no Railgun S Episode 21 Subtitle Indonesia', 'link' => 'http://www.alibabasub.net/2013/09/toaru-kagaku-no-railgun-s-episode-21-subtitle-indonesia.html');
-		$array_result[] = array('title' => 'Fate/Kaleid Liner PrismaIlya Episode 9 Subtitle Indonesia', 'link' => 'http://www.alibabasub.net/2013/09/fatekaleid-liner-prisma%e2%98%86ilya-episode-9-subtitle-indonesia.html');
-		$array_result[] = array('title' => 'Choujigen Game Neptune: The Animation Episode 9 Subtitle Indonesia', 'link' => 'http://www.alibabasub.net/2013/09/choujigen-game-neptune-the-animation-episode-9-subtitle-indonesia.html');
-		$array_result[] = array('title' => 'Love Lab Episode 10 Subtitle Indonesia', 'link' => 'http://www.alibabasub.net/2013/09/love-lab-episode-10-subtitle-indonesia.html');
-		$array_result[] = array('title' => 'Rozen Maiden (2013) Episode 10 Subtitle Indonesia', 'link' => 'http://www.alibabasub.net/2013/09/rozen-maiden-2013-episode-10-subtitle-indonesia.html');
 		$array_result[] = array('title' => 'Gin no Saji Episode 9 Subtitle Indonesia', 'link' => 'http://www.alibabasub.net/2013/09/gin-no-saji-episode-9-subtitle-indonesia-2.html');
 		/*	*/
 		

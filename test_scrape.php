@@ -1,5 +1,5 @@
 <?php
-	set_time_limit(5);
+	set_time_limit(30);
 	
 	$is_office = false;
 	$library = 'alibaba';
@@ -16,8 +16,8 @@
 	include $path.'\application\libraries\awsubs.php';
 	include $path.'\application\libraries\alibaba.php';
 	
-	/*	
-	$link = 'http://www.alibabasub.net/2013/09/hunter-x-hunter-2011-episode-95-subtitle-indonesia.html';
+	/*	*/
+	$link = 'http://www.cupux-movie.com/feeds/posts/default?alt=rss';
 	$content = file_get_contents($link);
 	Write($path.'\post.txt', $content);
 	exit;

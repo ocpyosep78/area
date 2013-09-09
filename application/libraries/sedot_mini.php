@@ -57,12 +57,10 @@ class sedot_mini {
 		
 		/*	
 		// add link here
-		$array_result[] = array('title' => '[EveTaku] Ore no Imouto ga Konnani Kawaii Wake ga Nai 2  16', 'link' => 'http://www.sedotmini.com/evetaku-ore-no-imouto-ga-konnani-kawaii-wake-ga-nai-2-16/');
-		$array_result[] = array('title' => '[Commie] Senki Zesshou Symphogear G  09', 'link' => 'http://www.sedotmini.com/commie-senki-zesshou-symphogear-g-09/');
-		$array_result[] = array('title' => '[FTW] Watashi ga Motenai no wa Dou Kangaetemo Omaera ga Warui  09', 'link' => 'http://www.sedotmini.com/ftw-watashi-ga-motenai-no-wa-dou-kangaetemo-omaera-ga-warui-09-2/');
-		$array_result[] = array('title' => '[Tsuki] Hunter X Hunter  94', 'link' => 'http://www.sedotmini.com/tsuki-hunter-x-hunter-94/');
-		$array_result[] = array('title' => '[A-Destiny] Toriko  119', 'link' => 'http://www.sedotmini.com/a-destiny-toriko-119/');
-		$array_result[] = array('title' => '[HorribleSubs] Inu to Hasami wa Tsukaiyou  10', 'link' => 'http://www.sedotmini.com/horriblesubs-inu-to-hasami-wa-tsukaiyou-10/');
+		$array_result[] = array('title' => '[UTW] Minami-ke Natsuyasumi', 'link' => 'http://www.sedotmini.com/utw-minami-ke-natsuyasumi/');
+		$array_result[] = array('title' => '[FFF] High School DxD NEW  05', 'link' => 'http://www.sedotmini.com/fff-high-school-dxd-new-05/');
+		$array_result[] = array('title' => '[Doki] Kimi no Iru Machi Episode 04', 'link' => 'http://www.sedotmini.com/doki-kimi-no-iru-machi-04/');
+		$array_result[] = array('title' => '[Vivid] Uchouten Kazoku  05', 'link' => 'http://www.sedotmini.com/vivid-uchouten-kazoku-05/');
 		/*	*/
 		
 		foreach ($array_content->channel->item as $array_temp) {
