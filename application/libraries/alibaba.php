@@ -70,9 +70,22 @@ class alibaba {
 		$array_result = array();
 		$array_content = new SimpleXmlElement($content);
 		
-		/*
+		/*	*/
 		// add link here
-		$array_result[] = array('title' => 'Gin no Saji Episode 8 Subtitle Indonesia', 'link' => 'http://www.alibabasub.net/2013/08/gin-no-saji-episode-8-subtitle-indonesia.html');
+		$array_result[] = array('title' => 'Gatchaman Crowds Episode 9 Subtitle Indonesia', 'link' => 'http://www.alibabasub.net/2013/09/gatchaman-crowds-episode-9-subtitle-indonesia.html');
+		$array_result[] = array('title' => 'Senki Zesshou Symphogear G Episode 10 Subtitle Indonesia', 'link' => 'http://www.alibabasub.net/2013/09/senki-zesshou-symphogear-g-episode-10-subtitle-indonesia.html');
+		$array_result[] = array('title' => 'Kiniro Mosaic Episode 10 Subtitle Indonesia', 'link' => 'http://www.alibabasub.net/2013/09/kiniro-mosaic-episode-10-subtitle-indonesia.html');
+		$array_result[] = array('title' => 'One Piece Episode 611 Subtitle Indonesia', 'link' => 'http://www.alibabasub.net/2013/09/one-piece-episode-611-subtitle-indonesia.html');
+		$array_result[] = array('title' => 'Kamisama no Inai Nichiyoubi Episode 10 Subtitle Indonesia', 'link' => 'http://www.alibabasub.net/2013/09/kamisama-no-inai-nichiyoubi-episode-10-subtitle-indonesia.html');
+		$array_result[] = array('title' => 'Shingeki no Kyojin Episode 22 Subtitle Indonesia', 'link' => 'http://www.alibabasub.net/2013/09/shingeki-no-kyojin-episode-22-subtitle-indonesia.html');
+		$array_result[] = array('title' => 'Hunter x Hunter (2011) Episode 95 Subtitle Indonesia', 'link' => 'http://www.alibabasub.net/2013/09/hunter-x-hunter-2011-episode-95-subtitle-indonesia.html');
+		$array_result[] = array('title' => 'Genei o Kakeru Taiyou Episode 10 Subtitle Indonesia', 'link' => 'http://www.alibabasub.net/2013/09/genei-o-kakeru-taiyou-episode-10-subtitle-indonesia.html');
+		$array_result[] = array('title' => 'Toaru Kagaku no Railgun S Episode 21 Subtitle Indonesia', 'link' => 'http://www.alibabasub.net/2013/09/toaru-kagaku-no-railgun-s-episode-21-subtitle-indonesia.html');
+		$array_result[] = array('title' => 'Fate/Kaleid Liner PrismaIlya Episode 9 Subtitle Indonesia', 'link' => 'http://www.alibabasub.net/2013/09/fatekaleid-liner-prisma%e2%98%86ilya-episode-9-subtitle-indonesia.html');
+		$array_result[] = array('title' => 'Choujigen Game Neptune: The Animation Episode 9 Subtitle Indonesia', 'link' => 'http://www.alibabasub.net/2013/09/choujigen-game-neptune-the-animation-episode-9-subtitle-indonesia.html');
+		$array_result[] = array('title' => 'Love Lab Episode 10 Subtitle Indonesia', 'link' => 'http://www.alibabasub.net/2013/09/love-lab-episode-10-subtitle-indonesia.html');
+		$array_result[] = array('title' => 'Rozen Maiden (2013) Episode 10 Subtitle Indonesia', 'link' => 'http://www.alibabasub.net/2013/09/rozen-maiden-2013-episode-10-subtitle-indonesia.html');
+		$array_result[] = array('title' => 'Gin no Saji Episode 9 Subtitle Indonesia', 'link' => 'http://www.alibabasub.net/2013/09/gin-no-saji-episode-9-subtitle-indonesia-2.html');
 		/*	*/
 		
 		foreach ($array_content->channel->item as $array_temp) {
@@ -139,7 +152,7 @@ class alibaba {
 		$content = preg_replace('/<\/?strong>/i', '', $content);
 		$content = preg_replace('/<\/a>\s?\/\s?<a /i', '</a> / <a ', $content);
 		$content = preg_replace('/(480|720)p?\s*[=:]\s*/i', "$1 ", $content);
-		$content = preg_replace('/(title|class|rel|target)="[a-z0-9 \-\_]*"/i', '', $content);
+		$content = preg_replace('/ (title|class|rel|target)="[a-z0-9 \-\_]*"/i', '', $content);
 		
 		$result = '';
 		preg_match_all('/(480|720) (<a href=\"([^\"]+)\" *>([a-z0-9 ]+)<\/a>( *[\/\|] *)*)*/i', $content, $match);
@@ -155,6 +168,23 @@ class alibaba {
 						$title = $raw_link[2][$key];
 						$result .= $link.' '.$title."\n";
 					}
+				}
+			}
+		}
+		
+		// new design on 2013-09-09
+		if (empty($result)) {
+			preg_match_all('/<div>([a-z0-9 \!\:\[\]]+)<\/div>\s*<div>(<a href="[^\"]+\">[a-z0-9\/\[\] ]+<\/a>[ \|]*)*<\/div/i', $content, $match);
+			foreach ($match[0] as $key => $value) {
+				preg_match_all('/<a href="([^\"]+)\">([a-z0-9\/\[\] ]+)<\/a>/i', $value, $array_link);
+				
+				$label = $match[1][$key];
+				$result .= (empty($result)) ? $label : "\n\n".$label;
+				foreach ($array_link[0] as $key => $raw_link) {
+					$link_address = $array_link[1][$key];
+					$link_title = $array_link[2][$key];
+					
+					$result .= "\n".$link_address.' '.$link_title;
 				}
 			}
 		}
