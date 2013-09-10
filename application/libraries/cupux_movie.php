@@ -20,8 +20,8 @@ class cupux_movie {
 			$content_desc = preg_replace('/[^\x20-\x7E|\x0A]/i', '', $array['description']);
 			
 			// test purpose
-			/*
-			if ($array['title'] != 'When the Lights Went Out (2012) BRRip') {
+			/*	
+			if ($array['title'] != 'The Evolution of Andrew (2012) WebRip') {
 				continue;
 			}
 			/*	*/
@@ -48,32 +48,40 @@ class cupux_movie {
 	}
 	
 	function get_desc($content) {
+		$result = '';
 		$content_desc = str_replace('<br />', "\n", $content);
 		$content_desc = strip_tags($content_desc);
 		
 		// #1 condition
 		$content_desc = str_replace(' Release', "\nRelease", $content_desc);
-		preg_match('/(Release([a-z0-9\(\)\|\,\.\-\:\;\/\^\'\_\&\@\s]*))Download/i', $content_desc, $match);
+		preg_match('/(Release([a-z0-9\(\)\|\,\.\?\-\:\;\/\^\'\_\&\@\s]*))Download/i', $content_desc, $match);
 		$string_temp = (isset($match[1])) ? $match[1] : '';
 		
 		// #2 condition
 		if (empty($string_temp)) {
 			$content_desc = str_replace(' Genre', "\nGenre", $content_desc);
-			preg_match('/(Genre([a-z0-9\(\)\|\,\.\-\:\;\/\^\'\"\_\&\@\s]*))Download/i', $content_desc, $match);
+			preg_match('/(Genre([a-z0-9\(\)\|\,\.\?\-\:\;\/\^\'\"\_\&\@\s]*))Download/i', $content_desc, $match);
 			$string_temp = (isset($match[1])) ? $match[1] : '';
 		}
 		
 		$string_temp = preg_replace('/(Direct|Download) Link[\x20-\x7E\s]+/i', '', $string_temp);
 		$array_temp = explode("\n", $string_temp);
 		
-		$result = '';
-		foreach ($array_temp as $line) {
-			$result .= '<div>'.$line.'</div>';
+		// generate line
+		if (count($array_temp) == 1 && empty($array_temp[0])) {
+			// no description found
+		} else {
+			foreach ($array_temp as $line) {
+				$result .= '<div>'.$line.'</div>';
+			}
 		}
 		
-		// endfix
-		$result .= '<div></div>';
-		$result .= '<div>Sumber : Cupux Movie</div>';
+		// generate endfix
+		if (!empty($result)) {
+			// endfix
+			$result .= '<div></div>';
+			$result .= '<div>Sumber : Cupux Movie</div>';
+		}
 		
 		return $result;
 	}
