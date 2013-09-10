@@ -95,7 +95,13 @@ class alibaba {
 		// remove end offset
 		$offset = '<div class="related-posts">';
 		$pos_end = strpos($content, $offset);
-		$content = substr($content, 0, $pos_end);
+		if ($pos_end) {
+			$content = substr($content, 0, $pos_end);
+		} else {
+			$offset = '<!-- related-posts -->';
+			$pos_end = strpos($content, $offset);
+			$content = substr($content, 0, $pos_end);
+		}
 		
 		// remove string from website
 		$content = str_replace(array('Sebagai downloader yang baik tentunya tahu apa yang harus dilakukan, dan jangan lupa untuk selalu meninggalkan jejak di blog ini!'), '', $content);
@@ -133,7 +139,13 @@ class alibaba {
 		// remove end offset
 		$offset = '<div class="related-posts">';
 		$pos_end = strpos($content, $offset);
-		$content = substr($content, 0, $pos_end);
+		if ($pos_end) {
+			$content = substr($content, 0, $pos_end);
+		} else {
+			$offset = '<!-- related-posts -->';
+			$pos_end = strpos($content, $offset);
+			$content = substr($content, 0, $pos_end);
+		}
 		
 		// make it consistent
 		$content = preg_replace('/<\/?strong>/i', '', $content);

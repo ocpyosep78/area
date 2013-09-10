@@ -69,7 +69,7 @@ class oplovers {
 		
 		/*	
 		// add link here
-		$array_result[] = array('title' => 'Shingeki no Kyojin Episode 21 Subtitle Indonesia', 'link' => 'http://www.oploverz.net/2013/09/shingeki-no-kyojin-episode-21-subtitle.html');
+		$array_result[] = array('title' => 'Shingeki no Kyojin Episode 22 Subtitle Indonesia', 'link' => 'http://www.oploverz.net/2013/09/shingeki-no-kyojin-episode-22-subtitle.html');
 		/*	*/
 		
 		foreach ($array_content->channel->item as $array_temp) {
