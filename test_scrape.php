@@ -1,7 +1,7 @@
 <?php
-	set_time_limit(30);
+	set_time_limit(5);
 	
-	$is_office = false;
+	$is_office = true;
 	$library = 'alibaba';
 	
 	if ($is_office) {
@@ -15,10 +15,12 @@
 	include $path.'\application\libraries\ganool.php';
 	include $path.'\application\libraries\awsubs.php';
 	include $path.'\application\libraries\alibaba.php';
+	include $path.'\application\libraries\oplovers.php';
 	
-	/*	*/
-	$link = 'http://www.cupux-movie.com/feeds/posts/default?alt=rss';
-	$content = file_get_contents($link);
+	/*	
+	$link = 'http://www.alibabasub.net/2013/09/kami-nomi-zo-shiru-sekai-megami-hen-episode-10-subtitle-indonesia.html';
+	$curl = new curl();
+	$content = $curl->get($link);
 	Write($path.'\post.txt', $content);
 	exit;
 	/*	*/
@@ -30,7 +32,6 @@
 	// scrape
 	$desc = $library::get_desc($content);
 	$download = $library::get_download($content);
-	
 	echo $download; exit;
 	
 	

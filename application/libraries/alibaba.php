@@ -151,7 +151,7 @@ class alibaba {
 		$content = preg_replace('/<\/?strong>/i', '', $content);
 		$content = preg_replace('/<\/a>\s?\/\s?<a /i', '</a> / <a ', $content);
 		$content = preg_replace('/(480|720)p?\s*[=:]\s*/i', "$1 ", $content);
-		$content = preg_replace('/ (title|class|rel|target)="[a-z0-9 \-\_]*"/i', '', $content);
+		$content = preg_replace('/ (style|title|class|rel|target)="[a-z0-9 \-\_\:]*"/i', '', $content);
 		
 		$result = '';
 		preg_match_all('/(480|720) (<a href=\"([^\"]+)\" *>([a-z0-9 ]+)<\/a>( *[\/\|] *)*)*/i', $content, $match);
