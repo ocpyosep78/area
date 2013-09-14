@@ -927,6 +927,14 @@
 	
 	if (! function_exists('is_valid_link')) {
 		function is_valid_link($value) {
+			$value = trim($value);
+			
+			// it is multi line
+			$array_value = explode("\n", $value);
+			if (count($array_value) > 1) {
+				return false;
+			}
+			
 			preg_match('/https?:\/\/[\w]+/i', $value, $match);
 			$result = (count($match) > 0) ? true : false;
 			

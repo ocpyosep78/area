@@ -163,7 +163,8 @@ class ganool {
 		
 		// clean desc
 		$content = str_replace('http://www.imdb.com/', '', $content);
-		$content = preg_replace('/ (onclick|target)=\"[^\"]+\"/i', '', $content);
+		$content = preg_replace('/ (onclick|class|target|title|rel)=\"[^\"]+\"/i', '', $content);
+		$content = preg_replace('/\<\/?p\>/i', '', $content);
 		$content_clean = trim(strip_tags($content));
 		
 		// data
@@ -172,7 +173,7 @@ class ganool {
 		
 		// get from href
 		$content_format = str_replace("<br />", "", $content);
-		preg_match_all('/<strong>([a-z0-9 ]+)<\/strong>(\s*<a href=\"([^\"]+)\">([^\<]+)<\/a>)*/i', $content_format, $match);
+		preg_match_all('/rong>([a-z0-9 ]+)<\/strong>(\s*<a href=\"([^\"]+)\">([^\<]+)<\/a>)*/i', $content_format, $match);
 		foreach ($match[0] as $key => $string_check) {
 			$label = $match[1][$key];
 			preg_match_all('/<a href=\"([^\"]+)\">([^\<]+)</i', $string_check, $array_link);
@@ -188,7 +189,7 @@ class ganool {
 		// get from label
 		preg_match_all('/(Akafile|Mightyupload|UpAfile|Putlocker|UpToBox|PFU|Uploadscenter|Netload|Turbobit|Uploaded|FileClod|FileHostPro|Ezzyfile|Tubobit)[: ]+(full speed)?\s*((http:[\w\/\.]+\s?)+)/i', $content_clean, $match);
 		if (count($match) > 0) {
-			foreach ($match[0] as $value) {
+			foreach ($match[0] as $key => $value) {
 				$value = trim($value);
 				
 				if (! $is_write_single_link) {
@@ -196,14 +197,22 @@ class ganool {
 					$is_single_link = (count($array_check) == 1) ? true : false;
 					if ($is_single_link) {
 						$is_write_single_link = true;
-						$result .= "\n\nSingle Link";
+						$result .= "\nSingle Link";
 					}
 				}
 				
-				if ($is_write_single_link) {
-					$result .= (empty($result)) ? $value : "\n".$value;
+				$label_check = $match[1][$key];
+				$link_check = $match[3][$key];
+				if (!empty($label_check) && is_valid_link($link_check)) {
+					$link_temp = trim($match[3][$key]).' '.$match[1][$key];
 				} else {
-					$result .= (empty($result)) ? $value : "\n\n".$value;
+					$link_temp = trim($value);
+				}
+				
+				if ($is_write_single_link) {
+					$result .= (empty($result)) ? $link_temp : "\n".$link_temp;
+				} else {
+					$result .= (empty($result)) ? $link_temp : "\n\n".$link_temp;
 				}
 			}
 		}
