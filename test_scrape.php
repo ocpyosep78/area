@@ -15,7 +15,7 @@
 	include $path.'\application\libraries\\'.$library.'.php';
 	
 	/*	
-	$link = 'http://ganool.com/the-naked-gun-2%c2%bd-the-smell-of-fear-1991-bluray-1080p-5-1ch-x264-ganool';
+	$link = 'http://ganool.com/kateikyoushi-hitman-reborn';
 	$curl = new curl();
 	$content = $curl->get($link);
 	Write($path.'\post.txt', $content);

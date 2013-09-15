@@ -6,8 +6,6 @@ class ganool {
     }
     
 	function get_array($scrape) {
-//		$scrape['link'] = 'http://localhost/suekarea/trunk/temp.txt';
-		
 		$curl = new curl();
 		$array_item = array();
 		$content = $curl->get($scrape['link']);
@@ -22,20 +20,11 @@ class ganool {
 			$array_link = explode('?', $link_temp, 2);
 			$link_source = $array_link[0];
 			
-			// test purpose
-			/*	
-			if ($array['title'] != 'The Switch (2010) BluRay 720p 600MB Ganool') {
-				continue;
-			}
-			/*	*/
-			
 			// content already exist
 			$check = $this->CI->Scrape_Content_model->get_by_id(array( 'link_source' => $link_source ));
 			if (count($check) > 0) {
 				continue;
 			}
-			
-//			$link_source = 'http://localhost:8666/suekarea/trunk/post.html';
 			
 			// make content clean
 			$content_item = $curl->get($link_source);
@@ -72,7 +61,12 @@ class ganool {
 		
 		/*	
 		// add link here
-		$array_result[] = array('title' => 'The East (2013) 720p WEB-DL 800MB Ganool', 'link' => 'http://ganool.com/the-east-2013-720p-web-dl-800mb-ganool');
+		$array_result[] = array('title' => 'Harry Brown (2009) BluRay 720p 600MB Ganool', 'link' => 'http://ganool.com/harry-brown-2009-bluray-720p-600mb-ganool');
+		$array_result[] = array('title' => 'The Beaver (2011) LIMITED BluRay 720p 550MB Ganool', 'link' => 'http://ganool.com/the-beaver-2011-limited-bluray-720p-550mb-ganool');
+		$array_result[] = array('title' => 'Little Miss Sunshine (2006) BluRay 720p 600MB Ganool', 'link' => 'http://ganool.com/little-miss-sunshine-2006-bluray-720p-600mb-ganool');
+		$array_result[] = array('title' => 'American Beauty (1999) BluRay 720p 750MB Ganool', 'link' => 'http://ganool.com/american-beauty-1999-bluray-720p-750mb-ganool');
+		$array_result[] = array('title' => 'Pulp Fiction (1994) US REMASTERED BluRay 720p 900MB Ganool', 'link' => 'http://ganool.com/pulp-fiction-1994-us-remastered-bluray-720p-900mb-ganool');
+		$array_result[] = array('title' => 'Let the Right One In (2008) BluRay 720p 700MB Ganool', 'link' => 'http://ganool.com/let-the-right-one-in-2008-bluray-720p-700mb-ganool');
 		/*	*/
 		
 		foreach ($array_content->channel->item as $array_temp) {
@@ -197,7 +191,7 @@ class ganool {
 					$is_single_link = (count($array_check) == 1) ? true : false;
 					if ($is_single_link) {
 						$is_write_single_link = true;
-						$result .= "\nSingle Link";
+						$result = trim($result)."\n\nSingle Link";
 					}
 				}
 				

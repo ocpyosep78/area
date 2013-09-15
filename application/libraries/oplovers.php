@@ -6,9 +6,6 @@ class oplovers {
     }
     
 	function get_array($scrape) {
-		// debug
-		// $scrape['link'] = 'http://localhost/suekarea/trunk/temp.xml';
-		
 		$curl = new curl();
 		$array_item = array();
 		$content = $curl->get($scrape['link']);
@@ -19,21 +16,11 @@ class oplovers {
 			$array['title'] = trim($array['title']);
 			$link_source = $array['link'];
 			
-			// test purpose
-			/*	
-			if ($array['title'] != 'PV - Opening Shingeki no Kyojin') {
-				continue;
-			}
-			/*	*/
-			
 			// content already exist
 			$check = $this->CI->Scrape_Content_model->get_by_id(array( 'link_source' => $link_source ));
 			if (count($check) > 0) {
 				continue;
 			}
-			
-			// debug
-			// $link_source = 'http://localhost/suekarea/trunk/post.txt';
 			
 			// collect
 			$content_html = $this->get_content($link_source);
@@ -137,7 +124,7 @@ class oplovers {
 		// clean content
 		$content = preg_replace('/(rel|style|target)\=\"[^\"]+\"/i', '', $content);
 		$content = preg_replace('/ +\>/i', '>', $content);
-		$content = preg_replace('/\<\/?b\>/i', '', $content);
+		$content = preg_replace('/\<\/?(b|span)\>/i', '', $content);
 		preg_match_all('/\<a href\=\"([^\"]+)\"\>\[?([\w\s]+)\]?\<\/a\>/i', $content, $match);
 		
 		$result = '';
