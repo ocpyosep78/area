@@ -6,9 +6,6 @@ class alibaba {
     }
     
 	function get_array($scrape) {
-		// debug
-		// $scrape['link'] = 'http://localhost/suekarea/trunk/temp.xml';
-		
 		$curl = new curl();
 		$array_item = array();
 		$content = $curl->get($scrape['link']);
@@ -24,16 +21,6 @@ class alibaba {
 			if (count($check) > 0) {
 				continue;
 			}
-			
-			// test purpose
-			/*	
-			if ($array['title'] != 'Makai Ouji: Devils and Realist Episode 7 Subtitle Indonesia') {
-				continue;
-			}
-			/*	*/
-			
-			// debug
-			// $link_source = 'http://localhost/suekarea/trunk/post.txt';
 			
 			// make content clean
 			$content_item = $curl->get($link_source);
@@ -152,6 +139,7 @@ class alibaba {
 		$content = preg_replace('/<\/a>\s?\/\s?<a /i', '</a> / <a ', $content);
 		$content = preg_replace('/(480|720)p?\s*[=:]\s*/i', "$1 ", $content);
 		$content = preg_replace('/ (style|title|class|rel|target)="[a-z0-9 \-\_\:]*"/i', '', $content);
+		$content = preg_replace('/<div>([a-z0-9 ]+[ \|]+)*<a/i', '<div><a', $content);
 		
 		$result = '';
 		preg_match_all('/(480|720) (<a href=\"([^\"]+)\" *>([a-z0-9 ]+)<\/a>( *[\/\|] *)*)*/i', $content, $match);
