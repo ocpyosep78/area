@@ -1,10 +1,13 @@
 <?php
 	set_time_limit(30);
+	error_reporting(E_ALL);
+	ini_set('display_errors', 1);
 	
-	$is_office = false;
-	$library = 'alibaba';
+	$is_office = true;
+	$library = 'ganool';
 	
 	if ($is_office) {
+		$localhost = 'http://localhost:8666/suekarea/trunk/';
 		$path = 'C:\Program Files\xampplite\htdocs\suekarea\trunk';
 	} else {
 		$localhost = 'http://localhost/suekarea/trunk/';
@@ -12,10 +15,10 @@
 	}
 	
 	include $path.'\application\helpers\common_helper.php';
-	include $path.'\application\libraries\\'.$library.'.php';
+	include $path.'\application\libraries\scrape\\'.$library.'.php';
 	
 	/*	
-	$link = 'http://www.alibabasub.net/2013/09/fatekaleid-liner-prisma%e2%98%86ilya-episode-10-subtitle-indonesiafinal.html';
+	$link = 'http://ganool.com/ao-no-exorcist-the-movie';
 	$curl = new curl();
 	$content = $curl->get($link);
 	Write($path.'\post.txt', $content);

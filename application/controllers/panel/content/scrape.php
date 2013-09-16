@@ -41,7 +41,7 @@ class scrape extends SUEKAREA_Controller {
 		}
 		else if ($action == 'do_scrape') {
 			$scrape_master = $this->Scrape_Master_model->get_by_id(array( 'id' => $_POST['id'] ));
-			$this->load->library($scrape_master['library']);
+			$this->load->library('scrape/'.$scrape_master['library']);
 			
 			$insert_post = 0;
 			$result['status'] = true;
