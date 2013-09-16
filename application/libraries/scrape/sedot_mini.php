@@ -57,10 +57,8 @@ class sedot_mini {
 		
 		/*	
 		// add link here
-		$array_result[] = array('title' => '[UTW] Minami-ke Natsuyasumi', 'link' => 'http://www.sedotmini.com/utw-minami-ke-natsuyasumi/');
-		$array_result[] = array('title' => '[FFF] High School DxD NEW  05', 'link' => 'http://www.sedotmini.com/fff-high-school-dxd-new-05/');
-		$array_result[] = array('title' => '[Doki] Kimi no Iru Machi Episode 04', 'link' => 'http://www.sedotmini.com/doki-kimi-no-iru-machi-04/');
-		$array_result[] = array('title' => '[Vivid] Uchouten Kazoku  05', 'link' => 'http://www.sedotmini.com/vivid-uchouten-kazoku-05/');
+		$array_result[] = array('title' => '[HorribleSubs] Majestic Prince  23', 'link' => 'http://www.sedotmini.com/horriblesubs-majestic-prince-23/');
+		$array_result[] = array('title' => '[GotWoot] Mirai Nikki  Redial', 'link' => 'http://www.sedotmini.com/gotwoot-mirai-nikki-redial/');
 		/*	*/
 		
 		foreach ($array_content->channel->item as $array_temp) {

@@ -229,8 +229,9 @@ class ganool {
 		
 		// get form p => ul
 		if (empty($result)) {
-			$content = preg_replace('/<\/?strong>/i', '', $content);
-			preg_match_all('/([a-z0-9 ]+)<\/p>\n<ul>\n(<li><a href="[^\"]+">[a-z0-9 ]+<\/a><\/li>\n)*/i', $content, $match);
+			$content_temp = preg_replace('/<\/?strong>/i', '', $content);
+			$content_temp = preg_replace('/<br *\/>/i', '</p>', $content_temp);
+			preg_match_all('/([a-z0-9 ]+)<\/p>\n*<ul>\n(<li><a href="[^\"]+">[a-z0-9 ]+<\/a><\/li>\n)*/i', $content_temp, $match);
 			foreach ($match[0] as $key => $value) {
 				$label = $match[1][$key];
 				preg_match_all('/href="([^\"]+)">([^>]+)</i', $value, $array_link);
