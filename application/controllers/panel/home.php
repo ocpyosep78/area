@@ -54,6 +54,6 @@ class home extends CI_Controller {
 	}
 	
 	function dashboard() {
-		echo 'asd';
+		$this->load->view( 'panel/dashboard');
 	}
 }

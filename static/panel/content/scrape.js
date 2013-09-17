@@ -127,6 +127,7 @@ Ext.onReady(function() {
 				} });
 			} }, '-',
 			{	text: 'Ubah', iconCls: 'editIcon', tooltip: 'Ubah', handler: function() { main_grid.update({ }); } }, '-',
+			{	text: 'Set Status', iconCls: 'editIcon', tooltip: 'Set Status', handler: function() { main_grid.set_status({ }); } }, '-',
 			{	text: 'Hapus', iconCls: 'delIcon', tooltip: 'Hapus', handler: function() {
 					if (main_grid.getSelectionModel().getSelection().length == 0) {
 						Ext.Msg.alert('Informasi', 'Silahkan memilih data.');
@@ -198,6 +199,28 @@ Ext.onReady(function() {
 						main_store.load();
 					}
 				}
+			});
+		},
+		set_status: function(Param) {
+			var row = main_grid.getSelectionModel().getSelection();
+			if (row.length == 0) {
+				Ext.Msg.alert('Informasi', 'Silahkan memilih data.');
+				return false;
+			}
+			
+			var record = row[0].data;
+			Ext.MessageBox.prompt('Set Status', 'Please enter new status id :', function (btn, post_id) {
+				if (btn != 'ok') {
+					return;
+				}
+				
+				Ext.Ajax.request({
+					url: URLS.base + 'panel/content/scrape/action',
+					params: { action: 'update', id: record.id, post_id: post_id },
+					success: function(temp) {
+						main_store.load();
+					}
+				});
 			});
 		}
 	});

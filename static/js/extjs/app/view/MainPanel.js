@@ -1,4 +1,3 @@
-
 Ext.define( 'Stiki.view.MainPanel', {
     extend: 'Ext.tab.Panel',
     alias: 'widget.mainpanel',
@@ -6,26 +5,10 @@ Ext.define( 'Stiki.view.MainPanel', {
     activeTab: 0,
     defaults: { padding: '10px' },
     initComponent: function() {
-		var init_table = function() {
-			/*
-			var table_pin = Ext.create('Ext.ux.grid.TransformGrid', "table-pin", { stripeRows: true, height: 50 });
-			table_pin.render();
-			
-			var table_fakultas = Ext.create('Ext.ux.grid.TransformGrid', "table-fakultas", { stripeRows: true, height: 350 });
-			table_fakultas.render();
-			
-			var table_bank = Ext.create('Ext.ux.grid.TransformGrid', "table-bank", { stripeRows: true, height: 175 });
-			table_bank.render();
-			
-			var table_spmk = Ext.create('Ext.ux.grid.TransformGrid', "table-spmk", { stripeRows: true, height: 225 });
-			table_spmk.render();
-			/*	*/
-		}
-		
         Ext.apply( this, {
             items: [{
-                title: 'Home',
-				loader: { url: URLS.base + 'panel/home/dashboard', contentType: 'html', autoLoad: true, callback: init_table }
+				title: 'Home',
+				html: '<iframe src="' + URLS.base + 'panel/home/dashboard" frameborder="0" width="100%" height="100%"></iframe>'
             }]
         });
         this.callParent(arguments);

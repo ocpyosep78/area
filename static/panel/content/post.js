@@ -201,6 +201,8 @@ Ext.onReady(function() {
 							win.post_type = Combo.Class.PostType({ renderTo: 'post_typeED', width: 225, allowBlank: false, blankText: 'Masukkan Jenis Post', value: page_data.POST_TYPE_MULTI_LINK });
 							win.publish_date = new Ext.form.DateField({ renderTo: 'publish_dateED', width: 120, format: DATE_FORMAT, allowBlank: false, blankText: 'Masukkan Tanggal Publish', value: new Date() });
 							win.publish_time = Combo.Class.Time({ renderTo: 'publish_timeED', width: 100, allowBlank: false, blankText: 'Masukkan Jam Publish', value: new Date() });
+							win.create_date = new Ext.form.DateField({ renderTo: 'create_dateED', width: 120, format: DATE_FORMAT, allowBlank: false, blankText: 'Masukkan Tanggal Create', value: new Date() });
+							win.create_time = Combo.Class.Time({ renderTo: 'create_timeED', width: 100, allowBlank: false, blankText: 'Masukkan Jam Create', value: new Date() });
 							win.tag = new Ext.form.TextArea({ renderTo: 'tagED', width: 225, height: 50 });
 							win.link_canonical = new Ext.form.TextField({ renderTo: 'link_canonicalED', width: 225 });
 							win.thumbnail = new Ext.form.TextField({ renderTo: 'thumbnailED', width: 225, readOnly: true });
@@ -222,6 +224,8 @@ Ext.onReady(function() {
 								
 								win.publish_date.setValue(Renderer.GetDateFromString.Date(param.publish_date));
 								win.publish_time.setValue(Renderer.GetDateFromString.Time(param.publish_date));
+								win.create_date.setValue(Renderer.GetDateFromString.Date(param.create_date));
+								win.create_time.setValue(Renderer.GetDateFromString.Time(param.create_date));
 								
 								// tag
 								if (param.array_tag != null) {
@@ -274,13 +278,25 @@ Ext.onReady(function() {
 				if (! win.publish_time.validate()) {
 					is_valid = false;
 				}
+				if (! win.create_date.validate()) {
+					is_valid = false;
+				}
+				if (! win.create_time.validate()) {
+					is_valid = false;
+				}
 				if (! is_valid) {
 					return;
 				}
 				
+				// publish datetime
 				var publish_date = Renderer.ShowFormat.Date(win.publish_date.getValue());
 				var publish_time = Renderer.ShowFormat.Time(win.publish_time.getValue());
 				ajax.publish_date = publish_date + ' ' + publish_time;
+				
+				// create datetime
+				var create_date = Renderer.ShowFormat.Date(win.create_date.getValue());
+				var create_time = Renderer.ShowFormat.Time(win.create_time.getValue());
+				ajax.create_date = create_date + ' ' + create_time;
 				
 				Func.ajax({ param: ajax, url: URLS.base + 'panel/content/post/action', callback: function(result) {
 					Ext.Msg.alert('Informasi', result.message);

@@ -24,6 +24,10 @@
 		<div style="float: left; width: 125px;"><div id="publish_dateED"></div></div>
 		<div style="float: left; width: 120px;"><div id="publish_timeED"></div></div>
 		<div class="clear"></div>
+		<div style="float: left; width: 100px; padding: 3px 5px 12px 0; text-align: right;">Create Date :</div>
+		<div style="float: left; width: 125px;"><div id="create_dateED"></div></div>
+		<div style="float: left; width: 120px;"><div id="create_timeED"></div></div>
+		<div class="clear"></div>
 		<div style="float: left; width: 100px; padding: 3px 5px 12px 0; text-align: right;">Tag :</div>
 		<div style="float: left; width: 250px;"><div id="tagED"></div></div>
 		<div class="clear"></div>
