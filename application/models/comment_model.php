@@ -92,8 +92,8 @@ class Comment_model extends CI_Model {
 	function sync($row, $column = array()) {
 		$row = StripArray($row, array( 'comment_time' ));
 		
-		$row['user_email'] = (empty($row['user_email'])) ? $row['email'] : $row['user_email'];
-		$row['user_fullname'] = (empty($row['user_fullname'])) ? $row['name'] : $row['user_fullname'];
+		$row['user_email'] = (empty($row['user_email'])) ? @$row['email'] : $row['user_email'];
+		$row['user_fullname'] = (empty($row['user_fullname'])) ? @$row['name'] : $row['user_fullname'];
 		
 		return $row;
 	}
