@@ -26,7 +26,7 @@ class unduhfilm21 {
 			// test purpose
 			/*	
 			$title = $array['title'];
-			if ($title != 'The Sigil (2012) DVDRip') {
+			if ($title != 'Avatar: The Legend of Korra Book 2 Episode 1 - 2 Subtitle Indonesia') {
 				continue;
 			}
 			/*	*/
@@ -82,7 +82,7 @@ class unduhfilm21 {
 		// clean content
 		$content = preg_replace('/(rel|style|target)\=\"[^\"]+\"/i', '', $content);
 		$content = preg_replace('/ +\>/i', '>', $content);
-		$content = preg_replace('/\<\/?(b|span)\>/i', '', $content);
+		$content = preg_replace('/\<\/?(b|i|span)\>/i', '', $content);
 		preg_match_all('/\<a href\=\"([^\"]+)\"\>\[?([^\<]+)\]?\<\/a\>/i', $content, $match);
 		
 		$result = '';
