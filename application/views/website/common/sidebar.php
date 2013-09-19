@@ -38,6 +38,16 @@
 </aside>
 <?php } ?>
 
+<aside class="widget" style="background-color: #eb1c15;">
+	<div class="widget_header">
+		<h3 class="widget_title">Light Chat Box</h3>
+	</div>
+	<div class="widget_body" style="padding: 0px;">
+		<script type="text/javascript">var shout_master_id = 1;</script>
+		<script type="text/javascript" src="<?php echo base_url('static/js/plugin/shout.js'); ?>"></script>
+	</div>
+</aside>
+
 <aside id="news-combine-widget-2" class="widget widget_news_combine">
 	<div class="widget_header"><h3 class="widget_title">Main News</h3></div>
 	<div class="widget_body">

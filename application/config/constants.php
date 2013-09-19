@@ -36,6 +36,8 @@ define('POST_TYPE',								'post_type');
 define('REQUEST',								'request');
 define('SCRAPE_CONTENT',						'scrape_content');
 define('SCRAPE_MASTER',							'scrape_master');
+define('SHOUT_CONTENT',							'shout_content');
+define('SHOUT_MASTER',							'shout_master');
 define('TAG',									'tag');
 define('USER',									'user');
 define('USER_TYPE',								'user_type');
