@@ -59,7 +59,10 @@ class alibaba {
 		
 		/*	
 		// add link here
-		$array_result[] = array('title' => 'Gin no Saji Episode 9 Subtitle Indonesia', 'link' => 'http://www.alibabasub.net/2013/09/gin-no-saji-episode-9-subtitle-indonesia-2.html');
+		$array_result[] = array('title' => 'Gatchaman Crowds Episode 10 Subtitle Indonesia', 'link' => 'http://www.alibabasub.net/2013/09/gatcha10.html');
+		$array_result[] = array('title' => 'Fate/Kaleid Liner PrismaIlya Episode 10 Subtitle Indonesia(FINAL)', 'link' => 'http://www.alibabasub.net/2013/09/fatekaleid-liner-prisma%e2%98%86ilya-episode-10-subtitle-indonesiafinal.html');
+		$array_result[] = array('title' => 'Jigoku Sensei Nube Episode 4 Subtitle Indonesia', 'link' => 'http://www.alibabasub.net/2013/08/jigoku-sensei-nube-episode-4-subtitle-indonesia.html');
+		$array_result[] = array('title' => 'Jigoku Sensei Nube Episode 3 Subtitle Indonesia', 'link' => 'http://www.alibabasub.net/2013/08/jigoku-sensei-nube-episode-3-subtitle-indonesia.html');
 		/*	*/
 		
 		foreach ($array_content->channel->item as $array_temp) {
@@ -140,6 +143,8 @@ class alibaba {
 		$content = preg_replace('/(480|720)p?\s*[=:]\s*/i', "$1 ", $content);
 		$content = preg_replace('/ (style|title|class|rel|target)="[a-z0-9 \-\_\:]*"/i', '', $content);
 		$content = preg_replace('/<div>([a-z0-9 ]+[ \|]+)*<a/i', '<div><a', $content);
+		$content = preg_replace('/<del>[a-z0-9 ]+<\/del>(\s*\|\s*)*/i', '', $content);
+		$content = preg_replace('/(\s*\|\s*)*<del>[a-z0-9 ]+<\/del>/i', '', $content);
 		
 		$result = '';
 		preg_match_all('/(480|720) (<a href=\"([^\"]+)\" *>([a-z0-9 ]+)<\/a>( *[\/\|] *)*)*/i', $content, $match);
@@ -174,6 +179,22 @@ class alibaba {
 					$result .= "\n".$link_address.' '.$link_title;
 				}
 			}
+		}
+		
+		// last option from link
+		preg_match_all('/<a href=\"([^\"]+)\" *>([^\<]+)<\/a>/i', $content, $match);
+		foreach ($match[0] as $key => $value) {
+			$link = $match[1][$key];
+			$title = $match[2][$key];
+			
+			// check link
+			$array_link = parse_url($link);
+			if ($array_link['host'] == 'www.alibabasub.net') {
+				continue;
+			}
+			
+			$result .= (empty($result)) ? $result : "\n";
+			$result .= $link.' '.$title;
 		}
 		
 		// trim it

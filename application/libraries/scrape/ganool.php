@@ -61,12 +61,7 @@ class ganool {
 		
 		/*	
 		// add link here
-		$array_result[] = array('title' => 'Harry Brown (2009) BluRay 720p 600MB Ganool', 'link' => 'http://ganool.com/harry-brown-2009-bluray-720p-600mb-ganool');
-		$array_result[] = array('title' => 'The Beaver (2011) LIMITED BluRay 720p 550MB Ganool', 'link' => 'http://ganool.com/the-beaver-2011-limited-bluray-720p-550mb-ganool');
-		$array_result[] = array('title' => 'Little Miss Sunshine (2006) BluRay 720p 600MB Ganool', 'link' => 'http://ganool.com/little-miss-sunshine-2006-bluray-720p-600mb-ganool');
-		$array_result[] = array('title' => 'American Beauty (1999) BluRay 720p 750MB Ganool', 'link' => 'http://ganool.com/american-beauty-1999-bluray-720p-750mb-ganool');
-		$array_result[] = array('title' => 'Pulp Fiction (1994) US REMASTERED BluRay 720p 900MB Ganool', 'link' => 'http://ganool.com/pulp-fiction-1994-us-remastered-bluray-720p-900mb-ganool');
-		$array_result[] = array('title' => 'Let the Right One In (2008) BluRay 720p 700MB Ganool', 'link' => 'http://ganool.com/let-the-right-one-in-2008-bluray-720p-700mb-ganool');
+		$array_result[] = array('title' => 'Byzantium (2012) LIMITED BluRay 1080p 5.1CH x264 Ganool', 'link' => 'http://ganool.com/byzantium-2012-limited-bluray-1080p-5-1ch-x264-ganool');
 		/*	*/
 		
 		foreach ($array_content->channel->item as $array_temp) {
@@ -167,15 +162,21 @@ class ganool {
 		
 		// get from href
 		$content_format = str_replace("<br />", "", $content);
-		preg_match_all('/rong>([a-z0-9 ]+)<\/strong>(\s*<a href=\"([^\"]+)\">([^\<]+)<\/a>)*/i', $content_format, $match);
+		preg_match_all('/rong>([a-z0-9 ]+)<\/strong>(\s*<a href=\"([^\"]+)\">([^\<]+)<\/a>([\s*\|*]+[a-z]+)*)*/i', $content_format, $match);
 		foreach ($match[0] as $key => $string_check) {
 			$label = $match[1][$key];
-			preg_match_all('/<a href=\"([^\"]+)\">([^\<]+)</i', $string_check, $array_link);
+			preg_match_all('/<a href=\"([^\"]+)\">([^\<]+)<\/a>([\s*\|*]+[a-z]+)*/i', $string_check, $array_link);
 			if (count($array_link[0]) > 0) {
 				$result .= (empty($result)) ? "" : "\n";
 				$result .= $label."\n";
 				foreach ($array_link[0] as $key => $value) {
-					$result .= $array_link[1][$key].' '.$array_link[2][$key]."\n";
+					$link = $array_link[1][$key];
+					$title = $array_link[2][$key];
+					if (!empty($array_link[3][$key])) {
+						$title .= $array_link[3][$key];
+					}
+					
+					$result .= $link.' '.$title."\n";
 				}
 			}
 		}
