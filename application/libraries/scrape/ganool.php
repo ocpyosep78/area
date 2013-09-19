@@ -61,7 +61,8 @@ class ganool {
 		
 		/*	
 		// add link here
-		$array_result[] = array('title' => 'Byzantium (2012) LIMITED BluRay 1080p 5.1CH x264 Ganool', 'link' => 'http://ganool.com/byzantium-2012-limited-bluray-1080p-5-1ch-x264-ganool');
+		$array_result[] = array('title' => 'Battleship (2012) BluRay 720p 900MB Ganool', 'link' => 'http://ganool.com/battleship-2012-bluray-720p-900mb-ganool');
+		$array_result[] = array('title' => 'Death Note', 'link' => 'http://ganool.com/death-note');
 		/*	*/
 		
 		foreach ($array_content->channel->item as $array_temp) {

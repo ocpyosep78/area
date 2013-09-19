@@ -18,7 +18,7 @@
 	include $path.'\application\libraries\scrape\\'.$library.'.php';
 	
 	/*	
-	$link = 'http://ganool.com/ao-no-exorcist-the-movie';
+	$link = 'http://ganool.com/death-note';
 	$curl = new curl();
 	$content = $curl->get($link);
 	Write($path.'\post.txt', $content);
