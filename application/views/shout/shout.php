@@ -83,7 +83,13 @@ $(document).ready(function() {
 			return html_raw;
 		},
 		get_last_id: function() {
-			return $('#cnt-shout .cnt-display .item').last().data('id');
+			var id = 0;
+			
+			if ($('#cnt-shout .cnt-display .item').length > 0) {
+				id = $('#cnt-shout .cnt-display .item').last().data('id');
+			}
+			
+			return id;
 		},
 		generate: function(p) {
 			var last_id = shout.get_last_id();
@@ -134,6 +140,7 @@ $(document).ready(function() {
 	$('[name="user_name"]').blur(function() {
 		// set name
 		var value = $('[name="user_name"]').val();
+		value = (value.length == 0) ? 'Anonymouse' : value;
 		$('#cnt-shout .label-user_name').text(value);
 		
 		// set display
@@ -143,6 +150,7 @@ $(document).ready(function() {
 	$('[name="user_name"]').keydown(function(e) {
 		if (e.keyCode == 13) {
 			$(this).blur();
+			return false;
 		}
 	});
 	
