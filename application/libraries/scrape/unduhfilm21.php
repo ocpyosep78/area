@@ -90,7 +90,12 @@ class unduhfilm21 {
 			foreach ($match[1] as $key => $value) {
 				$link = $match[1][$key];
 				$label = $match[2][$key];
-				$result .= $link.' '.$label."\n";
+				
+				if ($link == $label) {
+					$result .= $link."\n";
+				} else {
+					$result .= $link.' '.$label."\n";
+				}
 			}
 		}
 		

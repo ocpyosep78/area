@@ -126,67 +126,49 @@ class awsubs {
 	}
 	
 	function get_download($content) {
-		$content = str_replace('&nbsp;', '', $content);
-		$content = preg_replace('/<\/?(b|span)([^\>]+)?>/i', '', $content);
-		$content = preg_replace('/\[\<strike\>[\w]+\<\/strike\>\]/i', '', $content);
-		$content = preg_replace('/(style|class|rel|target)\=\"[^\"]+\"/i', '', $content);
-		$content = preg_replace('/\s+\>/i', '>', $content);
-		preg_match_all('/(480p|576p|720p)([\w\s\=\&\;]+)?(<\/?(span|b)([^>]+)?>)*((\[<a href\=\"[^\"]+\">[\w ]+\<\/a\>\])*)/i', $content, $match);
-		
-		// condition #1
 		$result = '';
-		if (isset($match[1])) {
-			foreach ($match[1] as $key => $value) {
-				if (!empty($result)) {
-					$result .= "\n";
-				}
+		
+		// make it clean
+		$content = str_replace('&nbsp;', ' ', $content);
+		$content = preg_replace('/ (style|class|target|rel)\=\"[^\"]+\"/i', '', $content);
+		$content = preg_replace('/<\/?(b|span)([^\>]+)?>/i', '', $content);
+		
+		// remove start offset
+		$offset = '<div dir="ltr" trbidi="on">';
+		$pos_first = strpos($content, $offset);
+		$content = '<div '.substr($content, $pos_first, strlen($content) - $pos_first);
+		
+		// remove end offset
+		$offset = "<center>";
+		$pos_end = strpos($content, $offset);
+		$content = substr($content, 0, $pos_end);
+		
+		// remove empty link
+		$content = preg_replace('/\| <strike>[^\<]+<\/strike>/i', '', $content);
+		$content = preg_replace('/<strike>[^\<]+<\/strike> \|/i', '', $content);
+		
+		// get link
+		preg_match_all('/div>([^\<]+)<\/div>\s<div>\s(<a href="[^"]+"\>[a-z]+<\/a>[ \|]*)+/i', $content, $match);
+		foreach ($match[0] as $key => $value) {
+			$label = trim($match[1][$key]);
+			preg_match_all('/<a href="([^"]+)"\>([a-z]+)<\/a>/i', $value, $array_link);
+			
+			// validation
+			if (count($array_link[0]) == 0) {
+				continue;
+			}
+			
+			$result .= (empty($result)) ? "$label\n" : "\n$label\n";
+			foreach ($array_link[0] as $counter => $temp) {
+				$link_href = $array_link[1][$counter];
+				$link_title = $array_link[2][$counter];
 				
-				preg_match_all('/href=\"([^\"]+)\">([^\<]+)</i', $match[6][$key], $array_link);
-				if (count($array_link[0]) == 0) {
-					continue;
-				}
-				
-				// write title
-				$result .= $value."\n";
-				
-				// write link
-				foreach ($array_link[1] as $key => $link) {
-					$result .= $array_link[1][$key].' '.$array_link[2][$key]."\n";
-				}
+				$result .= $link_href.' '.$link_title."\n";
 			}
 		}
 		
-		// condition #1 update new design 2013-09-05
-		if (empty($result)) {
-			$content_update = preg_replace('/ (rel|target|style)="[^"]+"/i', '', $content);
-			$content_update = preg_replace('/(&nbsp;|\|)+/i', ' ', $content_update);
-			$content_update = preg_replace('/<\/?(span|div)>/i', '', $content_update);
-			$content_update = preg_replace('/\s+/i', ' ', $content_update);
-			preg_match_all('/trbidi="on">([^>]+) (<a href="[^"]+"\>[a-z]+<\/a> *)+/i', $content_update, $match);
-			foreach ($match[1] as $key => $label) {
-				$label = trim(preg_replace('/\[AWSubs\]/i', '', $label));
-				preg_match_all('/<a href="([^"]+)"\>([^\<]+)<\/a>/i', $match[0][$key], $array_link);
-				
-				$result .= (empty($result)) ? $label : "\n\n".$label;
-				foreach ($array_link[1] as $key => $link) {
-					$link_name = $array_link[2][$key];
-					$result .= "\n".$link.' '.$link_name;
-				}
-			}
-		}
-		
-		// condition #2
-		if (empty($result)) {
-			preg_match_all('/href=\"([^\"]+)\">([^\<]+)</i', $content, $match);
-			foreach ($match[1] as $key => $link) {
-				$check = preg_match('/wardhanime/i', $link, $check);
-				if ($check) {
-					continue;
-				}
-				
-				$result .= $match[1][$key].' '.$match[2][$key]."\n";
-			}
-		}
+		// trim it
+		$result = trim($result);
 		
 		return $result;
 	}

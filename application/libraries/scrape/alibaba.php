@@ -145,6 +145,7 @@ class alibaba {
 		$content = preg_replace('/<div>([a-z0-9 ]+[ \|]+)*<a/i', '<div><a', $content);
 		$content = preg_replace('/<del>[a-z0-9 ]+<\/del>(\s*\|\s*)*/i', '', $content);
 		$content = preg_replace('/(\s*\|\s*)*<del>[a-z0-9 ]+<\/del>/i', '', $content);
+		$content = preg_replace('/\s*\|\s*[a-z0-9 ]+\s*\|\s*/i', ' | ', $content);
 		
 		$result = '';
 		preg_match_all('/(480|720) (<a href=\"([^\"]+)\" *>([a-z0-9 ]+)<\/a>( *[\/\|] *)*)*/i', $content, $match);
@@ -182,19 +183,21 @@ class alibaba {
 		}
 		
 		// last option from link
-		preg_match_all('/<a href=\"([^\"]+)\" *>([^\<]+)<\/a>/i', $content, $match);
-		foreach ($match[0] as $key => $value) {
-			$link = $match[1][$key];
-			$title = $match[2][$key];
-			
-			// check link
-			$array_link = parse_url($link);
-			if ($array_link['host'] == 'www.alibabasub.net') {
-				continue;
+		if (empty($result)) {
+			preg_match_all('/<a href=\"([^\"]+)\" *>([^\<]+)<\/a>/i', $content, $match);
+			foreach ($match[0] as $key => $value) {
+				$link = $match[1][$key];
+				$title = $match[2][$key];
+				
+				// check link
+				$array_link = parse_url($link);
+				if ($array_link['host'] == 'www.alibabasub.net') {
+					continue;
+				}
+				
+				$result .= (empty($result)) ? $result : "\n";
+				$result .= $link.' '.$title;
 			}
-			
-			$result .= (empty($result)) ? $result : "\n";
-			$result .= $link.' '.$title;
 		}
 		
 		// trim it
