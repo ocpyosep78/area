@@ -31,6 +31,9 @@ class scrape extends SUEKAREA_Controller {
 		
 		$result = array();
 		if ($action == 'update') {
+			if (isset($_POST['download']))
+				$_POST['download'] = trim($_POST['download']);
+			
 			$result = $this->Scrape_Content_model->update($_POST);
 		}
 		else if ($action == 'get_by_id') {

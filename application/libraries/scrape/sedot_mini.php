@@ -57,8 +57,27 @@ class sedot_mini {
 		
 		/*	
 		// add link here
-		$array_result[] = array('title' => '[HorribleSubs] Majestic Prince  23', 'link' => 'http://www.sedotmini.com/horriblesubs-majestic-prince-23/');
-		$array_result[] = array('title' => '[GotWoot] Mirai Nikki  Redial', 'link' => 'http://www.sedotmini.com/gotwoot-mirai-nikki-redial/');
+		$array_result[] = array('title' => '[UTW] Fate Kaleid Liner Prisma Ilya  10', 'link' => 'http://www.sedotmini.com/utw-fate-kaleid-liner-prisma-ilya-10/');
+		$array_result[] = array('title' => '[Doki] Chibi Devi  58', 'link' => 'http://www.sedotmini.com/doki-chibi-devi-58/');
+		$array_result[] = array('title' => '[Tsuki] Hunter X Hunter  93', 'link' => 'http://www.sedotmini.com/tsuki-hunter-x-hunter-93/');
+		$array_result[] = array('title' => '[HorribleSubs] Makai Ouji  Devils and Realist  11', 'link' => 'http://www.sedotmini.com/horriblesubs-makai-ouji-devils-and-realist-11/');
+		$array_result[] = array('title' => '[HorribleSubs] Fantasista Doll  10', 'link' => 'http://www.sedotmini.com/horriblesubs-fantasista-doll-10/');
+		$array_result[] = array('title' => '[Doki] Chibi Devi  59', 'link' => 'http://www.sedotmini.com/doki-chibi-devi-59/');
+		$array_result[] = array('title' => '[Commie] Dokidoki! Precure  32', 'link' => 'http://www.sedotmini.com/commie-dokidoki-precure-32/');
+		$array_result[] = array('title' => '[Vivid] Uchouten Kazoku  11', 'link' => 'http://www.sedotmini.com/vivid-uchouten-kazoku-11/');
+		$array_result[] = array('title' => '[Doki] Papa no Iukoto wo Kikinasai!  OVA', 'link' => 'http://www.sedotmini.com/doki-papa-no-iukoto-wo-kikinasai-ova/');
+		$array_result[] = array('title' => '[Anime-Koi] Genshiken Nidaime  10', 'link' => 'http://www.sedotmini.com/anime-koi-genshiken-nidaime-10/');
+		$array_result[] = array('title' => '[Anime-Koi] Genshiken Nidaime  09', 'link' => 'http://www.sedotmini.com/anime-koi-genshiken-nidaime-09/');
+		$array_result[] = array('title' => '[Anime-Koi] Genshiken Nidaime  08', 'link' => 'http://www.sedotmini.com/anime-koi-genshiken-nidaime-08/');
+		$array_result[] = array('title' => '[A-Destiny] Toriko  121', 'link' => 'http://www.sedotmini.com/a-destiny-toriko-121/');
+		$array_result[] = array('title' => '[Taka] Naruto Shippuuden 327-328', 'link' => 'http://www.sedotmini.com/taka-naruto-shippuuden-327-328/');
+		$array_result[] = array('title' => '[HorribleSubs] Inu to Hasami wa Tsukaiyou  12', 'link' => 'http://www.sedotmini.com/horriblesubs-inu-to-hasami-wa-tsukaiyou-12/');
+		$array_result[] = array('title' => '[Anime-Koi] Hakkenden Touhou Hakken Ibun  24', 'link' => 'http://www.sedotmini.com/anime-koi-hakkenden-touhou-hakken-ibun-24/');
+		$array_result[] = array('title' => '[EveSenshi] Rozen Maiden Zuruckspulen  11', 'link' => 'http://www.sedotmini.com/evesenshi-rozen-maiden-zuru%cc%88ckspulen-11/');
+		$array_result[] = array('title' => '[yibis] One Piece 611', 'link' => 'http://www.sedotmini.com/yibis-one-piece-611/');
+		$array_result[] = array('title' => '[Doki] Chibi Devi  60', 'link' => 'http://www.sedotmini.com/doki-chibi-devi-60/');
+		$array_result[] = array('title' => '[Doki] Kimi no Iru Machi  10', 'link' => 'http://www.sedotmini.com/doki-kimi-no-iru-machi-10/');
+		$array_result[] = array('title' => '[Commie] Free!  11', 'link' => 'http://www.sedotmini.com/commie-free-11/');
 		/*	*/
 		
 		foreach ($array_content->channel->item as $array_temp) {
@@ -114,7 +133,7 @@ class sedot_mini {
 		}
 		
 		// endfix
-		$result .= '<div>&nbsp;</div>';
+		$result .= '<div></div>';
 		$result .= '<div>Sumber : Sedot Mini</div>';
 		
 		return $result;
