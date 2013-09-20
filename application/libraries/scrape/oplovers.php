@@ -121,13 +121,14 @@ class oplovers {
 	}
 	
 	function get_download($content) {
+		$result = '';
+		
 		// clean content
 		$content = preg_replace('/(rel|style|target)\=\"[^\"]+\"/i', '', $content);
 		$content = preg_replace('/ +\>/i', '>', $content);
-		$content = preg_replace('/\<\/?(b|span)\>/i', '', $content);
-		preg_match_all('/\<a href\=\"([^\"]+)\"\>\[?([\w\s]+)\]?\<\/a\>/i', $content, $match);
+		$content = preg_replace('/\<\/?(b|span|dwn)\>/i', '', $content);
 		
-		$result = '';
+		preg_match_all('/\<a href\=\"([^\"]+)\"\>\[?([\w\s]+)\]?\<\/a\>/i', $content, $match);
 		if (isset($match[1])) {
 			foreach ($match[1] as $key => $value) {
 				$link = $match[1][$key];

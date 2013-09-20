@@ -4,7 +4,7 @@
 	ini_set('display_errors', 1);
 	
 	$is_office = true;
-	$library = 'ganool';
+	$library = 'cupux_movie';
 	
 	if ($is_office) {
 		$localhost = 'http://localhost:8666/suekarea/trunk/';
@@ -18,7 +18,7 @@
 	include $path.'\application\libraries\scrape\\'.$library.'.php';
 	
 	/*	
-	$link = 'http://ganool.com/death-note';
+	$link = 'http://www.cupux-movie.com/2013/09/an-ordinary-love-story-2012-dvdrip.html';
 	$curl = new curl();
 	$content = $curl->get($link);
 	Write($path.'\post.txt', $content);

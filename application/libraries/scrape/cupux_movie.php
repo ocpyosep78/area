@@ -8,77 +8,109 @@ class cupux_movie {
 	function get_array($scrape) {
 		$curl = new curl();
 		$array_item = array();
+		
 		$content = $curl->get($scrape['link']);
-		$array_content = new SimpleXmlElement($content);
-		$array_source = $array_content->channel->item;
+		$array_post = $this->get_array_clear($content);
 		
 		$array_result = array();
-		foreach ($array_source as $array_temp) {
-			$array = (array)$array_temp;
-			$link_source = $array['link'];
+		foreach ($array_post as $array) {
 			$array['title'] = trim($array['title']);
-			$content_desc = preg_replace('/[^\x20-\x7E|\x0A]/i', '', $array['description']);
 			
-			// test purpose
-			/*	
-			if ($array['title'] != 'The Evolution of Andrew (2012) WebRip') {
+			// content already exist
+			$check = $this->CI->Scrape_Content_model->get_by_id(array( 'link_source' => $array['link'] ));
+			if (count($check) > 0) {
 				continue;
 			}
-			/*	*/
 			
-			$desc = $this->get_desc($content_desc);
-			$download = $this->get_download($array['description']);
-			$image_source = $this->get_image($array['description']);
+			// collect
+			$content_html = $this->get_content($array['link']);
+			$desc = $this->get_desc($content_html);
+			$download = $this->get_download($content_html);
+			$image_source = $this->get_image($content_html);
 			
 			// set to array
 			$temp = array();
 			$temp['name'] = $array['title'];
 			$temp['desc'] = $desc;
-			$temp['image_source'] = $image_source;
 			$temp['download'] = $download;
-			$temp['link_source'] = $link_source;
+			$temp['link_source'] = $array['link'];
+			$temp['image_source'] = $image_source;
 			$temp['category_id'] = $scrape['category_id'];
 			$temp['post_type_id'] = $scrape['post_type_id'];
 			$temp['scrape_master_id'] = $scrape['id'];
 			$temp['scrape_time'] = $this->CI->config->item('current_datetime');
 			$array_result[] = $temp;
+			
+			// add limit
+			if (count($array_result) >= 4) {
+				break;
+			}
 		}
 		
 		return $array_result;
 	}
 	
+	function get_array_clear($content) {
+		$array_result = array();
+		$array_content = new SimpleXmlElement($content);
+		
+		/*	*/
+		// add link here
+		$array_result[] = array('title' => 'Rockin\' on Heaven\'s Door (2013) HDRip [korea]', 'link' => 'http://www.cupux-movie.com/2013/09/rockin-on-heavens-door-2013-hdrip-korea.html');
+		$array_result[] = array('title' => 'An Ordinary Love Story (2012) DVDRip [Thailand]', 'link' => 'http://www.cupux-movie.com/2013/09/an-ordinary-love-story-2012-dvdrip.html');
+		$array_result[] = array('title' => 'Sorry Saranghaeyo (2010) DVDRip [thailand]', 'link' => 'http://www.cupux-movie.com/2013/09/sorry-saranghaeyo-2010-dvdrip-thailand.html');
+		$array_result[] = array('title' => 'Pai In Love (2012) DVDRip [thailnad]', 'link' => 'http://www.cupux-movie.com/2013/09/pai-in-love-2012-dvdrip-thailnad.html');
+		/*	*/
+		
+		foreach ($array_content->channel->item as $array_temp) {
+			$array_temp = (array)$array_temp;
+			unset($array_temp['category']);
+			unset($array_temp['description']);
+			
+			$array_result[] = (array)$array_temp;
+		}
+		
+		return $array_result;
+	}
+	
+	function get_content($link_source) {
+		// get html content
+		$curl = new curl();
+		$content_html = $curl->get($link_source);
+		$content_html = preg_replace('/[^\x20-\x7E|\x0A]/i', '', $content_html);
+		
+		// remove start offset
+		$offset = 'post-body-';
+		$pos_first = strpos($content_html, $offset);
+		$content_html = "<div class='".substr($content_html, $pos_first, strlen($content_html) - $pos_first);
+		
+		// remove end offset
+		$offset = "<div class='post-footer'>";
+		$pos_end = strpos($content_html, $offset);
+		$content_html = substr($content_html, 0, $pos_end);
+		
+		return $content_html;
+	}
+	
 	function get_desc($content) {
 		$result = '';
-		$content_desc = str_replace('<br />', "\n", $content);
-		$content_desc = strip_tags($content_desc);
 		
-		// #1 condition
-		$content_desc = str_replace(' Release', "\nRelease", $content_desc);
-		preg_match('/(Release([a-z0-9\(\)\|\,\.\?\-\:\;\/\^\'\_\&\@\s]*))Download/i', $content_desc, $match);
-		$string_temp = (isset($match[1])) ? $match[1] : '';
+		// remove start offset
+		$offset = '<div class="product_describe">';
+		$pos_first = strpos($content, $offset);
+		$content = substr($content, $pos_first, strlen($content) - $pos_first);
 		
-		// #2 condition
-		if (empty($string_temp)) {
-			$content_desc = str_replace(' Genre', "\nGenre", $content_desc);
-			preg_match('/(Genre([a-z0-9\(\)\|\,\.\?\-\:\;\/\^\'\"\_\&\@\s]*))Download/i', $content_desc, $match);
-			$string_temp = (isset($match[1])) ? $match[1] : '';
-		}
+		// remove end offset
+		$offset = '<iframe allowfullscreen=""';
+		$pos_end = strpos($content, $offset);
+		$content = substr($content, 0, $pos_end);
 		
-		$string_temp = preg_replace('/(Direct|Download) Link[\x20-\x7E\s]+/i', '', $string_temp);
-		$array_temp = explode("\n", $string_temp);
-		
-		// generate line
-		if (count($array_temp) == 1 && empty($array_temp[0])) {
-			// no description found
-		} else {
-			foreach ($array_temp as $line) {
-				$result .= '<div>'.$line.'</div>';
-			}
-		}
+		// set display
+		$content = str_replace(array('&nbsp;'), array(''), $content);
+		$result = nl2br(trim(strip_tags($content)));
 		
 		// generate endfix
 		if (!empty($result)) {
-			// endfix
 			$result .= '<div></div>';
 			$result .= '<div>Sumber : Cupux Movie</div>';
 		}
@@ -87,15 +119,18 @@ class cupux_movie {
 	}
 	
 	function get_download($content) {
-		$array_download = array();
-		preg_match_all('/<a href="([^"]+)" target="_blank">(Direct|Download) Link/i', $content, $match);
+		$result = '';
+		
+		// default link
+		preg_match_all('/<a href="([^"]+)" target="_blank">(Direct|Download|Part[^\<]+)/i', $content, $match);
 		if (isset($match[1])) {
+			$array_download = array();
 			foreach ($match[1] as $key => $link) {
 				$link_temp = parse_url($link);
 				$array_download[] = $link.' '.$match[2][$key].' Link : '.$link_temp['host'];
 			}
+			$result = implode("\n", $array_download);
 		}
-		$result = "Pilih 1 link aja gan\n".implode("\n", $array_download);
 		
 		return $result;
 	}
