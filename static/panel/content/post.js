@@ -252,7 +252,7 @@ Ext.onReady(function() {
 				ajax.desc = win.desc.getValue();
 				ajax.alias = win.alias.getValue();
 				ajax.thumbnail = win.thumbnail.getValue();
-				ajax.download = win.download.getValue();
+				ajax.download = ' ' + win.download.getValue();
 				ajax.category_id = win.category.getValue();
 				ajax.post_type_id = win.post_type.getValue();
 				ajax.tag = win.tag.getValue();

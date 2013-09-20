@@ -130,7 +130,7 @@ class ganool {
 		
 		// endfix
 		if (!empty($result)) {
-			$result .= '<div>&nbsp;</div>';
+			$result .= '<div></div>';
 			$result .= '<div>Sumber : Ganool</div>';
 		}
 		
