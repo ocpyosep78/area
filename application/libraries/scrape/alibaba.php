@@ -14,16 +14,15 @@ class alibaba {
 		$array_result = array();
 		foreach ($array_post as $array) {
 			$array['title'] = trim($array['title']);
-			$link_source = $array['link'];
 			
 			// content already exist
-			$check = $this->CI->Scrape_Content_model->get_by_id(array( 'link_source' => $link_source ));
+			$check = $this->CI->Scrape_Content_model->get_by_id(array( 'link_source' => $array['link'] ));
 			if (count($check) > 0) {
 				continue;
 			}
 			
 			// make content clean
-			$content_item = $curl->get($link_source);
+			$content_item = $curl->get($array['link']);
 			$content_item = preg_replace('/[^\x20-\x7E|\x0A]/i', '', $content_item);
 			
 			// collect data

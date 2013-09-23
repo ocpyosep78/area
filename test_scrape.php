@@ -3,8 +3,8 @@
 	error_reporting(E_ALL);
 	ini_set('display_errors', 1);
 	
-	$is_office = false;
-	$library = 'alibaba';
+	$is_office = true;
+	$library = 'unduhfilm21';
 	
 	if ($is_office) {
 		$localhost = 'http://localhost:8666/suekarea/trunk/';
@@ -18,7 +18,7 @@
 	include $path.'\application\libraries\scrape\\'.$library.'.php';
 	
 	/*	
-	$link = 'http://www.alibabasub.net/2013/09/ginga-kikoutai-majestic-prince-episode-24-subtitle-indonesia.html';
+	$link = 'http://www.unduhfilm21.com/2013/09/insidious-chapter-2-2013-cam-x264.html';
 	$curl = new curl();
 	$content = $curl->get($link);
 	Write($path.'\post.txt', $content);
