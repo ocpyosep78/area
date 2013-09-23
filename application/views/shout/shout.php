@@ -31,7 +31,7 @@ h3, div, hr, form, input, textarea { padding: 0px; margin: 0px; font: 12px Arial
 #cnt-shout h3 { font-weight: bold; padding: 0 0 10px 0; }
 #cnt-shout .cnt-display { border-radius: 5px; border: 1px solid #C3C6C7; margin: 0 0 10px 0; padding: 10px; height: 235px; overflow: auto; }
 #cnt-shout .cnt-display hr { margin: 1px 0; }
-#cnt-shout .cnt-display .item-right { float: right; }
+#cnt-shout .cnt-display .item-right { float: right; padding: 0 0 0 15px; }
 #cnt-shout .cnt-form .message { padding: 0 2px 0 0; }
 #cnt-shout .cnt-form .message textarea { width: 100%; height: 20px; padding: 2px 0px; resize: none; }
 #cnt-shout .cnt-form .side-right { float: right; }
