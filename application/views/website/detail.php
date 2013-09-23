@@ -97,7 +97,7 @@
 							<?php if (!empty($item['thumbnail_small_link'])) { ?>
 							<div class="pic">
 								<a href="<?php echo $item['post_link']; ?>" class="w_hover img-link img-wrap">
-									<img width="170" height="126" src="<?php echo $item['thumbnail_small_link']; ?>" class="attachment-category_news wp-post-image" />
+									<img width="170" height="126" src="<?php echo $item['thumbnail_small_link']; ?>" alt="<?php echo $item['name']; ?>" class="attachment-category_news wp-post-image" />
 									<span class="overlay"></span>
 								</a>
 							</div>
@@ -109,7 +109,7 @@
 							<?php if (!empty($item['thumbnail_small_link'])) { ?>
 							<div class="pic">
 								<a href="<?php echo $item['post_link']; ?>" class="w_hover img-link img-wrap">
-									<img width="170" height="126" src="<?php echo $item['thumbnail_small_link']; ?>" class="attachment-category_news wp-post-image" />
+									<img width="170" height="126" src="<?php echo $item['thumbnail_small_link']; ?>" alt="<?php echo $item['name']; ?>" class="attachment-category_news wp-post-image" />
 									<span class="overlay"></span>
 								</a>
 							</div>

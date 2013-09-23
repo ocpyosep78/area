@@ -14,7 +14,6 @@
 <?php foreach ($tag_meta as $meta) { ?>
 <meta property="<?php echo $meta['property']; ?>" content="<?php echo save_html_tag($meta['content']); ?>">
 <?php } ?>
-<meta name="title" content="<?php echo save_html_tag($title); ?>" />
 <meta name="description" content="<?php echo save_html_tag($desc); ?>" />
 <title><?php echo htmlspecialchars($title); ?></title>
 <link href="https://plus.google.com/114002599803233293136/posts" rel="author"/>

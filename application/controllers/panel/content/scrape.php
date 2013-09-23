@@ -31,6 +31,8 @@ class scrape extends SUEKAREA_Controller {
 		
 		$result = array();
 		if ($action == 'update') {
+			if (isset($_POST['desc']))
+				$_POST['desc'] = clean_html_style($_POST['desc']);
 			if (isset($_POST['download']))
 				$_POST['download'] = trim($_POST['download']);
 			

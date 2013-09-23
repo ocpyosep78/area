@@ -34,7 +34,7 @@
 		<div class="top-center">
 			<div class="block_top_menu">
 				<ul id="top-left-menu">
-					<li><a href="<?php echo base_url(); ?>" alt="Suekarea" title="Suekarea">Home</a></li>
+					<li><a href="<?php echo base_url(); ?>" title="Suekarea">Home</a></li>
 					<li><a href="<?php echo base_url('about-us'); ?>">About us</a></li>
 					<?php
 					/*

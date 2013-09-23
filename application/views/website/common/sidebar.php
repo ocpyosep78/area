@@ -20,14 +20,6 @@
 <aside id="recent-video-widget-2" class="widget widget_recent_video">
 	<div class="widget_header"><h3 class="widget_title">Social Media</h3></div>
 	<div class="widget_body" style="padding: 5px;">
-		<div id="fb-root"></div>
-		<script>(function(d, s, id) {
-		  var js, fjs = d.getElementsByTagName(s)[0];
-		  if (d.getElementById(id)) return;
-		  js = d.createElement(s); js.id = id;
-		  js.src = "//connect.facebook.net/id_ID/all.js#xfbml=1";
-		  fjs.parentNode.insertBefore(js, fjs);
-		}(document, 'script', 'facebook-jssdk'));</script>
 		<div class="fb-like-box" data-href="https://www.facebook.com/suekarea" data-width="292" data-show-faces="true" data-header="false" data-stream="false" data-show-border="false"></div>
 		
 		<div style="width: 130px; margin: 0px auto;">
@@ -87,7 +79,7 @@
 	<?php if (!empty($array_recent[$i]['thumbnail_small_link'])) { ?>
 	<div class="pic">
 		<a href="<?php echo $array_recent[$i]['post_link']; ?>" class="w_hover img-link img-wrap" title="<?php echo $array_recent[$i]['name']; ?>">
-			<img width="388" height="246" src="<?php echo $array_recent[$i]['thumbnail_small_link']; ?>" />
+			<img width="388" height="246" src="<?php echo $array_recent[$i]['thumbnail_small_link']; ?>" alt="<?php echo $array_recent[$i]['name']; ?>" />
 			<span class="overlay"></span>
 		</a>
 	</div>
@@ -104,7 +96,7 @@
 <div class="article">
 	<div class="pic">
 		<a href="<?php echo $array_recent[$i]['post_link']; ?>" title="<?php echo $array_recent[$i]['name']; ?>" class="w_hover img-link img-wrap">
-			<img width="388" height="246" src="<?php echo $array_recent[$i]['thumbnail_small_link']; ?>" />
+			<img width="388" height="246" src="<?php echo $array_recent[$i]['thumbnail_small_link']; ?>" alt="<?php echo $array_recent[$i]['name']; ?>" />
 			<span class="overlay"></span>
 		</a>
 	</div>

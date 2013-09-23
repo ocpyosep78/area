@@ -142,7 +142,7 @@ class User_model extends CI_Model {
 	
 	function is_login($admin_level = false) {
 		$user = $this->get_session();
-		$result = (count($user) > 0) ? true : false;
+		$result = (count($user) > 0 && @$user['is_login']) ? true : false;
 		
 		if ($result && $admin_level) {
 			if ($user['user_type_id'] != USER_TYPE_ADMINISTRATOR) {
@@ -162,11 +162,13 @@ class User_model extends CI_Model {
 	}
 	
 	function set_session($user) {
+		$user['is_login'] = true;
+		
 		// set session
 		$_SESSION['user_login'] = $user;
 		
 		// set cookie
-		$cookie_value =  mcrypt_encode(json_encode($user));
+		$cookie_value = mcrypt_encode(json_encode($user));
 		setcookie("user_login", $cookie_value, time() + (60 * 60 * 5), '/');
 	}
 	
@@ -174,6 +176,11 @@ class User_model extends CI_Model {
 		$user = (isset($_SESSION['user_login'])) ? $_SESSION['user_login'] : array();
 		if (! is_array($user)) {
 			$user = array();
+		}
+		
+		// check from cookie
+		if (count($user) == 0) {
+			$user = $this->get_cookies();
 		}
 		
 		return $user;
