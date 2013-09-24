@@ -18,14 +18,14 @@
 	include $path.'\application\libraries\scrape\\'.$library.'.php';
 	
 	/*	
-	$link = 'http://www.unduhfilm21.com/2013/09/insidious-chapter-2-2013-cam-x264.html';
+	$link = 'http://www.unduhfilm21.com/2013/09/avatar-legend-of-korra-book-2-episode-3.html';
 	$curl = new curl();
 	$content = $curl->get($link);
-	Write($path.'\post.txt', $content);
+	Write($path.'\p.txt', $content);
 	exit;
 	/*	*/
 	
-	$link = $localhost.'post.txt';
+	$link = $localhost.'p.txt';
 	$content = file_get_contents($link);
 	$content = preg_replace('/[^\x20-\x7E|\x0A]/i', '', $content);
 	

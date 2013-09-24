@@ -111,6 +111,7 @@ class User_model extends CI_Model {
 				'Child' => array(
 					array( 'Title' => 'Post', 'Link' => base_url('panel/content/post') ),
 					array( 'Title' => 'Scrape', 'Link' => base_url('panel/content/scrape') ),
+					array( 'Title' => 'Tag', 'Link' => base_url('panel/content/tag') ),
 					array( 'Title' => 'Comment', 'Link' => base_url('panel/content/comment') ),
 					array( 'Title' => 'Request', 'Link' => base_url('panel/content/request') ),
 					array( 'Title' => 'Contact', 'Link' => base_url('panel/content/contact') ),
@@ -181,6 +182,16 @@ class User_model extends CI_Model {
 		// check from cookie
 		if (count($user) == 0) {
 			$user = $this->get_cookies();
+		}
+		
+		// renew session if user already login
+		if (count($user) > 0 && isset($user['is_login']) && $user['is_login']) {
+			// set session
+			$_SESSION['user_login'] = $user;
+			
+			// set cookie
+			$cookie_value = mcrypt_encode(json_encode($user));
+			setcookie("user_login", $cookie_value, time() + (60 * 60 * 5), '/');
 		}
 		
 		return $user;

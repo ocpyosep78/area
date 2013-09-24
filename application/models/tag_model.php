@@ -61,9 +61,11 @@ class Tag_model extends CI_Model {
 		$string_limit = GetStringLimit($param);
 		
 		$select_query = "
-			SELECT SQL_CALC_FOUND_ROWS Tag.*
+			SELECT SQL_CALC_FOUND_ROWS Tag.id, Tag.alias, Tag.name, COUNT(*) total_tag
 			FROM ".TAG." Tag
+			LEFT JOIN ".POST_TAG." PostTag ON PostTag.tag_id = Tag.id
 			WHERE 1 $string_namelike $string_filter
+			GROUP BY id, alias, name
 			ORDER BY $string_sorting
 			LIMIT $string_limit
 		";
@@ -85,8 +87,13 @@ class Tag_model extends CI_Model {
     }
 	
     function delete($param) {
-		$delete_query  = "DELETE FROM ".TAG." WHERE id = '".$param['id']."' LIMIT 1";
-		$delete_result = mysql_query($delete_query) or die(mysql_error());
+		$delete_query[] = "DELETE FROM ".TAG." WHERE id = '".$param['id']."' LIMIT 1";
+		$delete_query[] = "DELETE FROM ".POST_TAG." WHERE tag_id = '".$param['id']."'";
+		
+		// loop
+        foreach ($delete_query as $query) {
+            $delete_result = mysql_query($query) or die(mysql_error());
+        }
 		
 		$result['status'] = '1';
 		$result['message'] = 'Data berhasil dihapus.';
