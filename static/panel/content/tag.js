@@ -8,7 +8,7 @@ Ext.onReady(function() {
 	var main_store = Ext.create('Ext.data.Store', {
 		autoLoad: true, pageSize: 25, remoteSort: true,
         sorters: [{ property: 'name', direction: 'ASC' }],
-		fields: [ 'id', 'alias', 'name', 'total_tag' ],
+		fields: [ 'id', 'alias', 'name', 'tag_link', 'total_tag' ],
 		proxy: {
 			type: 'ajax',
 			url : URLS.base + 'panel/content/tag/grid', actionMethods: { read: 'POST' },
@@ -23,6 +23,13 @@ Ext.onReady(function() {
 					header: 'Name', dataIndex: 'name', sortable: true, filter: true, width: 250, flex: 1
 			}, {	header: 'Alias', dataIndex: 'alias', sortable: true, filter: true, width: 250
 			}, {	header: 'Total', dataIndex: 'total_tag', sortable: true, width: 100, align: 'right'
+			}, {	header: 'Action', xtype: 'actioncolumn', width: 75, align: 'center',
+					items: [ {
+							iconCls: 'linkIcon', tooltip: 'Link', handler: function(grid, rowIndex, colIndex) {
+								var row = grid.store.getAt(rowIndex).data;
+								window.open(row.tag_link);
+							}
+					} ]
 		} ],
 		tbar: [ {
 				text: 'Ubah', iconCls: 'editIcon', tooltip: 'Ubah', handler: function() { main_grid.update({ }); }

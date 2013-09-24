@@ -61,9 +61,8 @@ class Tag_model extends CI_Model {
 		$string_limit = GetStringLimit($param);
 		
 		$select_query = "
-			SELECT SQL_CALC_FOUND_ROWS Tag.id, Tag.alias, Tag.name, COUNT(*) total_tag
+			SELECT SQL_CALC_FOUND_ROWS Tag.id, Tag.alias, Tag.name, (SELECT COUNT(*) FROM ".POST_TAG." PostTag WHERE tag_id = Tag.id) total_tag
 			FROM ".TAG." Tag
-			LEFT JOIN ".POST_TAG." PostTag ON PostTag.tag_id = Tag.id
 			WHERE 1 $string_namelike $string_filter
 			GROUP BY id, alias, name
 			ORDER BY $string_sorting
