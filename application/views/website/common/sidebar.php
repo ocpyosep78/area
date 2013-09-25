@@ -66,6 +66,12 @@
 	</div>
 </aside>
 
+<?php if ($this->config->item('online_widget')) { ?>
+<aside>
+	<script src="http://adsensecamp.com/show/?id=vRwJrO%2FhS3Y%3D&cid=1mKE6FR8OXo%3D&chan=J2hyMjwvTGs%3D&type=5&title=3D81EE&text=000000&background=FFFFFF&border=000000&url=2BA94F" type="text/javascript"></script>
+</aside>
+<?php } ?>
+
 <aside id="recent-blogposts-widget-2" class="widget widget_recent_blogposts">
 	<div class="widget_header">
 		<!--	<div class="widget_subtitle"><a href="#" class="lnk_all_posts">all recent posts</a></div>	-->
@@ -113,12 +119,5 @@
 </div>
 	</div>
 </aside>
-
-<?php if ($this->config->item('online_widget') && false) { ?>
-<aside>
-	<script type="text/javascript">google_ad_client = "ca-pub-0445723121454332"; google_ad_slot = "6005245942"; google_ad_width = 300; google_ad_height = 250;</script>
-	<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
-</aside>
-<?php } ?>
 
 </div>
