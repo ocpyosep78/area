@@ -42,7 +42,7 @@ Ext.define( 'Stiki.view.LoginWindow', {
                     required:true
                 }]
             }],
-            buttons: [ { name: 'loginButton', text: 'Login' } ]
+            buttons: [ { name: 'loginButton', text: 'Login', id: 'login_submit' } ]
         });
         this.callParent(arguments);
     }

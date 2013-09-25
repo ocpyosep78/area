@@ -4,7 +4,7 @@
 	ini_set('display_errors', 1);
 	
 	$is_office = true;
-	$library = 'unduhfilm21';
+	$library = 'awsubs';
 	
 	if ($is_office) {
 		$localhost = 'http://localhost:8666/suekarea/trunk/';
@@ -18,7 +18,7 @@
 	include $path.'\application\libraries\scrape\\'.$library.'.php';
 	
 	/*	
-	$link = 'http://www.unduhfilm21.com/2013/09/avatar-legend-of-korra-book-2-episode-3.html';
+	$link = 'http://www.wardhanime.net/2013/09/ms-igloo-2-02.html';
 	$curl = new curl();
 	$content = $curl->get($link);
 	Write($path.'\p.txt', $content);

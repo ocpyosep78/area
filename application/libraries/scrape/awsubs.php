@@ -147,7 +147,7 @@ class awsubs {
 		$content = preg_replace('/\| <strike>[^\<]+<\/strike>/i', '', $content);
 		$content = preg_replace('/<strike>[^\<]+<\/strike> \|/i', '', $content);
 		
-		// get link
+		// get common link
 		preg_match_all('/div>([^\<]+)<\/div>\s<div>\s(<a href="[^"]+"\>[a-z]+<\/a>[ \|]*)+/i', $content, $match);
 		foreach ($match[0] as $key => $value) {
 			$label = trim($match[1][$key]);
@@ -165,6 +165,45 @@ class awsubs {
 				
 				$result .= $link_href.' '.$link_title."\n";
 			}
+		}
+		
+		// get multiplart link
+		preg_match_all('/div>([^\<]+)<\/div>\s<div>\s([a-z0-9 ]+[=]\s*(<a href="[^"]+"\>[a-z]+<\/a>[ \|]*)*\s*)*/i', $content, $match);
+		foreach ($match[0] as $key => $raw_html) {
+			// check link
+			$raw_link = $match[2][$key];
+			if (empty($raw_link)) {
+				continue;
+			}
+			
+			// primary label
+			$label_file = trim($match[1][$key]);
+			
+			$temp_result = '';
+			preg_match_all('/([a-z0-9 ]+)[=]\s*(<a href="[^"]+"\>[a-z]+<\/a>[ \|]*)*/i', $raw_html, $raw_link);
+			foreach ($raw_link[0] as $key => $value) {
+				$temp_part = '';
+				$label_part = trim($raw_link[1][$key]);
+				
+				preg_match_all('/<a href="([^"]+)"\>([a-z]+)<\/a>/i', $value, $array);
+				foreach ($array[0] as $i => $j) {
+					$temp_part .= $array[1][$i].' '.$array[2][$i]."\n";
+				}
+				
+				$temp_result .= trim($label_part."\n".$temp_part)."\n\n";
+			}
+			
+			// trim it
+			$temp_result = trim($temp_result);
+			
+			// write label once
+			if (!empty($label_file)) {
+				$result .= "\n\n$label_file\n\n";
+				$label_file = '';
+			}
+			
+			// write part link
+			$result .= $temp_result;
 		}
 		
 		// trim it
