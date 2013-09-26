@@ -1,3 +1,8 @@
+<?php
+	header("HTTP/1.1 301 Moved Permanently");
+	header('Location: http://suekarea.com/');
+	exit;
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

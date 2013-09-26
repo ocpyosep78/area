@@ -187,4 +187,7 @@ Ext.onReady(function() {
 	}
 	
 	Renderer.InitWindowSize({ Panel: -1, Grid: main_grid, Toolbar: 70 });
+	Ext.EventManager.onWindowResize(function() {
+		Renderer.InitWindowSize({ Panel: -1, Grid: main_grid, Toolbar: 70 });
+    }, main_grid);
 });
