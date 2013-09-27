@@ -40,6 +40,13 @@
 	</div>
 </aside>
 
+<?php if ($this->config->item('online_widget')) { ?>
+<aside>
+<script>var sitti_pub_id = "BC0042877";var sitti_ad_width = "300";var sitti_ad_height = "250";var sitti_ad_type = "1";var sitti_ad_number = "3";var sitti_ad_name = "";var sitti_dep_id = "95941";</script>
+<script src="http://stat.sittiad.com/delivery/sittiad.b1.js"></script>
+</aside>
+<?php } ?>
+
 <aside id="news-combine-widget-2" class="widget widget_news_combine">
 	<div class="widget_header"><h3 class="widget_title">Main News</h3></div>
 	<div class="widget_body">
