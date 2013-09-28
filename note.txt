@@ -1,12 +1,3 @@
-Link :
-- http://localhost/suekarea/trunk/
-- http://localhost/suekarea/trunk/film
-- http://localhost/suekarea/trunk/2013/06/article
-- http://localhost/suekarea/trunk/contact
-- http://localhost/suekarea/trunk/full-page
-
---------------------------------------------------------------------------------------------------------------------
-
 First at alexa : 23,869,144 2013-08-10
 First at alexa :  8,429,043 2013-08-13
 First at alexa :  8,502,494 2013-08-16
@@ -15,6 +6,8 @@ First at alexa :  7,081,865 2013-08-21
 First at alexa :  5,725,589 2013-09-18
 First at alexa :  5,820,383 2013-09-23
 First at alexa :  5,390,606 2013-09-24
+First at alexa :  5,123,006 2013-09-26
+First at alexa :  5,154,014 2013-09-28
 
 
 
@@ -34,8 +27,6 @@ Tersangka 2		:		450 Friend
 Bunga Low		: 		463 Friend
 Makin Bunawas	:		410 Friend
 
-Uchouten Kazoku														: 7.37
-Watashi ga Motenai no wa Dou Kangaetemo Omaera ga Warui!			: 7.85
 
 --------------------------------------------------------------------------------------------------------------------
 

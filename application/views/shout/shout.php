@@ -71,6 +71,9 @@ h3, div, hr, form, input, textarea { padding: 0px; margin: 0px; font: 12px Arial
 $(document).ready(function() {
 	// shout library
 	var shout = {
+		set_bottom: function() {
+			$("#cnt-shout .cnt-display").scrollTop($("#cnt-shout .cnt-display")[0].scrollHeight);
+		},
 		get_template: function(p) {
 			// concate
 			var html_raw = '';
@@ -97,7 +100,7 @@ $(document).ready(function() {
 				if (last_id < p.array_shout[i].id) {
 					var content = shout.get_template(p.array_shout[i]);
 					$('#cnt-shout .cnt-display').append(content);
-					$("#cnt-shout .cnt-display").scrollTop($("#cnt-shout .cnt-display")[0].scrollHeight);
+					shout.set_bottom();
 				}
 			}
 		},
@@ -181,6 +184,7 @@ $(document).ready(function() {
 	
 	// refresh shout
 	shout.refresh();
+	shout.set_bottom();
 });
 </script>
 

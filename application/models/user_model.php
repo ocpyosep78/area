@@ -112,6 +112,7 @@ class User_model extends CI_Model {
 					array( 'Title' => 'Post', 'Link' => base_url('panel/content/post') ),
 					array( 'Title' => 'Scrape', 'Link' => base_url('panel/content/scrape') ),
 					array( 'Title' => 'Tag', 'Link' => base_url('panel/content/tag') ),
+					array( 'Title' => 'Shout', 'Link' => base_url('panel/content/shout') ),
 					array( 'Title' => 'Comment', 'Link' => base_url('panel/content/comment') ),
 					array( 'Title' => 'Request', 'Link' => base_url('panel/content/request') ),
 					array( 'Title' => 'Contact', 'Link' => base_url('panel/content/contact') ),

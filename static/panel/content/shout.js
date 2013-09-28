@@ -7,11 +7,11 @@ Ext.onReady(function() {
 	
 	var main_store = Ext.create('Ext.data.Store', {
 		autoLoad: true, pageSize: 25, remoteSort: true,
-        sorters: [{ property: 'comment_time', direction: 'DESC' }],
-		fields: [ 'id', 'user_id', 'user_email', 'link', 'comment', 'comment_time', 'is_publish' ],
+        sorters: [{ property: 'shout_time', direction: 'DESC' }],
+		fields: [ 'id', 'shout_master_id', 'user_name', 'message', 'shout_time' ],
 		proxy: {
 			type: 'ajax',
-			url : URLS.base + 'panel/content/comment/grid', actionMethods: { read: 'POST' },
+			url : URLS.base + 'panel/content/shout/grid', actionMethods: { read: 'POST' },
 			reader: { type: 'json', root: 'rows', totalProperty: 'count' }
 		}
 	});
@@ -20,41 +20,11 @@ Ext.onReady(function() {
 		viewConfig: { forceFit: true }, store: main_store, height: 335, renderTo: 'grid-member',
 		features: [{ ftype: 'filters', encode: true, local: false }],
 		columns: [ {
-					header: 'Time', dataIndex: 'comment_time', sortable: true, filter: true, width: 125, align: 'center'
-			}, {	header: 'Email', dataIndex: 'user_email', sortable: true, filter: true, width: 150
-			}, {	header: 'Comment', dataIndex: 'comment', sortable: true, filter: true, width: 150, flex: 1
-			}, {	header: 'Publish', xtype: 'actioncolumn', width: 75, align: 'center',
-					items: [ {
-						getClass: function(v, meta, rec) {
-							if (rec.get('is_publish') == 0) {
-								this.items[0].tooltip = 'Unpublish';
-								return 'delIcon';
-							} else {
-								this.items[0].tooltip = 'Publish';
-								return 'acceptIcon';
-							}
-						},
-						handler: function(grid, rowIndex, colIndex) {
-							var rec = grid.store.getAt(rowIndex);
-							var param = { action: 'update', id: rec.data.id, is_publish: (rec.data.is_publish == 0) ? 1 : 0 }
-							Func.ajax({ param: param, url: URLS.base + 'panel/content/comment/action', callback: function(result) {
-								if (result.status) {
-									grid.store.load();
-								}
-							} });
-						}
-					} ]
-			}, {	header: 'Action', xtype: 'actioncolumn', width: 75, align: 'center',
-					items: [ {
-							iconCls: 'linkIcon', tooltip: 'Link', handler: function(grid, rowIndex, colIndex) {
-								var row = grid.store.getAt(rowIndex).data;
-								window.open(row.link);
-							}
-					} ]
+					header: 'Time', dataIndex: 'shout_time', sortable: true, filter: true, width: 125, align: 'center'
+			}, {	header: 'User', dataIndex: 'user_name', sortable: true, filter: true, width: 150
+			}, {	header: 'Shout', dataIndex: 'message', sortable: true, filter: true, width: 150, flex: 1
 		} ],
 		tbar: [ {
-				text: 'Tambah', iconCls: 'addIcon', tooltip: 'Tambah', handler: function() { main_win({ id: 0 }); }
-			}, '-', {
 				text: 'Ubah', iconCls: 'editIcon', tooltip: 'Ubah', handler: function() { main_grid.update({ }); }
 			}, '-', {
 				text: 'Hapus', iconCls: 'delIcon', tooltip: 'Hapus', handler: function() {
@@ -103,7 +73,7 @@ Ext.onReady(function() {
 			}
 			
 			Ext.Ajax.request({
-				url: URLS.base + 'panel/content/comment/action',
+				url: URLS.base + 'panel/content/shout/action',
 				params: { action: 'get_by_id', id: row[0].data.id },
 				success: function(Result) {
 					eval('var record = ' + Result.responseText)
@@ -118,7 +88,7 @@ Ext.onReady(function() {
 			}
 			
 			Ext.Ajax.request({
-				url: URLS.base + 'panel/content/comment/action',
+				url: URLS.base + 'panel/content/shout/action',
 				params: { action: 'delete', id: main_grid.getSelectionModel().getSelection()[0].data.id },
 				success: function(TempResult) {
 					eval('var Result = ' + TempResult.responseText)
@@ -134,7 +104,7 @@ Ext.onReady(function() {
 	
 	function main_win(param) {
 		var win = new Ext.Window({
-			layout: 'fit', width: 710, height: 250,
+			layout: 'fit', width: 710, height: 225,
 			closeAction: 'hide', plain: true, modal: true,
 			buttons: [ {
 						text: 'Save', handler: function() { win.save(); }
@@ -144,22 +114,22 @@ Ext.onReady(function() {
 			}],
 			listeners: {
 				show: function(w) {
-					var Title = (param.id == 0) ? 'Entry Category - [New]' : 'Entry Category - [Edit]';
+					var Title = (param.id == 0) ? 'Entry Shout - [New]' : 'Entry Shout - [Edit]';
 					w.setTitle(Title);
 					
 					Ext.Ajax.request({
-						url: URLS.base + 'panel/content/comment/view',
+						url: URLS.base + 'panel/content/shout/view',
 						success: function(Result) {
 							w.body.dom.innerHTML = Result.responseText;
 							
 							win.id = param.id;
-							win.user_email = new Ext.form.TextField({ renderTo: 'user_emailED', width: 575, readOnly: true });
-							win.comment = new Ext.form.TextArea({ renderTo: 'commentED', width: 575, height: 150, allowBlank: false, blankText: 'Masukkan Comment' });
+							win.user_name = new Ext.form.TextField({ renderTo: 'user_nameED', width: 575, readOnly: true });
+							win.message = new Ext.form.TextArea({ renderTo: 'messageED', width: 575, height: 125, allowBlank: false, blankText: 'Masukkan Shout' });
 							
 							// Populate Record
 							if (param.id > 0) {
-								win.user_email.setValue(param.user_email);
-								win.comment.setValue(param.comment);
+								win.user_name.setValue(param.user_name);
+								win.message.setValue(param.message);
 							}
 						}
 					});
@@ -173,18 +143,19 @@ Ext.onReady(function() {
 				var ajax = new Object();
 				ajax.action = 'update';
 				ajax.id = win.id;
-				ajax.comment = win.comment.getValue();
+				ajax.user_name = win.user_name.getValue();
+				ajax.message = win.message.getValue();
 				
 				// Validation
 				var is_valid = true;
-				if (! win.comment.validate()) {
+				if (! win.message.validate()) {
 					is_valid = false;
 				}
 				if (! is_valid) {
 					return;
 				}
 				
-				Func.ajax({ param: ajax, url: URLS.base + 'panel/content/comment/action', callback: function(result) {
+				Func.ajax({ param: ajax, url: URLS.base + 'panel/content/shout/action', callback: function(result) {
 					Ext.Msg.alert('Informasi', result.message);
 					if (result.status) {
 						main_store.load();
