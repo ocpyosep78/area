@@ -7,7 +7,7 @@ Ext.onReady(function() {
 	
 	var main_store = Ext.create('Ext.data.Store', {
 		autoLoad: true, pageSize: 25, remoteSort: true,
-        sorters: [{ property: 'name', direction: 'ASC' }],
+        sorters: [{ property: 'priority', direction: 'DESC' }],
 		fields: [ 'id', 'name', 'priority' ],
 		proxy: {
 			type: 'ajax',

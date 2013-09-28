@@ -13,6 +13,10 @@
 	$param_popular['publish_date'] = $this->config->item('current_datetime');
 	$param_popular['sort'] = '[{"property":"publish_date","direction":"DESC"}]';
 	$array_popular = $this->Post_model->get_array($param_popular);
+	
+	// adsense
+	$adsense_code_1 = $this->Adsense_Html_model->get_code(array( 'adsense_type_alias' => ADSENSE_300_x_250 ));
+	$adsense_code_2 = $this->Adsense_Html_model->get_code(array( 'adsense_type_alias' => ADSENSE_300_x_250 ));
 ?>
 
 <div id="secondary" class="widget-area main_sidebar right_sidebar" role="complementary">
@@ -39,11 +43,8 @@
 	</div>
 </aside>
 
-<?php if ($this->config->item('online_widget')) { ?>
-<aside>
-<script>var sitti_pub_id = "BC0042877";var sitti_ad_width = "300";var sitti_ad_height = "250";var sitti_ad_type = "1";var sitti_ad_number = "3";var sitti_ad_name = "";var sitti_dep_id = "95941";</script>
-<script src="http://stat.sittiad.com/delivery/sittiad.b1.js"></script>
-</aside>
+<?php if ($this->config->item('online_widget') || true) { ?>
+<aside><?php echo $adsense_code_1; ?></aside>
 <?php } ?>
 
 <aside id="news-combine-widget-2" class="widget widget_news_combine">
@@ -72,10 +73,8 @@
 	</div>
 </aside>
 
-<?php if ($this->config->item('online_widget')) { ?>
-<aside>
-	<script src="http://adsensecamp.com/show/?id=vRwJrO%2FhS3Y%3D&cid=1mKE6FR8OXo%3D&chan=J2hyMjwvTGs%3D&type=5&title=3D81EE&text=000000&background=FFFFFF&border=000000&url=2BA94F" type="text/javascript"></script>
-</aside>
+<?php if ($this->config->item('online_widget') || true) { ?>
+<aside><?php echo $adsense_code_2; ?></aside>
 <?php } ?>
 
 <aside id="recent-blogposts-widget-2" class="widget widget_recent_blogposts">

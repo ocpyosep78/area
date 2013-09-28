@@ -7,8 +7,8 @@ Ext.onReady(function() {
 	
 	var main_store = Ext.create('Ext.data.Store', {
 		autoLoad: true, pageSize: 25, remoteSort: true,
-        sorters: [{ property: 'owner_name', direction: 'ASC' }],
-		fields: [ 'id', 'adsense_owner_id', 'owner_name', 'adsense_type_id', 'type_name', 'create_date' ],
+        sorters: [{ property: 'owner_priority', direction: 'DESC' }],
+		fields: [ 'id', 'adsense_owner_id', 'owner_priority', 'owner_name', 'adsense_type_id', 'type_name', 'create_date', 'is_active' ],
 		proxy: {
 			type: 'ajax',
 			url : URLS.base + 'panel/adsense/adsense_html/grid', actionMethods: { read: 'POST' },
@@ -20,9 +20,31 @@ Ext.onReady(function() {
 		viewConfig: { forceFit: true }, store: main_store, height: 335, renderTo: 'grid-member',
 		features: [{ ftype: 'filters', encode: true, local: false }],
 		columns: [ {
-					header: 'Owner', dataIndex: 'owner_name', sortable: true, filter: true, width: 200, flex: 1
+					header: 'Priority', dataIndex: 'owner_priority', sortable: true, filter: true, width: 100, align: 'center'
+			}, {	header: 'Owner', dataIndex: 'owner_name', sortable: true, filter: true, width: 200, flex: 1
 			}, {	header: 'Type', dataIndex: 'type_name', sortable: true, filter: true, width: 200
 			}, {	header: 'Create Date', dataIndex: 'create_date', sortable: true, filter: true, width: 200
+			}, {	header: 'Active', xtype: 'actioncolumn', width: 75, align: 'center',
+					items: [ {
+						getClass: function(v, meta, rec) {
+							if (rec.get('is_active') == 0) {
+								this.items[0].tooltip = 'Inactive';
+								return 'delIcon';
+							} else {
+								this.items[0].tooltip = 'Active';
+								return 'acceptIcon';
+							}
+						},
+						handler: function(grid, rowIndex, colIndex) {
+							var rec = grid.store.getAt(rowIndex);
+							var param = { action: 'update', id: rec.data.id, is_active: (rec.data.is_active == 0) ? 1 : 0 }
+							Func.ajax({ param: param, url: URLS.base + 'panel/adsense/adsense_html/action', callback: function(result) {
+								if (result.status) {
+									grid.store.load();
+								}
+							} });
+						}
+					} ]
 		} ],
 		tbar: [ {
 				text: 'Tambah', iconCls: 'addIcon', tooltip: 'Tambah', handler: function() { main_win({ id: 0 }); }
