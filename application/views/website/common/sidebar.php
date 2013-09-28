@@ -107,12 +107,14 @@
 <li>
 <?php for ($i = 13; $i < 18; $i++) { ?>
 <div class="article">
+	<?php if (!empty($array_recent[$i]['thumbnail_small_link'])) { ?>
 	<div class="pic">
 		<a href="<?php echo $array_recent[$i]['post_link']; ?>" title="<?php echo $array_recent[$i]['name']; ?>" class="w_hover img-link img-wrap">
 			<img width="388" height="246" src="<?php echo $array_recent[$i]['thumbnail_small_link']; ?>" alt="<?php echo $array_recent[$i]['name']; ?>" />
 			<span class="overlay"></span>
 		</a>
 	</div>
+	<?php } ?>
 	<div class="text">
 		<p class="title"><a href="<?php echo $array_recent[$i]['post_link']; ?>" title="<?php echo $array_recent[$i]['name']; ?>"><?php echo $array_recent[$i]['name']; ?></a></p>
 		<div class="desc">by <a href="<?php echo $array_recent[$i]['post_link']; ?>"><?php echo $array_recent[$i]['user_fullname']; ?></a></div>
