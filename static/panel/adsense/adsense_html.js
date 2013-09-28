@@ -7,11 +7,11 @@ Ext.onReady(function() {
 	
 	var main_store = Ext.create('Ext.data.Store', {
 		autoLoad: true, pageSize: 25, remoteSort: true,
-        sorters: [{ property: 'name', direction: 'ASC' }],
+        sorters: [{ property: 'owner_name', direction: 'ASC' }],
 		fields: [ 'id', 'adsense_owner_id', 'owner_name', 'adsense_type_id', 'type_name', 'create_date' ],
 		proxy: {
 			type: 'ajax',
-			url : URLS.base + 'panel/adsense/adsense_type/grid', actionMethods: { read: 'POST' },
+			url : URLS.base + 'panel/adsense/adsense_html/grid', actionMethods: { read: 'POST' },
 			reader: { type: 'json', root: 'rows', totalProperty: 'count' }
 		}
 	});
@@ -75,7 +75,7 @@ Ext.onReady(function() {
 			}
 			
 			Ext.Ajax.request({
-				url: URLS.base + 'panel/adsense/adsense_type/action',
+				url: URLS.base + 'panel/adsense/adsense_html/action',
 				params: { action: 'get_by_id', id: row[0].data.id },
 				success: function(Result) {
 					eval('var record = ' + Result.responseText)
@@ -90,7 +90,7 @@ Ext.onReady(function() {
 			}
 			
 			Ext.Ajax.request({
-				url: URLS.base + 'panel/adsense/adsense_type/action',
+				url: URLS.base + 'panel/adsense/adsense_html/action',
 				params: { action: 'delete', id: main_grid.getSelectionModel().getSelection()[0].data.id },
 				success: function(TempResult) {
 					eval('var Result = ' + TempResult.responseText)
@@ -106,7 +106,7 @@ Ext.onReady(function() {
 	
 	function main_win(param) {
 		var win = new Ext.Window({
-			layout: 'fit', width: 390, height: 130,
+			layout: 'fit', width: 710, height: 260,
 			closeAction: 'hide', plain: true, modal: true,
 			buttons: [ {
 						text: 'Save', handler: function() { win.save(); }
@@ -120,7 +120,7 @@ Ext.onReady(function() {
 					w.setTitle(Title);
 					
 					Ext.Ajax.request({
-						url: URLS.base + 'panel/adsense/adsense_type/view',
+						url: URLS.base + 'panel/adsense/adsense_html/view',
 						success: function(Result) {
 							w.body.dom.innerHTML = Result.responseText;
 							
@@ -128,7 +128,7 @@ Ext.onReady(function() {
 							
 							win.id = param.id;
 							win.adsense_owner = Combo.Class.AdsenseOwner({ renderTo: 'adsense_ownerED', width: 225, allowBlank: false, blankText: 'Masukkan Owner' });
-							win.adsense_type = Combo.Class.AdsenseOwner({ renderTo: 'adsense_typeED', width: 225, allowBlank: false, blankText: 'Masukkan Type' });
+							win.adsense_type = Combo.Class.AdsenseType({ renderTo: 'adsense_typeED', width: 225, allowBlank: false, blankText: 'Masukkan Type' });
 							win.adsense_code = new Ext.form.TextArea({ renderTo: 'adsense_codeED', width: 575, height: 130, allowBlank: false, blankText: 'Masukkan HTML Code' });
 							
 							// Populate Record
@@ -168,7 +168,7 @@ Ext.onReady(function() {
 					return;
 				}
 				
-				Func.ajax({ param: ajax, url: URLS.base + 'panel/adsense/adsense_type/action', callback: function(result) {
+				Func.ajax({ param: ajax, url: URLS.base + 'panel/adsense/adsense_html/action', callback: function(result) {
 					Ext.Msg.alert('Informasi', result.message);
 					if (result.status) {
 						main_store.load();

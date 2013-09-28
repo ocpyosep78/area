@@ -21,6 +21,10 @@ class adsense_html extends SUEKAREA_Controller {
 		
 		$result = array();
 		if ($action == 'update') {
+			if (empty($_POST['id'])) {
+				$_POST['create_date'] = $this->config->item('current_datetime');
+			}
+			
 			$result = $this->Adsense_Html_model->update($_POST);
 		} else if ($action == 'get_by_id') {
 			$result = $this->Adsense_Html_model->get_by_id(array( 'id' => $_POST['id'] ));

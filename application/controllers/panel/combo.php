@@ -8,7 +8,11 @@ class combo extends CI_Controller {
 	function index() {
 		$action = (!empty($_POST['action'])) ? $_POST['action'] : '';
 		
-		if ($action == 'category') {
+		if ($action == 'adsense_owner') {
+			$array = $this->Adsense_Owner_model->get_array(array( ));
+		} else if ($action == 'adsense_type') {
+			$array = $this->Adsense_Type_model->get_array(array( ));
+		} else if ($action == 'category') {
 			$array = $this->Category_model->get_array(array( ));
 		} else if ($action == 'link_short') {
 			$array = $this->Link_Short_model->get_array(array( ));

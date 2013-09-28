@@ -208,6 +208,30 @@ var Template = {
 }
 
 var Store = {
+	AdsenseOwner: function() {
+		var Store = new Ext.create('Ext.data.Store', {
+			fields: ['id', 'name', 'priority'],
+			autoLoad: true, proxy: {
+				type: 'ajax', extraParams: { action: 'adsense_owner' },
+				url: URLS.base + 'panel/combo',
+				reader: { type: 'json', root: 'res' },
+				actionMethods: { read: 'POST' }
+			}
+		});
+		return Store;
+	},
+	AdsenseType: function() {
+		var Store = new Ext.create('Ext.data.Store', {
+			fields: ['id', 'name', 'alias'],
+			autoLoad: true, proxy: {
+				type: 'ajax', extraParams: { action: 'adsense_type' },
+				url: URLS.base + 'panel/combo',
+				reader: { type: 'json', root: 'res' },
+				actionMethods: { read: 'POST' }
+			}
+		});
+		return Store;
+	},
 	Category: function() {
 		var Store = new Ext.create('Ext.data.Store', {
 			fields: ['id', 'name'],
@@ -276,6 +300,24 @@ var Store = {
 
 var Combo = {
 	Param: {
+		AdsenseOwner: function(Param) {
+			var p = {
+				xtype: 'combo', store: Store.AdsenseOwner(), minChars: 1, selectOnFocus: true,
+				valueField: 'id', displayField: 'name', readonly: true, editable: false
+			}
+			p = Func.SyncComboParam(p, Param);
+			
+			return p;
+		},
+		AdsenseType: function(Param) {
+			var p = {
+				xtype: 'combo', store: Store.AdsenseType(), minChars: 1, selectOnFocus: true,
+				valueField: 'id', displayField: 'name', readonly: true, editable: false
+			}
+			p = Func.SyncComboParam(p, Param);
+			
+			return p;
+		},
 		Category: function(Param) {
 			var p = {
 				xtype: 'combo', store: Store.Category(), minChars: 1, selectOnFocus: true,
@@ -350,6 +392,14 @@ var Combo = {
 }
 
 Combo.Class = {
+	AdsenseOwner: function(Param) {
+		var c = new Ext.form.ComboBox(Combo.Param.AdsenseOwner(Param));
+		return c;
+	},
+	AdsenseType: function(Param) {
+		var c = new Ext.form.ComboBox(Combo.Param.AdsenseType(Param));
+		return c;
+	},
 	Category: function(Param) {
 		var c = new Ext.form.ComboBox(Combo.Param.Category(Param));
 		return c;
