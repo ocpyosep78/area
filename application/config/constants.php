@@ -25,6 +25,9 @@ define('POST_TYPE_MULTI_LINK',					3);
 define('USER_TYPE_ADMINISTRATOR',				1);
 define('USER_TYPE_MEMBER',						2);
 
+define('ADSENSE_HTML',							'adsense_html');
+define('ADSENSE_OWNER',							'adsense_owner');
+define('ADSENSE_TYPE',							'adsense_type');
 define('CATEGORY',								'category');
 define('COMMENT',								'comment');
 define('CONTACT',								'contact');

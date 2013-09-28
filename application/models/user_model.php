@@ -127,6 +127,14 @@ class User_model extends CI_Model {
 				)
 			),
 			array(
+				'Title' => 'Adsense Management',
+				'Child' => array(
+					array( 'Title' => 'Owner', 'Link' => base_url('panel/adsense/adsense_owner') ),
+					array( 'Title' => 'Type', 'Link' => base_url('panel/adsense/adsense_type') ),
+					array( 'Title' => 'HTML', 'Link' => base_url('panel/adsense/adsense_html') )
+				)
+			),
+			array(
 				'Title' => 'Master',
 				'Child' => array(
 					array( 'Title' => 'Page Static', 'Link' => base_url('panel/master/page_static') ),

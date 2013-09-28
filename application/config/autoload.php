@@ -6,6 +6,9 @@ $autoload['helper'] = array( 'date', 'common', 'url', 'mcrypt' );
 $autoload['config'] = array();
 $autoload['language'] = array();
 $autoload['model'] = array(
+	// adsense
+	'Adsense_Html_model', 'Adsense_Owner_model', 'Adsense_Type_model',
+	
 	'User_model', 'Category_model', 'Post_Type_model', 'Post_model', 'Comment_model', 'Request_model', 'User_Type_model', 'Page_Static_model', 'Contact_model',
 	'Scrape_Master_model', 'Scrape_Content_model', 'Tag_model', 'Post_Tag_model', 'Link_Short_model', 'Shout_Master_model', 'Shout_Content_model'
 );
