@@ -59,10 +59,12 @@ class ganool {
 		$array_result = array();
 		$array_content = new SimpleXmlElement($content);
 		
-		/*	
+		/*	*/
 		// add link here
-		$array_result[] = array('title' => 'Battleship (2012) BluRay 720p 900MB Ganool', 'link' => 'http://ganool.com/battleship-2012-bluray-720p-900mb-ganool');
-		$array_result[] = array('title' => 'Death Note', 'link' => 'http://ganool.com/death-note');
+		$array_result[] = array('title' => 'Ookami Kodomo no Ame to Yuki', 'link' => 'http://ganool.com/ookami-kodomo-no-ame-to-yuki');
+		$array_result[] = array('title' => 'Blood-C: The Last Dark', 'link' => 'http://ganool.com/blood-c-the-last-dark');
+		$array_result[] = array('title' => 'Nijiiro Hotaru: Eien no Natsuyasumi', 'link' => 'http://ganool.com/nijiiro-hotaru-eien-no-natsuyasumi');
+		$array_result[] = array('title' => 'Blood For Irina (2012) DVDRip 300MB Ganool', 'link' => 'http://ganool.com/blood-for-irina-2012-dvdrip-300mb-ganool');
 		/*	*/
 		
 		foreach ($array_content->channel->item as $array_temp) {
@@ -233,7 +235,8 @@ class ganool {
 		if (empty($result)) {
 			$content_temp = preg_replace('/<\/?strong>/i', '', $content);
 			$content_temp = preg_replace('/<br *\/>/i', '</p>', $content_temp);
-			preg_match_all('/([a-z0-9 ]+)<\/p>\n*<ul>\n(<li><a href="[^\"]+">[a-z0-9 ]+<\/a><\/li>\n)*/i', $content_temp, $match);
+			
+			preg_match_all('/([a-z0-9 ]+)(<\/p>)*\n*<ul>\n(<li><a href="[^\"]+">[a-z0-9 ]+<\/a><\/li>\n)*/i', $content_temp, $match);
 			foreach ($match[0] as $key => $value) {
 				$label = $match[1][$key];
 				preg_match_all('/href="([^\"]+)">([^>]+)</i', $value, $array_link);

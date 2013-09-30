@@ -60,19 +60,9 @@ class awsubs {
 		$array_result = array();
 		$array_content = new SimpleXmlElement($content);
 		
-		/*	
+		/*	*/
 		// add link here
-		$array_result[] = array('title' => 'Free! Episode 9 Subtitle Indonesia', 'link' => 'http://www.wardhanime.net/2013/09/free-episode-9-subtitle-indonesia.html');
-		$array_result[] = array('title' => 'Brothers Conflict Episode 10 Subtitle Indonesia', 'link' => 'http://www.wardhanime.net/2013/09/brothers-conflict-episode-10-subtitle.html');
-		$array_result[] = array('title' => 'Busou Shinki Episode 13 OVA Subtitle Indonesia', 'link' => 'http://www.wardhanime.net/2013/09/busou-shinki-episode-13-ova-subtitle.html');
-		$array_result[] = array('title' => 'Watamote Episode 9 Subtitle Indonesia', 'link' => 'http://www.wardhanime.net/2013/09/watamote-episode-9-subtitle-indonesia.html');
-		$array_result[] = array('title' => 'Watamote Episode 8 Subtitle Indonesia', 'link' => 'http://www.wardhanime.net/2013/08/watamote-episode-8-subtitle-indonesia.html');
-		$array_result[] = array('title' => 'Monogatari Series: Second Season Episode 8 Subtitle Indonesia', 'link' => 'http://www.wardhanime.net/2013/08/monogatari-S2-08.html');
-		$array_result[] = array('title' => 'Kimi no Iru Machi Episode 7 Subtitle Indonesia', 'link' => 'http://www.wardhanime.net/2013/08/kimi-no-iru-machi-episode-7-subtitle.html');
-		$array_result[] = array('title' => 'Genei wo Kakeru Taiyou Episode 8 Subtitle Indonesia', 'link' => 'http://www.wardhanime.net/2013/08/genei-wo-kakeru-taiyou-episode-8.html');
-		$array_result[] = array('title' => 'Senki Zesshou Symphogear G Episode 8 Subtitle Indonesia', 'link' => 'http://www.wardhanime.net/2013/08/senki-zesshou-symphogear-g-episode-8.html');
-		$array_result[] = array('title' => 'To Aru Kagaku no Railgun S Episode 19 Subtitle Indonesia', 'link' => 'http://www.wardhanime.net/2013/08/to-aru-kagaku-no-railgun-s-episode-19.html');
-		$array_result[] = array('title' => 'Kamisama no Inai Nichiyoubi Episode 8 Subtitle Indonesia', 'link' => 'http://www.wardhanime.net/2013/08/kamisama-no-inai-nichiyoubi-episode-8.html');
+		$array_result[] = array('title' => 'Gatchaman Crowds Episode 12 Subtitle Indonesia [Final]', 'link' => 'http://www.wardhanime.net/2013/09/gatchaman-crowds-episode-12-subtitle.html');
 		/*	*/
 		
 		foreach ($array_content->channel->item as $array_temp) {
@@ -148,7 +138,7 @@ class awsubs {
 		$content = preg_replace('/<strike>[^\<]+<\/strike> \|/i', '', $content);
 		
 		// get common link
-		preg_match_all('/div>([^\<]+)<\/div>\s<div>\s(<a href="[^"]+"\>[a-z]+<\/a>[ \|]*)+/i', $content, $match);
+		preg_match_all('/div>([^\<]+)<\/div>\s<div>\s*(<a href="[^"]+"\>[a-z]+<\/a>[ \|]*)+/i', $content, $match);
 		foreach ($match[0] as $key => $value) {
 			$label = trim($match[1][$key]);
 			preg_match_all('/<a href="([^"]+)"\>([a-z]+)<\/a>/i', $value, $array_link);

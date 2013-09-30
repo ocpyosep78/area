@@ -4,11 +4,11 @@
 	ini_set('display_errors', 1);
 	
 	$is_office = true;
-	$library = 'awsubs';
+	$library = 'ganool';
 	
 	if ($is_office) {
-		$localhost = 'http://localhost:8666/suekarea/trunk/';
-		$path = 'C:\Program Files\xampplite\htdocs\suekarea\trunk';
+		$localhost = 'http://localhost/suekarea/trunk/';
+		$path = 'D:\Program Files\xampp\htdocs\suekarea\trunk';
 	} else {
 		$localhost = 'http://localhost/suekarea/trunk/';
 		$path = 'E:\Program Files\xampplite\htdocs\suekarea\trunk';
@@ -18,7 +18,7 @@
 	include $path.'\application\libraries\scrape\\'.$library.'.php';
 	
 	/*	
-	$link = 'http://www.wardhanime.net/2013/09/ms-igloo-2-02.html';
+	$link = 'http://ganool.com/ookami-kodomo-no-ame-to-yuki';
 	$curl = new curl();
 	$content = $curl->get($link);
 	Write($path.'\p.txt', $content);
@@ -30,8 +30,8 @@
 	$content = preg_replace('/[^\x20-\x7E|\x0A]/i', '', $content);
 	
 	// scrape
-	$desc = $library::get_desc($content);
+	$desc = @$library::get_desc($content);
 //	echo $desc; exit;
 	
-	$download = $library::get_download($content);
+	$download = @$library::get_download($content);
 	echo $download; exit;
