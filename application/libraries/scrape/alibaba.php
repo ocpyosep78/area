@@ -9,7 +9,7 @@ class alibaba {
 	function get_array($scrape) {
 		$curl = new curl();
 		$array_item = array();
-		$content = $curl->get($scrape['link']);
+		$content = ($this->is_index) ? file_get_contents($scrape['link']) : $curl->get($scrape['link']);
 		$array_post = $this->get_array_clear($content);
 		
 		$array_result = array();
@@ -23,7 +23,7 @@ class alibaba {
 			}
 			
 			// make content clean
-			$content_item = $curl->get($array['link']);
+			$content_item = ($this->is_index) ? file_get_contents($array['link']) : $curl->get($array['link']);
 			$content_item = preg_replace('/[^\x20-\x7E|\x0A]/i', '', $content_item);
 			
 			// collect data
@@ -45,7 +45,7 @@ class alibaba {
 			$array_result[] = $temp;
 			
 			// add limit
-			if (count($array_result) >= 10) {
+			if (count($array_result) >= 5) {
 				break;
 			}
 		}
@@ -65,10 +65,22 @@ class alibaba {
 		/*	*/
 		
 		if (isset($this->is_index) && $this->is_index) {
-			/*
-			echo $content; exit;
-			$content = $curl->get($array['link']);
-			/*	*/
+			// remove start offset
+			$offset = "<div class='post hentry'>";
+			$pos_first = strpos($content, $offset);
+			$content = substr($content, $pos_first, strlen($content) - $pos_first);
+			
+			// remove end offset
+			$offset = "<div class='blog-pager' id='blog-pager'>";
+			$pos_end = strpos($content, $offset);
+			$content = substr($content, 0, $pos_end);
+			
+			preg_match_all('/h2 (class)=\'[^\']+\'>\s*<a href=\'([^\']+)\'>([^\<]+)<\/a>/i', $content, $match);
+			foreach ($match[0] as $key => $value) {
+				$link = trim($match[2][$key]);
+				$title = trim($match[3][$key]);
+				$array_result[] = array('title' => $title, 'link' => $link);
+			}
 		} else {
 			$array_content = new SimpleXmlElement($content);
 			foreach ($array_content->channel->item as $array_temp) {
