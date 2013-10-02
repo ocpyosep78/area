@@ -61,10 +61,24 @@ class ganool {
 		
 		/*	*/
 		// add link here
-		$array_result[] = array('title' => 'Ookami Kodomo no Ame to Yuki', 'link' => 'http://ganool.com/ookami-kodomo-no-ame-to-yuki');
-		$array_result[] = array('title' => 'Blood-C: The Last Dark', 'link' => 'http://ganool.com/blood-c-the-last-dark');
-		$array_result[] = array('title' => 'Nijiiro Hotaru: Eien no Natsuyasumi', 'link' => 'http://ganool.com/nijiiro-hotaru-eien-no-natsuyasumi');
-		$array_result[] = array('title' => 'Blood For Irina (2012) DVDRip 300MB Ganool', 'link' => 'http://ganool.com/blood-for-irina-2012-dvdrip-300mb-ganool');
+		$array_result[] = array('title' => 'Blame!', 'link' => 'http://ganool.com/blame');
+		$array_result[] = array('title' => 'Biomega', 'link' => 'http://ganool.com/biomega');
+		$array_result[] = array('title' => 'Blame Gakuen! And So On', 'link' => 'http://ganool.com/blame-gakuen-and-so-on');
+		$array_result[] = array('title' => 'NOiSE', 'link' => 'http://ganool.com/noise');
+		$array_result[] = array('title' => 'Bakuman', 'link' => 'http://ganool.com/bakuman');
+		$array_result[] = array('title' => 'Astroboy', 'link' => 'http://ganool.com/astroboy');
+		$array_result[] = array('title' => 'Age of Dinosaurs (2013) BluRay 1080p 5.1CH x264 Ganool', 'link' => 'http://ganool.com/age-of-dinosaurs-2013-bluray-1080p-5-1ch-x264-ganool');
+		$array_result[] = array('title' => 'Ragin Cajun Redneck Gators (2013) TVRip 400MB Ganool', 'link' => 'http://ganool.com/ragin-cajun-redneck-gators-2013-tvrip-400mb-ganool');
+		$array_result[] = array('title' => 'Ghost', 'link' => 'http');
+		$array_result[] = array('title' => 'Ghost', 'link' => 'http');
+		$array_result[] = array('title' => 'Ghost', 'link' => 'http');
+		$array_result[] = array('title' => 'Ghost', 'link' => 'http');
+		$array_result[] = array('title' => 'Ghost', 'link' => 'http');
+		$array_result[] = array('title' => 'Ghost', 'link' => 'http');
+		$array_result[] = array('title' => 'Ghost', 'link' => 'http');
+		$array_result[] = array('title' => 'Ghost', 'link' => 'http');
+		$array_result[] = array('title' => 'Ghost', 'link' => 'http');
+		$array_result[] = array('title' => 'Ghost', 'link' => 'http');
 		/*	*/
 		
 		foreach ($array_content->channel->item as $array_temp) {
@@ -165,7 +179,9 @@ class ganool {
 		
 		// get from href
 		$content_format = str_replace("<br />", "", $content);
-		preg_match_all('/rong>([a-z0-9 ]+)<\/strong>(\s*<a href=\"([^\"]+)\">([^\<]+)<\/a>([\s*\|*]+[a-z]+)*)*/i', $content_format, $match);
+		$content_format = str_replace("</span>", "", $content_format);
+		$content_format = str_replace("<strong></strong>", "", $content_format);
+		preg_match_all('/rong>([a-z0-9 ]+)<\/strong>(\s*<a href=\"([^\"]+)\">([^\<]+)<\/a>([\s*\|*]+[a-z0-9 \[\]\-]+)*)*/i', $content_format, $match);
 		foreach ($match[0] as $key => $string_check) {
 			$label = $match[1][$key];
 			preg_match_all('/<a href=\"([^\"]+)\">([^\<]+)<\/a>([\s*\|*]+[a-z]+)*/i', $string_check, $array_link);

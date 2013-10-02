@@ -8,6 +8,7 @@ First at alexa :  5,820,383 2013-09-23
 First at alexa :  5,390,606 2013-09-24
 First at alexa :  5,123,006 2013-09-26
 First at alexa :  5,154,014 2013-09-28
+First at alexa :  5,188,509 2013-10-02
 
 
 
@@ -15,14 +16,6 @@ Facebook :
 Sehari => 5 add friend pagi + 5 sore termasuk teman yang "request friend"
 
 Tempat cari teman :
-FarmVille
-FarmVille 2
-Criminal Case
-Village Life
-ChefVille
-Marvel: Avengers Alliance
-Cafeland
-
 Tersangka 2		:		450 Friend
 Bunga Low		: 		463 Friend
 Makin Bunawas	:		410 Friend
@@ -80,10 +73,6 @@ Di Post tambah nama user nya (sapa tau ada user yang baru submit)
 
 Untuk website yang traffictnya lebih tinggi, kita pakai blogspot untuk tempat posting mereka
 Untuk website yang traffictnya lebih rendah, kita pakai post dengan type single agar langsung redirect ke mereka
-
-Referernya belum selesai (kurang logo)
-Widget Logonya belum selesai (kurang logo)
-Halaman Widnget nya belum selesai (kurang logo)
 
 --------------------------------------------------------------------------------------------------------------------
 

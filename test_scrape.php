@@ -18,7 +18,7 @@
 	include $path.'\application\libraries\scrape\\'.$library.'.php';
 	
 	/*	
-	$link = 'http://ganool.com/ookami-kodomo-no-ame-to-yuki';
+	$link = 'http://ganool.com/07-ghost';
 	$curl = new curl();
 	$content = $curl->get($link);
 	Write($path.'\p.txt', $content);
