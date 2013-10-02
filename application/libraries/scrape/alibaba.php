@@ -3,6 +3,7 @@
 class alibaba {
     function __construct() {
         $this->CI =& get_instance();
+		$this->is_index = true;
     }
     
 	function get_array($scrape) {
@@ -54,7 +55,6 @@ class alibaba {
 	
 	function get_array_clear($content) {
 		$array_result = array();
-		$array_content = new SimpleXmlElement($content);
 		
 		/*	
 		// add link here
@@ -64,12 +64,20 @@ class alibaba {
 		$array_result[] = array('title' => 'Jigoku Sensei Nube Episode 3 Subtitle Indonesia', 'link' => 'http://www.alibabasub.net/2013/08/jigoku-sensei-nube-episode-3-subtitle-indonesia.html');
 		/*	*/
 		
-		foreach ($array_content->channel->item as $array_temp) {
-			$array_temp = (array)$array_temp;
-			unset($array_temp['category']);
-			unset($array_temp['description']);
-			
-			$array_result[] = (array)$array_temp;
+		if (isset($this->is_index) && $this->is_index) {
+			/*
+			echo $content; exit;
+			$content = $curl->get($array['link']);
+			/*	*/
+		} else {
+			$array_content = new SimpleXmlElement($content);
+			foreach ($array_content->channel->item as $array_temp) {
+				$array_temp = (array)$array_temp;
+				unset($array_temp['category']);
+				unset($array_temp['description']);
+				
+				$array_result[] = (array)$array_temp;
+			}
 		}
 		
 		return $array_result;

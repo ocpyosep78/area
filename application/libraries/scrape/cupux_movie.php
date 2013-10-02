@@ -56,10 +56,7 @@ class cupux_movie {
 		
 		/*	*/
 		// add link here
-		$array_result[] = array('title' => 'Rockin\' on Heaven\'s Door (2013) HDRip [korea]', 'link' => 'http://www.cupux-movie.com/2013/09/rockin-on-heavens-door-2013-hdrip-korea.html');
-		$array_result[] = array('title' => 'An Ordinary Love Story (2012) DVDRip [Thailand]', 'link' => 'http://www.cupux-movie.com/2013/09/an-ordinary-love-story-2012-dvdrip.html');
-		$array_result[] = array('title' => 'Sorry Saranghaeyo (2010) DVDRip [thailand]', 'link' => 'http://www.cupux-movie.com/2013/09/sorry-saranghaeyo-2010-dvdrip-thailand.html');
-		$array_result[] = array('title' => 'Pai In Love (2012) DVDRip [thailnad]', 'link' => 'http://www.cupux-movie.com/2013/09/pai-in-love-2012-dvdrip-thailnad.html');
+		$array_result[] = array('title' => 'Amy (2013) DVDRip', 'link' => 'http://www.cupux-movie.com/2013/10/amy-2013-dvdrip.html');
 		/*	*/
 		
 		foreach ($array_content->channel->item as $array_temp) {
@@ -103,7 +100,13 @@ class cupux_movie {
 		// remove end offset
 		$offset = '<iframe allowfullscreen=""';
 		$pos_end = strpos($content, $offset);
-		$content = substr($content, 0, $pos_end);
+		if ($pos_end === false) {
+			$offset = "<a class='addthis_button_tweet'>";
+			$pos_end = strpos($content, $offset);
+			$content = substr($content, 0, $pos_end);
+		} else {
+			$content = substr($content, 0, $pos_end);
+		}
 		
 		// set display
 		$content = str_replace(array('&nbsp;'), array(''), $content);

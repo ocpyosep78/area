@@ -59,7 +59,7 @@ class ganool {
 		$array_result = array();
 		$array_content = new SimpleXmlElement($content);
 		
-		/*	*/
+		/*	
 		// add link here
 		$array_result[] = array('title' => 'Blame!', 'link' => 'http://ganool.com/blame');
 		$array_result[] = array('title' => 'Biomega', 'link' => 'http://ganool.com/biomega');
@@ -69,16 +69,6 @@ class ganool {
 		$array_result[] = array('title' => 'Astroboy', 'link' => 'http://ganool.com/astroboy');
 		$array_result[] = array('title' => 'Age of Dinosaurs (2013) BluRay 1080p 5.1CH x264 Ganool', 'link' => 'http://ganool.com/age-of-dinosaurs-2013-bluray-1080p-5-1ch-x264-ganool');
 		$array_result[] = array('title' => 'Ragin Cajun Redneck Gators (2013) TVRip 400MB Ganool', 'link' => 'http://ganool.com/ragin-cajun-redneck-gators-2013-tvrip-400mb-ganool');
-		$array_result[] = array('title' => 'Ghost', 'link' => 'http');
-		$array_result[] = array('title' => 'Ghost', 'link' => 'http');
-		$array_result[] = array('title' => 'Ghost', 'link' => 'http');
-		$array_result[] = array('title' => 'Ghost', 'link' => 'http');
-		$array_result[] = array('title' => 'Ghost', 'link' => 'http');
-		$array_result[] = array('title' => 'Ghost', 'link' => 'http');
-		$array_result[] = array('title' => 'Ghost', 'link' => 'http');
-		$array_result[] = array('title' => 'Ghost', 'link' => 'http');
-		$array_result[] = array('title' => 'Ghost', 'link' => 'http');
-		$array_result[] = array('title' => 'Ghost', 'link' => 'http');
 		/*	*/
 		
 		foreach ($array_content->channel->item as $array_temp) {
