@@ -97,32 +97,12 @@ class alibaba {
 	
 	function get_desc($content) {
 		// remove start offset
-		$offset = '<div class="single_post">';
+		$offset = "<h1 class='post-title entry-title'>";
 		$pos_first = strpos($content, $offset);
 		$content = substr($content, $pos_first, strlen($content) - $pos_first);
 		
 		// remove end offset
-		$offset = '<div class="related-posts">';
-		$pos_end = strpos($content, $offset);
-		if ($pos_end) {
-			$content = substr($content, 0, $pos_end);
-		} else {
-			$offset = '<!-- related-posts -->';
-			$pos_end = strpos($content, $offset);
-			$content = substr($content, 0, $pos_end);
-		}
-		
-		// remove string from website
-		$content = str_replace(array('Sebagai downloader yang baik tentunya tahu apa yang harus dilakukan, dan jangan lupa untuk selalu meninggalkan jejak di blog ini!'), '', $content);
-		$content = preg_replace('/Silahkan download [a-z0-9 ]+ di bawah ini:/i', '', $content);
-		
-		// additional start offset
-		$offset = '</header>';
-		$pos_first = strpos($content, $offset);
-		$content = substr($content, $pos_first, strlen($content) - $pos_first);
-		
-		// additional end offset
-		$offset = '<div class="bottomad">';
+		$offset = "<div id='fb-root'></div>";
 		$pos_end = strpos($content, $offset);
 		$content = substr($content, 0, $pos_end);
 		
@@ -133,30 +113,29 @@ class alibaba {
 		$result = implode("<br />", $array_temp);
 		
 		// endfix
-		$result .= '<div>&nbsp;</div>';
-		$result .= '<div>Sumber : Alibaba</div>';
+		if (!empty($result)) {
+			$result .= '<div>&nbsp;</div>';
+			$result .= '<div>Sumber : Alibaba</div>';
+		}
 		
 		return $result;
 	}
 	
 	function get_download($content) {
 		// remove start offset
-		$offset = '<div class="single_post">';
+		$offset = "<h1 class='post-title entry-title'>";
 		$pos_first = strpos($content, $offset);
 		$content = substr($content, $pos_first, strlen($content) - $pos_first);
 		
 		// remove end offset
-		$offset = '<div class="related-posts">';
+		$offset = "<div id='fb-root'></div>";
 		$pos_end = strpos($content, $offset);
-		if ($pos_end) {
-			$content = substr($content, 0, $pos_end);
-		} else {
-			$offset = '<!-- related-posts -->';
-			$pos_end = strpos($content, $offset);
-			$content = substr($content, 0, $pos_end);
-		}
+		$content = substr($content, 0, $pos_end);
 		
 		// make it consistent
+		$content = preg_replace('/&nbsp;/i', ' ', $content);
+		$content = preg_replace('/<strike>[a-z0-9 ]+<\/strike>\s*\|/i', '', $content);
+		$content = preg_replace('/\|\s*<strike>[a-z0-9 ]+<\/strike>/i', '', $content);
 		$content = preg_replace('/<\/?strong>/i', '', $content);
 		$content = preg_replace('/<\/a>\s?\/\s?<a /i', '</a> / <a ', $content);
 		$content = preg_replace('/(480|720)p?\s*[=:]\s*/i', "$1 ", $content);
@@ -186,7 +165,7 @@ class alibaba {
 		
 		// new design on 2013-09-09
 		if (empty($result)) {
-			preg_match_all('/<div>([^\<]+)<\/div>\s*<div>(<a href="[^\"]+\">[a-z0-9\/\[\] ]+<\/a>[ \|]*)*<\/div/i', $content, $match);
+			preg_match_all('/div>\s([^\<]+)<\/div>\s*<div>([\s\|]*<a href="[^\"]+\">[a-z0-9\/\[\] ]+<\/a>)*<\/d/i', $content, $match);
 			foreach ($match[0] as $key => $value) {
 				preg_match_all('/<a href="([^\"]+)\">([a-z0-9\/\[\] ]+)<\/a>/i', $value, $array_link);
 				

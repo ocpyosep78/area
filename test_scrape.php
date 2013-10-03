@@ -3,16 +3,8 @@
 	error_reporting(E_ALL);
 	ini_set('display_errors', 1);
 	
-	
-	/*	temp */
-	/*
-	$link = 'http://alibabasub.net/';
-	echo file_get_contents($link);
-	exit;
-	/*	*/
-	
 	$is_office = true;
-	$library = 'cupux_movie';
+	$library = 'alibaba';
 	
 	if ($is_office) {
 		$localhost = 'http://localhost/suekarea/trunk/';
@@ -39,7 +31,7 @@
 	
 	// scrape
 	$desc = @$library::get_desc($content);
-	echo $desc; exit;
+//	echo $desc; exit;
 	
 	$download = @$library::get_download($content);
 	echo $download; exit;
