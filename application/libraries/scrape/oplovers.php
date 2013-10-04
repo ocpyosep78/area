@@ -104,8 +104,7 @@ class oplovers {
 		}
 		
 		// endfix
-		$result .= '<div>&nbsp;</div>';
-		$result .= '<div>Sumber : Oplovers</div>';
+		$result .= '<br /><div>Sumber : Oplovers</div>';
 		
 		return $result;
 	}
