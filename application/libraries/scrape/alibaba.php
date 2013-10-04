@@ -56,12 +56,18 @@ class alibaba {
 	function get_array_clear($content) {
 		$array_result = array();
 		
-		/*	
+		/*
 		// add link here
-		$array_result[] = array('title' => 'Gatchaman Crowds Episode 10 Subtitle Indonesia', 'link' => 'http://www.alibabasub.net/2013/09/gatcha10.html');
-		$array_result[] = array('title' => 'Fate/Kaleid Liner PrismaIlya Episode 10 Subtitle Indonesia(FINAL)', 'link' => 'http://www.alibabasub.net/2013/09/fatekaleid-liner-prisma%e2%98%86ilya-episode-10-subtitle-indonesiafinal.html');
-		$array_result[] = array('title' => 'Jigoku Sensei Nube Episode 4 Subtitle Indonesia', 'link' => 'http://www.alibabasub.net/2013/08/jigoku-sensei-nube-episode-4-subtitle-indonesia.html');
-		$array_result[] = array('title' => 'Jigoku Sensei Nube Episode 3 Subtitle Indonesia', 'link' => 'http://www.alibabasub.net/2013/08/jigoku-sensei-nube-episode-3-subtitle-indonesia.html');
+		$array_result[] = array('title' => 'Rou Kyuu Bu! SS Episode 12 Subtitle Indonesia [Final]', 'link' => 'http://www.alibabasub.net/2013/10/rou-kyuu-bu-ss-episode-12-subtitle.html');
+		$array_result[] = array('title' => 'Tamayura: More Aggressive Episode 11 Subtitle Indonesia', 'link' => 'http://www.alibabasub.net/2013/09/tamayura-more-aggressive-episode-11.html');
+		$array_result[] = array('title' => 'Kami nomi zo Shiru Sekai: Megami-hen Episode 11 Subtitle Indonesia', 'link' => 'http://www.alibabasub.net/2013/09/kami-nomi-zo-shiru-sekai-megami-hen.html');
+		$array_result[] = array('title' => 'Inu to Hasami wa Tsukaiyou Episode 12 Subtitle Indonesia [Final]', 'link' => 'http://www.alibabasub.net/2013/09/inu-to-hasami-wa-tsukaiyou-episode-12.html');
+		$array_result[] = array('title' => 'Shingeki no Kyojin Episode 24 Subtitle Indonesia', 'link' => 'http://www.alibabasub.net/2013/09/shingeki-no-kyojin-episode-24-subtitle.html');
+		$array_result[] = array('title' => 'Choujigen Game Neptune: The Animation Episode 11 Subtitle Indonesia', 'link' => 'http://www.alibabasub.net/2013/09/choujigen-game-neptune-animation.html');
+		$array_result[] = array('title' => 'One Piece Episode 614 Subtitle Indonesia', 'link' => 'http://www.alibabasub.net/2013/09/one-piece-episode-614-subtitle-indonesia.html');
+		$array_result[] = array('title' => 'Mushibugyou Episode 24 Subtitle Indonesia', 'link' => 'http://www.alibabasub.net/2013/09/mushibugyou-episode-24-subtitle.html');
+		$array_result[] = array('title' => 'Servant x Service Episode 13 Subtitle Indonesia [Final]', 'link' => 'http://www.alibabasub.net/2013/09/servant-x-service-episode-13-subtitle.html');
+		$array_result[] = array('title' => 'Gin no Saji Episode 11 Subtitle Indonesia [Final]', 'link' => 'http://www.alibabasub.net/2013/09/gin-no-saji-episode-11-subtitle.html');
 		/*	*/
 		
 		if (isset($this->is_index) && $this->is_index) {
@@ -165,7 +171,7 @@ class alibaba {
 		
 		// new design on 2013-09-09
 		if (empty($result)) {
-			preg_match_all('/div>\s([^\<]+)<\/div>\s*<div>([\s\|]*<a href="[^\"]+\">[a-z0-9\/\[\] ]+<\/a>)*<\/d/i', $content, $match);
+			preg_match_all('/div>\s*([^\<]+)<\/div>\s*<div>([\s\|]*<a href="[^\"]+\">[a-z0-9\/\[\] ]+<\/a>)*<\/d/i', $content, $match);
 			foreach ($match[0] as $key => $value) {
 				preg_match_all('/<a href="([^\"]+)\">([a-z0-9\/\[\] ]+)<\/a>/i', $value, $array_link);
 				
@@ -205,7 +211,20 @@ class alibaba {
 	}
 	
 	function get_image($content) {
-		preg_match('/ width=\"\d+\" height=\"\d+\" src=\"([^\"]+)\"/i', $content, $match);
+		// remove start offset
+		$offset = "<h1 class='post-title entry-title'>";
+		$pos_first = strpos($content, $offset);
+		$content = substr($content, $pos_first, strlen($content) - $pos_first);
+		
+		// remove end offset
+		$offset = "<div id='fb-root'></div>";
+		$pos_end = strpos($content, $offset);
+		$content = substr($content, 0, $pos_end);
+		
+		// make it consistent
+		$content = preg_replace('/ (class|style|border|height|width)=[\'\"][^\"|^\']+[\'\"]/i', '', $content);
+		
+		preg_match('/img src="([^\"]+)\"/i', $content, $match);
 		$result = (isset($match[1]) && !empty($match[1])) ? $match[1] : '';
 		
 		return $result;

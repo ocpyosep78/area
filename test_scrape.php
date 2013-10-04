@@ -18,7 +18,7 @@
 	include $path.'\application\libraries\scrape\\'.$library.'.php';
 	
 	/*	
-	$link = 'http://www.cupux-movie.com/2013/10/amy-2013-dvdrip.html';
+	$link = 'http://www.alibabasub.net/2013/09/tamayura-more-aggressive-episode-11.html';
 	$curl = new curl();
 	$content = $curl->get($link);
 	Write($path.'\p.txt', $content);
@@ -35,3 +35,6 @@
 	
 	$download = @$library::get_download($content);
 	echo $download; exit;
+	
+	$image = @$library::get_image($content);
+//	echo $image; exit;
