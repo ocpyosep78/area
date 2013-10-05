@@ -3,6 +3,7 @@
 class unduhfilm21 {
     function __construct() {
         $this->CI =& get_instance();
+		$this->is_index = true;
     }
     
 	function get_array($scrape) {
@@ -59,7 +60,6 @@ class unduhfilm21 {
 	
 	function get_array_clear($content) {
 		$array_result = array();
-		$array_content = new SimpleXmlElement($content);
 		
 		/*	
 		// add link here
@@ -69,12 +69,32 @@ class unduhfilm21 {
 		$array_result[] = array('title' => 'Jigoku Sensei Nube Episode 3 Subtitle Indonesia', 'link' => 'http://www.alibabasub.net/2013/08/jigoku-sensei-nube-episode-3-subtitle-indonesia.html');
 		/*	*/
 		
-		foreach ($array_content->channel->item as $array_temp) {
-			$array_temp = (array)$array_temp;
-			unset($array_temp['category']);
-			unset($array_temp['description']);
+		if (isset($this->is_index) && $this->is_index) {
+			// remove start offset
+			$offset = "<div class='blog-posts hfeed'>";
+			$pos_first = strpos($content, $offset);
+			$content = substr($content, $pos_first, strlen($content) - $pos_first);
 			
-			$array_result[] = (array)$array_temp;
+			// remove end offset
+			$offset = "<div class='blog-pager' id='blog-pager'>";
+			$pos_end = strpos($content, $offset);
+			$content = substr($content, 0, $pos_end);
+			
+			preg_match_all('/<h3 class=\'post-title entry-title\'>\s*<a href=\'([^\']+)\'>([^\<]+)<\/a>/i', $content, $match);
+			foreach ($match[0] as $key => $value) {
+				$link = trim($match[1][$key]);
+				$title = trim($match[2][$key]);
+				$array_result[] = array('title' => $title, 'link' => $link);
+			}
+		} else {
+			$array_content = new SimpleXmlElement($content);
+			foreach ($array_content->channel->item as $array_temp) {
+				$array_temp = (array)$array_temp;
+				unset($array_temp['category']);
+				unset($array_temp['description']);
+				
+				$array_result[] = (array)$array_temp;
+			}
 		}
 		
 		return $array_result;
