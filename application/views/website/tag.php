@@ -23,14 +23,17 @@
 	$page_count = ceil($this->Post_Tag_model->get_count() / $page_item);
 	
 	// meta
-	$desc = 'Download';
-	$title = 'Suekarea - '.$tag['name'].' - Page '.$page_active;
+	$param_meta['title'] = 'Suekarea - '.$tag['name'].' - Page '.$page_active;
+	$param_meta['desc'] = 'Download';
 	foreach ($array_post as $post) {
-		$desc .= ' - '.$post['post_name'];
+		$param_meta['desc'] .= ' - '.$post['post_name'];
+	}
+	if ($page_active == 1) {
+		$param_meta['link_canonical'] = $tag['tag_link'].'/page-1';
 	}
 ?>
 
-<?php $this->load->view( 'website/common/meta', array( 'title' => $title, 'desc' => $desc ) ); ?>
+<?php $this->load->view( 'website/common/meta', $param_meta ); ?>
 
 <body class="blog boxed pattern-1 navigation-style-1">
 
