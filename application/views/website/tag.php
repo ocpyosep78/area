@@ -28,7 +28,9 @@
 	foreach ($array_post as $post) {
 		$param_meta['desc'] .= ' - '.$post['post_name'];
 	}
-	if ($page_active == 1) {
+	
+	$page_at_url = preg_match('/\/page-[\d+]$/i', $_SERVER['REQUEST_URI'], $match);
+	if ($page_active == 1 && !$page_at_url) {
 		$param_meta['link_canonical'] = $tag['tag_link'].'/page-1';
 	}
 ?>
