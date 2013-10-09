@@ -16,13 +16,6 @@ class awsubs {
 			$array['title'] = trim($array['title']);
 			$link_source = $array['link'];
 			
-			// test purpose
-			/*
-			if ($array['title'] != 'Persona: Trinity Soul Episode 3 Subtitle Indonesia') {
-				continue;
-			}
-			/*	*/
-			
 			// content already exist
 			$check = $this->CI->Scrape_Content_model->get_by_id(array( 'link_source' => $link_source ));
 			if (count($check) > 0) {
@@ -60,9 +53,9 @@ class awsubs {
 		$array_result = array();
 		$array_content = new SimpleXmlElement($content);
 		
-		/*	*/
+		/*	
 		// add link here
-		$array_result[] = array('title' => 'Gatchaman Crowds Episode 12 Subtitle Indonesia [Final]', 'link' => 'http://www.wardhanime.net/2013/09/gatchaman-crowds-episode-12-subtitle.html');
+		$array_result[] = array('title' => 'Little Busters! Refrain Episode 1 Subtitle Indonesia', 'link' => 'http://www.wardhanime.net/2013/10/little-buster-refrain-episode-01.html');
 		/*	*/
 		
 		foreach ($array_content->channel->item as $array_temp) {
@@ -138,10 +131,10 @@ class awsubs {
 		$content = preg_replace('/<strike>[^\<]+<\/strike> \|/i', '', $content);
 		
 		// get common link
-		preg_match_all('/div>([^\<]+)<\/div>\s<div>\s*(<a href="[^"]+"\>[a-z]+<\/a>[ \|]*)+/i', $content, $match);
+		preg_match_all('/div>([^\<]+)<\/div>\s<div>\s*(<a href="[^"]+"\>[^<]+<\/a>[ \|]*)+/i', $content, $match);
 		foreach ($match[0] as $key => $value) {
 			$label = trim($match[1][$key]);
-			preg_match_all('/<a href="([^"]+)"\>([a-z]+)<\/a>/i', $value, $array_link);
+			preg_match_all('/<a href="([^"]+)"\>([^<]+)<\/a>/i', $value, $array_link);
 			
 			// validation
 			if (count($array_link[0]) == 0) {

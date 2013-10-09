@@ -4,7 +4,7 @@
 	ini_set('display_errors', 1);
 	
 	$is_office = true;
-	$library = 'ganool';
+	$library = 'awsubs';
 	
 	if ($is_office) {
 		$localhost = 'http://localhost/suekarea/trunk/';
@@ -18,7 +18,7 @@
 	include $path.'\application\libraries\scrape\\'.$library.'.php';
 	
 	/*	
-	$link = 'http://ganool.com/sue-mai-sawa-righting-the-girl-ship-2012-dvdrip-450mb-ganool';
+	$link = 'http://www.wardhanime.net/2013/10/little-buster-refrain-episode-01.html';
 	$curl = new curl();
 	$content = $curl->get($link);
 	Write($path.'\p.txt', $content);

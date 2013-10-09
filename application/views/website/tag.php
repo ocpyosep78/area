@@ -1,11 +1,11 @@
 <?php
 	$tag_alias = $this->uri->segments[2];
-	if (empty($tag_alias)) {
+	$tag = $this->Tag_model->get_by_id(array( 'alias' => $tag_alias ));
+	if (empty($tag_alias) || count($tag) == 0) {
 		header("HTTP/1.1 301 Moved Permanently");
 		header('Location: '.base_url());
 		exit;
 	}
-	$tag = $this->Tag_model->get_by_id(array( 'alias' => $tag_alias ));
 	
 	// page
 	$page_item = 10;

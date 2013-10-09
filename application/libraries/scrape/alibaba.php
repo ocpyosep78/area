@@ -120,8 +120,7 @@ class alibaba {
 		
 		// endfix
 		if (!empty($result)) {
-			$result .= '<div>&nbsp;</div>';
-			$result .= '<div>Sumber : Alibaba</div>';
+			$result .= '<br /><div>Sumber : Alibaba</div>';
 		}
 		
 		return $result;

@@ -136,8 +136,7 @@ class ganool {
 		
 		// endfix
 		if (!empty($result)) {
-			$result .= '<div></div>';
-			$result .= '<div>Sumber : Ganool</div>';
+			$result .= '<br /><div>Sumber : Ganool</div>';
 		}
 		
 		return $result;
@@ -196,32 +195,34 @@ class ganool {
 		}
 		
 		// get from label
-		preg_match_all('/(Akafile|Mightyupload|UpAfile|Putlocker|UpToBox|PFU|Uploadscenter|Netload|Turbobit|Uploaded|FileClod|FileHostPro|Ezzyfile|Tubobit)[: ]+(full speed)?\s*((http:[\w\/\.]+\s?)+)/i', $content_clean, $match);
-		if (count($match) > 0) {
-			foreach ($match[0] as $key => $value) {
-				$value = trim($value);
-				
-				if (! $is_write_single_link) {
-					$array_check = explode("\n", $value);
-					$is_single_link = (count($array_check) == 1) ? true : false;
-					if ($is_single_link) {
-						$is_write_single_link = true;
-						$result = trim($result)."\n\nSingle Link";
+		if (empty($result)) {
+			preg_match_all('/(Akafile|Mightyupload|UpAfile|Putlocker|UpToBox|PFU|Uploadscenter|Netload|Turbobit|Uploaded|FileClod|FileHostPro|Ezzyfile|Tubobit)[: ]+(full speed)?\s*((http:[\w\/\.]+\s?)+)/i', $content_clean, $match);
+			if (count($match) > 0) {
+				foreach ($match[0] as $key => $value) {
+					$value = trim($value);
+					
+					if (! $is_write_single_link) {
+						$array_check = explode("\n", $value);
+						$is_single_link = (count($array_check) == 1) ? true : false;
+						if ($is_single_link) {
+							$is_write_single_link = true;
+							$result = trim($result)."\n\nSingle Link";
+						}
 					}
-				}
-				
-				$label_check = $match[1][$key];
-				$link_check = $match[3][$key];
-				if (!empty($label_check) && is_valid_link($link_check)) {
-					$link_temp = trim($match[3][$key]).' '.$match[1][$key];
-				} else {
-					$link_temp = trim($value);
-				}
-				
-				if ($is_write_single_link) {
-					$result .= (empty($result)) ? $link_temp : "\n".$link_temp;
-				} else {
-					$result .= (empty($result)) ? $link_temp : "\n\n".$link_temp;
+					
+					$label_check = $match[1][$key];
+					$link_check = $match[3][$key];
+					if (!empty($label_check) && is_valid_link($link_check)) {
+						$link_temp = trim($match[3][$key]).' '.$match[1][$key];
+					} else {
+						$link_temp = trim($value);
+					}
+					
+					if ($is_write_single_link) {
+						$result .= (empty($result)) ? $link_temp : "\n".$link_temp;
+					} else {
+						$result .= (empty($result)) ? $link_temp : "\n\n".$link_temp;
+					}
 				}
 			}
 		}
