@@ -113,7 +113,7 @@ class narutobleachlover {
 		
 		// endfix
 		if (!empty($result)) {
-			$result .= '<br /><div>Sumber : Naruto Bleach Lover</div>';
+			$result .= '<br /><br /><div>Sumber : Naruto Bleach Lover</div>';
 		}
 		
 		return $result;
