@@ -159,7 +159,7 @@ class ganool {
 		
 		// clean desc
 		$content = str_replace('http://www.imdb.com/', '', $content);
-		$content = preg_replace('/ (onclick|class|target|title|rel)=\"[^\"]+\"/i', '', $content);
+		$content = preg_replace('/ (onclick|class|style|target|title|rel)=\"[^\"]+\"/i', '', $content);
 		$content = preg_replace('/\<\/?p\>/i', '', $content);
 		$content_clean = trim(strip_tags($content));
 		
@@ -169,9 +169,10 @@ class ganool {
 		
 		// get from href
 		$content_format = str_replace("<br />", "", $content);
-		$content_format = str_replace("</span>", "", $content_format);
+		$content_format = preg_replace("/<\/?span>/i", "", $content_format);
 		$content_format = str_replace("<strong></strong>", "", $content_format);
-		preg_match_all('/rong>([a-z0-9 ]+)<\/strong>(\s*<a href=\"([^\"]+)\">([^\<]+)<\/a>([\s*\|*]+[a-z0-9 \[\]\-]+)*)*/i', $content_format, $match);
+		$content_format = preg_replace("/<\/strong>\s*<strong>/i", "", $content_format);
+		preg_match_all('/rong>([a-z0-9: ]+)<\/strong>(\s*<a href=\"([^\"]+)\">([^\<]+)<\/a>([\s*\|*]+[a-z0-9 \[\]\-]+)*)*/i', $content_format, $match);
 		foreach ($match[0] as $key => $string_check) {
 			$label = $match[1][$key];
 			preg_match_all('/<a href=\"([^\"]+)\">([^\<]+)<\/a>([\s*\|*]+[a-z]+)*/i', $string_check, $array_link);
@@ -185,7 +186,11 @@ class ganool {
 						$title .= $array_link[3][$key];
 					}
 					
-					$result .= $link.' '.$title."\n";
+					if ($link == $title) {
+						$result .= $link."\n";
+					} else {
+						$result .= $link.' '.$title."\n";
+					}
 				}
 			}
 		}

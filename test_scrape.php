@@ -4,7 +4,7 @@
 	ini_set('display_errors', 1);
 	
 	$is_office = true;
-	$library = 'alibaba';
+	$library = 'ganool';
 	
 	if ($is_office) {
 		$localhost = 'http://localhost/suekarea/trunk/';
@@ -18,7 +18,7 @@
 	include $path.'\application\libraries\scrape\\'.$library.'.php';
 	
 	/*	
-	$link = 'http://www.alibabasub.net/2013/09/tamayura-more-aggressive-episode-11.html';
+	$link = 'http://ganool.com/sue-mai-sawa-righting-the-girl-ship-2012-dvdrip-450mb-ganool';
 	$curl = new curl();
 	$content = $curl->get($link);
 	Write($path.'\p.txt', $content);
