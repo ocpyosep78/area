@@ -4,7 +4,7 @@
 	ini_set('display_errors', 1);
 	
 	$is_office = true;
-	$library = 'awsubs';
+	$library = 'ganool';
 	
 	if ($is_office) {
 		$localhost = 'http://localhost/suekarea/trunk/';
@@ -18,7 +18,7 @@
 	include $path.'\application\libraries\scrape\\'.$library.'.php';
 	
 	/*	
-	$link = 'http://www.wardhanime.net/2013/10/little-buster-refrain-episode-01.html';
+	$link = 'http://ganool.com/x-men-the-last-stand-2006-bluray-1080p-5-1ch-x264-ganool';
 	$curl = new curl();
 	$content = $curl->get($link);
 	Write($path.'\p.txt', $content);

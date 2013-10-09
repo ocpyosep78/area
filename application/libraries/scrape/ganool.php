@@ -174,6 +174,10 @@ class ganool {
 		preg_match_all('/rong>([a-z0-9: ]+)<\/strong>(\s*<a href=\"([^\"]+)\">([^\<]+)<\/a>([\s*\|*]+[a-z0-9 \[\]\-]+)*)*/i', $content_format, $match);
 		foreach ($match[0] as $key => $string_check) {
 			$label = $match[1][$key];
+			if ($label == 'Info:') {
+				continue;
+			}
+			
 			preg_match_all('/<a href=\"([^\"]+)\">([^\<]+)<\/a>([\s*\|*]+[a-z]+)*/i', $string_check, $array_link);
 			if (count($array_link[0]) > 0) {
 				$result .= (empty($result)) ? "" : "\n";
@@ -193,6 +197,7 @@ class ganool {
 				}
 			}
 		}
+		
 		
 		// get from label
 		if (empty($result)) {
