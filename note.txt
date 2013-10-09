@@ -12,6 +12,7 @@ First at alexa :  5,188,509 2013-10-02
 First at alexa :  5,235,320 2013-10-04
 First at alexa :  2013-10-05	4,977,700		120,957
 First at alexa :  2013-10-07	4,756,421		105,468
+First at alexa :  2013-10-09	4,472,270		106,532
 
 
 
