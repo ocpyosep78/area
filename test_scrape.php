@@ -4,7 +4,7 @@
 	ini_set('display_errors', 1);
 	
 	$is_office = true;
-	$library = 'ganool';
+	$library = 'narutobleachlover';
 	
 	if ($is_office) {
 		$localhost = 'http://localhost/suekarea/trunk/';
@@ -18,7 +18,7 @@
 	include $path.'\application\libraries\scrape\\'.$library.'.php';
 	
 	/*	
-	$link = 'http://ganool.com/x-men-the-last-stand-2006-bluray-1080p-5-1ch-x264-ganool';
+	$link = 'http://www.narutobleachlover.net/2013/10/hunter-x-hunter-2011-episode-99-subtitle-indonesia.html';
 	$curl = new curl();
 	$content = $curl->get($link);
 	Write($path.'\p.txt', $content);
@@ -37,4 +37,4 @@
 	echo $download; exit;
 	
 	$image = @$library::get_image($content);
-//	echo $image; exit;
+	echo $image; exit;
