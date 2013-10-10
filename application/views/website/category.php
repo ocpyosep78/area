@@ -1,4 +1,11 @@
 <?php
+	preg_match('/latest(\/page)*/i', $_SERVER['REQUEST_URI'], $match);
+	if (!empty($match[0])) {
+		header("HTTP/1.1 301 Moved Permanently");
+		header('Location: '.base_url());
+		exit;
+	}
+	
 	$category_alias = $this->uri->segments[1];
 	$category = $this->Category_model->get_by_id(array( 'alias' => $category_alias ));
 	$is_popular = get_popular();

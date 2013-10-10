@@ -29,6 +29,15 @@
 		$param_meta['desc'] .= ' - '.$post['post_name'];
 	}
 	
+	// get more meta
+	if (strlen($param_meta['desc']) <= 75 && count($array_post) > 0) {
+		$title = $array_post[0]['post_name'];
+		$desc = $array_post[0]['post_desc'];
+		
+		$more_desc = strip_tags(trim(str_replace($title, '', $desc)));
+		$param_meta['desc'] = get_length_char($param_meta['desc'].' - '.$more_desc, 250, '');
+	}
+	
 	$page_at_url = preg_match('/\/page-[\d+]$/i', $_SERVER['REQUEST_URI'], $match);
 	if ($page_active == 1 && !$page_at_url) {
 		$param_meta['link_canonical'] = $tag['tag_link'].'/page-1';

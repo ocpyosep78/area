@@ -1,4 +1,7 @@
-<?php $this->load->view( 'website/common/meta', array( 'title' => 'Suekarea - Contact Us', 'desc' => 'Suekarea - Contact Us Form' ) ); ?>
+<?php
+	$head_text = 'Anda dapat menggunakan formulir ini untuk mengirimkan pertanyaan, dan kami akan mencoba sebaik mungkin untuk memberikan jawaban secepatnya.';
+?>
+<?php $this->load->view( 'website/common/meta', array( 'title' => 'Suekarea - Contact Us', 'desc' => 'Suekarea - Contact Us Form - '.$head_text ) ); ?>
 
 <body class="blog boxed pattern-1 navigation-style-1">
 
@@ -9,6 +12,8 @@
 		<div class="main_content"><div id="primary" class="content-area"><div id="content" class="site-content" role="main">
 			<h2 class="page-title">Contact Us</h2>
 			<div class="post_content">
+				<h5><?php echo $head_text; ?></h5>
+				
 				<div id="respond">
 					<form method="post" id="commentform">
 						<input type="hidden" name="action" value="update" />

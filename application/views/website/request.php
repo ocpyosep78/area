@@ -1,8 +1,9 @@
 <?php
 	$is_login = $this->User_model->is_login();
+	$head_text = 'Anda dapat menggunakan formulir ini untuk mengirimkan request, dan kami akan mencoba sebaik mungkin untuk memberikan bantuan secepatnya.';
 ?>
 
-<?php $this->load->view( 'website/common/meta', array( 'title' => 'Suekarea - Request', 'desc' => 'Suekarea - Request Form' ) ); ?>
+<?php $this->load->view( 'website/common/meta', array( 'title' => 'Suekarea - Request', 'desc' => 'Suekarea - Request Form - '.$head_text ) ); ?>
 
 <body class="blog boxed pattern-1 navigation-style-1">
 
@@ -15,6 +16,8 @@
 			
 			<?php if ($is_login) { ?>
 			<div class="post_content">
+				<h5><?php echo $head_text; ?></h5>
+				
 				<form method="post" id="form-request" class="form-manual form-validation">
 					<input type="hidden" name="action" value="update" />
 					
@@ -39,6 +42,8 @@
 			</div>
 			<?php } else { ?>
 			<div class="post_content">
+				<h5><?php echo $head_text; ?></h5>
+				
 				<p class="c_message">Silahkan login untuk melakukan request.</p>
 			</div>
 			<?php } ?>

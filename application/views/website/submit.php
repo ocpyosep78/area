@@ -1,12 +1,13 @@
 <?php
 	$is_login = $this->User_model->is_login();
 	$array_category = $this->Category_model->get_array();
+	$head_text = 'Anda dapat menggunakan formulir ini untuk mengirimkan content link anda yang kemudian akan dapat kami tampilkan dalam link posting kami';
 	
 	// default data
 	$download = (isset($_GET['link'])) ? $_GET['link'] : '';
 ?>
 
-<?php $this->load->view( 'website/common/meta', array( 'title' => 'Suekarea - Submit', 'desc' => 'Suekarea - Submit Form' ) ); ?>
+<?php $this->load->view( 'website/common/meta', array( 'title' => 'Suekarea - Submit', 'desc' => 'Suekarea - Submit Form - '.$head_text ) ); ?>
 
 <body class="blog boxed pattern-1 navigation-style-1">
 
@@ -64,6 +65,8 @@
 			</div>
 			<?php } else { ?>
 			<div class="post_content">
+				<h5><?php echo $head_text; ?></h5>
+				
 				<p class="c_message">Silahkan login untuk mengirim link Anda.</p>
 			</div>
 			<?php } ?>
