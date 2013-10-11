@@ -3,6 +3,7 @@
 class cupux_movie {
     function __construct() {
         $this->CI =& get_instance();
+		$this->is_index = true;
     }
     
 	function get_array($scrape) {
@@ -42,7 +43,7 @@ class cupux_movie {
 			$array_result[] = $temp;
 			
 			// add limit
-			if (count($array_result) >= 4) {
+			if (count($array_result) >= 10) {
 				break;
 			}
 		}
@@ -52,19 +53,38 @@ class cupux_movie {
 	
 	function get_array_clear($content) {
 		$array_result = array();
-		$array_content = new SimpleXmlElement($content);
 		
-		/*	*/
+		/*	
 		// add link here
 		$array_result[] = array('title' => 'Amy (2013) DVDRip', 'link' => 'http://www.cupux-movie.com/2013/10/amy-2013-dvdrip.html');
 		/*	*/
 		
-		foreach ($array_content->channel->item as $array_temp) {
-			$array_temp = (array)$array_temp;
-			unset($array_temp['category']);
-			unset($array_temp['description']);
+		if (isset($this->is_index) && $this->is_index) {
+			// remove start offset
+			$offset = "<div class='main section' id='main'><div class='widget Blog' id='Blog1'>";
+			$pos_first = strpos($content, $offset);
+			$content = substr($content, $pos_first, strlen($content) - $pos_first);
 			
-			$array_result[] = (array)$array_temp;
+			// remove end offset
+			$offset = "<!--Page Navigation Starts-->";
+			$pos_end = strpos($content, $offset);
+			$content = substr($content, 0, $pos_end);
+			
+			preg_match_all('/h3 (class)=\'[^\']+\'>\s*<a href=\'([^\']+)\'>([^\<]+)<\/a>/i', $content, $match);
+			foreach ($match[0] as $key => $value) {
+				$link = trim($match[2][$key]);
+				$title = trim($match[3][$key]);
+				$array_result[] = array('title' => $title, 'link' => $link);
+			}
+		} else {
+			$array_content = new SimpleXmlElement($content);
+			foreach ($array_content->channel->item as $array_temp) {
+				$array_temp = (array)$array_temp;
+				unset($array_temp['category']);
+				unset($array_temp['description']);
+				
+				$array_result[] = (array)$array_temp;
+			}
 		}
 		
 		return $array_result;
