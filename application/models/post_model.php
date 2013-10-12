@@ -46,6 +46,10 @@ class Post_model extends CI_Model {
 			$array_tag = explode(',', $param['tag']);
 			foreach ($array_tag as $tag_queue) {
 				$tag_name = trim($tag_queue);
+				if (empty($tag_name)) {
+					continue;
+				}
+				
 				$tag_alias = $this->Tag_model->get_name($tag_name);
 				$tag = $this->Tag_model->get_by_id(array( 'alias' => $tag_alias, 'name' => $tag_name, 'force_insert' => true ));
 				
