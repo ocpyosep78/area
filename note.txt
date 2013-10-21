@@ -14,6 +14,7 @@ First at alexa :  2013-10-05	4,977,700		120,957
 First at alexa :  2013-10-07	4,756,421		105,468
 First at alexa :  2013-10-09	4,472,270		106,532
 First at alexa :  2013-10-11	4,312,384		 94,986
+First at alexa :  2013-10-21	3,461,268  		 61,768 
 
 
 
@@ -97,3 +98,4 @@ Buat Komunitas subtitle indo => detail di page static suekarea
 
 current => 176-200 of 220
 summary => 608 - 504 - 331
+summary => 456 - 474 - 158		: 2013-10-21
