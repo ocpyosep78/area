@@ -10,9 +10,9 @@ if ($_SERVER['SERVER_NAME'] == 'localhost') {
 	$db['default']['database'] = 'suekarea_db';
 } else if ($_SERVER['SERVER_NAME'] == 'suekarea.com' || $_SERVER['SERVER_NAME'] == 'www.suekarea.com') {
 	$db['default']['hostname'] = 'localhost';
-	$db['default']['username'] = 'suekare1_315';
-	$db['default']['password'] = 'saahcnt&5-';
-	$db['default']['database'] = 'suekare1_media';
+	$db['default']['username'] = 'infoguec_sueka';
+	$db['default']['password'] = 'Cg1fcR_;!T&5';
+	$db['default']['database'] = 'infoguec_suekarea_db';
 }
 
 $db['default']['dbdriver'] = 'mysql';
