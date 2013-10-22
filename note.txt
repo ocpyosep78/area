@@ -14,8 +14,8 @@ First at alexa :  2013-10-05	4,977,700		120,957
 First at alexa :  2013-10-07	4,756,421		105,468
 First at alexa :  2013-10-09	4,472,270		106,532
 First at alexa :  2013-10-11	4,312,384		 94,986
-First at alexa :  2013-10-21	3,461,268  		 61,768 
-
+First at alexa :  2013-10-16	3,770,186		 73,377
+First at alexa :  2013-10-21	3,461,268  		 61,768
 
 
 Facebook :
@@ -97,5 +97,8 @@ Awsubs & oplover harus support seperti alibaba
 Buat Komunitas subtitle indo => detail di page static suekarea
 
 current => 176-200 of 220
-summary => 608 - 504 - 331
-summary => 456 - 474 - 158		: 2013-10-21
+summary => 608 - 504 - 331 		=> 2013-10-07
+summary => 507 - 424 - 142		=> 2013-10-14
+summary => 456 - 474 - 158		=> 2013-10-17
+summary => 456 - 474 - 158		=> 2013-10-21
+summary => 196 - 485 - 155		=> 2013-10-21
