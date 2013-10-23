@@ -58,10 +58,10 @@ class narutobleachlover {
 		
 		/*	
 		// add link here
-		$array_result[] = array('title' => 'Gatchaman Crowds Episode 10 Subtitle Indonesia', 'link' => 'http://www.alibabasub.net/2013/09/gatcha10.html');
-		$array_result[] = array('title' => 'Fate/Kaleid Liner PrismaIlya Episode 10 Subtitle Indonesia(FINAL)', 'link' => 'http://www.alibabasub.net/2013/09/fatekaleid-liner-prisma%e2%98%86ilya-episode-10-subtitle-indonesiafinal.html');
-		$array_result[] = array('title' => 'Jigoku Sensei Nube Episode 4 Subtitle Indonesia', 'link' => 'http://www.alibabasub.net/2013/08/jigoku-sensei-nube-episode-4-subtitle-indonesia.html');
-		$array_result[] = array('title' => 'Jigoku Sensei Nube Episode 3 Subtitle Indonesia', 'link' => 'http://www.alibabasub.net/2013/08/jigoku-sensei-nube-episode-3-subtitle-indonesia.html');
+		$array_result[] = array('title' => 'Kyoukai no Kanata Episode 2 Subtitle Indonesia', 'link' => 'http://www.narutobleachlover.net/2013/10/kyoukai-no-kanata-episode-2-subtitle-indonesia.html');
+		$array_result[] = array('title' => 'Aoki Hagane no Arpeggio : Ars Nova Subtitle Indonesia', 'link' => 'http://www.narutobleachlover.net/2013/10/aoki-hagane-no-arpeggio-ars-nova-subtitle-indonesia.html');
+		$array_result[] = array('title' => 'Avatar Korra Book 2 &#8211; Episode 6 Subtitle Indonesia', 'link' => 'http://www.narutobleachlover.net/2013/10/avatar-korra-book-2-episode-6-subtitle-indonesia.html');
+		$array_result[] = array('title' => 'Kyoukai no Kanata Episode 3 Subtitle Indonesia', 'link' => 'http://www.narutobleachlover.net/2013/10/kyoukai-no-kanata-episode-3-subtitle-indonesia.html');
 		/*	*/
 		
 		if (isset($this->is_index) && $this->is_index) {
@@ -134,11 +134,11 @@ class narutobleachlover {
 		
 		// clean content
 		$content = preg_replace('/ (rel|style|target|title|data-[a-z\-]+)\=\"[^\"]+\"/i', '', $content);
-		$content = preg_replace('/<\/?(span|strong)>/i', '', $content);
+		$content = preg_replace('/<\/?(b|span|strong)>/i', '', $content);
 		$content = preg_replace('/\s*\|\s*/i', '|', $content);
 		
 		// option #1
-		preg_match_all('/(SD|HD)[\s\=]*(\|*<a href="[^\"]+">[^\<]+<\/a>)*/i', $content, $match);
+		preg_match_all('/(SD|HD|480p|720p)[\s\=\:]*(\|*<a href="[^\"]+">[^\<]+<\/a>)*/i', $content, $match);
 		if (count($match[0]) > 0) {
 			foreach ($match[0] as $key => $value) {
 				$label = trim($match[1][$key]);

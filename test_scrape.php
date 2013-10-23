@@ -3,8 +3,8 @@
 	error_reporting(E_ALL);
 	ini_set('display_errors', 1);
 	
-	$is_office = true;
-	$library = 'ganool';
+	$is_office = false;
+	$library = 'narutobleachlover';
 	
 	if ($is_office) {
 		$localhost = 'http://localhost/suekarea/trunk/';
@@ -18,7 +18,7 @@
 	include $path.'\application\libraries\scrape\\'.$library.'.php';
 	
 	/*	
-	$link = 'http://ganool.com/the-black-dahlia-haunting-2012-dvdrip-350mb-ganool';
+	$link = 'http://www.narutobleachlover.net/2013/10/kyoukai-no-kanata-episode-2-subtitle-indonesia.html';
 	$curl = new curl();
 	$content = $curl->get($link);
 	Write($path.'\p.txt', $content);
