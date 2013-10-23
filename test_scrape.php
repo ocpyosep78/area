@@ -4,7 +4,7 @@
 	ini_set('display_errors', 1);
 	
 	$is_office = true;
-	$library = 'narutobleachlover';
+	$library = 'ganool';
 	
 	if ($is_office) {
 		$localhost = 'http://localhost/suekarea/trunk/';
@@ -18,7 +18,7 @@
 	include $path.'\application\libraries\scrape\\'.$library.'.php';
 	
 	/*	
-	$link = 'http://www.narutobleachlover.net/2013/10/hunter-x-hunter-2011-episode-99-subtitle-indonesia.html';
+	$link = 'http://ganool.com/the-black-dahlia-haunting-2012-dvdrip-350mb-ganool';
 	$curl = new curl();
 	$content = $curl->get($link);
 	Write($path.'\p.txt', $content);

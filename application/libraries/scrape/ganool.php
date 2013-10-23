@@ -167,6 +167,7 @@ class ganool {
 		$is_write_single_link = false;
 		
 		// get from href
+		// phase 1
 		$content_format = str_replace("<br />", "", $content);
 		$content_format = preg_replace("/<\/?span>/i", "", $content_format);
 		$content_format = str_replace("<strong></strong>", "", $content_format);
@@ -197,7 +198,20 @@ class ganool {
 				}
 			}
 		}
-		
+		// phase 2
+		$content_format = preg_replace("/<\/?strong>/i", "", $content_format);
+		preg_match('/Single Link\s*:(\s*[a-z0-9 ]+: <a href="[^"]+">[^<]+<\/a>)*/i', $content_format, $match);
+		if (!empty($match[0])) {
+			$temp_link = '';
+			preg_match_all('/([a-z0-9 ]+)\s*:\s*<a href="([^"]+)">/i', $match[0], $array_link);
+			foreach ($array_link[0] as $key => $value) {
+				$label = $array_link[1][$key];
+				$link = $array_link[2][$key];
+				$temp_link .= $link.' '.$label."\n";
+			}
+			
+			$result .= "\nSingle Link\n".$temp_link;
+		}
 		
 		// get from label
 		if (empty($result)) {
@@ -266,6 +280,9 @@ class ganool {
 				}
 			}
 		}
+		
+		// trim it
+		$result = trim($result);
 		
 		return $result;
 	}
