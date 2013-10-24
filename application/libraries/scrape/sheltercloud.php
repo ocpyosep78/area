@@ -1,6 +1,6 @@
 <?php
 
-class awsubs {
+class sheltercloud {
     function __construct() {
         $this->CI =& get_instance();
     }
@@ -41,7 +41,7 @@ class awsubs {
 			$array_result[] = $temp;
 			
 			// add limit
-			if (count($array_result) >= 10) {
+			if (count($array_result) >= 5) {
 				break;
 			}
 		}
@@ -58,12 +58,20 @@ class awsubs {
 		$array_result[] = array('title' => 'Little Busters! Refrain Episode 1 Subtitle Indonesia', 'link' => 'http://www.wardhanime.net/2013/10/little-buster-refrain-episode-01.html');
 		/*	*/
 		
-		foreach ($array_content->channel->item as $array_temp) {
+		foreach ($array_content->entry as $array_temp) {
 			$array_temp = (array)$array_temp;
-			unset($array_temp['category']);
-			unset($array_temp['description']);
 			
-			$array_result[] = (array)$array_temp;
+			$link = '';
+			foreach ($array_temp['link'] as $row) {
+				$row = (array)$row;
+				if ($row['@attributes']['rel'] == 'alternate') {
+					$link = $row['@attributes']['href'];
+					$title = $row['@attributes']['title'];
+					break;
+				}
+			}
+			
+			$array_result[] = array( 'title' => $title, 'link' => $link );
 		}
 		
 		return $array_result;
@@ -75,12 +83,12 @@ class awsubs {
 		$content = preg_replace('/[^\x20-\x7E|\x0A]/i', '', $content);
 		
 		// remove start offset
-		$offset = "<div class='post-body entry-content'>";
+		$offset = "<div class='post-body entry-content'";
 		$pos_first = strpos($content, $offset);
 		$content = substr($content, $pos_first, strlen($content) - $pos_first);
 		
 		// remove end offset
-		$offset = "<div id='area-bawah'>";
+		$offset = "<div class='post-footer'>";
 		$pos_end = strpos($content, $offset);
 		$content = substr($content, 0, $pos_end);
 		
@@ -89,7 +97,6 @@ class awsubs {
 	
 	function get_desc($content) {
 		$content = strip_tags($content);
-		$content = preg_replace('/(480|720).+/i', '', $content);
 		$content = preg_replace("/[\n]+/i", "\n", $content);
 		$content = str_replace('&nbsp;', ' ', $content);
 		$content = trim($content);
@@ -102,7 +109,7 @@ class awsubs {
 		}
 		
 		// endfix
-		$result .= '<br /><div>Sumber : AWSubs</div>';
+		$result .= '<br /><div>Sumber : Sheltercloud</div>';
 		
 		return $result;
 	}
@@ -112,80 +119,23 @@ class awsubs {
 		
 		// make it clean
 		$content = str_replace('&nbsp;', ' ', $content);
-		$content = preg_replace('/ (style|class|target|rel)\=\"[^\"]+\"/i', '', $content);
+		$content = preg_replace('/ (style|target|rel)\=\"[^\"]+\"/i', '', $content);
 		$content = preg_replace('/<\/?(b|span)([^\>]+)?>/i', '', $content);
 		
-		// remove start offset
-		$offset = '<div dir="ltr" trbidi="on">';
-		$pos_first = strpos($content, $offset);
-		$content = '<div '.substr($content, $pos_first, strlen($content) - $pos_first);
-		
-		// remove end offset
-		$offset = "<center>";
-		$pos_end = strpos($content, $offset);
-		$content = substr($content, 0, $pos_end);
-		
-		// remove empty link
-		$content = preg_replace('/\| <strike>[^\<]+<\/strike>/i', '', $content);
-		$content = preg_replace('/<strike>[^\<]+<\/strike> \|/i', '', $content);
-		
 		// get common link
-		preg_match_all('/div>([^\<]+)<\/div>\s<div>\s*(<a href="[^"]+"\>[^<]+<\/a>[ \|]*)+/i', $content, $match);
+		preg_match_all('/\n([^<]+)<a class="Tombol" href="([^\"]+)">[^<]+<\/a>/i', $content, $match);
 		foreach ($match[0] as $key => $value) {
 			$label = trim($match[1][$key]);
-			preg_match_all('/<a href="([^"]+)"\>([^<]+)<\/a>/i', $value, $array_link);
+			$link = trim($match[2][$key]);
 			
-			// validation
-			if (count($array_link[0]) == 0) {
-				continue;
-			}
-			
-			$result .= (empty($result)) ? "$label\n" : "\n$label\n";
-			foreach ($array_link[0] as $counter => $temp) {
-				$link_href = $array_link[1][$counter];
-				$link_title = $array_link[2][$counter];
-				
-				$result .= $link_href.' '.$link_title."\n";
-			}
+			$result .= (empty($result)) ? $link.' '.$label : "\n".$link.' '.$label;
 		}
 		
-		// get multiplart link
-		preg_match_all('/div>([^\<]+)<\/div>\s<div>\s([a-z0-9 ]+[=]\s*(<a href="[^"]+"\>[a-z]+<\/a>[ \|]*)*\s*)*/i', $content, $match);
-		foreach ($match[0] as $key => $raw_html) {
-			// check link
-			$raw_link = $match[2][$key];
-			if (empty($raw_link)) {
-				continue;
-			}
-			
-			// primary label
-			$label_file = trim($match[1][$key]);
-			
-			$temp_result = '';
-			preg_match_all('/([a-z0-9 ]+)[=]\s*(<a href="[^"]+"\>[a-z]+<\/a>[ \|]*)*/i', $raw_html, $raw_link);
-			foreach ($raw_link[0] as $key => $value) {
-				$temp_part = '';
-				$label_part = trim($raw_link[1][$key]);
-				
-				preg_match_all('/<a href="([^"]+)"\>([a-z]+)<\/a>/i', $value, $array);
-				foreach ($array[0] as $i => $j) {
-					$temp_part .= $array[1][$i].' '.$array[2][$i]."\n";
-				}
-				
-				$temp_result .= trim($label_part."\n".$temp_part)."\n\n";
-			}
-			
-			// trim it
-			$temp_result = trim($temp_result);
-			
-			// write label once
-			if (!empty($label_file)) {
-				$result .= "\n\n$label_file\n\n";
-				$label_file = '';
-			}
-			
-			// write part link
-			$result .= $temp_result;
+		// maybe link having password
+		preg_match_all('/password[:= ]+([a-z0-9]+)/i', $content, $match);
+		if (!empty($match[1][0])) {
+			$password = trim($match[1][0]);
+			$result .= "\n\nPassword : ".$password;
 		}
 		
 		// trim it
@@ -195,7 +145,7 @@ class awsubs {
 	}
 	
 	function get_image($content) {
-		$content = preg_replace('/(border|height|width)\=\"\d+\"/i', '', $content);
+		$content = preg_replace('/ (border|height|width|alt)="[^"]+"/i', '', $content);
 		preg_match('/<img +src=\"([^\"]+)\"/i', $content, $match);
 		$result = (isset($match[1]) && !empty($match[1])) ? $match[1] : '';
 		
