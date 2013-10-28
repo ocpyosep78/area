@@ -57,6 +57,7 @@ class Scrape_Content_model extends CI_Model {
 		$param['field_replace']['scrape_master_name'] = 'ScrapeMaster.name';
 		
 		$string_namelike = (!empty($param['namelike'])) ? "AND ScrapeContent.name LIKE '%".$param['namelike']."%'" : '';
+		$string_scrape_master_id = (!empty($param['scrape_master_id'])) ? "AND ScrapeContent.scrape_master_id = '".$param['scrape_master_id']."'" : '';
 		$string_filter = GetStringFilter($param, @$param['column']);
 		$string_sorting = GetStringSorting($param, @$param['column'], 'scrape_time DESC');
 		$string_limit = GetStringLimit($param);
@@ -69,11 +70,11 @@ class Scrape_Content_model extends CI_Model {
 			LEFT JOIN ".POST." Post ON Post.id = ScrapeContent.post_id
 			LEFT JOIN ".CATEGORY." Category ON Category.id = ScrapeContent.category_id
 			LEFT JOIN ".POST_TYPE." PostType ON PostType.id = ScrapeContent.post_type_id
-			WHERE 1 $string_namelike $string_filter
+			WHERE 1 $string_namelike $string_scrape_master_id $string_filter
 			ORDER BY $string_sorting
 			LIMIT $string_limit
 		";
-        $select_result = mysql_query($select_query) or die(mysql_error());
+		$select_result = mysql_query($select_query) or die(mysql_error());
 		while ( $row = mysql_fetch_assoc( $select_result ) ) {
 			$array[] = $this->sync($row);
 		}

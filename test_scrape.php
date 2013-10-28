@@ -3,8 +3,8 @@
 	error_reporting(E_ALL);
 	ini_set('display_errors', 1);
 	
-	$is_office = false;
-	$library = 'narutobleachlover';
+	$is_office = true;
+	$library = 'animechiby';
 	
 	if ($is_office) {
 		$localhost = 'http://localhost/suekarea/trunk/';
@@ -18,7 +18,7 @@
 	include $path.'\application\libraries\scrape\\'.$library.'.php';
 	
 	/*	
-	$link = 'http://www.narutobleachlover.net/2013/10/kyoukai-no-kanata-episode-2-subtitle-indonesia.html';
+	$link = 'http://animechiby.com/little-busters-refrain/';
 	$curl = new curl();
 	$content = $curl->get($link);
 	Write($path.'\p.txt', $content);
@@ -28,6 +28,7 @@
 	$link = $localhost.'p.txt';
 	$content = file_get_contents($link);
 	$content = preg_replace('/[^\x20-\x7E|\x0A]/i', '', $content);
+	$content = @$library::get_content($link);
 	
 	// scrape
 	$desc = @$library::get_desc($content);

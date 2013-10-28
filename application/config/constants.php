@@ -28,6 +28,9 @@ define('USER_TYPE_MEMBER',						2);
 // ADSENSE
 define('ADSENSE_300_x_250',						'300-x-250');
 
+// SCRAPE
+define('SCRAPE_CONTENT_ANIME_CHIBE_ID',			12);
+
 define('ADSENSE_HTML',							'adsense_html');
 define('ADSENSE_OWNER',							'adsense_owner');
 define('ADSENSE_TYPE',							'adsense_type');
