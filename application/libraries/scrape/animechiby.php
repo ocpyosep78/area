@@ -131,7 +131,7 @@ class animechiby {
 		$result = 'Sinopsis menyusul.';
 		
 		// endfix
-		$result .= '<br /><div>Sumber : Anime Chibi</div>';
+		$result .= '<br /><br /><div>Sumber : Anime Chibi</div>';
 		
 		return $result;
 	}

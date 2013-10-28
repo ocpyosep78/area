@@ -109,7 +109,9 @@ class sheltercloud {
 		}
 		
 		// endfix
-		$result .= '<br /><div>Sumber : Sheltercloud</div>';
+		if (!empty($result)) {
+			$result .= '<br /><div>Sumber : Sheltercloud</div>';
+		}
 		
 		return $result;
 	}
@@ -120,13 +122,18 @@ class sheltercloud {
 		// make it clean
 		$content = str_replace('&nbsp;', ' ', $content);
 		$content = preg_replace('/ (style|target|rel)\=\"[^\"]+\"/i', '', $content);
-		$content = preg_replace('/<\/?(b|span)([^\>]+)?>/i', '', $content);
+		$content = preg_replace('/<\/?(b|i|span)([^\>]+)?>/i', '', $content);
+		$content = preg_replace('/(<\/?div>\s)+/i', "\n", $content);
 		
 		// get common link
 		preg_match_all('/\n([^<]+)<a class="Tombol" href="([^\"]+)">[^<]+<\/a>/i', $content, $match);
 		foreach ($match[0] as $key => $value) {
 			$label = trim($match[1][$key]);
 			$link = trim($match[2][$key]);
+			
+			// make sure label only have one line
+			$array_label = explode("\n", $label);
+			$label = $array_label[count($array_label) - 1];
 			
 			$result .= (empty($result)) ? $link.' '.$label : "\n".$link.' '.$label;
 		}
