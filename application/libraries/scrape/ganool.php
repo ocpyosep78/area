@@ -47,7 +47,7 @@ class ganool {
 			$array_result[] = $temp;
 			
 			// add limit
-			if (count($array_result) >= 10) {
+			if (count($array_result) >= 5) {
 				break;
 			}
 		}
