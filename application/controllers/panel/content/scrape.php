@@ -55,7 +55,7 @@ class scrape extends SUEKAREA_Controller {
 				$post_db = $this->Scrape_Content_model->get_by_id(array( 'link_source' => $post['link_source'] ));
 				
 				// checking
-				if ($post['force_insert']) {
+				if (isset($post['force_insert']) && $post['force_insert']) {
 					$insert_record = true;
 				} else if (count($post_db) > 0) {
 					$insert_record = false;

@@ -173,7 +173,46 @@ class animechiby {
 				$result .= "\n";
 			}
 			
-			$result .= $label_main."\n".$string_link;
+			// add link if we link is exist
+			if (!empty($string_link)) {
+				$result .= $label_main."\n".$string_link;
+			}
+		}
+		
+		#option no 2
+		if (empty($result)) {
+			preg_match_all('/su-spoiler-icon"><\/span>([^\<]+)<\/div><div class="su-spoiler-content"><a href="([^"]+)"/i', $content, $match);
+			foreach($match[0] as $key => $value) {
+				$link = $match[2][$key];
+				$label = $match[1][$key];
+				$result .= $link.' '.$label."\n";
+			}
+		}
+		
+		#option no 3
+		if (empty($result)) {
+			preg_match_all('/<strong>([^<]+)<\/strong><input class="button-auto" onclick="window.open\(\'([^\']+)\'\);return false;" type="button" value="([^"]+)"/i', $content, $match);
+			foreach($match[0] as $key => $value) {
+				$link = $match[2][$key];
+				$label = $match[1][$key];
+				$label_detail = $match[3][$key];
+				
+				if (!empty($label_detail)) {
+					$result .= $link.' '.$label.' '.$label_detail."\n";
+				} else {
+					$result .= $link.' '.$label."\n";
+				}
+			}
+		}
+		
+		#option no 4
+		if (empty($result)) {
+			preg_match_all('/<input class="button-auto" onclick="window.open\(\'([^\']+)\'\);return false;" type="button" value="([^"]+)"/i', $content, $match);
+			foreach($match[0] as $key => $value) {
+				$link = $match[1][$key];
+				$label = $match[2][$key];
+				$result .= $link.' '.$label."\n";
+			}
 		}
 		
 		// trim it

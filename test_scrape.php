@@ -18,7 +18,7 @@
 	include $path.'\application\libraries\scrape\\'.$library.'.php';
 	
 	/*	
-	$link = 'http://animechiby.com/little-busters-refrain/';
+	$link = 'http://animechiby.com/golgo-13/';
 	$curl = new curl();
 	$content = $curl->get($link);
 	Write($path.'\p.txt', $content);
