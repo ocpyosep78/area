@@ -842,9 +842,9 @@
 	}
 	
 	if (! function_exists('save_html_tag')) {
-		function save_html_tag($value) {
+		function save_html_tag($value, $regex = '/[\"\'\:]/i') {
 			$result = $value;
-			$result = preg_replace('/[\"\'\:]/i', "", $result);
+			$result = preg_replace($regex, "", $result);
 			
 			return $result;
 		}

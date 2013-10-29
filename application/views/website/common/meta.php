@@ -12,7 +12,7 @@
 <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 <?php foreach ($tag_meta as $meta) { ?>
-<meta property="<?php echo $meta['property']; ?>" content="<?php echo save_html_tag($meta['content']); ?>">
+<meta property="<?php echo $meta['property']; ?>" content="<?php echo save_html_tag($meta['content'], '/[\"\']/i'); ?>">
 <?php } ?>
 <meta name="description" content="<?php echo save_html_tag($desc); ?>" />
 <title><?php echo htmlspecialchars($title); ?></title>
