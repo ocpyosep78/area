@@ -149,7 +149,9 @@ class Adsense_Html_model extends CI_Model {
 		setcookie("sue_adsense", $string_implode, time() + (60 * 60 * 5), '/');
 		
 		// set result
-		$result = $row['adsense_code'];
+		$result = "
+			<!-- ".$row['owner_name']." -->
+			".$row['adsense_code'];
 		
 		return $result;
 	}

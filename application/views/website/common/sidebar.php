@@ -16,7 +16,7 @@
 	
 	// adsense
 	$adsense_code_1 = $this->Adsense_Html_model->get_code(array( 'adsense_type_alias' => ADSENSE_300_x_250 ));
-	$adsense_code_2 = $this->Adsense_Html_model->get_code(array( 'adsense_type_alias' => ADSENSE_300_x_250 ));
+//	$adsense_code_2 = $this->Adsense_Html_model->get_code(array( 'adsense_type_alias' => ADSENSE_300_x_250 ));
 ?>
 
 <div id="secondary" class="widget-area main_sidebar right_sidebar" role="complementary">
@@ -73,7 +73,7 @@
 	</div>
 </aside>
 
-<?php if ($this->config->item('online_widget') || true) { ?>
+<?php if ($this->config->item('online_widget') && false) { ?>
 <aside><?php echo $adsense_code_2; ?></aside>
 <?php } ?>
 
