@@ -18,7 +18,7 @@
 	include $path.'\application\libraries\scrape\\'.$library.'.php';
 	
 	/*	
-	$link = 'http://animechiby.com/golgo-13/';
+	$link = 'http://animechiby.com/golden-time-fff/';
 	$curl = new curl();
 	$content = $curl->get($link);
 	Write($path.'\p.txt', $content);
@@ -28,7 +28,9 @@
 	$link = $localhost.'p.txt';
 	$content = file_get_contents($link);
 	$content = preg_replace('/[^\x20-\x7E|\x0A]/i', '', $content);
-	$content = @$library::get_content($link);
+	if (! in_array($library, array( 'narutobleachlover' ))) {
+		$content = @$library::get_content($link);
+	}
 	
 	// scrape
 	$desc = @$library::get_desc($content);

@@ -58,10 +58,7 @@ class narutobleachlover {
 		
 		/*	
 		// add link here
-		$array_result[] = array('title' => 'Kyoukai no Kanata Episode 2 Subtitle Indonesia', 'link' => 'http://www.narutobleachlover.net/2013/10/kyoukai-no-kanata-episode-2-subtitle-indonesia.html');
-		$array_result[] = array('title' => 'Aoki Hagane no Arpeggio : Ars Nova Subtitle Indonesia', 'link' => 'http://www.narutobleachlover.net/2013/10/aoki-hagane-no-arpeggio-ars-nova-subtitle-indonesia.html');
-		$array_result[] = array('title' => 'Avatar Korra Book 2 &#8211; Episode 6 Subtitle Indonesia', 'link' => 'http://www.narutobleachlover.net/2013/10/avatar-korra-book-2-episode-6-subtitle-indonesia.html');
-		$array_result[] = array('title' => 'Kyoukai no Kanata Episode 3 Subtitle Indonesia', 'link' => 'http://www.narutobleachlover.net/2013/10/kyoukai-no-kanata-episode-3-subtitle-indonesia.html');
+		$array_result[] = array('title' => 'Pokemon XY Episode 1 &#8211; 2 Subtitle Indonesia', 'link' => 'http://www.narutobleachlover.net/2013/10/pokemon-xy-episode-1-2-subtitle-indonesia.html');
 		/*	*/
 		
 		if (isset($this->is_index) && $this->is_index) {
@@ -137,18 +134,41 @@ class narutobleachlover {
 		$content = preg_replace('/<\/?(b|span|strong)>/i', '', $content);
 		$content = preg_replace('/\s*\|\s*/i', '|', $content);
 		
+		// option #0
+		preg_match_all('/<p>([^<]+)<\/p>(\s*<p>[a-z0-9 ]+[:=](\|?<a href="[^"]+">[^<]+<\/a>)*<\/p>)*/i', $content, $match_raw);
+		foreach ($match_raw[0] as $key => $raw_value) {
+			if (!empty($match_raw[3][$key])) {
+				preg_match_all('/<p>([a-z0-9 ]+)[:=](\|?<a href="[^"]+">[^<]+<\/a>)*<\/p>/i', $raw_value, $match_html);
+				foreach ($match_html[0] as $key => $raw_link) {
+					$label = $match_html[1][$key];
+					
+					$temp_link = '';
+					preg_match_all('/<a href="([^"]+)">([^<]+)<\/a>/i', $raw_link, $match_link);
+					foreach ($match_link[0] as $key => $raw_link) {
+						$link = $match_link[1][$key];
+						$title = $match_link[2][$key];
+						$temp_link .= $link.' '.$title."\n";
+					}
+					
+					$result .= $label."\n".$temp_link."\n";
+				}
+			}
+		}
+		
 		// option #1
-		preg_match_all('/(SD|HD|480p|720p)[\s\=\:]*(\|*<a href="[^\"]+">[^\<]+<\/a>)*/i', $content, $match);
-		if (count($match[0]) > 0) {
-			foreach ($match[0] as $key => $value) {
-				$label = trim($match[1][$key]);
-				preg_match_all('/<a href="([^\"]+)">([^\<]+)<\/a>/i', $value, $raw_link);
-				if (count($raw_link[0]) > 0) {
-					$result .= (empty($result)) ? $label : "\n\n".$label;
-					foreach ($raw_link[0] as $key => $temp) {
-						$link = trim($raw_link[1][$key]);
-						$title = trim($raw_link[2][$key]);
-						$result .= "\n".$link.' '.$title;
+		if (empty($result)) {
+			preg_match_all('/(SD|HD|480p|720p)[\s\=\:]*(\|*<a href="[^\"]+">[^\<]+<\/a>)*/i', $content, $match);
+			if (count($match[0]) > 0) {
+				foreach ($match[0] as $key => $value) {
+					$label = trim($match[1][$key]);
+					preg_match_all('/<a href="([^\"]+)">([^\<]+)<\/a>/i', $value, $raw_link);
+					if (count($raw_link[0]) > 0) {
+						$result .= (empty($result)) ? $label : "\n\n".$label;
+						foreach ($raw_link[0] as $key => $temp) {
+							$link = trim($raw_link[1][$key]);
+							$title = trim($raw_link[2][$key]);
+							$result .= "\n".$link.' '.$title;
+						}
 					}
 				}
 			}

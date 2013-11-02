@@ -56,18 +56,9 @@ class alibaba {
 	function get_array_clear($content) {
 		$array_result = array();
 		
-		/*
+		/*	*/
 		// add link here
-		$array_result[] = array('title' => 'Rou Kyuu Bu! SS Episode 12 Subtitle Indonesia [Final]', 'link' => 'http://www.alibabasub.net/2013/10/rou-kyuu-bu-ss-episode-12-subtitle.html');
-		$array_result[] = array('title' => 'Tamayura: More Aggressive Episode 11 Subtitle Indonesia', 'link' => 'http://www.alibabasub.net/2013/09/tamayura-more-aggressive-episode-11.html');
-		$array_result[] = array('title' => 'Kami nomi zo Shiru Sekai: Megami-hen Episode 11 Subtitle Indonesia', 'link' => 'http://www.alibabasub.net/2013/09/kami-nomi-zo-shiru-sekai-megami-hen.html');
-		$array_result[] = array('title' => 'Inu to Hasami wa Tsukaiyou Episode 12 Subtitle Indonesia [Final]', 'link' => 'http://www.alibabasub.net/2013/09/inu-to-hasami-wa-tsukaiyou-episode-12.html');
-		$array_result[] = array('title' => 'Shingeki no Kyojin Episode 24 Subtitle Indonesia', 'link' => 'http://www.alibabasub.net/2013/09/shingeki-no-kyojin-episode-24-subtitle.html');
-		$array_result[] = array('title' => 'Choujigen Game Neptune: The Animation Episode 11 Subtitle Indonesia', 'link' => 'http://www.alibabasub.net/2013/09/choujigen-game-neptune-animation.html');
-		$array_result[] = array('title' => 'One Piece Episode 614 Subtitle Indonesia', 'link' => 'http://www.alibabasub.net/2013/09/one-piece-episode-614-subtitle-indonesia.html');
-		$array_result[] = array('title' => 'Mushibugyou Episode 24 Subtitle Indonesia', 'link' => 'http://www.alibabasub.net/2013/09/mushibugyou-episode-24-subtitle.html');
-		$array_result[] = array('title' => 'Servant x Service Episode 13 Subtitle Indonesia [Final]', 'link' => 'http://www.alibabasub.net/2013/09/servant-x-service-episode-13-subtitle.html');
-		$array_result[] = array('title' => 'Gin no Saji Episode 11 Subtitle Indonesia [Final]', 'link' => 'http://www.alibabasub.net/2013/09/gin-no-saji-episode-11-subtitle.html');
+		$array_result[] = array('title' => 'Kakumeiki Valvrave Episode 14 Subtitle Indonesia', 'link' => 'http://www.alibabasub.net/2013/10/kakumeiki-valvrave-episode-14-subtitle.html');
 		/*	*/
 		
 		if (isset($this->is_index) && $this->is_index) {

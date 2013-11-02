@@ -56,7 +56,9 @@ class oplovers {
 		
 		/*	
 		// add link here
-		$array_result[] = array('title' => 'Shingeki no Kyojin Episode 22 Subtitle Indonesia', 'link' => 'http://www.oploverz.net/2013/09/shingeki-no-kyojin-episode-22-subtitle.html');
+		$array_result[] = array('title' => 'Magi S2 Episode 04 Subtitle Indonesia', 'link' => 'http://www.oploverz.net/2013/10/magi-s2-episode-04-subtitle-indonesia.html');
+		$array_result[] = array('title' => 'Coppelion Episode 05 Subtitle Indonesia', 'link' => 'http://www.oploverz.net/2013/10/coppelion-episode-05-subtitle-indonesia.html');
+		$array_result[] = array('title' => 'Infinite Stratos S2 Episode 05 Subtitle Indonesia', 'link' => 'http://www.oploverz.net/2013/11/infinite-stratos-s2-episode-05-subtitle.html');
 		/*	*/
 		
 		foreach ($array_content->channel->item as $array_temp) {
@@ -127,13 +129,34 @@ class oplovers {
 		$content = preg_replace('/ +\>/i', '>', $content);
 		$content = preg_replace('/\<\/?(b|span|dwn)\>/i', '', $content);
 		
-		preg_match_all('/\<a href\=\"([^\"]+)\"\>\[?([\w\s]+)\]?\<\/a\>/i', $content, $match);
-		if (isset($match[1])) {
-			foreach ($match[1] as $key => $value) {
-				$link = $match[1][$key];
-				$label = $match[2][$key];
+		// option #1
+		preg_match_all('/([a-z0-9 ]+)[:=]([ \|]*<a href="[^"]+">[^<]+<\/a>)*/i', $content, $match_raw);
+		foreach ($match_raw[0] as $key => $raw_value) {
+			if (strlen($raw_value) > 30) {
+				$label = $match_raw[1][$key];
 				
-				$result .= $link.' '.$label."\n";
+				$temp_link = '';
+				preg_match_all('/<a href="([^"]+)">([^<]+)<\/a>/i', $raw_value, $match_link);
+				foreach ($match_link[0] as $key => $raw_link) {
+					$link = $match_link[1][$key];
+					$title = $match_link[2][$key];
+					$temp_link .= $link.' '.$title."\n";
+				}
+				
+				$result .= $label."\n".$temp_link."\n";
+			}
+		}
+		
+		// option #2
+		if (empty($result)) {
+			preg_match_all('/\<a href\=\"([^\"]+)\"\>\[?([\w\s]+)\]?\<\/a\>/i', $content, $match);
+			if (isset($match[1])) {
+				foreach ($match[1] as $key => $value) {
+					$link = $match[1][$key];
+					$label = $match[2][$key];
+					
+					$result .= $link.' '.$label."\n";
+				}
 			}
 		}
 		

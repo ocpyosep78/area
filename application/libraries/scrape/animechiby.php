@@ -53,9 +53,10 @@ class animechiby {
 		// get latest post
 		$array_post = $this->CI->Scrape_Content_model->get_array(array( 'scrape_master_id' => SCRAPE_CONTENT_ANIME_CHIBE_ID, 'limit' => 25 ));
 		
-		/*	
+		/*	*/
 		// add link here
-		$array_merge[] = array('title' => 'Little Busters! Refrain Episode 1 Subtitle Indonesia', 'link' => 'http://www.wardhanime.net/2013/10/little-buster-refrain-episode-01.html');
+		$array_merge[] = array('title' => 'Kill la Kill Episode 05', 'link' => 'http://animechiby.com/kill-la-kill/');
+		$array_merge[] = array('title' => 'Golden Time Episode 05', 'link' => 'http://animechiby.com/golden-time-fff/');
 		/*	*/
 		
 		$array_index = array();
@@ -141,41 +142,86 @@ class animechiby {
 		
 		// make it clean
 		$content = str_replace('&nbsp;', ' ', $content);
-		$content = preg_replace('/ (style)\=\"[^\"]+\"/i', '', $content);
+		$content = preg_replace('/ (alt|style|target)\=\"[^\"]+\"/i', '', $content);
 		$content = preg_replace('/<\/?(p)([^\>]+)?>/i', '', $content);
 		
+		#option no 1
+		$content_fix = preg_replace('/<\/?(h5|strong)([^\>]+)?>/i', ' ', $content);
+		$content_fix = preg_replace('/ +/i', ' ', $content_fix);
+		preg_match_all('/su-spoiler-icon"><\/span>([^\<]+)<\/div><div class="su-spoiler-content">([^<]+(\s*<input class="button-auto" onclick="[^"]+" type="button" value="[^"]+" \/>)*)*/i', $content_fix, $match_raw);
+		foreach ($match_raw[0] as $key => $value_raw) {
+			$label = $match_raw[1][$key];
+			
+			$temp_result = '';
+			preg_match_all('/>([^<]+)<input class="button-auto" onclick="window.open\(\'([^\']+)\'\);return false;" type="button" value="([^"]+)"/i', $value_raw, $match_value);
+			foreach ($match_value[0] as $key => $temp_data) {
+				$sub_label = trim($match_value[1][$key]);
+				$link = trim($match_value[2][$key]);
+				$title = trim($match_value[3][$key]);
+				
+				// get sub label
+				$sub_label = (empty($sub_label)) ? $sub_label_last : $sub_label;
+				
+				$temp_result .= $link.' '.$sub_label.' '.$title."\n";
+				
+				// set sub label
+				if (!empty($sub_label)) {
+					$sub_label_last = $sub_label;
+				}
+			}
+			
+			if (!empty($temp_result)) {
+				$result .= "\n".$label."\n".$temp_result;
+			}
+		}
+		
+		#option no 1A
+		if (empty($result)) {
+			$content_fix = preg_replace('/<\/?(h5|span|strong)([^\>]+)?>/i', ' ', $content_fix);
+			preg_match_all('/>([^<]+)<\/div><div class="su-spoiler-content">([^<]+)<a href="([^"]+)"/i', $content_fix, $match_raw);
+			foreach ($match_raw[0] as $key => $value) {
+				$label = trim($match_raw[1][$key]);
+				$sub_label = trim($match_raw[2][$key]);
+				$link = trim($match_raw[3][$key]);
+				
+				$result .= $link.' '.$label.' - '.$sub_label."\n";
+			}
+		}
+		
 		// get common link
-		preg_match_all('/su-spoiler-icon"><\/span>([^\<]+)<\/div><div class="su-spoiler-content">((<span>[^<]+<\/span>)*(<h5>([^<]+)*<\/h5>)*(\s*<input class="button-auto" onclick="[^"]+" type="button" value="[^"]+" \/>)*)*/i', $content, $match);
-		foreach ($match[0] as $key => $value) {
-			$label_main = trim($match[1][$key]);
-			
-			$string_link = '';
-			preg_match_all('/(<h5>([^<]+)*<\/h5>)*(\s*<input class="button-auto" onclick="[^"]+" type="button" value="[^"]+" \/>)*/i', $value, $array_sub_label);
-			foreach ($array_sub_label[0] as $key => $raw_html_label) {
-				if (empty($raw_html_label)) {
-					continue;
-				}
+		if (empty($result)) {
+			preg_match_all('/su-spoiler-icon"><\/span>([^\<]+)<\/div><div class="su-spoiler-content">((<span>[^<]+<\/span>)*(<h5>([^<]+)*<\/h5>)*(\s*<input class="button-auto" onclick="[^"]+" type="button" value="[^"]+" \/>)*)*/i', $content, $match);
+			foreach ($match[0] as $key => $value) {
+				$label_main = trim($match[1][$key]);
 				
-				// get label
-				$sub_label = trim($array_sub_label[2][$key]);
-				
-				preg_match_all('/onclick="window.open\(\'([^\']+)\'\);return false;" type="button" value="([^"]+)"/i', $raw_html_label, $array_link);
-				foreach ($array_link[0] as $key => $raw_html) {
-					$link = $array_link[1][$key];
-					$label = $array_link[2][$key];
+				$string_link = '';
+				preg_match_all('/(<h5>([^<]+)*<\/h5>)*(\s*<input class="button-auto" onclick="[^"]+" type="button" value="[^"]+" \/>)*/i', $value, $array_sub_label);
+				foreach ($array_sub_label[0] as $key => $raw_html_label) {
+					if (empty($raw_html_label)) {
+						continue;
+					}
 					
-					$string_link .= $link.' '.$label.' '.$sub_label."\n";
+					// get label
+					$sub_label = trim($array_sub_label[2][$key]);
+					
+					preg_match_all('/onclick="window.open\(\'([^\']+)\'\);return false;" type="button" value="([^"]+)"/i', $raw_html_label, $array_link);
+					foreach ($array_link[0] as $key => $raw_html) {
+						$link = $array_link[1][$key];
+						$label = $array_link[2][$key];
+						
+						$string_link .= $link.' '.$label.' '.$sub_label."\n";
+					}
 				}
-			}
-			
-			// add space
-			if (!empty($result)) {
-				$result .= "\n";
-			}
-			
-			// add link if we link is exist
-			if (!empty($string_link)) {
-				$result .= $label_main."\n".$string_link;
+				
+				// add space
+				if (!empty($result)) {
+					$result .= "\n";
+				}
+				
+				// add link if we link is exist
+				if (!empty($string_link)) {
+					$result .= $label_main."\n".$string_link;
+				}
 			}
 		}
 		
