@@ -16,7 +16,7 @@
 	
 	// adsense
 	$adsense_code_1 = $this->Adsense_Html_model->get_code(array( 'adsense_type_alias' => ADSENSE_300_x_250 ));
-//	$adsense_code_2 = $this->Adsense_Html_model->get_code(array( 'adsense_type_alias' => ADSENSE_300_x_250 ));
+	$adsense_code_2 = $this->Adsense_Html_model->get_code(array( 'adsense_type_alias' => ADSENSE_300_x_250 ));
 ?>
 
 <div id="secondary" class="widget-area main_sidebar right_sidebar" role="complementary">
@@ -33,6 +33,8 @@
 </aside>
 <?php } ?>
 
+<?php
+/*
 <aside class="widget" style="background-color: #eb1c15;">
 	<div class="widget_header">
 		<h3 class="widget_title">Light Chat Box</h3>
@@ -42,6 +44,8 @@
 		<script type="text/javascript" src="<?php echo base_url('static/js/plugin/shout.js'); ?>"></script>
 	</div>
 </aside>
+/*	*/
+?>
 
 <?php if ($this->config->item('online_widget') || true) { ?>
 <aside><?php echo $adsense_code_1; ?></aside>
@@ -73,7 +77,7 @@
 	</div>
 </aside>
 
-<?php if ($this->config->item('online_widget') && false) { ?>
+<?php if ($this->config->item('online_widget')) { ?>
 <aside><?php echo $adsense_code_2; ?></aside>
 <?php } ?>
 
