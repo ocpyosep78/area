@@ -26,16 +26,15 @@ class cupux_movie {
 			// collect
 			$content_html = $this->get_content($array['link']);
 			$desc = $this->get_desc($content_html);
-			$download = $this->get_download($content_html);
-			$image_source = $this->get_image($content_html);
+			$thumbnail = $this->get_image($content_html);
 			
 			// set to array
 			$temp = array();
 			$temp['name'] = $array['title'];
 			$temp['desc'] = $desc;
-			$temp['download'] = $download;
+			$temp['download'] = $array['link'];
 			$temp['link_source'] = $array['link'];
-			$temp['image_source'] = $image_source;
+			$temp['thumbnail'] = $thumbnail;
 			$temp['category_id'] = $scrape['category_id'];
 			$temp['post_type_id'] = $scrape['post_type_id'];
 			$temp['scrape_master_id'] = $scrape['id'];
@@ -43,7 +42,7 @@ class cupux_movie {
 			$array_result[] = $temp;
 			
 			// add limit
-			if (count($array_result) >= 10) {
+			if (count($array_result) >= 5) {
 				break;
 			}
 		}
@@ -97,12 +96,12 @@ class cupux_movie {
 		$content_html = preg_replace('/[^\x20-\x7E|\x0A]/i', '', $content_html);
 		
 		// remove start offset
-		$offset = 'post-body-';
+		$offset = "<div class='post-body entry-content'>";
 		$pos_first = strpos($content_html, $offset);
-		$content_html = "<div class='".substr($content_html, $pos_first, strlen($content_html) - $pos_first);
+		$content_html = substr($content_html, $pos_first, strlen($content_html) - $pos_first);
 		
 		// remove end offset
-		$offset = "<div class='post-footer'>";
+		$offset = "<div style='float:right;padding-right:10px;'>";
 		$pos_end = strpos($content_html, $offset);
 		$content_html = substr($content_html, 0, $pos_end);
 		
@@ -131,6 +130,10 @@ class cupux_movie {
 		// set display
 		$content = str_replace(array('&nbsp;'), array(''), $content);
 		$result = nl2br(trim(strip_tags($content)));
+		$result = preg_replace('/(<br \/>\s){2,}/i', "<br /><br />\n", $result);
+		
+		// remove 'Watch Trailer'
+		$result = str_replace(':: Watch Trailer ::', '', $result);
 		
 		// generate endfix
 		if (!empty($result)) {
@@ -141,26 +144,20 @@ class cupux_movie {
 		return $result;
 	}
 	
-	function get_download($content) {
-		$result = '';
-		
-		// default link
-		preg_match_all('/<a href="([^"]+)" target="_blank">(Direct|Download|Part[^\<]+)/i', $content, $match);
-		if (isset($match[1])) {
-			$array_download = array();
-			foreach ($match[1] as $key => $link) {
-				$link_temp = parse_url($link);
-				$array_download[] = $link.' '.$match[2][$key].' Link : '.$link_temp['host'];
-			}
-			$result = implode("\n", $array_download);
-		}
-		
-		return $result;
-	}
-	
 	function get_image($content) {
-		preg_match('/class=\"item_thumb\" oncontextmenu=\"return false;\" src=\"([^\"]+)\"/i', $content, $match);
+		$content = preg_replace('/ (style|alt|border|height|width)="[^"]*"/i', '', $content);
+		
+		// get image link
+		preg_match('/"item_thumb" src="([^"]+)"/i', $content, $match);
 		$result = (isset($match[1])) ? $match[1] : '';
+		
+		// write image
+		if (!empty($result)) {
+			$download_result = download_image($result);
+			if ($download_result['status']) {
+				$result = $download_result['dir_image_path'];
+			}
+		}
 		
 		return $result;
 	}
