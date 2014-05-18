@@ -248,8 +248,15 @@
                 return '';
             }
             
-            $ArrayString = explode('.', $FileName);
-            return $ArrayString[count($ArrayString) - 1];
+			// string ext
+            $array_string = explode('.', $FileName);
+			$string_ext = $array_string[count($array_string) - 1];
+			
+			// get ext
+			preg_match('/^([a-z]+)/i', $string_ext, $match);
+			$ext = (!empty($match[1])) ? $match[1] : '';
+			
+            return $ext;
         }
     }
     

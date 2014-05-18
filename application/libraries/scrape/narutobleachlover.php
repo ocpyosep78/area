@@ -29,15 +29,15 @@ class narutobleachlover {
 			// collect data
 			$desc = $this->get_desc($content_item);
 			$download = $this->get_download($content_item);
-			$image_source = $this->get_image($content_item);
+			$thumbnail = $this->get_image($content_item);
 			
 			// set to array
 			$temp = array();
 			$temp['name'] = $array['title'];
 			$temp['desc'] = $desc;
-			$temp['download'] = $download;
+			$temp['download'] = $array['link'];
 			$temp['link_source'] = $array['link'];
-			$temp['image_source'] = $image_source;
+			$temp['thumbnail'] = $thumbnail;
 			$temp['category_id'] = $scrape['category_id'];
 			$temp['post_type_id'] = $scrape['post_type_id'];
 			$temp['scrape_master_id'] = $scrape['id'];
@@ -45,7 +45,7 @@ class narutobleachlover {
 			$array_result[] = $temp;
 			
 			// add limit
-			if (count($array_result) >= 10) {
+			if (count($array_result) >= 5) {
 				break;
 			}
 		}
@@ -63,16 +63,16 @@ class narutobleachlover {
 		
 		if (isset($this->is_index) && $this->is_index) {
 			// remove start offset
-			$offset = '<div class="content">';
+			$offset = '<h2>Download Anime & Manga Bahasa Indonesia</h2>';
 			$pos_first = strpos($content, $offset);
 			$content = substr($content, $pos_first, strlen($content) - $pos_first);
 			
 			// remove end offset
-			$offset = '<ul class="pager" role="navigation">';
+			$offset = '<div class="navigation">';
 			$pos_end = strpos($content, $offset);
 			$content = substr($content, 0, $pos_end);
 			
-			preg_match_all('/<a href="([^\"]+)" title="[^\"]+" rel="bookmark">([^\<]+)</i', $content, $match);
+			preg_match_all('/<a href="([^"]+)" title="([^"]+)"/i', $content, $match);
 			foreach ($match[0] as $key => $value) {
 				$link = trim($match[1][$key]);
 				$title = trim($match[2][$key]);
@@ -92,18 +92,25 @@ class narutobleachlover {
 		return $array_result;
 	}
 	
-	function get_desc($content, $param = array()) {
+	function get_desc($content) {
 		$result = '';
 		
 		// remove start offset
-		$offset = '<div class="entry-content">';
+		$offset = '<div class="fpost">';
 		$pos_first = strpos($content, $offset);
 		$content = substr($content, $pos_first, strlen($content) - $pos_first);
 		
 		// remove end offset
-		$offset = '<footer class="entry-footer">';
+		$offset = '<div class="iklanpost">';
 		$pos_end = strpos($content, $offset);
 		$content = substr($content, 0, $pos_end);
+		
+		// remove additional content
+		$offset = '<iframe';
+		$pos_end = strpos($content, $offset);
+		if ($pos_end) {
+			$content = substr($content, 0, $pos_end);
+		}
 		
 		// get result
 		$result = nl2br(trim(strip_tags($content)));
@@ -200,21 +207,29 @@ class narutobleachlover {
 	}
 	
 	function get_image($content) {
-		// remove start offset
-		$offset = '<div class="entry-content">';
-		$pos_first = strpos($content, $offset);
-		$content = substr($content, $pos_first, strlen($content) - $pos_first);
-		
-		// remove end offset
-		$offset = '<footer class="entry-footer">';
-		$pos_end = strpos($content, $offset);
-		$content = substr($content, 0, $pos_end);
-		
 		// make it consistent
-		$content = preg_replace('/ (alt|class|style|border|height|width)=[\'\"][^\"|^\']+[\'\"]/i', '', $content);
+		$content = preg_replace('/ (alt|title|style|border|height|width)=[\'\"][^\"|^\']*[\'\"]/i', '', $content);
 		
-		preg_match('/img src="([^\"]+)\"/i', $content, $match);
-		$result = (isset($match[1]) && !empty($match[1])) ? $match[1] : '';
+		// get link image #1
+		preg_match('/class="aligncenter size-full( wp-[a-z0-9\-]+)*" src="([^"]+)"/i', $content, $match);
+		$result = (isset($match[2]) && !empty($match[2])) ? $match[2] : '';
+		if (strpos($result, 'wa-NO2.gif')) {
+			$result = '';
+		}
+		
+		// get link image #2
+		if (empty($result)) {
+			preg_match('/<div class="embed">\s*<\/div>\s*<div><a href="[^"]+"><img src="([^"]+)"/i', $content, $match);
+			$result = (isset($match[1]) && !empty($match[1])) ? $match[1] : '';
+		}
+		
+		// write image
+		if (!empty($result)) {
+			$download_result = download_image($result);
+			if ($download_result['status']) {
+				$result = $download_result['dir_image_path'];
+			}
+		}
 		
 		return $result;
 	}
