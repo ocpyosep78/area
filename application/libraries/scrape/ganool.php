@@ -147,7 +147,7 @@ class ganool {
 		$content = preg_replace('/ (title|style|alt|border|height|width)="[^"]*"/i', '', $content);
 		
 		// get link image
-		preg_match('/class="alignleft( wp-[a-z0-9\-]+)*" src="([^"]+)"/i', $content, $match);
+		preg_match('/class="alignleft( *wp-[a-z0-9\-]+)*" src="([^"]+)"/i', $content, $match);
 		$result = (isset($match[2]) && !empty($match[2])) ? $match[2] : '';
 		
 		// write image

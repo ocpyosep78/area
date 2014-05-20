@@ -4,7 +4,7 @@ class Scrape_Master_model extends CI_Model {
     function __construct() {
         parent::__construct();
 		
-        $this->field = array( 'id', 'category_id', 'post_type_id', 'name', 'link', 'library', 'is_active' );
+        $this->field = array( 'id', 'category_id', 'post_type_id', 'name', 'link', 'library', 'is_active', 'last_update' );
     }
 
     function update($param) {
@@ -34,6 +34,8 @@ class Scrape_Master_model extends CI_Model {
        
         if (isset($param['id'])) {
             $select_query  = "SELECT * FROM ".SCRAPE_MASTER." WHERE id = '".$param['id']."' LIMIT 1";
+        } else if (isset($param['order_by_latest'])) {
+			$select_query  = "SELECT * FROM ".SCRAPE_MASTER." WHERE is_active = '1' ORDER BY last_update ASC LIMIT 1";
         } 
 		
         $select_result = mysql_query($select_query) or die(mysql_error());

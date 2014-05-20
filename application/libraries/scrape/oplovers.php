@@ -14,27 +14,25 @@ class oplovers {
 		$array_result = array();
 		foreach ($array_post as $array) {
 			$array['title'] = trim($array['title']);
-			$link_source = $array['link'];
 			
 			// content already exist
-			$check = $this->CI->Scrape_Content_model->get_by_id(array( 'link_source' => $link_source ));
+			$check = $this->CI->Scrape_Content_model->get_by_id(array( 'link_source' => $array['link'] ));
 			if (count($check) > 0) {
 				continue;
 			}
 			
 			// collect
-			$content_html = $this->get_content($link_source);
-			$desc = $this->get_desc($content_html);
-			$image = $this->get_image($content_html);
-			$download = $this->get_download($content_html);
+			$content_html = $this->get_content($array['link']);
+			$desc = $this->get_desc($content_html, $array['title']);
+			$thumbnail = $this->get_image($content_html);
 			
 			// set to array
 			$temp = array();
 			$temp['name'] = $array['title'];
 			$temp['desc'] = $desc;
-			$temp['download'] = $download;
-			$temp['link_source'] = $link_source;
-			$temp['image_source'] = $image;
+			$temp['download'] = $array['link'];
+			$temp['link_source'] = $array['link'];
+			$temp['thumbnail'] = $thumbnail;
 			$temp['category_id'] = $scrape['category_id'];
 			$temp['post_type_id'] = $scrape['post_type_id'];
 			$temp['scrape_master_id'] = $scrape['id'];
@@ -42,7 +40,7 @@ class oplovers {
 			$array_result[] = $temp;
 			
 			// add limit
-			if (count($array_result) >= 10) {
+			if (count($array_result) >= 5) {
 				break;
 			}
 		}
@@ -52,21 +50,27 @@ class oplovers {
 	
 	function get_array_clear($content) {
 		$array_result = array();
-		$array_content = new SimpleXmlElement($content);
 		
-		/*	
-		// add link here
-		$array_result[] = array('title' => 'Magi S2 Episode 04 Subtitle Indonesia', 'link' => 'http://www.oploverz.net/2013/10/magi-s2-episode-04-subtitle-indonesia.html');
-		$array_result[] = array('title' => 'Coppelion Episode 05 Subtitle Indonesia', 'link' => 'http://www.oploverz.net/2013/10/coppelion-episode-05-subtitle-indonesia.html');
-		$array_result[] = array('title' => 'Infinite Stratos S2 Episode 05 Subtitle Indonesia', 'link' => 'http://www.oploverz.net/2013/11/infinite-stratos-s2-episode-05-subtitle.html');
-		/*	*/
+		// remove start offset
+		$offset = "<div class='post-outer'>";
+		$pos_first = strpos($content, $offset);
+		$content = substr($content, $pos_first, strlen($content) - $pos_first);
 		
-		foreach ($array_content->channel->item as $array_temp) {
-			$array_temp = (array)$array_temp;
-			unset($array_temp['category']);
-			unset($array_temp['description']);
-			
-			$array_result[] = (array)$array_temp;
+		// remove end offset
+		$offset = '<script type="text/javascript">';
+		$pos_end = strpos($content, $offset);
+		$content = substr($content, 0, $pos_end);
+		
+		preg_match_all("/<h3><a href='([^']+)'>([^<]+)<\/a>/i", $content, $match);
+		foreach ($match[0] as $key => $value) {
+			if (!empty($match[1][$key]) && $match[2][$key]) {
+				$array_temp = array( 'link' => $match[1][$key], 'title' => $match[2][$key] );
+				if ($array_temp['link'] == 'http://www.oploverz.net/ps03-polo-heart-pirates-ready-stock/') {
+					continue;
+				}
+				
+				$array_result[] = $array_temp;
+			}
 		}
 		
 		return $array_result;
@@ -79,19 +83,19 @@ class oplovers {
 		$content_html = preg_replace('/[^\x20-\x7E|\x0A]/i', '', $content_html);
 		
 		// remove start offset
-		$offset = 'post-body-';
+		$offset = '<div class="post-body">';
 		$pos_first = strpos($content_html, $offset);
-		$content_html = "<div class='".substr($content_html, $pos_first, strlen($content_html) - $pos_first);
+		$content_html = substr($content_html, $pos_first, strlen($content_html) - $pos_first);
 		
 		// remove end offset
-		$offset = "<div class='post-footer'>";
+		$offset = "http://www.oploverz.net/2012/11/frequently-asked-questions.html";
 		$pos_end = strpos($content_html, $offset);
 		$content_html = substr($content_html, 0, $pos_end);
 		
 		return $content_html;
 	}
 	
-	function get_desc($content) {
+	function get_desc($content, $title = '') {
 		$content = preg_replace('/\<blink[\x20-\x7E|\x0A]+/i', '', $content);
 		$content = preg_replace('/\Jadwal Rilis OPLOVERZ bisa dilihat di[\x20-\x7E|\x0A]+/i', '', $content);
 		$content = strip_tags($content);
@@ -101,67 +105,46 @@ class oplovers {
 		$result = '';
 		$array_temp = explode("\n", $content);
 		foreach ($array_temp as $line) {
-			$line = (empty($line)) ? '&nbsp;' : $line;
-			$result .= '<div>'.trim($line).'</div>';
+			$line = (empty($line)) ? '&nbsp;' : trim($line);
+			
+			// remove symbol
+			if ($line == '//') {
+				continue;
+			}
+			
+			// append result
+			if (!empty($line)) {
+				$result .= '<div>'.$line.'</div>';
+			}
+		}
+		
+		// check default title
+		if (empty($result) && !empty($title)) {
+			$result .= "<div>$title</div>";
 		}
 		
 		// endfix
-		$result .= '<br /><div>Sumber : Oplovers</div>';
+		if (!empty($result)) {
+			$result .= '<br /><div>Sumber : Oplovers</div>';
+		}
 		
 		return $result;
 	}
 	
 	function get_image($content) {
-		$content = preg_replace('/(border|height|width)\=\"\d+\"/i', ' ', $content);
-		$content = preg_replace('/[ ]+/i', ' ', $content);
-		preg_match('/\<img src\=\"([^\"]+)\"/i', $content, $match);
+		$content = preg_replace('/ (style|alt|border|height|width)="[^"]*"/i', '', $content);
 		
-		$image = (isset($match[1]) && !empty($match[1])) ? $match[1] : '';
+		// get link image
+		preg_match('/image-thumb">\s*<img src="([^"]+)"/i', $content, $match);
+		$result = (isset($match[1]) && !empty($match[1])) ? $match[1] : '';
 		
-		return $image;
-	}
-	
-	function get_download($content) {
-		$result = '';
-		
-		// clean content
-		$content = preg_replace('/(rel|style|target)\=\"[^\"]+\"/i', '', $content);
-		$content = preg_replace('/ +\>/i', '>', $content);
-		$content = preg_replace('/\<\/?(b|span|dwn)\>/i', '', $content);
-		
-		// option #1
-		preg_match_all('/([a-z0-9 ]+)[:=]([ \|]*<a href="[^"]+">[^<]+<\/a>)*/i', $content, $match_raw);
-		foreach ($match_raw[0] as $key => $raw_value) {
-			if (strlen($raw_value) > 30) {
-				$label = $match_raw[1][$key];
-				
-				$temp_link = '';
-				preg_match_all('/<a href="([^"]+)">([^<]+)<\/a>/i', $raw_value, $match_link);
-				foreach ($match_link[0] as $key => $raw_link) {
-					$link = $match_link[1][$key];
-					$title = $match_link[2][$key];
-					$temp_link .= $link.' '.$title."\n";
-				}
-				
-				$result .= $label."\n".$temp_link."\n";
+		// write image
+		if (!empty($result)) {
+			$download_result = download_image($result);
+			if ($download_result['status']) {
+				$result = $download_result['dir_image_path'];
 			}
 		}
-		
-		// option #2
-		if (empty($result)) {
-			preg_match_all('/\<a href\=\"([^\"]+)\"\>\[?([\w\s]+)\]?\<\/a\>/i', $content, $match);
-			if (isset($match[1])) {
-				foreach ($match[1] as $key => $value) {
-					$link = $match[1][$key];
-					$label = $match[2][$key];
-					
-					$result .= $link.' '.$label."\n";
-				}
-			}
-		}
-		
-		// trim it
-		$result = trim($result);
 		
 		return $result;
 	}
