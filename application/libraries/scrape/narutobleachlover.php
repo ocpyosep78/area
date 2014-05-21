@@ -223,6 +223,12 @@ class narutobleachlover {
 			$result = (isset($match[1]) && !empty($match[1])) ? $match[1] : '';
 		}
 		
+		// get link image #3
+		if (empty($result)) {
+			preg_match('/src="(http:\/\/www.narutobleachlover.net\/wp-content\/uploads\/\d+\/\d+\/[a-z0-9]+.[a-z]+)"/i', $content, $match);
+			$result = (isset($match[1]) && !empty($match[1])) ? $match[1] : '';
+		}
+		
 		// write image
 		if (!empty($result)) {
 			$download_result = download_image($result);
