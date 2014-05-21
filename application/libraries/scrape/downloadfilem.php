@@ -38,8 +38,6 @@ class downloadfilem {
 			$temp['scrape_time'] = $this->CI->config->item('current_datetime');
 			$array_result[] = $temp;
 			
-			print_r($array_result); exit;
-			
 			// add limit
 			if (count($array_result) >= 5) {
 				break;
