@@ -48,17 +48,24 @@
 			<div id="post_content" class="post_content" role="main">
                 <article>
 					<?php if (!empty($post['thumbnail_link'])) { ?>
-					<div class="pic post_thumb">
-						<img width="1240" height="620" src="<?php echo $post['thumbnail_link']; ?>" alt="<?php echo $post['name']; ?>" title="<?php echo $post['name']; ?>" class="attachment-slider wp-post-image" />
-					</div>
+						<?php $image_property = getimagesize($post['thumbnail_path']); ?>
+						<?php if ($image_property[0] >= 300 && $image_property[0] >= 300) { ?>
+						<div style="padding: 0 0 10px 0;">
+							<div class="pic post_thumb">
+								<img width="1240" height="620" src="<?php echo $post['thumbnail_link']; ?>" alt="<?php echo $post['name']; ?>" title="<?php echo $post['name']; ?>" class="attachment-slider wp-post-image" />
+							</div>
+						</div>
+						<?php } else { ?>
+						<div style="float: left;">
+							<div style="padding: 0 15px 15px 0;">
+								<img src="<?php echo $post['thumbnail_link']; ?>" alt="<?php echo $post['name']; ?>" title="<?php echo $post['name']; ?>" />
+							</div>
+						</div>
+						<?php } ?>
 					<?php } ?>
 					
-					<div class="post_content" style="padding: 10px 0 15px 0;"><?php echo $post['desc']; ?></div>
-					
-					<div class="hide">
-						<div class="published date updated" title="<?php echo $post['publish_date']; ?>">Update : <?php echo GetFormatDate($post['publish_date'], array( 'FormatDate' => 'd F Y' )); ?></div>
-						<div class="vcard author">Publisher : <span class="fn"><?php echo $post['user_fullname']; ?></span></div>
-					</div>
+					<div class="post_content" style="padding: 0 0 15px 0;"><?php echo $post['desc']; ?></div>
+					<div style="clear: both;"></div>
 					
 					<?php if ($post['post_type_id'] == POST_TYPE_SINGLE_LINK) { ?>
 					<div style="text-align: center; padding: 0 0 15px 0;">

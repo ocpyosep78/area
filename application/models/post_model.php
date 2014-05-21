@@ -180,6 +180,7 @@ class Post_model extends CI_Model {
 		
 		if (!empty($row['thumbnail'])) {
 			$row['thumbnail_link'] = base_url('static/upload/'.$row['thumbnail']);
+			$row['thumbnail_path'] = $this->config->item('base_path').'/static/upload/'.$row['thumbnail'];
 			$row['thumbnail_small_link'] = preg_replace('/\.(jpg|jpeg|png|gif)/i', '_s.$1', $row['thumbnail_link']);
 		}
 		
@@ -202,8 +203,16 @@ class Post_model extends CI_Model {
 			$image_result = $image_source;
 			$image_small = preg_replace('/\.(jpg|jpeg|png|gif)/i', '_s.$1', $image_result);
 			
+			// image property
+			$image_property = @getimagesize($image_source);
+			
+			// create small image
 			ImageResize($image_source, $image_small, 194, 123, 1);
-			ImageResize($image_source, $image_result, 600, 374, 1);
+			
+			// create large image
+			if ($image_property[0] >= 300 && $image_property[0] >= 300) {
+				ImageResize($image_source, $image_result, 600, 374, 1);
+			}
 		}
 	}
 	
