@@ -343,7 +343,8 @@ a.img-wrap {
 a.img-wrap img,
 a.gal_link img,
 .img_wrap img,
-a.w_hover img {vertical-align: top; width: 85px;height:54px;}
+a.w_hover img {vertical-align: top; width: 100%;}
+a.my-img img{width:85px;height:54px;}
 article h1 {
 	font-size: 22px;
 	line-height: 26px;
