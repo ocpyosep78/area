@@ -205,7 +205,7 @@ Ext.onReady(function() {
 							win.create_time = Combo.Class.Time({ renderTo: 'create_timeED', width: 100, allowBlank: false, blankText: 'Masukkan Jam Create', value: new Date() });
 							win.tag = new Ext.form.TextArea({ renderTo: 'tagED', width: 225, height: 50 });
 							win.link_canonical = new Ext.form.TextField({ renderTo: 'link_canonicalED', width: 225 });
-							win.thumbnail = new Ext.form.TextField({ renderTo: 'thumbnailED', width: 225, readOnly: true });
+							win.thumbnail = new Ext.form.TextField({ renderTo: 'thumbnailED', width: 225 });
 							win.thumbnail_button = new Ext.Button({ renderTo: 'btn_thumbnailED', text: 'Browse', width: 75, handler: function(btn) {
 								window.iframe_thumbnail.browse();
 							} });

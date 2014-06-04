@@ -251,7 +251,7 @@ Ext.onReady(function() {
 							win.publish_date = new Ext.form.DateField({ renderTo: 'publish_dateED', width: 120, format: DATE_FORMAT, allowBlank: false, blankText: 'Masukkan Tanggal Publish', value: new Date() });
 							win.publish_time = Combo.Class.Time({ renderTo: 'publish_timeED', width: 100, allowBlank: false, blankText: 'Masukkan Jam Publish', value: new Date() });
 							win.tag = new Ext.form.TextField({ renderTo: 'tagED', width: 225 });
-							win.thumbnail = new Ext.form.TextField({ renderTo: 'thumbnailED', width: 225, readOnly: true });
+							win.thumbnail = new Ext.form.TextField({ renderTo: 'thumbnailED', width: 225 });
 							win.link_source = new Ext.form.TextField({ renderTo: 'link_sourceED', width: 575, readOnly: true });
 							win.image_source = new Ext.form.TextField({ renderTo: 'image_sourceED', width: 575, readOnly: true });
 							win.thumbnail_button = new Ext.Button({ renderTo: 'btn_thumbnailED', text: 'Browse', width: 75, handler: function(btn) {
