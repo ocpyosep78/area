@@ -51,6 +51,11 @@ class sheltercloud {
 	function get_array_clear($content) {
 		$array_result = array();
 		
+		/*	
+		// add link here
+		$array_result[] = array('title' => 'Naruto Shippuden Episode 364 Subtitle Indonesia', 'link' => 'http://sheltercloud.blogspot.com/2014/06/naruto-shippuden-episode-364-subtitle.html');
+		/*	*/
+		
 		// remove start offset
 		$offset = "<div class='blog-posts hfeed'>";
 		$pos_first = strpos($content, $offset);
@@ -78,14 +83,19 @@ class sheltercloud {
 		$content = preg_replace('/[^\x20-\x7E|\x0A]/i', '', $content);
 		
 		// remove start offset
-		$offset = "<div class='post-header'>";
+		$offset = "<a href='#comment-form' onclick=''>";
 		$pos_first = strpos($content, $offset);
-		$content = substr($content, $pos_first, strlen($content) - $pos_first);
+		if ($offset) {
+			$content = substr($content, $pos_first, strlen($content) - $pos_first);
+		}
+		$content = preg_replace('/Belum ada komentar/i', '', $content);
 		
 		// remove end offset
-		$offset = "<div id='fb-root'></div>";
+		$offset = "<div class='related-post' id='related-post'></div>";
 		$pos_end = strpos($content, $offset);
-		$content = substr($content, 0, $pos_end);
+		if ($pos_end) {
+			$content = substr($content, 0, $pos_end);
+		}
 		
 		return $content;
 	}
